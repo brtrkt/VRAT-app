@@ -1,6 +1,152 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getVratsForDate, getNextVrat } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
+
+const LOG_ITEMS = [
+  { label: "Water", emoji: "💧" },
+  { label: "Coconut Water", emoji: "🥥" },
+  { label: "Lassi", emoji: "🥛" },
+  { label: "Buttermilk", emoji: "🫙" },
+  { label: "Herbal Tea", emoji: "🍵" },
+  { label: "Fruits", emoji: "🍎" },
+  { label: "Makhana", emoji: "🌾" },
+  { label: "Sabudana", emoji: "🍚" },
+  { label: "Paneer", emoji: "🧀" },
+  { label: "Nuts", emoji: "🥜" },
+];
+
+interface LogEntry {
+  id: string;
+  label: string;
+  emoji: string;
+  time: string;
+}
+
+const LOG_STORAGE_KEY = "vrat_food_log";
+const LOG_DATE_KEY = "vrat_food_log_date";
+
+function loadLog(todayStr: string): LogEntry[] {
+  try {
+    const savedDate = localStorage.getItem(LOG_DATE_KEY);
+    if (savedDate !== todayStr) {
+      localStorage.removeItem(LOG_STORAGE_KEY);
+      localStorage.setItem(LOG_DATE_KEY, todayStr);
+      return [];
+    }
+    const raw = localStorage.getItem(LOG_STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as LogEntry[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveLog(entries: LogEntry[]) {
+  try {
+    localStorage.setItem(LOG_STORAGE_KEY, JSON.stringify(entries));
+  } catch {
+    // ignore
+  }
+}
+
+function FoodLog({ todayStr }: { todayStr: string }) {
+  const [log, setLog] = useState<LogEntry[]>(() => loadLog(todayStr));
+
+  useEffect(() => {
+    saveLog(log);
+  }, [log]);
+
+  function addEntry(item: { label: string; emoji: string }) {
+    const now = new Date();
+    const time = now.toLocaleTimeString("en-IN", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+    const entry: LogEntry = {
+      id: `${Date.now()}-${Math.random()}`,
+      label: item.label,
+      emoji: item.emoji,
+      time,
+    };
+    setLog((prev) => [entry, ...prev]);
+  }
+
+  function removeEntry(id: string) {
+    setLog((prev) => prev.filter((e) => e.id !== id));
+  }
+
+  return (
+    <div className="vrat-card p-5 mb-4" data-testid="food-log-section">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-xl">📋</span>
+        <h3 className="font-serif text-base font-semibold text-foreground">Today's Food Log</h3>
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-5">
+        {LOG_ITEMS.map((item) => (
+          <button
+            key={item.label}
+            onClick={() => addEntry(item)}
+            className="flex items-center gap-1.5 bg-accent/50 hover:bg-accent active:scale-95 border border-accent-border text-foreground text-xs font-medium px-3 py-2 rounded-full transition-all"
+            data-testid={`log-btn-${item.label.toLowerCase().replace(/\s/g, "-")}`}
+            aria-label={`Log ${item.label}`}
+          >
+            <span>{item.emoji}</span>
+            <span>{item.label}</span>
+          </button>
+        ))}
+      </div>
+
+      {log.length === 0 ? (
+        <div className="text-center py-6 text-muted-foreground">
+          <p className="text-sm italic">Nothing logged yet today.</p>
+          <p className="text-xs mt-1 opacity-70">Tap a button above to track what you've had.</p>
+        </div>
+      ) : (
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+              Logged Today — {log.length} {log.length === 1 ? "item" : "items"}
+            </p>
+            <button
+              onClick={() => setLog([])}
+              className="text-xs text-muted-foreground hover:text-destructive transition-colors px-2 py-0.5 rounded"
+              data-testid="clear-log-btn"
+              aria-label="Clear all log entries"
+            >
+              Clear all
+            </button>
+          </div>
+          <div className="space-y-2" data-testid="log-entries-list">
+            {log.map((entry) => (
+              <div
+                key={entry.id}
+                className="flex items-center justify-between bg-muted/40 rounded-xl px-3 py-2.5 group"
+                data-testid={`log-entry-${entry.id}`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="text-base">{entry.emoji}</span>
+                  <span className="text-sm font-medium text-foreground">{entry.label}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-muted-foreground">{entry.time}</span>
+                  <button
+                    onClick={() => removeEntry(entry.id)}
+                    className="w-5 h-5 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all text-xs"
+                    data-testid={`remove-entry-${entry.id}`}
+                    aria-label={`Remove ${entry.label} entry`}
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function OmSymbol({ className = "" }: { className?: string }) {
   return <span className={`font-serif ${className}`} aria-hidden="true">ॐ</span>;
@@ -177,6 +323,8 @@ export default function WhatToEat() {
         ) : (
           <NoFastToday nextVrat={nextVrat} />
         )}
+
+        <FoodLog todayStr={todayStr} />
 
         <div className="vrat-card p-4 text-center">
           <p className="text-xs text-muted-foreground italic leading-relaxed">
