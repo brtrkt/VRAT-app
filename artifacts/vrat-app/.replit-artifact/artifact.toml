@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "VRAT — Your Fast, Your Way"
+version = "1.0.0"
+id = "artifacts/vrat-app"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18163
+
+[services.development]
+run = "pnpm --filter @workspace/vrat-app run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/vrat-app", "run", "build" ]
+publicDir = "artifacts/vrat-app/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18163"
+BASE_PATH = "/"
