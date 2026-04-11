@@ -11,7 +11,6 @@ const LOG_ITEMS = [
   { label: "Fruits", emoji: "🍎" },
   { label: "Makhana", emoji: "🌾" },
   { label: "Sabudana", emoji: "🍚" },
-  { label: "Paneer", emoji: "🧀" },
   { label: "Nuts", emoji: "🥜" },
 ];
 
