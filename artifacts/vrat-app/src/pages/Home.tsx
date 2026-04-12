@@ -3,6 +3,7 @@ import { getVratsForDate, getNextVrat, getDaysUntil, formatDateStr } from "@/dat
 import type { Vrat } from "@/data/vrats";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
+import NirjalaWarning from "@/components/NirjalaWarning";
 
 function getParanaTime(vrat: Vrat, now: Date): Date {
   const name = vrat.name.toLowerCase();
@@ -252,6 +253,11 @@ function TodayCard({ todayStr, vratsToday }: { todayStr: string; vratsToday: Vra
                 <h3 className="font-serif text-xl font-bold text-white" data-testid={`vrat-name-${v.id}`}>
                   {v.name}
                 </h3>
+                {v.nirjala && (
+                  <div className="mt-1.5 mb-1">
+                    <NirjalaWarning variant="light" />
+                  </div>
+                )}
                 <p className="text-white/75 text-sm mt-1">{v.deity}</p>
               </div>
             ))}

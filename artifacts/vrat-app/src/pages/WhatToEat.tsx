@@ -3,6 +3,7 @@ import { getVratsForDate, getNextVrat } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
+import NirjalaWarning from "@/components/NirjalaWarning";
 
 const HYDRATING_LABELS = new Set(["Water", "Coconut Water", "Lassi", "Buttermilk", "Herbal Tea"]);
 
@@ -277,6 +278,11 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
       <div className="saffron-gradient rounded-2xl p-4 mb-4 text-white">
         <p className="text-xs font-medium tracking-widest uppercase text-white/70 mb-1">Fasting Today</p>
         <h2 className="font-serif text-2xl font-bold">{vrat.name}</h2>
+        {vrat.nirjala && (
+          <div className="mt-1.5 mb-1">
+            <NirjalaWarning variant="light" />
+          </div>
+        )}
         <p className="text-white/80 text-sm mt-1">Deity: {vrat.deity}</p>
         <p className="text-white/70 text-xs mt-2 leading-relaxed">{vrat.description}</p>
       </div>

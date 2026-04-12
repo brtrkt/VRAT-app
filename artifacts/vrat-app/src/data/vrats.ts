@@ -13,6 +13,7 @@ export interface Vrat {
   color: string;
   description: string;
   specialNote?: string;
+  nirjala?: boolean;
 }
 
 export const vrats: Vrat[] = [
@@ -362,7 +363,7 @@ export const vrats: Vrat[] = [
   },
   {
     id: "ekadashi-jun-1",
-    name: "Ekadashi",
+    name: "Nirjala Ekadashi",
     dates: ["2026-06-06", "2027-06-12"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
@@ -390,6 +391,7 @@ export const vrats: Vrat[] = [
     mealIdea: "Singhara atta halwa with ghee and cardamom — sweet and satisfying",
     color: "#D4A017",
     description: "The eleventh day of each lunar fortnight, dedicated to fasting and devotion to Vishnu",
+    nirjala: true,
   },
   {
     id: "ekadashi-jun-2",
@@ -1979,6 +1981,7 @@ export const vrats: Vrat[] = [
     mealIdea: "Sargi: a loving tray of mathri, seviyan kheer, dry fruits, and fruits prepared by your mother-in-law — the tender ritual before dawn",
     color: "#BE185D",
     description: "A married woman's fast from sunrise to moonrise, for her husband's long and healthy life",
+    nirjala: true,
   },
   {
     id: "sankashti-jan",
@@ -3115,6 +3118,7 @@ export const vrats: Vrat[] = [
     color: "#BE185D",
     description: "One of the most demanding women's fasts — observed on Bhadrapad Shukla Tritiya. Married and unmarried women fast (often Nirjala — without even water) for Lord Shiva, staying awake through the entire night in puja",
     specialNote: "Women stay awake all night performing puja of clay idols of Shiva-Parvati, listening to the Hartalika Katha. The fast must not be broken until the next morning after rituals are complete. This fast commemorates Parvati's intense tapas (penance) to win Shiva's love — tradition holds that Hartalika Teej once observed cannot be stopped.",
+    nirjala: true,
   },
   {
     id: "rishi-panchami",
@@ -3432,6 +3436,7 @@ export const vrats: Vrat[] = [
     color: "#F97316",
     description: "Chhath Puja is one of the most ancient and demanding Hindu vrats — a 4-day festival in which devotees (primarily women) observe a 36-hour nirjala fast, standing in water at sunset and sunrise to offer arghya to the Sun God. Kartik Shukla 6 is the main fasting day (Sandhya Arghya)",
     specialNote: "Chhath is unique in that the worship is performed in rivers, ponds, or any natural water body — not at home or in temples. The vrat is extraordinarily strict: no food, no water for 36 hours, with the fast broken only after offering arghya to the rising sun. If you observe Chhath, prepare thekua and fruit baskets (soop) a day in advance. This is one of the most powerful vrats — its blessings are said to extend to the entire family for generations.",
+    nirjala: true,
   },
   {
     id: "ram-navami",

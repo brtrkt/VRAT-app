@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { getAllVratDates, formatDateStr } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import PageFooter from "@/components/PageFooter";
+import NirjalaWarning from "@/components/NirjalaWarning";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -59,6 +60,11 @@ function VratDetailSheet({
               <h2 className="font-serif text-2xl font-bold text-white">
                 {activeVrat.name}
               </h2>
+              {activeVrat.nirjala && (
+                <div className="mt-1.5 mb-1">
+                  <NirjalaWarning variant="light" />
+                </div>
+              )}
               <p className="text-white/80 text-sm mt-1">{activeVrat.deity}</p>
             </div>
             <button
