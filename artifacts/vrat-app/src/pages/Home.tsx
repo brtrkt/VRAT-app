@@ -49,6 +49,55 @@ function useCountdown(targetTime: Date | null) {
   return { hours, mins, done: remaining === 0 };
 }
 
+function BrahmaMuhurta() {
+  // 96 minutes before default sunrise of 6:30 AM = 4:54 AM
+  const SUNRISE_MINS = 6 * 60 + 30; // 390
+  const brahmaMins = SUNRISE_MINS - 96; // 294
+  const bHour = Math.floor(brahmaMins / 60); // 4
+  const bMin = brahmaMins % 60; // 54
+  const bTimeStr = `${bHour}:${String(bMin).padStart(2, "0")}am`;
+
+  // Android SET_ALARM intent — opens Clock app with the time pre-filled
+  const alarmUrl =
+    `intent:#Intent;action=android.intent.action.SET_ALARM;` +
+    `S.android.intent.extra.alarm.MESSAGE=Brahma%20Muhurta;` +
+    `i.android.intent.extra.alarm.HOUR=${bHour};` +
+    `i.android.intent.extra.alarm.MINUTES=${bMin};` +
+    `Z.android.intent.extra.alarm.SKIP_UI=false;end`;
+
+  return (
+    <div
+      className="rounded-3xl p-5 mb-4 border border-amber-200"
+      style={{ background: "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)" }}
+      data-testid="brahma-muhurta-card"
+    >
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-lg" aria-hidden="true">🌅</span>
+        <p className="text-xs font-medium tracking-widest uppercase text-amber-700">
+          Brahma Muhurta
+        </p>
+      </div>
+      <p className="text-foreground text-sm leading-relaxed mb-2">
+        <span className="font-serif font-semibold text-base text-amber-900">
+          Tomorrow: {bTimeStr}
+        </span>
+        {" — "}the most auspicious time for prayer and meditation.{" "}
+        <a
+          href={alarmUrl}
+          className="text-amber-700 underline underline-offset-2 font-semibold hover:text-amber-900 transition-colors"
+          data-testid="alarm-link"
+          aria-label={`Open clock app to set alarm for Brahma Muhurta at ${bTimeStr}`}
+        >
+          Tap to set your alarm
+        </a>
+      </p>
+      <p className="text-xs text-amber-600/60 mt-1">
+        96 minutes before sunrise (6:30 am default)
+      </p>
+    </div>
+  );
+}
+
 function FastingTimer({ vratsToday }: { vratsToday: Vrat[] }) {
   const now = new Date();
   const vrat = vratsToday[0] ?? null;
@@ -286,6 +335,7 @@ export default function Home() {
         <FastingTimer vratsToday={vratsToday} />
         <NextVratCard nextVrat={nextVrat} />
         <MantraCard vrats={allVrats} />
+        <BrahmaMuhurta />
 
         <div className="vrat-card p-5 mb-4">
           <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3">
