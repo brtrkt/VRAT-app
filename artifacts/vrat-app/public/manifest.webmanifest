@@ -1,0 +1,24 @@
+{
+  "name": "VRAT — Your Fast, Your Way",
+  "short_name": "VRAT",
+  "description": "A sacred fasting companion for Hindu and Jain devotees.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FEF9EC",
+  "theme_color": "#E07B2A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/opengraph.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    }
+  ]
+}

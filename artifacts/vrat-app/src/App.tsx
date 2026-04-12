@@ -186,7 +186,7 @@ function BottomNav() {
 
 function Router() {
   return (
-    <div className="relative">
+    <div className="relative" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/eat" component={WhatToEat} />
