@@ -25,7 +25,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits (banana, apple, mango)",
-      "Milk and dairy (paneer, curd, ghee)",
+      "Milk and dairy (curd, ghee)",
       "Sabudana (tapioca pearls)",
       "Singhara atta (water chestnut flour)",
       "Rock salt (sendha namak)",
@@ -59,7 +59,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -90,7 +90,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -121,7 +121,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -152,7 +152,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -183,7 +183,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -214,7 +214,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -245,7 +245,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -276,7 +276,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -307,7 +307,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -338,7 +338,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -369,7 +369,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -401,7 +401,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -432,7 +432,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -463,7 +463,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -494,7 +494,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -525,7 +525,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -556,7 +556,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -587,7 +587,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -618,7 +618,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -649,7 +649,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -680,7 +680,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -711,7 +711,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -742,7 +742,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -773,7 +773,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -1889,7 +1889,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "All fruits",
-      "Milk, curd, paneer, ghee, buttermilk",
+      "Milk, curd, ghee, buttermilk",
       "Sabudana (tapioca pearls)",
       "Singhara atta (water chestnut flour)",
       "Kuttu atta (buckwheat flour)",
@@ -1928,7 +1928,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "All fruits",
-      "Milk, curd, paneer, ghee, buttermilk",
+      "Milk, curd, ghee, buttermilk",
       "Sabudana (tapioca pearls)",
       "Singhara atta (water chestnut flour)",
       "Kuttu atta (buckwheat flour)",
@@ -1963,7 +1963,7 @@ export const vrats: Vrat[] = [
     deity: "Lord Krishna",
     tradition: "Hindu",
     foodsAllowed: [
-      "Milk, curd, paneer, butter, ghee",
+      "Milk, curd, butter, ghee",
       "Fruits (especially bananas and berries)",
       "Panchamrit (five nectars: milk, honey, curd, ghee, sugar)",
       "Sabudana",
@@ -3299,7 +3299,7 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Modak (steamed rice flour dumplings with coconut-jaggery filling) — Ganesh's favourite",
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Coconut and coconut-based sweets",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -3329,7 +3329,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Singhara atta (water chestnut flour)",
       "Rock salt (sendha namak)",
@@ -3361,7 +3361,7 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Kheer (rice pudding with milk and sugar) — offered to Lakshmi",
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Dry fruits and nuts",
       "Coconut",
       "Satvik sweets (barfi, halwa)",
@@ -3391,7 +3391,7 @@ export const vrats: Vrat[] = [
       "Dry fruits and nuts — especially almonds, cashews, pistachios",
       "Kheer and halwa",
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Coconut — sacred offering to Lakshmi",
       "Panchamrit (milk, curd, honey, ghee, sugar)",
     ],
@@ -3472,7 +3472,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana (tapioca pearls)",
       "Kuttu atta (buckwheat flour)",
       "Singhara atta (water chestnut flour)",
@@ -3506,7 +3506,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits, especially bananas — Hanuman's favourite",
-      "Milk and dairy (paneer, ghee, curd)",
+      "Milk and dairy (ghee, curd)",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
       "Boondi (offered as prasad)",
@@ -3536,7 +3536,7 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
-      "Milk, curd, paneer, ghee",
+      "Milk, curd, ghee",
       "Sabudana and makhana",
       "Rock salt (sendha namak)",
       "Kuttu atta (buckwheat flour)",
