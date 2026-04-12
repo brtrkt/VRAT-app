@@ -165,6 +165,33 @@ function OmSymbol({ className = "" }: { className?: string }) {
   );
 }
 
+function JainSymbol({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 56 72"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      {/* Five fingers: pinky → thumb */}
+      <rect x="1"  y="22" width="9"  height="22" rx="4.5" />
+      <rect x="12" y="14" width="9"  height="28" rx="4.5" />
+      <rect x="23" y="8"  width="10" height="33" rx="5" />
+      <rect x="35" y="13" width="9"  height="28" rx="4.5" />
+      <rect x="46" y="21" width="9"  height="22" rx="4.5" />
+      {/* Palm */}
+      <path d="M1 40 C1 38 3 37 5 37 L51 37 C53 37 55 38 55 40 L55 60 C55 67 48 72 28 72 C8 72 1 67 1 60 Z" />
+      {/* Ahimsa chakra wheel */}
+      <circle cx="28" cy="57" r="11" fill="white" />
+      <line x1="28" y1="46" x2="28" y2="68" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="17" y1="57" x2="39" y2="57" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="20.2" y1="49.2" x2="35.8" y2="64.8" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="35.8" y1="49.2" x2="20.2" y2="64.8" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="28" cy="57" r="2.5" />
+    </svg>
+  );
+}
+
 function FloralDivider() {
   return (
     <div className="decorative-divider my-4">
@@ -290,7 +317,10 @@ function MantraCard({ vrats }: { vrats: Vrat[] }) {
   return (
     <div data-testid="mantra-card" className="vrat-card p-5 mb-4">
       <div className="flex items-center gap-2 mb-3">
-        <OmSymbol className="text-primary text-lg" />
+        {displayVrat.tradition === "Jain"
+          ? <JainSymbol className="text-green-600 w-5 h-6 flex-shrink-0" />
+          : <OmSymbol className="text-primary text-lg" />
+        }
         <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
           {currentVrats.length > 0 ? "Today's Mantra" : "Upcoming Mantra"}
         </p>
@@ -326,7 +356,10 @@ export default function Home() {
     <div className="min-h-screen cream-gradient">
       <div className="max-w-md mx-auto px-4 pt-8 pb-24">
         <div className="text-center mb-6">
-          <OmSymbol className="text-primary text-3xl block mb-2" />
+          <div className="flex items-end justify-center gap-4 mb-2">
+            <OmSymbol className="text-primary text-3xl" />
+            <JainSymbol className="text-green-600 w-7 h-9" />
+          </div>
           <h1 className="font-serif text-3xl font-bold text-foreground">VRAT</h1>
           <p className="text-muted-foreground text-sm mt-1 tracking-wide">Your Fast, Your Way</p>
         </div>
