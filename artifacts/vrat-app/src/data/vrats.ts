@@ -20,7 +20,7 @@ export const vrats: Vrat[] = [
   {
     id: "maha-shivratri",
     name: "Maha Shivratri",
-    dates: ["2026-02-26", "2027-02-17"],
+    dates: ["2026-02-15", "2027-02-17"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -54,7 +54,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jan-1",
     name: "Ekadashi",
-    dates: ["2026-01-11", "2027-01-14"],
+    dates: ["2026-01-07", "2027-01-14"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -85,7 +85,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jan-2",
     name: "Ekadashi",
-    dates: ["2026-01-25", "2027-01-29"],
+    dates: ["2026-01-22", "2027-01-29"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -116,7 +116,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-feb-1",
     name: "Ekadashi",
-    dates: ["2026-02-09", "2027-02-13"],
+    dates: ["2026-02-05", "2027-02-13"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -147,7 +147,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-feb-2",
     name: "Ekadashi",
-    dates: ["2026-02-24", "2027-02-27"],
+    dates: ["2026-02-21", "2027-02-27"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -178,7 +178,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-mar-1",
     name: "Ekadashi",
-    dates: ["2026-03-10", "2027-03-15"],
+    dates: ["2026-03-07", "2027-03-15"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -209,7 +209,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-mar-2",
     name: "Ekadashi",
-    dates: ["2026-03-26", "2027-03-30"],
+    dates: ["2026-03-22", "2027-03-30"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -240,7 +240,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-apr-1",
     name: "Ekadashi",
-    dates: ["2026-04-08", "2027-04-14"],
+    dates: ["2026-04-05", "2027-04-14"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -271,7 +271,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-apr-2",
     name: "Ekadashi",
-    dates: ["2026-04-24", "2027-04-28"],
+    dates: ["2026-04-20", "2027-04-28"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -302,7 +302,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-may-1",
     name: "Ekadashi",
-    dates: ["2026-05-08", "2027-05-13"],
+    dates: ["2026-05-05", "2027-05-13"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -333,7 +333,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-may-2",
     name: "Ekadashi",
-    dates: ["2026-05-23", "2027-05-27"],
+    dates: ["2026-05-19", "2027-05-27"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -364,7 +364,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jun-1",
     name: "Nirjala Ekadashi",
-    dates: ["2026-06-06", "2027-06-12"],
+    dates: ["2026-06-03", "2027-06-12"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -396,7 +396,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jun-2",
     name: "Ekadashi",
-    dates: ["2026-06-22", "2027-06-26"],
+    dates: ["2026-06-17", "2027-06-26"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -427,7 +427,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jul-1",
     name: "Ekadashi",
-    dates: ["2026-07-06"],
+    dates: ["2026-07-03"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -458,7 +458,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jul-2",
     name: "Ekadashi",
-    dates: ["2026-07-21"],
+    dates: ["2026-07-17"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -489,7 +489,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-aug-1",
     name: "Ekadashi",
-    dates: ["2026-08-05"],
+    dates: ["2026-08-01"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -520,7 +520,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-aug-2",
     name: "Ekadashi",
-    dates: ["2026-08-20"],
+    dates: ["2026-08-16"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -551,7 +551,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-sep-1",
     name: "Ekadashi",
-    dates: ["2026-09-03"],
+    dates: ["2026-08-31"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -582,7 +582,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-sep-2",
     name: "Ekadashi",
-    dates: ["2026-09-19"],
+    dates: ["2026-09-15"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -613,7 +613,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-oct-1",
     name: "Ekadashi",
-    dates: ["2026-10-03"],
+    dates: ["2026-09-29"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -644,7 +644,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-oct-2",
     name: "Ekadashi",
-    dates: ["2026-10-18"],
+    dates: ["2026-10-14"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -675,7 +675,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-nov-1",
     name: "Ekadashi",
-    dates: ["2026-11-01"],
+    dates: ["2026-10-29"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -706,7 +706,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-nov-2",
     name: "Ekadashi",
-    dates: ["2026-11-17"],
+    dates: ["2026-11-13"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -737,7 +737,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-dec-1",
     name: "Ekadashi",
-    dates: ["2026-12-01"],
+    dates: ["2026-11-28"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -768,7 +768,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-dec-2",
     name: "Ekadashi",
-    dates: ["2026-12-17"],
+    dates: ["2026-12-12"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -799,7 +799,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-jan-1",
     name: "Pradosh Vrat",
-    dates: ["2026-01-12", "2027-01-01"],
+    dates: ["2026-01-16", "2027-01-01"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -828,7 +828,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-jan-2",
     name: "Pradosh Vrat",
-    dates: ["2026-01-27", "2027-01-16"],
+    dates: ["2026-01-30", "2027-01-16"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -857,7 +857,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-feb-1",
     name: "Pradosh Vrat",
-    dates: ["2026-02-11", "2027-01-31"],
+    dates: ["2026-02-14", "2027-01-31"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -886,7 +886,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-feb-2",
     name: "Pradosh Vrat",
-    dates: ["2026-02-25", "2027-02-16"],
+    dates: ["2026-03-01", "2027-02-16"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -915,7 +915,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-mar-1",
     name: "Pradosh Vrat",
-    dates: ["2026-03-13", "2027-03-02"],
+    dates: ["2026-03-16", "2027-03-02"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -944,7 +944,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-mar-2",
     name: "Pradosh Vrat",
-    dates: ["2026-03-28", "2027-03-17"],
+    dates: ["2026-03-30", "2027-03-17"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -973,7 +973,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-apr-1",
     name: "Pradosh Vrat",
-    dates: ["2026-04-11", "2027-04-01"],
+    dates: ["2026-04-15", "2027-04-01"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1002,7 +1002,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-apr-2",
     name: "Pradosh Vrat",
-    dates: ["2026-04-27", "2027-04-15"],
+    dates: ["2026-04-28", "2027-04-15"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1031,7 +1031,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-may-1",
     name: "Pradosh Vrat",
-    dates: ["2026-05-11", "2027-04-30"],
+    dates: ["2026-05-15", "2027-04-30"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1060,7 +1060,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-may-2",
     name: "Pradosh Vrat",
-    dates: ["2026-05-26", "2027-05-15"],
+    dates: ["2026-05-28", "2027-05-15"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1089,7 +1089,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-jun-1",
     name: "Pradosh Vrat",
-    dates: ["2026-06-09", "2027-05-30"],
+    dates: ["2026-06-13", "2027-05-30"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1118,7 +1118,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-jun-2",
     name: "Pradosh Vrat",
-    dates: ["2026-06-25", "2027-06-13"],
+    dates: ["2026-06-27", "2027-06-13"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1147,7 +1147,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-jul-1",
     name: "Pradosh Vrat",
-    dates: ["2026-07-09"],
+    dates: ["2026-07-12"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1176,7 +1176,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-jul-2",
     name: "Pradosh Vrat",
-    dates: ["2026-07-24"],
+    dates: ["2026-07-27"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1205,7 +1205,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-aug-1",
     name: "Pradosh Vrat",
-    dates: ["2026-08-08"],
+    dates: ["2026-08-11"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1234,7 +1234,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-aug-2",
     name: "Pradosh Vrat",
-    dates: ["2026-08-23"],
+    dates: ["2026-08-25"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1263,7 +1263,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-sep-1",
     name: "Pradosh Vrat",
-    dates: ["2026-09-06"],
+    dates: ["2026-09-09"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1292,7 +1292,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-sep-2",
     name: "Pradosh Vrat",
-    dates: ["2026-09-22"],
+    dates: ["2026-09-24"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1321,7 +1321,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-oct-1",
     name: "Pradosh Vrat",
-    dates: ["2026-10-06"],
+    dates: ["2026-10-09"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1350,7 +1350,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-oct-2",
     name: "Pradosh Vrat",
-    dates: ["2026-10-22"],
+    dates: ["2026-10-23"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1379,7 +1379,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-nov-1",
     name: "Pradosh Vrat",
-    dates: ["2026-11-05"],
+    dates: ["2026-11-07"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1408,7 +1408,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-nov-2",
     name: "Pradosh Vrat",
-    dates: ["2026-11-20"],
+    dates: ["2026-11-22"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1437,7 +1437,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-dec-1",
     name: "Pradosh Vrat",
-    dates: ["2026-12-05"],
+    dates: ["2026-12-06"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1466,7 +1466,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-dec-2",
     name: "Pradosh Vrat",
-    dates: ["2026-12-19"],
+    dates: ["2026-12-21"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1495,7 +1495,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-jan",
     name: "Purnima Vrat",
-    dates: ["2026-01-13", "2027-01-03"],
+    dates: ["2026-01-03", "2027-01-03"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1527,7 +1527,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-feb",
     name: "Purnima Vrat",
-    dates: ["2026-02-12", "2027-02-02"],
+    dates: ["2026-02-01", "2027-02-02"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1559,7 +1559,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-mar",
     name: "Purnima Vrat",
-    dates: ["2026-03-14", "2027-03-04"],
+    dates: ["2026-03-03", "2027-03-04"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1591,7 +1591,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-apr",
     name: "Purnima Vrat",
-    dates: ["2026-04-12", "2027-04-03"],
+    dates: ["2026-04-02", "2027-04-03"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1623,7 +1623,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-may",
     name: "Purnima Vrat — Buddha Purnima",
-    dates: ["2026-05-12", "2027-05-02"],
+    dates: ["2026-05-01", "2027-05-02"],
     deity: "Lord Vishnu / Buddha",
     tradition: "Both",
     foodsAllowed: [
@@ -1656,7 +1656,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-jun",
     name: "Purnima Vrat",
-    dates: ["2026-06-11", "2027-06-01"],
+    dates: ["2026-06-29", "2027-06-01"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1688,7 +1688,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-jul",
     name: "Guru Purnima",
-    dates: ["2026-07-10"],
+    dates: ["2026-07-29"],
     deity: "Guru (Divine Teacher)",
     tradition: "Both",
     foodsAllowed: [
@@ -1721,7 +1721,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-aug",
     name: "Raksha Bandhan / Purnima",
-    dates: ["2026-08-09"],
+    dates: ["2026-08-28"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1753,7 +1753,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-sep",
     name: "Purnima Vrat",
-    dates: ["2026-09-07"],
+    dates: ["2026-09-26"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1785,7 +1785,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-oct",
     name: "Sharad Purnima",
-    dates: ["2026-10-07"],
+    dates: ["2026-10-26"],
     deity: "Lord Vishnu / Lakshmi",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1817,7 +1817,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-nov",
     name: "Kartik Purnima",
-    dates: ["2026-11-06"],
+    dates: ["2026-11-24"],
     deity: "Lord Vishnu / Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1849,7 +1849,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-dec",
     name: "Purnima Vrat",
-    dates: ["2026-12-05"],
+    dates: ["2026-12-23"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1921,8 +1921,8 @@ export const vrats: Vrat[] = [
     id: "navratri-shardiya",
     name: "Shardiya Navratri",
     dates: [
-      "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12",
-      "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-17"
+      "2026-10-11", "2026-10-12", "2026-10-13", "2026-10-14",
+      "2026-10-15", "2026-10-16", "2026-10-17", "2026-10-18", "2026-10-19", "2026-10-20"
     , "2027-09-28", "2027-09-29", "2027-09-30", "2027-10-01", "2027-10-02", "2027-10-03", "2027-10-04", "2027-10-05", "2027-10-06"],
     deity: "Goddess Durga (nine forms)",
     tradition: "Hindu",
@@ -1959,7 +1959,7 @@ export const vrats: Vrat[] = [
   {
     id: "janmashtami",
     name: "Janmashtami",
-    dates: ["2026-08-22", "2027-08-11"],
+    dates: ["2026-09-04", "2027-08-11"],
     deity: "Lord Krishna",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1990,7 +1990,7 @@ export const vrats: Vrat[] = [
   {
     id: "karva-chauth",
     name: "Karva Chauth",
-    dates: ["2026-10-20", "2027-10-09"],
+    dates: ["2026-10-29", "2027-10-09"],
     deity: "Lord Shiva, Parvati, and the Moon",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2012,7 +2012,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-jan",
     name: "Sankashti Chaturthi",
-    dates: ["2026-01-17", "2027-01-07"],
+    dates: ["2026-01-06", "2027-01-07"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2043,7 +2043,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-feb",
     name: "Sankashti Chaturthi",
-    dates: ["2026-02-15", "2027-02-06"],
+    dates: ["2026-02-05", "2027-02-06"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2074,7 +2074,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-mar",
     name: "Sankashti Chaturthi",
-    dates: ["2026-03-16", "2027-03-08"],
+    dates: ["2026-03-06", "2027-03-08"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2105,7 +2105,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-apr",
     name: "Sankashti Chaturthi",
-    dates: ["2026-04-15", "2027-04-07"],
+    dates: ["2026-04-05", "2027-04-07"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2136,7 +2136,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-may",
     name: "Sankashti Chaturthi",
-    dates: ["2026-05-15", "2027-05-06"],
+    dates: ["2026-05-05", "2027-05-06"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2167,7 +2167,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-jun",
     name: "Sankashti Chaturthi",
-    dates: ["2026-06-13", "2027-06-05"],
+    dates: ["2026-06-03", "2027-06-05"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2198,7 +2198,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-jul",
     name: "Sankashti Chaturthi",
-    dates: ["2026-07-12"],
+    dates: ["2026-07-03"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2229,7 +2229,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-aug",
     name: "Sankashti Chaturthi",
-    dates: ["2026-08-11"],
+    dates: ["2026-08-01"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2260,7 +2260,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-sep",
     name: "Sankashti Chaturthi",
-    dates: ["2026-09-10"],
+    dates: ["2026-08-31"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2291,7 +2291,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-oct",
     name: "Sankashti Chaturthi",
-    dates: ["2026-10-09"],
+    dates: ["2026-09-30"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2322,7 +2322,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-nov",
     name: "Sankashti Chaturthi",
-    dates: ["2026-11-08"],
+    dates: ["2026-10-29"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2353,7 +2353,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-dec",
     name: "Sankashti Chaturthi",
-    dates: ["2026-12-08"],
+    dates: ["2026-11-27"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2384,7 +2384,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-jan",
     name: "Amavasya",
-    dates: ["2026-01-29", "2027-01-18"],
+    dates: ["2026-01-18", "2027-01-18"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2410,7 +2410,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-feb",
     name: "Amavasya",
-    dates: ["2026-02-28", "2027-02-18"],
+    dates: ["2026-02-17", "2027-02-18"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2436,7 +2436,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-mar",
     name: "Amavasya",
-    dates: ["2026-03-29", "2027-03-19"],
+    dates: ["2026-03-18", "2027-03-19"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2462,7 +2462,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-apr",
     name: "Amavasya",
-    dates: ["2026-04-28", "2027-04-17"],
+    dates: ["2026-04-17", "2027-04-17"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2488,7 +2488,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-may",
     name: "Amavasya",
-    dates: ["2026-05-27", "2027-05-17"],
+    dates: ["2026-05-16", "2027-05-17"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2514,7 +2514,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-jun",
     name: "Amavasya",
-    dates: ["2026-06-25", "2027-06-15"],
+    dates: ["2026-06-14", "2027-06-15"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2540,7 +2540,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-jul",
     name: "Amavasya",
-    dates: ["2026-07-25"],
+    dates: ["2026-07-14"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2566,7 +2566,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-aug",
     name: "Amavasya",
-    dates: ["2026-08-23"],
+    dates: ["2026-08-12"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2592,7 +2592,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-sep",
     name: "Amavasya",
-    dates: ["2026-09-22"],
+    dates: ["2026-09-10"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2618,7 +2618,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-oct",
     name: "Amavasya",
-    dates: ["2026-10-21"],
+    dates: ["2026-10-10"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2644,7 +2644,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-nov",
     name: "Amavasya",
-    dates: ["2026-11-20"],
+    dates: ["2026-11-08"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2670,7 +2670,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-dec",
     name: "Amavasya",
-    dates: ["2026-12-19"],
+    dates: ["2026-12-08"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2696,7 +2696,7 @@ export const vrats: Vrat[] = [
   {
     id: "mahavir-jayanti",
     name: "Mahavir Jayanti",
-    dates: ["2026-04-14", "2027-04-01"],
+    dates: ["2026-03-31", "2027-04-01"],
     deity: "Lord Mahavira (24th Tirthankara)",
     tradition: "Jain",
     foodsAllowed: [
@@ -2880,7 +2880,7 @@ export const vrats: Vrat[] = [
   {
     id: "mahavira-nirvana",
     name: "Mahavira Nirvana — Jain Diwali",
-    dates: ["2026-10-20", "2027-10-20"],
+    dates: ["2026-11-08", "2027-10-20"],
     deity: "Lord Mahavira",
     tradition: "Jain",
     foodsAllowed: [
@@ -3022,7 +3022,7 @@ export const vrats: Vrat[] = [
   {
     id: "vat-savitri",
     name: "Vat Savitri Vrat",
-    dates: ["2026-05-27", "2026-06-11"],
+    dates: ["2026-05-16", "2026-06-29"],
     deity: "Goddess Savitri and Satyavan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3048,7 +3048,7 @@ export const vrats: Vrat[] = [
   {
     id: "hariyali-teej",
     name: "Hariyali Teej",
-    dates: ["2026-07-28"],
+    dates: ["2026-08-15"],
     deity: "Lord Shiva and Goddess Parvati",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3073,7 +3073,7 @@ export const vrats: Vrat[] = [
   {
     id: "nag-panchami",
     name: "Nag Panchami",
-    dates: ["2026-07-30"],
+    dates: ["2026-08-17"],
     deity: "Nagaraja — Serpent Gods",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3098,7 +3098,7 @@ export const vrats: Vrat[] = [
   {
     id: "mangala-gauri",
     name: "Mangala Gauri Vrat",
-    dates: ["2026-07-28", "2026-08-04", "2026-08-11"],
+    dates: ["2026-08-04", "2026-08-11", "2026-08-18", "2026-08-25"],
     deity: "Goddess Mangala Gauri (form of Parvati)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3123,7 +3123,7 @@ export const vrats: Vrat[] = [
   {
     id: "hartalika-teej",
     name: "Hartalika Teej",
-    dates: ["2026-08-11"],
+    dates: ["2026-09-13"],
     deity: "Lord Shiva and Goddess Parvati",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3149,7 +3149,7 @@ export const vrats: Vrat[] = [
   {
     id: "rishi-panchami",
     name: "Rishi Panchami",
-    dates: ["2026-08-13"],
+    dates: ["2026-09-15"],
     deity: "Saptarishis — the Seven Divine Sages",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3176,7 +3176,7 @@ export const vrats: Vrat[] = [
   {
     id: "ahoi-ashtami",
     name: "Ahoi Ashtami",
-    dates: ["2026-10-14", "2027-10-03"],
+    dates: ["2026-11-03", "2027-10-03"],
     deity: "Goddess Ahoi Mata (form of Parvati)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3235,7 +3235,7 @@ export const vrats: Vrat[] = [
   {
     id: "mahalaya-amavasya",
     name: "Mahalaya Amavasya",
-    dates: ["2026-10-02"],
+    dates: ["2026-10-10"],
     deity: "Sarvapitri — All Ancestors",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3293,7 +3293,7 @@ export const vrats: Vrat[] = [
   {
     id: "ganesh-chaturthi",
     name: "Ganesh Chaturthi",
-    dates: ["2026-08-12", "2027-09-01"],
+    dates: ["2026-09-14", "2027-09-01"],
     deity: "Lord Ganesh",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3324,7 +3324,7 @@ export const vrats: Vrat[] = [
   {
     id: "dussehra",
     name: "Dussehra / Vijaya Dashami",
-    dates: ["2026-10-18", "2027-10-07"],
+    dates: ["2026-10-20", "2027-10-07"],
     deity: "Goddess Durga / Lord Ram",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3355,7 +3355,7 @@ export const vrats: Vrat[] = [
   {
     id: "dhanteras",
     name: "Dhanteras",
-    dates: ["2026-10-19", "2027-10-18"],
+    dates: ["2026-11-06", "2027-10-18"],
     deity: "Lord Dhanvantari / Goddess Lakshmi / Lord Kuber",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3383,7 +3383,7 @@ export const vrats: Vrat[] = [
   {
     id: "diwali",
     name: "Diwali — Lakshmi Puja",
-    dates: ["2026-10-21", "2027-10-20"],
+    dates: ["2026-11-08", "2027-10-20"],
     deity: "Goddess Lakshmi / Lord Ganesh",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3410,7 +3410,7 @@ export const vrats: Vrat[] = [
   {
     id: "govardhan-puja",
     name: "Govardhan Puja",
-    dates: ["2026-10-22", "2027-10-21"],
+    dates: ["2026-11-09", "2027-10-21"],
     deity: "Lord Krishna / Govardhan Parvat",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3436,7 +3436,7 @@ export const vrats: Vrat[] = [
   {
     id: "chhath-puja",
     name: "Chhath Puja",
-    dates: ["2026-10-27", "2027-10-26"],
+    dates: ["2026-11-15", "2027-10-26"],
     deity: "Surya Dev (Sun God) / Chhathi Maiya",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3467,7 +3467,7 @@ export const vrats: Vrat[] = [
   {
     id: "ram-navami",
     name: "Ram Navami",
-    dates: ["2026-04-06", "2027-03-28"],
+    dates: ["2026-03-26", "2027-03-28"],
     deity: "Lord Ram",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3501,7 +3501,7 @@ export const vrats: Vrat[] = [
   {
     id: "hanuman-jayanti",
     name: "Hanuman Jayanti",
-    dates: ["2026-04-12", "2027-04-03"],
+    dates: ["2026-04-02", "2027-04-03"],
     deity: "Lord Hanuman",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3531,7 +3531,7 @@ export const vrats: Vrat[] = [
   {
     id: "akshaya-tritiya",
     name: "Akshaya Tritiya",
-    dates: ["2026-04-30", "2027-04-20"],
+    dates: ["2026-04-19", "2027-04-20"],
     deity: "Lord Vishnu / Goddess Lakshmi",
     tradition: "Hindu",
     foodsAllowed: [
