@@ -28,6 +28,7 @@ function VratDetailSheet({
   onClose: () => void;
 }) {
   const [activeVrat, setActiveVrat] = useState(vrats[0]);
+  const isJain = activeVrat.tradition === "Jain";
 
   return (
     <div className="fixed inset-0 z-50 flex items-end" data-testid="vrat-detail-sheet">
@@ -37,12 +38,23 @@ function VratDetailSheet({
         aria-hidden="true"
       />
       <div className="relative z-10 w-full max-h-[85vh] bg-background rounded-t-3xl overflow-hidden shadow-2xl flex flex-col">
-        <div className="saffron-gradient px-6 pt-6 pb-5">
+        {/* Header — green for Jain, saffron for Hindu */}
+        <div
+          className={isJain ? "px-6 pt-6 pb-5" : "saffron-gradient px-6 pt-6 pb-5"}
+          style={isJain ? { background: "linear-gradient(135deg, #15803D 0%, #22C55E 100%)" } : undefined}
+        >
           <div className="flex items-start justify-between">
-            <div>
-              <p className="text-white/70 text-xs uppercase tracking-widest mb-1">
-                {formatDateStr(dateStr)}
-              </p>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <p className="text-white/70 text-xs uppercase tracking-widest">
+                  {formatDateStr(dateStr)}
+                </p>
+                {isJain && (
+                  <span className="bg-white/25 text-white text-xs px-2 py-0.5 rounded-full font-medium">
+                    Jain
+                  </span>
+                )}
+              </div>
               <h2 className="font-serif text-2xl font-bold text-white">
                 {activeVrat.name}
               </h2>
@@ -79,22 +91,54 @@ function VratDetailSheet({
         </div>
 
         <div className="overflow-y-auto flex-1 px-6 py-5 space-y-4">
-          <div>
-            <p className="text-xs text-muted-foreground leading-relaxed italic">
-              {activeVrat.description}
-            </p>
-          </div>
+          {/* Description */}
+          <p className="text-xs text-muted-foreground leading-relaxed italic">
+            {activeVrat.description}
+          </p>
 
-          <div className="bg-accent/30 rounded-2xl p-4">
-            <p className="font-serif text-xl text-primary text-center py-2 leading-relaxed" lang="hi">
+          {/* Jain water & root veg reminder */}
+          {isJain && (
+            <div className="rounded-2xl border border-green-200 bg-green-50 px-4 py-3">
+              <p className="text-xs font-semibold text-green-800 mb-1">🌿 Jain Fasting Essentials</p>
+              <p className="text-xs text-green-700 leading-relaxed">
+                Always use <strong>boiled water cooled to room temperature</strong> — never cold, never iced, never raw.
+                Root vegetables (potato, carrot, onion, garlic, beetroot, radish) are avoided by practising Jains <strong>every single day</strong>, not just on fasting days.
+              </p>
+            </div>
+          )}
+
+          {/* Mantra */}
+          <div className={`rounded-2xl p-4 ${isJain ? "bg-green-50 border border-green-100" : "bg-accent/30"}`}>
+            <p
+              className={`font-serif text-lg text-center py-2 leading-loose whitespace-pre-line ${isJain ? "text-green-800" : "text-primary"}`}
+              lang="hi"
+              data-testid="mantra-text"
+            >
               {activeVrat.mantra}
             </p>
-            <div className="h-px bg-border my-3" />
+            {activeVrat.mantraTransliteration && (
+              <>
+                <div className="h-px bg-green-200 my-2" />
+                <p className="text-xs text-green-700 text-center font-medium whitespace-pre-line leading-relaxed">
+                  {activeVrat.mantraTransliteration}
+                </p>
+              </>
+            )}
+            <div className="h-px bg-border my-2" />
             <p className="text-xs text-muted-foreground text-center italic leading-relaxed">
               {activeVrat.mantraTranslation}
             </p>
           </div>
 
+          {/* Special note */}
+          {activeVrat.specialNote && (
+            <div className={`rounded-2xl px-4 py-3 border ${isJain ? "bg-amber-50 border-amber-200" : "bg-amber-50 border-amber-200"}`}>
+              <p className="text-xs font-semibold text-amber-800 mb-1">✦ Special Note</p>
+              <p className="text-xs text-amber-700 leading-relaxed">{activeVrat.specialNote}</p>
+            </div>
+          )}
+
+          {/* Foods */}
           <div>
             <h4 className="font-serif text-sm font-semibold text-foreground mb-2 flex items-center gap-1">
               <span className="text-green-600">✓</span> Foods Allowed
@@ -240,7 +284,7 @@ const HINDU_LEGEND = [
   { label: "Karva Chauth / Special", color: "#BE185D" },
 ];
 const JAIN_LEGEND = [
-  { label: "Jain Festivals", color: "#0D9488" },
+  { label: "Jain Festivals", color: "#22C55E" },
   { label: "Shared (Purnima)", color: "#C084FC" },
 ];
 
