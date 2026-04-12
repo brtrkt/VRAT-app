@@ -463,10 +463,9 @@ export default function Calendar() {
           </div>
         </div>
 
-        <div className="vrat-card p-4 text-center">
-          <p className="text-xs text-muted-foreground italic leading-relaxed">
-            Dates are approximate and based on the Hindu lunar calendar for 2026–2027.
-            Always confirm with your local pandit or community calendar.
+        <div className="p-4 text-center">
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            Dates follow Drik Panchang IST. Regional dates may vary — please verify with your local pandit or family tradition.
           </p>
         </div>
 
