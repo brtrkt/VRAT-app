@@ -281,6 +281,7 @@ const HINDU_LEGEND = [
   { label: "Navratri", color: "#DC2626" },
   { label: "Sankashti", color: "#EA580C" },
   { label: "Amavasya", color: "#1E3A5F" },
+  { label: "Pitru Paksha", color: "#374151" },
   { label: "Karva Chauth / Special", color: "#BE185D" },
 ];
 const JAIN_LEGEND = [
