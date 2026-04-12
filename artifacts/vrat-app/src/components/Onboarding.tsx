@@ -235,7 +235,7 @@ export default function Onboarding({ onComplete }: Props) {
               Your fast. Your way.
             </p>
             <p className="text-base leading-relaxed opacity-85" style={{ color: "#FEF3E2" }}>
-              A sacred companion for Hindu and Jain women
+              A sacred companion for Hindu and Jain families
             </p>
           </div>
           <div className="w-full max-w-xs">

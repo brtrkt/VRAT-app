@@ -3041,8 +3041,8 @@ export const vrats: Vrat[] = [
     mantraTranslation: "Om Namah Shivaya — I bow to Lord Shiva, the eternal and auspicious one",
     mealIdea: "Fresh fruit platter with ghewar (festive sweet) in the evening — the traditional Hariyali Teej treat",
     color: "#BE185D",
-    description: "The first Teej of the Shravan season — Hariyali (green) Teej celebrates the reunion of Shiva and Parvati and the arrival of the monsoon. Married women fast and dress in green",
-    specialNote: "Wear green bangles, green clothes, and green mehndi. Swings are hung from trees and women sing folk songs. The fast is broken in the evening. This Teej celebrates nature and the joy of the monsoon — the most festive and joyful of the three Teejs.",
+    description: "The first Teej of the Shravan season — Hariyali (green) Teej celebrates the reunion of Shiva and Parvati and the arrival of the monsoon. Devotees fast and dress in green",
+    specialNote: "Wear green bangles, green clothes, and green mehndi. Swings are hung from trees and devotees sing folk songs. The fast is broken in the evening. This Teej celebrates nature and the joy of the monsoon — the most festive and joyful of the three Teejs.",
   },
   {
     id: "nag-panchami",
@@ -3067,7 +3067,7 @@ export const vrats: Vrat[] = [
     mealIdea: "Warm milk offered first to the Nag idol, then simple satvik dal and rice for the family",
     color: "#7C3AED",
     description: "Worship of serpent deities on Shravan Shukla Panchami — Nagas are honoured as protectors of the home, symbols of fertility, and guardians of underground wealth",
-    specialNote: "Offer fresh milk to a snake idol or image at the temple. Many women avoid cutting vegetables on this day as a mark of respect for all serpent life. Worshipping Nagaraja is believed to protect the family from snake bites, accidents, and misfortune.",
+    specialNote: "Offer fresh milk to a snake idol or image at the temple. Many devotees avoid cutting vegetables on this day as a mark of respect for all serpent life. Worshipping Nagaraja is believed to protect the family from snake bites, accidents, and misfortune.",
   },
   {
     id: "mangala-gauri",
@@ -3116,8 +3116,8 @@ export const vrats: Vrat[] = [
     mantraTranslation: "Om Namah Shivaya — I bow to Lord Shiva, the eternal and auspicious one",
     mealIdea: "Nothing until the morning after — the fast is broken at dawn the next day with satvik food after completing morning rituals",
     color: "#BE185D",
-    description: "One of the most demanding women's fasts — observed on Bhadrapad Shukla Tritiya. Married and unmarried women fast (often Nirjala — without even water) for Lord Shiva, staying awake through the entire night in puja",
-    specialNote: "Women stay awake all night performing puja of clay idols of Shiva-Parvati, listening to the Hartalika Katha. The fast must not be broken until the next morning after rituals are complete. This fast commemorates Parvati's intense tapas (penance) to win Shiva's love — tradition holds that Hartalika Teej once observed cannot be stopped.",
+    description: "One of the most demanding fasts in the Hindu calendar — observed on Bhadrapad Shukla Tritiya. Devotees fast (often Nirjala — without even water) for Lord Shiva, staying awake through the entire night in puja",
+    specialNote: "Devotees stay awake all night performing puja of clay idols of Shiva-Parvati, listening to the Hartalika Katha. The fast must not be broken until the next morning after rituals are complete. This fast commemorates Parvati's intense tapas (penance) to win Shiva's love — tradition holds that Hartalika Teej once observed cannot be stopped.",
     nirjala: true,
   },
   {
@@ -3144,7 +3144,7 @@ export const vrats: Vrat[] = [
     mantraTranslation: "Om Saptarishibhyo Namaha — I bow to the seven divine sages, the eternal guardians of dharma and wisdom",
     mealIdea: "Fresh fruits and wild-gathered greens — the purity of uncultivated food on this day of the seven sages",
     color: "#D97706",
-    description: "Observed the day after Ganesh Chaturthi — women fast in honour of the Saptarishis for purification and to atone for any inadvertent violations of dharma",
+    description: "Observed the day after Ganesh Chaturthi — devotees fast in honour of the Saptarishis for purification and to atone for any inadvertent violations of dharma",
     specialNote: "Eat only food that has not been touched by an ox-plough — traditionally this means forest fruits and uncultivated plants. This fast is especially important in Maharashtra, UP, and Bihar. Worship the seven sages by offering fruits, flowers, and sandalwood paste.",
   },
   {
@@ -3434,7 +3434,7 @@ export const vrats: Vrat[] = [
     mantraTranslation: "Om Suryaya Namaha — I bow to Surya, the life-giving sun, the source of all light and energy",
     mealIdea: "Thekua with sugarcane juice — the sacred Chhath prasad eaten after offering arghya to the setting and rising sun",
     color: "#F97316",
-    description: "Chhath Puja is one of the most ancient and demanding Hindu vrats — a 4-day festival in which devotees (primarily women) observe a 36-hour nirjala fast, standing in water at sunset and sunrise to offer arghya to the Sun God. Kartik Shukla 6 is the main fasting day (Sandhya Arghya)",
+    description: "Chhath Puja is one of the most ancient and demanding Hindu vrats — a 4-day festival in which devotees observe a 36-hour nirjala fast, standing in water at sunset and sunrise to offer arghya to the Sun God. Kartik Shukla 6 is the main fasting day (Sandhya Arghya)",
     specialNote: "Chhath is unique in that the worship is performed in rivers, ponds, or any natural water body — not at home or in temples. The vrat is extraordinarily strict: no food, no water for 36 hours, with the fast broken only after offering arghya to the rising sun. If you observe Chhath, prepare thekua and fruit baskets (soop) a day in advance. This is one of the most powerful vrats — its blessings are said to extend to the entire family for generations.",
     nirjala: true,
   },
@@ -3531,7 +3531,7 @@ export const vrats: Vrat[] = [
     mealIdea: "Chilled sattu sharbat with rock salt, or fruit bowl with coconut — light, cooling, and auspicious for a day of new beginnings",
     color: "#EAB308",
     description: "Akshaya Tritiya — 'the third day that never diminishes' — falls on the 3rd day of the bright fortnight of Vaishakha. It is one of the most auspicious days in the Hindu calendar: every action taken bears everlasting fruit. Start a new venture, make a charitable gift, buy gold, or begin a new fast on this day",
-    specialNote: "The word Akshaya means 'that which never diminishes.' Charity given on this day grows boundlessly. It is also the traditional day to begin the recitation of the Mahabharata and the Vedas. Many women start new jewelry, and families donate sesame, water pots (matkas), and umbrellas to the poor.",
+    specialNote: "The word Akshaya means 'that which never diminishes.' Charity given on this day grows boundlessly. It is also the traditional day to begin the recitation of the Mahabharata and the Vedas. Many devotees start new jewelry, and families donate sesame, water pots (matkas), and umbrellas to the poor.",
   },
 ];
 

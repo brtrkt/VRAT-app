@@ -2,7 +2,7 @@
 
 ## Overview
 
-pnpm workspace monorepo using TypeScript. Contains the VRAT app — a Hindu and Jain fasting companion for South Asian women.
+pnpm workspace monorepo using TypeScript. Contains the VRAT app — a sacred fasting companion for Hindu and Jain devotees.
 
 ## Artifacts
 
