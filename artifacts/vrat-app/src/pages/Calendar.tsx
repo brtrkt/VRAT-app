@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { getAllVratDates, formatDateStr } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
+import PageFooter from "@/components/PageFooter";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -434,6 +435,8 @@ export default function Calendar() {
             Always confirm with your local pandit or community calendar.
           </p>
         </div>
+
+        <PageFooter />
       </div>
 
       {selected && (

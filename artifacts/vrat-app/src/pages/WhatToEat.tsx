@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getVratsForDate, getNextVrat } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
+import PageFooter from "@/components/PageFooter";
 
 const HYDRATING_LABELS = new Set(["Water", "Coconut Water", "Lassi", "Buttermilk", "Herbal Tea"]);
 
@@ -384,6 +385,7 @@ export default function WhatToEat() {
         </div>
 
         <DisclaimerBanner />
+        <PageFooter />
       </div>
     </div>
   );

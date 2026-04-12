@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import WhatToEat from "@/pages/WhatToEat";
 import Calendar from "@/pages/Calendar";
+import Privacy from "@/pages/Privacy";
 
 const queryClient = new QueryClient();
 
@@ -187,6 +188,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/eat" component={WhatToEat} />
         <Route path="/calendar" component={Calendar} />
+        <Route path="/privacy" component={Privacy} />
         <Route component={NotFound} />
       </Switch>
       <BottomNav />
