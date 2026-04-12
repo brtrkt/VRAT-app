@@ -1,4 +1,14 @@
-export const VRAT_KATHAS: Record<string, string> = {
+export interface KathaChapter {
+  title: string;
+  body: string;
+}
+
+export interface ChapteredKatha {
+  chapters: KathaChapter[];
+  closing?: string;
+}
+
+export const VRAT_KATHAS: Record<string, string | ChapteredKatha> = {
   ekadashi: `Long ago a demon named Mura terrorised the heavens. Lord Vishnu fought him for a thousand years and grew tired. He rested in a cave where a beautiful maiden emerged from his energy and slew the demon. Vishnu named her Ekadashi and blessed her — whoever fasts on the eleventh day of the lunar fortnight shall be freed from sin and granted moksha. This is why we honour Ekadashi twice every month.`,
 
   "ekadashi-nirjala": `The Pandava Bhima was known for his enormous appetite and found it impossible to fast on all 24 Ekadashis. He approached the sage Vyasa who told him of Nirjala Ekadashi — one strict fast without food or water that carries the merit of all 24 Ekadashis combined. Bhima observed it faithfully. This is why Nirjala Ekadashi is also called Bhimseni Ekadashi and is considered the most powerful fast in the Vaishnava calendar.`,
@@ -17,10 +27,34 @@ export const VRAT_KATHAS: Record<string, string> = {
 
   sankashti: `Once all the gods were competing to see who could circle the universe first. Lord Kartikeya mounted his peacock and set off immediately. But Ganesha simply walked around his parents Shiva and Parvati — for they are his entire universe. Pleased by this wisdom, Ganesha was declared the winner. We fast on Chaturthi and worship Ganesha who removes all obstacles with his intelligence rather than his strength.`,
 
-  purnima: `A poor man once prayed sincerely to Lord Vishnu for relief from his poverty. Vishnu appeared as an old sage and told him to observe the Satyanarayan puja on Purnima. The man did so faithfully and his life transformed. He shared the puja with his family and community. On every full moon night, families gather to read the Satyanarayan Katha — the story of faith rewarded — and share prasad together.`,
+  purnima: {
+    chapters: [
+      {
+        title: "Chapter 1 — Origin of the Vrat",
+        body: "Narada Muni travels to Earth and sees humans suffering greatly in Kalyug. He visits Lord Vishnu and asks how people can find relief from their misery. Lord Vishnu reveals the Satyanarayan Vrat — the simplest path to peace and prosperity — and instructs Narada to share it with the world.",
+      },
+      {
+        title: "Chapter 2 — The Poor Brahmin and the Woodcutter",
+        body: "Lord Vishnu appears as an old Brahmin and instructs a poor Brahmin to perform the Satyanarayan puja. After doing so faithfully, the Brahmin overcomes all his obstacles and finds joy. A woodcutter witnesses this transformation and performs the puja himself — receiving the same blessings and abundance.",
+      },
+      {
+        title: "Chapter 3 — The Merchant who broke his vow",
+        body: "A wealthy merchant promises to perform the Satyanarayan puja after his child is born but repeatedly delays and forgets his vow. The Lord holds him accountable — the merchant is falsely accused and imprisoned. His devoted wife performs the puja with sincerity, the Lord shows mercy, and the merchant is freed.",
+      },
+      {
+        title: "Chapter 4 — The importance of Prasad",
+        body: "Continuing from Chapter 3 — the merchant's wife and daughter rush to greet him at the dockyard without first accepting the prasad. The Lord is displeased and the ship sinks. It rises again only when the wife and daughter humbly accept and eat the prasad — teaching that prasad must never be disrespected or refused.",
+      },
+      {
+        title: "Chapter 5 — King Tungadhwaj",
+        body: "A generous king named Tungadhwaj sees villagers performing Satyanarayan puja in the forest but out of pride refuses to join or accept the prasad. He suffers great losses in his kingdom as a consequence. When he returns, humbly accepts the prasad and performs the puja with devotion, all is restored and he ultimately attains salvation.",
+      },
+    ],
+    closing: "Jai Lakshmi Ramana Shri Satyanarayan Swami Ki Jai.",
+  },
 };
 
-export function getVratKatha(id: string): string | undefined {
+export function getVratKatha(id: string): string | ChapteredKatha | undefined {
   if (id === "ekadashi-jun-1") return VRAT_KATHAS["ekadashi-nirjala"];
   if (id.startsWith("ekadashi")) return VRAT_KATHAS["ekadashi"];
   if (id.startsWith("pradosh")) return VRAT_KATHAS["pradosh"];
