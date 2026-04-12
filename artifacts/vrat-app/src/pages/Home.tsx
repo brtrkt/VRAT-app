@@ -61,7 +61,8 @@ function BrahmaMuhurta() {
   const bMin = brahmaMins % 60; // 54
   const bTimeStr = `${bHour}:${String(bMin).padStart(2, "0")}am`;
 
-  // Android SET_ALARM intent — opens Clock app with the time pre-filled
+  // Detect Android for the SET_ALARM intent (iOS ignores intent:// URLs)
+  const isAndroid = /android/i.test(navigator.userAgent);
   const alarmUrl =
     `intent:#Intent;action=android.intent.action.SET_ALARM;` +
     `S.android.intent.extra.alarm.MESSAGE=Brahma%20Muhurta;` +
@@ -86,14 +87,20 @@ function BrahmaMuhurta() {
           Tomorrow: {bTimeStr}
         </span>
         {" — "}the most auspicious time for prayer and meditation.{" "}
-        <a
-          href={alarmUrl}
-          className="text-amber-700 underline underline-offset-2 font-semibold hover:text-amber-900 transition-colors"
-          data-testid="alarm-link"
-          aria-label={`Open clock app to set alarm for Brahma Muhurta at ${bTimeStr}`}
-        >
-          Tap to set your alarm
-        </a>
+        {isAndroid ? (
+          <a
+            href={alarmUrl}
+            className="text-amber-700 underline underline-offset-2 font-semibold hover:text-amber-900 transition-colors"
+            data-testid="alarm-link"
+            aria-label={`Open Clock app to set alarm for Brahma Muhurta at ${bTimeStr}`}
+          >
+            Tap to set your alarm
+          </a>
+        ) : (
+          <span className="text-amber-700 font-semibold">
+            Set your alarm for {bTimeStr}
+          </span>
+        )}
       </p>
       <p className="text-xs text-amber-600/60 mt-1">
         96 minutes before sunrise (6:30 am default)

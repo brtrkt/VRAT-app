@@ -185,7 +185,7 @@ function FoodLog({ todayStr }: { todayStr: string }) {
                   <span className="text-xs text-muted-foreground">{entry.time}</span>
                   <button
                     onClick={() => removeEntry(entry.id)}
-                    className="w-5 h-5 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all text-xs"
+                    className="w-8 h-8 rounded-full text-muted-foreground/50 active:text-destructive active:bg-destructive/10 flex items-center justify-center transition-all text-xs"
                     data-testid={`remove-entry-${entry.id}`}
                     aria-label={`Remove ${entry.label} entry`}
                   >
