@@ -222,6 +222,28 @@ function CalendarGrid({
   );
 }
 
+type TraditionFilter = "all" | "hindu" | "jain";
+
+const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "hindu", label: "Hindu" },
+  { value: "jain", label: "Jain" },
+];
+
+const HINDU_LEGEND = [
+  { label: "Ekadashi", color: "#D4A017" },
+  { label: "Pradosh", color: "#7C3AED" },
+  { label: "Purnima", color: "#C084FC" },
+  { label: "Navratri", color: "#DC2626" },
+  { label: "Sankashti", color: "#EA580C" },
+  { label: "Amavasya", color: "#1E3A5F" },
+  { label: "Karva Chauth / Special", color: "#BE185D" },
+];
+const JAIN_LEGEND = [
+  { label: "Jain Festivals", color: "#0D9488" },
+  { label: "Shared (Purnima)", color: "#C084FC" },
+];
+
 export default function Calendar() {
   const today = new Date();
   const todayStr = today.toISOString().split("T")[0];
@@ -229,10 +251,24 @@ export default function Calendar() {
   const [viewYear, setViewYear] = useState(2026);
   const [viewMonth, setViewMonth] = useState(today.getFullYear() === 2026 ? today.getMonth() : 0);
   const [selected, setSelected] = useState<{ dateStr: string; vrats: Vrat[] } | null>(null);
+  const [filter, setFilter] = useState<TraditionFilter>("all");
 
   const allVratDates = getAllVratDates();
+
+  const filteredVratDates = allVratDates
+    .map(({ date, vrats }) => ({
+      date,
+      vrats: vrats.filter((v) => {
+        if (filter === "all") return true;
+        if (filter === "hindu") return v.tradition === "Hindu" || v.tradition === "Both";
+        if (filter === "jain") return v.tradition === "Jain" || v.tradition === "Both";
+        return true;
+      }),
+    }))
+    .filter(({ vrats }) => vrats.length > 0);
+
   const vratDateMap: Record<string, Vrat[]> = {};
-  for (const { date, vrats } of allVratDates) {
+  for (const { date, vrats } of filteredVratDates) {
     vratDateMap[date] = vrats;
   }
 
@@ -262,11 +298,31 @@ export default function Calendar() {
   return (
     <div className="min-h-screen cream-gradient">
       <div className="max-w-md mx-auto px-4 pt-8 pb-24">
-        <div className="text-center mb-6">
+        <div className="text-center mb-4">
           <h1 className="font-serif text-2xl font-bold text-foreground">Vrat Calendar</h1>
           <p className="text-muted-foreground text-sm mt-1">
             2026 — Tap any highlighted date
           </p>
+        </div>
+
+        <div className="flex gap-2 justify-center mb-4" role="group" aria-label="Filter by tradition">
+          {FILTER_LABELS.map(({ value, label }) => (
+            <button
+              key={value}
+              onClick={() => { setFilter(value); setSelected(null); }}
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+                filter === value
+                  ? value === "jain"
+                    ? "bg-teal-600 text-white shadow-sm"
+                    : "saffron-gradient text-white shadow-sm"
+                  : "bg-card border border-card-border text-muted-foreground hover:text-foreground"
+              }`}
+              data-testid={`filter-${value}`}
+              aria-pressed={filter === value}
+            >
+              {label}
+            </button>
+          ))}
         </div>
 
         <div className="vrat-card p-4 mb-4">
@@ -315,15 +371,7 @@ export default function Calendar() {
             Legend
           </p>
           <div className="grid grid-cols-2 gap-2">
-            {[
-              { label: "Ekadashi", color: "#D4A017" },
-              { label: "Pradosh", color: "#7C3AED" },
-              { label: "Purnima", color: "#C084FC" },
-              { label: "Navratri", color: "#DC2626" },
-              { label: "Sankashti", color: "#EA580C" },
-              { label: "Amavasya", color: "#1E3A5F" },
-              { label: "Karva Chauth / Special", color: "#BE185D" },
-            ].map((item) => (
+            {(filter === "jain" ? JAIN_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
               <div key={item.label} className="flex items-center gap-2" data-testid={`legend-${item.label}`}>
                 <span
                   className="w-3 h-3 rounded-full flex-shrink-0"
