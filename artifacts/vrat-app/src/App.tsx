@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Switch, Route, Router as WouterRouter, Link, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,6 +8,64 @@ import WhatToEat from "@/pages/WhatToEat";
 import Calendar from "@/pages/Calendar";
 
 const queryClient = new QueryClient();
+
+const DISCLAIMER_KEY = "vrat_disclaimer_accepted";
+
+function DisclaimerPopup() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem(DISCLAIMER_KEY)) {
+      setVisible(true);
+    }
+  }, []);
+
+  if (!visible) return null;
+
+  function accept() {
+    localStorage.setItem(DISCLAIMER_KEY, "1");
+    setVisible(false);
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-5 bg-black/50 backdrop-blur-sm">
+      <div
+        className="w-full max-w-sm rounded-2xl bg-card shadow-2xl overflow-hidden"
+        style={{ border: "1px solid rgba(224,123,42,0.25)" }}
+      >
+        <div
+          className="px-6 pt-7 pb-4 text-center"
+          style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
+        >
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <span className="text-2xl" aria-hidden="true">🪔</span>
+            <span className="font-serif text-xl font-bold text-foreground">Welcome to VRAT</span>
+          </div>
+          <p className="text-sm text-foreground/80 leading-relaxed mb-4">
+            This app shares traditional Hindu and Jain fasting knowledge passed down through
+            generations. All content is for{" "}
+            <span className="font-semibold">spiritual and educational guidance only</span> — not
+            medical advice.
+          </p>
+          <div className="rounded-xl bg-amber-50 border border-amber-200/70 px-4 py-3 mb-5">
+            <p className="text-[11px] text-amber-900/75 leading-relaxed">
+              By continuing you agree to our{" "}
+              <span className="font-semibold">Terms of Use</span>. If you have any health
+              conditions, please consult your doctor before fasting.
+            </p>
+          </div>
+          <button
+            onClick={accept}
+            className="w-full py-3.5 rounded-xl text-white font-semibold text-sm tracking-wide transition-opacity active:opacity-80"
+            style={{ background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }}
+          >
+            I understand — let me begin
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function BottomNav() {
   const [location] = useLocation();
@@ -140,6 +199,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          <DisclaimerPopup />
           <Router />
         </WouterRouter>
       </TooltipProvider>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getVratsForDate, getNextVrat } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
+import DisclaimerBanner from "@/components/DisclaimerBanner";
 
 const HYDRATING_LABELS = new Set(["Water", "Coconut Water", "Lassi", "Buttermilk", "Herbal Tea"]);
 
@@ -381,6 +382,8 @@ export default function WhatToEat() {
             Your fast is a gift you give to your spirit.
           </p>
         </div>
+
+        <DisclaimerBanner />
       </div>
     </div>
   );

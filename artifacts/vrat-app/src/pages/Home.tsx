@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getVratsForDate, getNextVrat, getDaysUntil, formatDateStr } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
+import DisclaimerBanner from "@/components/DisclaimerBanner";
 
 function getParanaTime(vrat: Vrat, now: Date): Date {
   const name = vrat.name.toLowerCase();
@@ -369,6 +370,8 @@ export default function Home() {
         <NextVratCard nextVrat={nextVrat} />
         <MantraCard vrats={allVrats} />
         <BrahmaMuhurta />
+
+        <DisclaimerBanner />
 
         <div className="vrat-card p-5 mb-4">
           <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3">
