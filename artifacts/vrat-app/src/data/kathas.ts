@@ -5,7 +5,7 @@ export interface KathaChapter {
 
 export interface ChapteredKatha {
   chapters: KathaChapter[];
-  closing?: string;
+  phalaShruti?: string;
 }
 
 export const VRAT_KATHAS: Record<string, string | ChapteredKatha> = {
@@ -46,11 +46,11 @@ export const VRAT_KATHAS: Record<string, string | ChapteredKatha> = {
         body: "Continuing from Chapter 3 — the merchant's wife and daughter rush to greet him at the dockyard without first accepting the prasad. The Lord is displeased and the ship sinks. It rises again only when the wife and daughter humbly accept and eat the prasad — teaching that prasad must never be disrespected or refused.",
       },
       {
-        title: "Chapter 5 — King Tungadhwaj",
-        body: "A generous king named Tungadhwaj sees villagers performing Satyanarayan puja in the forest but out of pride refuses to join or accept the prasad. He suffers great losses in his kingdom as a consequence. When he returns, humbly accepts the prasad and performs the puja with devotion, all is restored and he ultimately attains salvation.",
+        title: "Chapter 5 — King Tungadhwaj and the Phala Shruti",
+        body: "A king named Tungadhwaj goes hunting in the forest and comes upon cowherds performing Satyanarayan puja with great devotion. Out of pride and arrogance he neither joins them nor bows to the Lord. When offered prasad he refuses and walks away. Upon returning to his kingdom he finds all his sons dead and his wealth gone — the consequence of disrespecting the Lord's prasad. Realising his mistake he returns to the cowherds, humbly performs the puja and accepts the prasad with full devotion. All is restored. He attains happiness in this life and moksha after death.",
       },
     ],
-    closing: "Jai Lakshmi Ramana Shri Satyanarayan Swami Ki Jai.",
+    phalaShruti: "Lord Vishnu declares: Whoever hears or reads this Katha with devotion shall be freed from all sins. One who is childless shall be blessed with children. One who is without wealth shall gain prosperity. One who is imprisoned shall be freed. One who is fearful shall be liberated from fear. A widow who observes this vrat with devotion shall be blessed with a good husband in her next birth. One who performs this puja with a pure heart shall enjoy all earthly pleasures and attain moksha after death. The person who observes this great and rare fast shall, by the grace of Lord Satyanarayana, never face shortage of wealth or grain. Jai Lakshmi Ramana Shri Satyanarayan Swami Ki Jai.",
   },
 };
 

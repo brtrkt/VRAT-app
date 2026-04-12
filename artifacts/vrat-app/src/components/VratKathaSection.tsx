@@ -76,14 +76,25 @@ function ChapteredKathaView({ katha }: { katha: ChapteredKatha }) {
         </div>
       ))}
 
-      {katha.closing && (
-        <p
-          className="font-serif text-sm text-center font-semibold pt-2"
-          style={{ color: "#92400E" }}
-          data-testid="katha-closing"
+      {katha.phalaShruti && (
+        <div
+          className="mt-2 pt-4 rounded-xl px-4 py-4"
+          style={{ background: "#FFF8E7", border: "1px solid #D4A01740" }}
+          data-testid="katha-phala-shruti"
         >
-          {katha.closing}
-        </p>
+          <p
+            className="font-serif text-xs font-semibold mb-2 tracking-wide text-center"
+            style={{ color: "#B45309" }}
+          >
+            Phala Shruti — The Blessings of this Katha
+          </p>
+          <p
+            className="font-serif text-sm leading-relaxed text-center"
+            style={{ color: "#44260A", fontStyle: "italic", lineHeight: "1.9" }}
+          >
+            {katha.phalaShruti}
+          </p>
+        </div>
       )}
     </div>
   );
