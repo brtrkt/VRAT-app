@@ -8,6 +8,8 @@ import WhatToEat from "@/pages/WhatToEat";
 import Calendar from "@/pages/Calendar";
 import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
+import Onboarding from "@/components/Onboarding";
+import { ONBOARDING_KEY } from "@/hooks/useUserPrefs";
 
 const queryClient = new QueryClient();
 
@@ -199,11 +201,19 @@ function Router() {
 }
 
 function App() {
+  const [onboardingDone, setOnboardingDone] = useState(
+    () => !!localStorage.getItem(ONBOARDING_KEY)
+  );
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <DisclaimerPopup />
+          {!onboardingDone ? (
+            <Onboarding onComplete={() => setOnboardingDone(true)} />
+          ) : (
+            <DisclaimerPopup />
+          )}
           <Router />
         </WouterRouter>
       </TooltipProvider>

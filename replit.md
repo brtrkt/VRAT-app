@@ -15,11 +15,30 @@ pnpm workspace monorepo using TypeScript. Contains the VRAT app — a Hindu and 
 - **Data**: All vrat data hardcoded in `src/data/vrats.ts`
 
 **Features:**
+- **Onboarding** (5 screens, shown once): Welcome → Tradition → Vrat toggles → City → "Jai Mata Di"
 - Home screen: today's fasting status, next vrat countdown, daily mantra
 - What to Eat: foods allowed/avoided + meal ideas based on today's vrat
-- Calendar: full 2026 year view with colour-coded vrat days, tap to see details
+- Calendar: 2026–2027 year view, colour-coded vrat days, gold dot for personal vrats
+- Nirjala warnings: red badge + health modal for strict no-water fasts
+- Health disclaimer banner + one-time popup + Privacy/Terms pages
+- Personalisation: tradition preference (Hindu/Jain/Both) sets default calendar filter; observed vrats show gold dots
 
-**Vrats covered:** Ekadashi (24 days), Pradosh (24 days), Purnima (12 days), Navratri (18 days), Sankashti Chaturthi (12 days), Maha Shivratri, Janmashtami, Karva Chauth
+**Vrats covered (119 entries, 2026–2027):** Ekadashi (24), Pradosh (24), Purnima (12), Amavasya (12), Navratri (18), Sankashti Chaturthi (12), Maha Shivratri, Janmashtami, Karva Chauth, Hartalika Teej, Hariyali Teej, Vat Savitri, Ahoi Ashtami, Ram Navami, Hanuman Jayanti, Ganesh Chaturthi, Dussehra, Diwali, Dhanteras, Govardhan Puja, Chhath Puja, Nirjala Ekadashi, Akshaya Tritiya, Pitru Paksha, Jain festivals (6 types)
+
+**LocalStorage keys:**
+- `vrat_onboarding_done` — onboarding completed flag
+- `vrat_tradition` — "Hindu" | "Jain" | "Both"
+- `vrat_observed` — JSON array of observed vrat ID patterns
+- `vrat_city` — user's city for moonrise/sunrise calculations
+- `vrat_disclaimer_accepted` — health disclaimer accepted
+
+**Key files:**
+- `src/data/vrats.ts` — all vrat data (119 entries)
+- `src/hooks/useUserPrefs.ts` — localStorage helpers
+- `src/components/Onboarding.tsx` — 5-screen onboarding flow
+- `src/components/NirjalaWarning.tsx` — nirjala health warning badge/modal
+- `src/components/DisclaimerBanner.tsx` — health disclaimer banner
+- `src/pages/Calendar.tsx` — personalised calendar with gold dots
 
 ## Stack
 

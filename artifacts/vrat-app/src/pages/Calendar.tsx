@@ -4,6 +4,7 @@ import { getAllVratDates, formatDateStr } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
+import { getUserTradition, getObservedVrats, isVratObserved } from "@/hooks/useUserPrefs";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -197,12 +198,14 @@ function CalendarGrid({
   month,
   vratDates,
   today,
+  observedVrats,
   onDayClick,
 }: {
   year: number;
   month: number;
   vratDates: Record<string, Vrat[]>;
   today: string;
+  observedVrats: string[];
   onDayClick: (dateStr: string, vrats: Vrat[]) => void;
 }) {
   const daysInMonth = getDaysInMonth(year, month);
@@ -236,9 +239,11 @@ function CalendarGrid({
           const isVratDay = !!vratsForDay;
 
           let dotColor = "";
+          let isPersonal = false;
           if (isVratDay) {
             const v = vratsForDay[0];
             dotColor = v.color;
+            isPersonal = vratsForDay.some((vr) => isVratObserved(vr.id, observedVrats));
           }
 
           return (
@@ -248,6 +253,8 @@ function CalendarGrid({
               className={`relative aspect-square flex flex-col items-center justify-center rounded-xl transition-all ${
                 isToday
                   ? "bg-primary text-primary-foreground font-bold"
+                  : isVratDay && isPersonal
+                  ? "bg-amber-50 hover:bg-amber-100 cursor-pointer active:scale-95"
                   : isVratDay
                   ? "bg-accent/50 hover:bg-accent cursor-pointer active:scale-95"
                   : "text-foreground cursor-default"
@@ -261,8 +268,12 @@ function CalendarGrid({
               </span>
               {isVratDay && (
                 <span
-                  className="absolute bottom-1 w-1.5 h-1.5 rounded-full"
-                  style={{ backgroundColor: isToday ? "white" : dotColor }}
+                  className={`absolute bottom-1 rounded-full ${isPersonal ? "w-2 h-2" : "w-1.5 h-1.5"}`}
+                  style={{
+                    backgroundColor: isToday ? "white" : isPersonal ? "#D4A017" : dotColor,
+                    opacity: isPersonal ? 1 : 0.75,
+                    boxShadow: isPersonal && !isToday ? "0 0 3px #D4A01780" : "none",
+                  }}
                 />
               )}
             </button>
@@ -303,7 +314,13 @@ export default function Calendar() {
   const [viewYear, setViewYear] = useState(2026);
   const [viewMonth, setViewMonth] = useState(today.getFullYear() === 2026 ? today.getMonth() : 0);
   const [selected, setSelected] = useState<{ dateStr: string; vrats: Vrat[] } | null>(null);
-  const [filter, setFilter] = useState<TraditionFilter>("all");
+  const [filter, setFilter] = useState<TraditionFilter>(() => {
+    const t = getUserTradition();
+    if (t === "Hindu") return "hindu";
+    if (t === "Jain") return "jain";
+    return "all";
+  });
+  const [observedVrats] = useState<string[]>(() => getObservedVrats());
 
   const allVratDates = getAllVratDates();
 
@@ -414,6 +431,7 @@ export default function Calendar() {
             month={viewMonth}
             vratDates={vratDateMap}
             today={todayStr}
+            observedVrats={observedVrats}
             onDayClick={(dateStr, vrats) => setSelected({ dateStr, vrats })}
           />
         </div>
@@ -423,6 +441,13 @@ export default function Calendar() {
             Legend
           </p>
           <div className="grid grid-cols-2 gap-2">
+            <div className="flex items-center gap-2 col-span-2 pb-2 mb-1 border-b border-stone-100">
+              <span
+                className="w-3 h-3 rounded-full flex-shrink-0"
+                style={{ backgroundColor: "#D4A017", boxShadow: "0 0 4px #D4A01780" }}
+              />
+              <span className="text-xs font-medium text-foreground">Your observed vrats (gold)</span>
+            </div>
             {(filter === "jain" ? JAIN_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
               <div key={item.label} className="flex items-center gap-2" data-testid={`legend-${item.label}`}>
                 <span
