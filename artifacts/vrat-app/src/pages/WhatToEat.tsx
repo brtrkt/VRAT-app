@@ -163,7 +163,7 @@ function FoodLog({ todayStr }: { todayStr: string }) {
             </p>
             <button
               onClick={() => setLog([])}
-              className="text-xs text-muted-foreground hover:text-destructive transition-colors px-2 py-0.5 rounded"
+              className="text-xs text-muted-foreground hover:text-destructive transition-colors px-3 py-2 rounded-lg min-h-[44px] flex items-center"
               data-testid="clear-log-btn"
               aria-label="Clear all log entries"
             >

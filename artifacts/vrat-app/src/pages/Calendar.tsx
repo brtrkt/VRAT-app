@@ -71,11 +71,11 @@ function VratDetailSheet({
             </div>
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/30 transition-colors flex-shrink-0"
+              className="w-11 h-11 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/30 transition-colors flex-shrink-0"
               data-testid="close-detail-sheet"
               aria-label="Close"
             >
-              <X size={16} />
+              <X size={20} />
             </button>
           </div>
 
@@ -99,7 +99,7 @@ function VratDetailSheet({
           )}
         </div>
 
-        <div className="overflow-y-auto flex-1 px-6 py-5 space-y-4">
+        <div className="overflow-y-auto flex-1 px-6 py-5 space-y-4" data-overscroll-contain style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}>
           {/* Description */}
           <p className="text-xs text-muted-foreground leading-relaxed italic">
             {activeVrat.description}
@@ -382,7 +382,7 @@ export default function Calendar() {
             <button
               key={value}
               onClick={() => { setFilter(value); setSelected(null); }}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+              className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
                 filter === value
                   ? value === "jain"
                     ? "bg-green-500 text-white shadow-sm"
@@ -401,11 +401,11 @@ export default function Calendar() {
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={prevMonth}
-              className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center hover:bg-accent transition-colors"
+              className="w-11 h-11 rounded-xl bg-muted flex items-center justify-center hover:bg-accent transition-colors active:scale-95"
               data-testid="prev-month"
               aria-label="Previous month"
             >
-              <ChevronLeft size={18} />
+              <ChevronLeft size={20} />
             </button>
 
             <div className="text-center">
@@ -421,11 +421,11 @@ export default function Calendar() {
 
             <button
               onClick={nextMonth}
-              className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center hover:bg-accent transition-colors"
+              className="w-11 h-11 rounded-xl bg-muted flex items-center justify-center hover:bg-accent transition-colors active:scale-95"
               data-testid="next-month"
               aria-label="Next month"
             >
-              <ChevronRight size={18} />
+              <ChevronRight size={20} />
             </button>
           </div>
 

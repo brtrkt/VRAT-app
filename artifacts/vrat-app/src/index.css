@@ -158,12 +158,31 @@
 @layer base {
   * {
     @apply border-border;
+    -webkit-tap-highlight-color: transparent;
+  }
+  html {
+    scroll-behavior: smooth;
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
+  }
+  /* Prevent scroll chaining on modals and sheets */
+  [data-overscroll-contain] {
+    overscroll-behavior: contain;
+  }
+  /* Onboarding safe area top — accounts for notch / Dynamic Island */
+  .safe-top {
+    padding-top: max(3rem, env(safe-area-inset-top));
+  }
+  /* Minimum tap target utility */
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
   }
 }
 

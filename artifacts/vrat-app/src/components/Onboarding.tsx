@@ -219,7 +219,7 @@ export default function Onboarding({ onComplete }: Props) {
       >
         {/* ── Screen 1: Welcome ─────────────────────────────────── */}
         <div
-          className="flex-shrink-0 h-full flex flex-col items-center justify-between px-6 py-12"
+          className="flex-shrink-0 h-full flex flex-col items-center justify-between px-6 pb-12 safe-top"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #C86B1A 0%, #E07B2A 50%, #D97706 100%)" }}
         >
           <div />
@@ -252,7 +252,7 @@ export default function Onboarding({ onComplete }: Props) {
 
         {/* ── Screen 2: Tradition ──────────────────────────────── */}
         <div
-          className="flex-shrink-0 h-full flex flex-col px-6 py-12 overflow-y-auto"
+          className="flex-shrink-0 h-full flex flex-col px-6 pb-12 safe-top overflow-y-auto"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
@@ -339,7 +339,7 @@ export default function Onboarding({ onComplete }: Props) {
           className="flex-shrink-0 h-full flex flex-col"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
-          <div className="px-6 pt-12 pb-3">
+          <div className="px-6 pb-3 safe-top">
             <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 2 of 3</p>
             <h2 className="font-serif text-3xl font-bold text-foreground mb-1">Which vrats do you observe?</h2>
             <p className="text-sm text-muted-foreground">
@@ -381,7 +381,7 @@ export default function Onboarding({ onComplete }: Props) {
 
         {/* ── Screen 4: City ───────────────────────────────────── */}
         <div
-          className="flex-shrink-0 h-full flex flex-col px-6 py-12 overflow-y-auto"
+          className="flex-shrink-0 h-full flex flex-col px-6 pb-12 safe-top overflow-y-auto"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
@@ -430,7 +430,7 @@ export default function Onboarding({ onComplete }: Props) {
 
         {/* ── Screen 5: All set ────────────────────────────────── */}
         <div
-          className="flex-shrink-0 h-full flex flex-col items-center justify-between px-6 py-14"
+          className="flex-shrink-0 h-full flex flex-col items-center justify-between px-6 pb-14 safe-top"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #C86B1A 0%, #E07B2A 50%, #D97706 100%)" }}
         >
           <div />
