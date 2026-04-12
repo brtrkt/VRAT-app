@@ -59,11 +59,13 @@ function HydrationBar({ log }: { log: LogEntry[] }) {
   const pct = Math.min((count / MAX) * 100, 100);
 
   const state =
-    count >= 5
-      ? { label: "Well hydrated — well done", color: "bg-green-500", text: "text-green-700", bg: "bg-green-50", border: "border-green-100", icon: "💚" }
+    count === 0
+      ? { label: "Tap a drink above to track hydration", color: "bg-stone-300", text: "text-stone-500", bg: "bg-stone-50", border: "border-stone-100", icon: "💧" }
+      : count >= 5
+      ? { label: "Well hydrated — well done!", color: "bg-green-500", text: "text-green-700", bg: "bg-green-50", border: "border-green-100", icon: "💚" }
       : count >= 3
-      ? { label: "Getting there — keep sipping", color: "bg-amber-400", text: "text-amber-700", bg: "bg-amber-50", border: "border-amber-100", icon: "💛" }
-      : { label: "Drink more — you need hydration", color: "bg-red-400", text: "text-red-700", bg: "bg-red-50", border: "border-red-100", icon: "🔴" };
+      ? { label: "Almost there — keep sipping", color: "bg-amber-400", text: "text-amber-700", bg: "bg-amber-50", border: "border-amber-100", icon: "💛" }
+      : { label: "Good start — drink a bit more", color: "bg-amber-300", text: "text-amber-600", bg: "bg-amber-50/60", border: "border-amber-100", icon: "🫗" };
 
   return (
     <div
