@@ -321,6 +321,7 @@ export default function Calendar() {
               { label: "Purnima", color: "#C084FC" },
               { label: "Navratri", color: "#DC2626" },
               { label: "Sankashti", color: "#EA580C" },
+              { label: "Amavasya", color: "#1E3A5F" },
               { label: "Karva Chauth / Special", color: "#BE185D" },
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-2" data-testid={`legend-${item.label}`}>

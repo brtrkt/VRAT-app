@@ -298,6 +298,7 @@ export default function Home() {
               { label: "Purnima", count: "12 days", color: "#C084FC" },
               { label: "Navratri", count: "18 days", color: "#DC2626" },
               { label: "Sankashti", count: "12 days", color: "#EA580C" },
+              { label: "Amavasya", count: "12 days", color: "#1E3A5F" },
               { label: "Special", count: "3 days", color: "#BE185D" },
             ].map((item) => (
               <div
