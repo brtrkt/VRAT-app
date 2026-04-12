@@ -5,6 +5,7 @@ import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import NavratriCard from "@/components/NavratriCard";
+import HydrationTracker from "@/components/HydrationTracker";
 import { getDaysRemaining } from "@/hooks/useUserPrefs";
 
 function getParanaTime(vrat: Vrat, now: Date): Date {
@@ -416,6 +417,7 @@ export default function Home() {
 
         <TodayCard todayStr={todayStr} vratsToday={vratsToday} />
         <FastingTimer vratsToday={vratsToday} />
+        <HydrationTracker vratsToday={vratsToday} todayStr={todayStr} />
         <NextVratCard nextVrat={nextVrat} />
         <MantraCard vrats={allVrats} />
         <BrahmaMuhurta />
