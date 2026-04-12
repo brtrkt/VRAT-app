@@ -4,7 +4,7 @@ import { getAllVratDates, formatDateStr } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
-import { getUserTradition, getObservedVrats, isVratObserved } from "@/hooks/useUserPrefs";
+import { getUserTradition, getObservedVrats, isVratObserved, getLocationInfo } from "@/hooks/useUserPrefs";
 import VratKathaSection from "@/components/VratKathaSection";
 
 const MONTHS = [
@@ -464,9 +464,16 @@ export default function Calendar() {
         </div>
 
         <div className="p-4 text-center">
-          <p className="text-xs text-muted-foreground leading-relaxed">
-            Dates follow Drik Panchang IST. Regional dates may vary — please verify with your local pandit or family tradition.
-          </p>
+          {(() => {
+            const loc = getLocationInfo();
+            return (
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                {loc.id === "india"
+                  ? "Dates follow Drik Panchang IST. Regional dates may vary — please verify with your local pandit or family tradition."
+                  : `Dates shown per Drik Panchang IST (${loc.flag} ${loc.label} · ${loc.timezone}). ${loc.note}`}
+              </p>
+            );
+          })()}
         </div>
 
         <PageFooter />

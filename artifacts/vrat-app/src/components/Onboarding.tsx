@@ -4,7 +4,10 @@ import {
   TRADITION_KEY,
   OBSERVED_KEY,
   CITY_KEY,
+  LOCATION_KEY,
+  LOCATION_OPTIONS,
   type Tradition,
+  type UserLocation,
 } from "@/hooks/useUserPrefs";
 
 const DISCLAIMER_KEY = "vrat_disclaimer_accepted";
@@ -95,20 +98,14 @@ function DiyaSvg() {
           <stop offset="100%" stopColor="#F97316" />
         </radialGradient>
       </defs>
-      {/* Glow halo */}
       <ellipse cx="70" cy="85" rx="55" ry="55" fill="url(#glow)" />
-      {/* Flame */}
       <path d="M70 28 C60 42 57 60 66 70 C68 73 70 74 70 74 C70 74 72 73 74 70 C83 60 80 42 70 28 Z" fill="url(#flameGrad)" />
       <path d="M70 42 C65 52 64 63 68 70 C69 72 70 73 70 73 C70 73 71 72 72 70 C76 63 75 52 70 42 Z" fill="#FFFDE7" opacity="0.85" />
-      {/* Wick */}
       <path d="M70 74 C74 80 80 86 86 90" stroke="#92400E" strokeWidth="2" strokeLinecap="round" fill="none" />
-      {/* Diya body */}
       <path d="M32 102 Q36 128 70 130 Q104 128 108 102 Q104 94 70 91 Q36 94 32 102 Z" fill="#C2410C" />
       <path d="M97 94 Q108 88 116 90 Q118 98 107 102 Q102 98 97 94 Z" fill="#9A3412" />
-      {/* Oil shine */}
       <ellipse cx="70" cy="102" rx="22" ry="6" fill="#92400E" opacity="0.5" />
       <ellipse cx="62" cy="99" rx="7" ry="2.5" fill="#FCD34D" opacity="0.3" transform="rotate(-10 62 99)" />
-      {/* Decorative dots on diya */}
       <circle cx="50" cy="115" r="2.5" fill="#FCD34D" opacity="0.6" />
       <circle cx="70" cy="122" r="2.5" fill="#FCD34D" opacity="0.6" />
       <circle cx="90" cy="115" r="2.5" fill="#FCD34D" opacity="0.6" />
@@ -179,9 +176,10 @@ export default function Onboarding({ onComplete }: Props) {
   const [step, setStep] = useState(0);
   const [tradition, setTradition] = useState<Tradition>("Hindu");
   const [observed, setObserved] = useState<string[]>(HINDU_DEFAULTS);
+  const [location, setLocation] = useState<UserLocation>("india");
   const [city, setCity] = useState("");
 
-  const TOTAL_STEPS = 5;
+  const TOTAL_STEPS = 6;
 
   function chooseTradition(t: Tradition) {
     setTradition(t);
@@ -198,6 +196,7 @@ export default function Onboarding({ onComplete }: Props) {
     localStorage.setItem(TRADITION_KEY, tradition);
     localStorage.setItem(OBSERVED_KEY, JSON.stringify(observed));
     localStorage.setItem(CITY_KEY, city.trim());
+    localStorage.setItem(LOCATION_KEY, location);
     localStorage.setItem(ONBOARDING_KEY, "1");
     localStorage.setItem(DISCLAIMER_KEY, "1");
     onComplete();
@@ -212,7 +211,6 @@ export default function Onboarding({ onComplete }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
-      {/* Sliding screens container */}
       <div
         className="flex h-full transition-transform duration-500 ease-in-out"
         style={{ width: `${TOTAL_STEPS * 100}%`, transform: `translateX(-${(step * 100) / TOTAL_STEPS}%)` }}
@@ -256,7 +254,7 @@ export default function Onboarding({ onComplete }: Props) {
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 1 of 3</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 1 of 4</p>
             <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Which tradition do you follow?</h2>
             <p className="text-sm text-muted-foreground mb-8">
               We'll personalise your calendar and vrat guidance accordingly.
@@ -340,7 +338,7 @@ export default function Onboarding({ onComplete }: Props) {
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="px-6 pb-3 safe-top">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 2 of 3</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 2 of 4</p>
             <h2 className="font-serif text-3xl font-bold text-foreground mb-1">Which vrats do you observe?</h2>
             <p className="text-sm text-muted-foreground">
               Toggle on the ones you keep. Your personal vrats will be starred in the calendar.
@@ -379,13 +377,72 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
         </div>
 
-        {/* ── Screen 4: City ───────────────────────────────────── */}
+        {/* ── Screen 4: Location ───────────────────────────────── */}
         <div
           className="flex-shrink-0 h-full flex flex-col px-6 pb-12 safe-top overflow-y-auto"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 3 of 3</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 3 of 4</p>
+            <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Where are you based?</h2>
+            <p className="text-sm text-muted-foreground mb-8">
+              Panchang dates are rooted in IST. We'll show you a regional note so you can confirm with your local pandit.
+            </p>
+
+            <div className="space-y-3">
+              {LOCATION_OPTIONS.map((opt) => {
+                const selected = location === opt.id;
+                return (
+                  <button
+                    key={opt.id}
+                    onClick={() => setLocation(opt.id)}
+                    className="w-full flex items-center gap-4 p-4 rounded-2xl text-left transition-all active:scale-98"
+                    style={{
+                      border: `2px solid ${selected ? "#E07B2A" : "#E5E7EB"}`,
+                      background: selected ? "#E07B2A12" : "white",
+                    }}
+                    data-testid={`location-option-${opt.id}`}
+                  >
+                    <span className="text-3xl flex-shrink-0" aria-hidden="true">{opt.flag}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-base text-foreground">{opt.label}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{opt.timezone}</p>
+                    </div>
+                    {selected && (
+                      <div
+                        className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: "#E07B2A" }}
+                      >
+                        <svg viewBox="0 0 12 12" fill="white" className="w-3 h-3">
+                          <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="max-w-sm mx-auto w-full">
+            <StepDots total={TOTAL_STEPS} current={3} />
+            <button
+              onClick={() => setStep(4)}
+              className="mt-4 w-full py-4 rounded-2xl font-semibold text-base text-white tracking-wide transition-opacity active:opacity-80"
+              style={{ background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+
+        {/* ── Screen 5: City ───────────────────────────────────── */}
+        <div
+          className="flex-shrink-0 h-full flex flex-col px-6 pb-12 safe-top overflow-y-auto"
+          style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
+        >
+          <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 4 of 4</p>
             <h2 className="font-serif text-3xl font-bold text-foreground mb-2">What is your city?</h2>
             <p className="text-sm text-muted-foreground mb-8">
               We use this to calculate Brahma Muhurta and moonrise times accurately for your location.
@@ -417,9 +474,9 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
 
           <div className="max-w-sm mx-auto w-full">
-            <StepDots total={TOTAL_STEPS} current={3} />
+            <StepDots total={TOTAL_STEPS} current={4} />
             <button
-              onClick={() => setStep(4)}
+              onClick={() => setStep(5)}
               className="mt-4 w-full py-4 rounded-2xl font-semibold text-base text-white tracking-wide transition-opacity active:opacity-80"
               style={{ background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }}
             >
@@ -428,7 +485,7 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
         </div>
 
-        {/* ── Screen 5: All set ────────────────────────────────── */}
+        {/* ── Screen 6: All set ────────────────────────────────── */}
         <div
           className="flex-shrink-0 h-full flex flex-col items-center justify-between px-6 pb-14 safe-top"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #C86B1A 0%, #E07B2A 50%, #D97706 100%)" }}
