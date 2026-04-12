@@ -8,6 +8,56 @@ import VratKathaSection from "@/components/VratKathaSection";
 
 const HYDRATING_LABELS = new Set(["Water", "Coconut Water", "Lassi", "Buttermilk", "Herbal Tea"]);
 
+// ─── Energy guide lookup ──────────────────────────────────────────────────────
+type EnergyLevel = "Light" | "Medium" | "Heavy";
+
+interface FoodInfo {
+  energy: EnergyLevel;
+  tip: string;
+}
+
+const FOOD_GUIDE: { match: string[]; energy: EnergyLevel; tip: string }[] = [
+  { match: ["makhana", "fox nut"],           energy: "Light",  tip: "Perfect light snack — won't make you feel heavy. Roast in a little ghee for flavour." },
+  { match: ["sabudana", "tapioca"],          energy: "Medium", tip: "Add peanuts for protein to slow energy release and keep you fuller for longer." },
+  { match: ["kuttu", "buckwheat"],           energy: "Heavy",  tip: "Filling — have once as a main meal. A small portion goes a long way." },
+  { match: ["singhara", "water chestnut"],   energy: "Medium", tip: "Lighter than kuttu. Singhara roti is filling without the heaviness — good for a midday meal." },
+  { match: ["rajgira", "amaranth"],          energy: "Medium", tip: "Higher in protein than most vrat grains. Rajgira ladoo makes a great mid-morning energy bite." },
+  { match: ["sama rice", "samak", "barnyard millet", "samvat"], energy: "Medium", tip: "Lighter alternative to regular rice. Easy on digestion — best as a midday meal." },
+  { match: ["sweet potato", "shakarkand"],   energy: "Medium", tip: "Slow-release energy that keeps you steady through the afternoon. Best boiled or roasted." },
+  { match: ["potato", "aloo"],               energy: "Medium", tip: "Boiled is much lighter than fried. Boiled aloo with sendha namak is easier on the stomach." },
+  { match: ["paneer"],                       energy: "Heavy",  tip: "High in protein — a small portion keeps hunger away for hours. Ideal for the afternoon." },
+  { match: ["kheer", "payasam"],             energy: "Heavy",  tip: "Rich and satisfying — best as a morning or midday meal, not late at night." },
+  { match: ["halwa"],                        energy: "Heavy",  tip: "Very filling and sweet. A small portion in the morning gives energy for several hours." },
+  { match: ["dry fruit", "almond", "cashew", "walnut", "raisin", "kaju", "badam", "pista"], energy: "Heavy", tip: "Very energy-dense — 4 to 5 pieces is enough. Best in the morning, not just before sleep." },
+  { match: ["peanut", "groundnut"],          energy: "Medium", tip: "A small handful gives lasting energy. Mix into sabudana dishes to make them more sustaining." },
+  { match: ["dahi", "yogurt", "curd"],       energy: "Light",  tip: "Cooling and easy to digest. A small bowl in the afternoon helps beat energy dips." },
+  { match: ["milk"],                         energy: "Medium", tip: "Warm milk at night soothes hunger and aids sleep. Add a little mishri if needed." },
+  { match: ["lassi", "buttermilk", "chaas"], energy: "Light",  tip: "Hydrating and cooling. Great in the afternoon when energy typically dips during a fast." },
+  { match: ["coconut water"],                energy: "Light",  tip: "Nature's electrolyte drink — best mid-morning to balance energy and hydration." },
+  { match: ["coconut", "nariyal"],           energy: "Light",  tip: "Fresh coconut curbs hunger without weighing you down. A few pieces at a time is ideal." },
+  { match: ["fruit", "banana", "papaya", "mango", "apple", "pomegranate", "watermelon", "pear", "guava", "chikoo", "kiwi"], energy: "Light", tip: "Eat in the morning for a natural energy boost. Banana is especially good before a long fast." },
+  { match: ["ghee"],                         energy: "Medium", tip: "A teaspoon adds flavour and helps absorb fat-soluble vitamins. A little goes a long way." },
+  { match: ["sendha namak", "rock salt"],    energy: "Light",  tip: "Essential for fasting — regular salt is not permitted. Use it freely in all your dishes." },
+  { match: ["mishri", "rock candy", "sugar"], energy: "Light", tip: "A small piece gives a quick energy lift. Better than processed sugar on a fast day." },
+  { match: ["water"],                        energy: "Light",  tip: "Sip steadily throughout the day. Don't wait until you're thirsty — especially on warm days." },
+];
+
+function getFoodInfo(item: string): FoodInfo | null {
+  const lower = item.toLowerCase();
+  for (const entry of FOOD_GUIDE) {
+    if (entry.match.some((kw) => lower.includes(kw))) {
+      return { energy: entry.energy, tip: entry.tip };
+    }
+  }
+  return null;
+}
+
+const ENERGY_STYLES: Record<EnergyLevel, { label: string; bg: string; text: string; dot: string }> = {
+  Light:  { label: "Light",  bg: "#F0FDF4", text: "#15803D", dot: "#22C55E" },
+  Medium: { label: "Medium", bg: "#FFFBEB", text: "#B45309", dot: "#F59E0B" },
+  Heavy:  { label: "Heavy",  bg: "#FFF7ED", text: "#C2410C", dot: "#F97316" },
+};
+
 const LOG_ITEMS = [
   { label: "Water", emoji: "💧" },
   { label: "Coconut Water", emoji: "🥥" },
@@ -226,28 +276,61 @@ function FoodList({
         <h3 className="font-serif text-base font-semibold text-foreground">{title}</h3>
       </div>
       <div className="space-y-2">
-        {items.map((item, i) => (
-          <div
-            key={i}
-            className={`flex items-start gap-3 px-4 py-2.5 rounded-xl ${
-              isAllowed
-                ? "bg-green-50 border border-green-100"
-                : "bg-red-50 border border-red-100"
-            }`}
-            data-testid={`food-${type}-${i}`}
-          >
-            <span
-              className={`mt-0.5 flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-xs font-bold ${
+        {items.map((item, i) => {
+          const info = isAllowed ? getFoodInfo(item) : null;
+          const style = info ? ENERGY_STYLES[info.energy] : null;
+          return (
+            <div
+              key={i}
+              className={`px-4 py-3 rounded-xl ${
                 isAllowed
-                  ? "bg-green-200 text-green-700"
-                  : "bg-red-200 text-red-700"
+                  ? "bg-green-50 border border-green-100"
+                  : "bg-red-50 border border-red-100"
               }`}
+              data-testid={`food-${type}-${i}`}
             >
-              {isAllowed ? "✓" : "✗"}
-            </span>
-            <span className="text-sm text-foreground leading-relaxed">{item}</span>
-          </div>
-        ))}
+              <div className="flex items-start gap-3">
+                <span
+                  className={`mt-0.5 flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-xs font-bold ${
+                    isAllowed
+                      ? "bg-green-200 text-green-700"
+                      : "bg-red-200 text-red-700"
+                  }`}
+                >
+                  {isAllowed ? "✓" : "✗"}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start justify-between gap-2">
+                    <span className="text-sm text-foreground leading-relaxed">{item}</span>
+                    {style && (
+                      <span
+                        className="flex-shrink-0 flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full mt-0.5"
+                        style={{ background: style.bg, color: style.text }}
+                        data-testid={`energy-badge-${i}`}
+                        aria-label={`Energy level: ${style.label}`}
+                      >
+                        <span
+                          className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                          style={{ background: style.dot }}
+                        />
+                        {style.label}
+                      </span>
+                    )}
+                  </div>
+                  {info && (
+                    <p
+                      className="text-xs mt-1.5 leading-relaxed"
+                      style={{ color: "#7C6F5A" }}
+                      data-testid={`food-tip-${i}`}
+                    >
+                      💡 {info.tip}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
