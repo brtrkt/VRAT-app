@@ -139,6 +139,27 @@ function VratDetailSheet({
             </p>
           </div>
 
+          {/* Mantra how to recite + benefits */}
+          {(activeVrat.mantraHow || activeVrat.mantraBenefits) && (
+            <div className="rounded-2xl border border-amber-100 bg-amber-50/60 px-4 py-4 space-y-3">
+              {activeVrat.mantraHow && (
+                <div>
+                  <p className="text-xs font-semibold text-amber-800 mb-1">🕯 How to recite</p>
+                  <p className="text-xs text-amber-700 leading-relaxed">{activeVrat.mantraHow}</p>
+                </div>
+              )}
+              {activeVrat.mantraHow && activeVrat.mantraBenefits && (
+                <div className="h-px bg-amber-200" />
+              )}
+              {activeVrat.mantraBenefits && (
+                <div>
+                  <p className="text-xs font-semibold text-amber-800 mb-1">✦ Benefits</p>
+                  <p className="text-xs text-amber-700 leading-relaxed">{activeVrat.mantraBenefits}</p>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Special note */}
           {activeVrat.specialNote && (
             <div className={`rounded-2xl px-4 py-3 border ${isJain ? "bg-amber-50 border-amber-200" : "bg-amber-50 border-amber-200"}`}>
