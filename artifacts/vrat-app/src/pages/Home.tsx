@@ -2,6 +2,114 @@ import { useState, useEffect } from "react";
 import { getVratsForDate, getNextVrat, getDaysUntil, formatDateStr } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 
+function getParanaTime(vrat: Vrat, now: Date): Date {
+  const name = vrat.name.toLowerCase();
+  const parana = new Date(now);
+
+  if (name.includes("ekadashi") || name.includes("maha shivratri")) {
+    // Fast breaks at next sunrise — use 6:00 AM tomorrow
+    parana.setDate(parana.getDate() + 1);
+    parana.setHours(6, 0, 0, 0);
+  } else if (name.includes("janmashtami")) {
+    // Fast breaks at midnight (start of the next day)
+    parana.setDate(parana.getDate() + 1);
+    parana.setHours(0, 1, 0, 0);
+  } else if (name.includes("sankashti")) {
+    // Breaks after moonrise — 9 PM
+    parana.setHours(21, 0, 0, 0);
+  } else {
+    // Navratri, Pradosh, Purnima, Karva Chauth, Guru Purnima, others — 8 PM
+    parana.setHours(20, 0, 0, 0);
+  }
+
+  return parana;
+}
+
+function useCountdown(targetTime: Date | null) {
+  const [remaining, setRemaining] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!targetTime) {
+      setRemaining(null);
+      return;
+    }
+    function tick() {
+      const diff = targetTime!.getTime() - Date.now();
+      setRemaining(diff > 0 ? diff : 0);
+    }
+    tick();
+    const id = setInterval(tick, 60_000);
+    return () => clearInterval(id);
+  }, [targetTime]);
+
+  if (remaining === null) return null;
+  const totalMins = Math.floor(remaining / 60_000);
+  const hours = Math.floor(totalMins / 60);
+  const mins = totalMins % 60;
+  return { hours, mins, done: remaining === 0 };
+}
+
+function FastingTimer({ vratsToday }: { vratsToday: Vrat[] }) {
+  const now = new Date();
+  const vrat = vratsToday[0] ?? null;
+  const paranaTime = vrat ? getParanaTime(vrat, now) : null;
+  const countdown = useCountdown(paranaTime);
+
+  return (
+    <div
+      className="vrat-card p-5 mb-4 text-center"
+      data-testid="fasting-timer"
+    >
+      {!vrat ? (
+        <>
+          <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-1">
+            Fasting Countdown
+          </p>
+          <p className="font-serif text-xl text-muted-foreground" data-testid="timer-no-fast">
+            No fast today
+          </p>
+        </>
+      ) : countdown?.done ? (
+        <>
+          <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-1">
+            Fasting Countdown
+          </p>
+          <p className="font-serif text-xl text-primary" data-testid="timer-done">
+            Your fast is complete — well done
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-2">
+            Fasting Countdown
+          </p>
+          <p
+            className="font-serif font-bold text-primary leading-none"
+            style={{ fontSize: "clamp(2rem, 10vw, 2.75rem)" }}
+            data-testid="timer-display"
+          >
+            {countdown?.hours}h {String(countdown?.mins).padStart(2, "0")}m
+          </p>
+          <p className="text-sm text-muted-foreground mt-2" data-testid="timer-label">
+            remaining in your fast
+          </p>
+          <p className="text-xs text-muted-foreground/60 mt-1" data-testid="timer-parana">
+            Parana at{" "}
+            {paranaTime?.toLocaleTimeString("en-IN", {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            })}
+            {paranaTime &&
+              paranaTime.getDate() !== now.getDate() &&
+              " (tomorrow)"}
+          </p>
+        </>
+      )}
+    </div>
+  );
+}
+
 function OmSymbol({ className = "" }: { className?: string }) {
   return (
     <span className={`font-serif ${className}`} aria-hidden="true">ॐ</span>
@@ -175,6 +283,7 @@ export default function Home() {
         </div>
 
         <TodayCard todayStr={todayStr} vratsToday={vratsToday} />
+        <FastingTimer vratsToday={vratsToday} />
         <NextVratCard nextVrat={nextVrat} />
         <MantraCard vrats={allVrats} />
 
