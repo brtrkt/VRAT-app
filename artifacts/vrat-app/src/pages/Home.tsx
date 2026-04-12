@@ -4,6 +4,7 @@ import type { Vrat } from "@/data/vrats";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
+import NavratriCard from "@/components/NavratriCard";
 
 function getParanaTime(vrat: Vrat, now: Date): Date {
   const name = vrat.name.toLowerCase();
@@ -363,6 +364,8 @@ export default function Home() {
   return (
     <div className="min-h-screen cream-gradient">
       <div className="max-w-md mx-auto px-4 pt-8 pb-24">
+        <NavratriCard todayStr={todayStr} />
+
         <div className="text-center mb-6">
           <div className="flex items-end justify-center gap-4 mb-2">
             <OmSymbol className="text-primary text-3xl" />
