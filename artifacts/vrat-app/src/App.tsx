@@ -9,8 +9,9 @@ import Calendar from "@/pages/Calendar";
 import Settings from "@/pages/Settings";
 import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
+import Paywall from "@/pages/Paywall";
 import Onboarding from "@/components/Onboarding";
-import { ONBOARDING_KEY } from "@/hooks/useUserPrefs";
+import { ONBOARDING_KEY, initTrial, isTrialExpired } from "@/hooks/useUserPrefs";
 
 const queryClient = new QueryClient();
 
@@ -225,17 +226,30 @@ function App() {
   const [onboardingDone, setOnboardingDone] = useState(
     () => !!localStorage.getItem(ONBOARDING_KEY)
   );
+  const [trialExpired, setTrialExpired] = useState(false);
+
+  useEffect(() => {
+    initTrial();
+    setTrialExpired(isTrialExpired());
+  }, []);
+
+  function handleOnboardingComplete() {
+    initTrial();
+    setOnboardingDone(true);
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           {!onboardingDone ? (
-            <Onboarding onComplete={() => setOnboardingDone(true)} />
+            <Onboarding onComplete={handleOnboardingComplete} />
+          ) : trialExpired ? (
+            <Paywall />
           ) : (
             <DisclaimerPopup />
           )}
-          <Router />
+          {!trialExpired && <Router />}
         </WouterRouter>
       </TooltipProvider>
     </QueryClientProvider>

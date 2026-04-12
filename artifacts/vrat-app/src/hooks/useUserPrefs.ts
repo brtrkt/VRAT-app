@@ -1,4 +1,6 @@
 export const ONBOARDING_KEY = "vrat_onboarding_done";
+export const TRIAL_START_KEY = "vrat_trial_start";
+export const TRIAL_DAYS = 30;
 export const TRADITION_KEY = "vrat_tradition";
 export const OBSERVED_KEY = "vrat_observed";
 export const CITY_KEY = "vrat_city";
@@ -75,6 +77,27 @@ export function setUserLocation(loc: UserLocation): void {
 
 export function getLocationInfo(id?: UserLocation): LocationInfo {
   return LOCATION_OPTIONS.find((l) => l.id === (id ?? getUserLocation())) ?? LOCATION_OPTIONS[0];
+}
+
+export function initTrial(): void {
+  if (!localStorage.getItem(TRIAL_START_KEY)) {
+    localStorage.setItem(TRIAL_START_KEY, String(Date.now()));
+  }
+}
+
+export function getTrialStartMs(): number {
+  const raw = localStorage.getItem(TRIAL_START_KEY);
+  return raw ? parseInt(raw, 10) : Date.now();
+}
+
+export function getDaysRemaining(): number {
+  const elapsed = Date.now() - getTrialStartMs();
+  const elapsedDays = elapsed / (1000 * 60 * 60 * 24);
+  return Math.max(0, Math.ceil(TRIAL_DAYS - elapsedDays));
+}
+
+export function isTrialExpired(): boolean {
+  return getDaysRemaining() === 0;
 }
 
 export function isVratObserved(vratId: string, observed: string[]): boolean {

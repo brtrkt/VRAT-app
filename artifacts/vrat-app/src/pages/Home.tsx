@@ -5,6 +5,7 @@ import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import NavratriCard from "@/components/NavratriCard";
+import { getDaysRemaining } from "@/hooks/useUserPrefs";
 
 function getParanaTime(vrat: Vrat, now: Date): Date {
   const name = vrat.name.toLowerCase();
@@ -211,6 +212,35 @@ function FloralDivider() {
   );
 }
 
+function TrialBanner() {
+  const days = getDaysRemaining();
+  if (days === 0) return null;
+
+  const isLow = days <= 5;
+
+  return (
+    <div
+      className="flex items-center justify-center gap-1.5 rounded-xl px-3 py-2 mb-4"
+      style={{
+        background: isLow ? "rgba(220,104,0,0.10)" : "rgba(0,0,0,0.04)",
+        border: isLow ? "1px solid rgba(220,104,0,0.20)" : "1px solid rgba(0,0,0,0.07)",
+      }}
+      data-testid="trial-banner"
+    >
+      <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 flex-shrink-0" style={{ color: isLow ? "#C86B1A" : "#8B7355" }}>
+        <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M8 5v3.5l2 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+      <p className="text-xs" style={{ color: isLow ? "#C86B1A" : "#8B7355" }}>
+        Free trial —{" "}
+        <span className={isLow ? "font-semibold" : "font-medium"}>
+          {days} {days === 1 ? "day" : "days"} remaining
+        </span>
+      </p>
+    </div>
+  );
+}
+
 function TodayCard({ todayStr, vratsToday }: { todayStr: string; vratsToday: Vrat[] }) {
   const today = new Date(todayStr + "T00:00:00");
   const weekday = today.toLocaleDateString("en-IN", { weekday: "long" });
@@ -373,7 +403,7 @@ export default function Home() {
       <div className="max-w-md mx-auto px-4 pt-8 pb-24">
         <NavratriCard todayStr={todayStr} />
 
-        <div className="text-center mb-6">
+        <div className="text-center mb-4">
           <div className="flex items-end justify-center gap-4 mb-2">
             <OmSymbol className="text-primary text-3xl" />
             <JainSymbol className="text-green-600 w-7 h-9" />
@@ -381,6 +411,8 @@ export default function Home() {
           <h1 className="font-serif text-3xl font-bold text-foreground">VRAT</h1>
           <p className="text-muted-foreground text-sm mt-1 tracking-wide">Your Fast, Your Way</p>
         </div>
+
+        <TrialBanner />
 
         <TodayCard todayStr={todayStr} vratsToday={vratsToday} />
         <FastingTimer vratsToday={vratsToday} />
