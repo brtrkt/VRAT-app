@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { getVratsForDate, getNextVrat } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 
+const HYDRATING_LABELS = new Set(["Water", "Coconut Water", "Lassi", "Buttermilk", "Herbal Tea"]);
+
 const LOG_ITEMS = [
   { label: "Water", emoji: "💧" },
   { label: "Coconut Water", emoji: "🥥" },
@@ -47,6 +49,52 @@ function saveLog(entries: LogEntry[]) {
   }
 }
 
+function HydrationBar({ log }: { log: LogEntry[] }) {
+  const count = log.filter((e) => HYDRATING_LABELS.has(e.label)).length;
+  const MAX = 5;
+  const pct = Math.min((count / MAX) * 100, 100);
+
+  const state =
+    count >= 5
+      ? { label: "Well hydrated — well done", color: "bg-green-500", text: "text-green-700", bg: "bg-green-50", border: "border-green-100", icon: "💚" }
+      : count >= 3
+      ? { label: "Getting there — keep sipping", color: "bg-amber-400", text: "text-amber-700", bg: "bg-amber-50", border: "border-amber-100", icon: "💛" }
+      : { label: "Drink more — you need hydration", color: "bg-red-400", text: "text-red-700", bg: "bg-red-50", border: "border-red-100", icon: "🔴" };
+
+  return (
+    <div
+      className={`rounded-2xl px-4 py-3 mb-4 border ${state.bg} ${state.border} transition-all`}
+      data-testid="hydration-bar"
+    >
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-1.5">
+          <span className="text-sm">{state.icon}</span>
+          <span className={`text-xs font-medium ${state.text}`} data-testid="hydration-label">
+            {state.label}
+          </span>
+        </div>
+        <span className={`text-xs font-semibold ${state.text}`} data-testid="hydration-count">
+          {count}/{MAX}
+        </span>
+      </div>
+      <div className="h-2 rounded-full bg-black/10 overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-500 ${state.color}`}
+          style={{ width: `${pct}%` }}
+          data-testid="hydration-progress"
+          role="progressbar"
+          aria-valuenow={count}
+          aria-valuemin={0}
+          aria-valuemax={MAX}
+        />
+      </div>
+      <p className="text-xs text-muted-foreground mt-1.5 opacity-70">
+        Water · Coconut Water · Lassi · Buttermilk · Herbal Tea
+      </p>
+    </div>
+  );
+}
+
 function FoodLog({ todayStr }: { todayStr: string }) {
   const [log, setLog] = useState<LogEntry[]>(() => loadLog(todayStr));
 
@@ -81,7 +129,7 @@ function FoodLog({ todayStr }: { todayStr: string }) {
         <h3 className="font-serif text-base font-semibold text-foreground">Today's Food Log</h3>
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-5">
+      <div className="flex flex-wrap gap-2 mb-4">
         {LOG_ITEMS.map((item) => (
           <button
             key={item.label}
@@ -95,6 +143,8 @@ function FoodLog({ todayStr }: { todayStr: string }) {
           </button>
         ))}
       </div>
+
+      <HydrationBar log={log} />
 
       {log.length === 0 ? (
         <div className="text-center py-6 text-muted-foreground">
