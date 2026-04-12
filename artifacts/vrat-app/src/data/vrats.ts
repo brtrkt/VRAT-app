@@ -1856,7 +1856,7 @@ export const vrats: Vrat[] = [
     dates: [
       "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22",
       "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26", "2026-03-27"
-    ],
+    , "2027-03-20", "2027-03-21", "2027-03-22", "2027-03-23", "2027-03-24", "2027-03-25", "2027-03-26", "2027-03-27", "2027-03-28"],
     deity: "Goddess Durga (nine forms)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1895,7 +1895,7 @@ export const vrats: Vrat[] = [
     dates: [
       "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12",
       "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-17"
-    ],
+    , "2027-09-28", "2027-09-29", "2027-09-30", "2027-10-01", "2027-10-02", "2027-10-03", "2027-10-04", "2027-10-05", "2027-10-06"],
     deity: "Goddess Durga (nine forms)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1931,7 +1931,7 @@ export const vrats: Vrat[] = [
   {
     id: "janmashtami",
     name: "Janmashtami",
-    dates: ["2026-08-22"],
+    dates: ["2026-08-22", "2027-08-11"],
     deity: "Lord Krishna",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1962,7 +1962,7 @@ export const vrats: Vrat[] = [
   {
     id: "karva-chauth",
     name: "Karva Chauth",
-    dates: ["2026-10-20"],
+    dates: ["2026-10-20", "2027-10-09"],
     deity: "Lord Shiva, Parvati, and the Moon",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2667,7 +2667,7 @@ export const vrats: Vrat[] = [
   {
     id: "mahavir-jayanti",
     name: "Mahavir Jayanti",
-    dates: ["2026-04-14"],
+    dates: ["2026-04-14", "2027-04-01"],
     deity: "Lord Mahavira (24th Tirthankara)",
     tradition: "Jain",
     foodsAllowed: [
@@ -2699,7 +2699,7 @@ export const vrats: Vrat[] = [
     dates: [
       "2026-04-14", "2026-04-15", "2026-04-16", "2026-04-17", "2026-04-18",
       "2026-04-19", "2026-04-20", "2026-04-21", "2026-04-22",
-    ],
+    , "2027-04-03", "2027-04-04", "2027-04-05", "2027-04-06", "2027-04-07", "2027-04-08", "2027-04-09", "2027-04-10", "2027-04-11"],
     deity: "Navpad — the 9 Supreme Elements",
     tradition: "Jain",
     foodsAllowed: [
@@ -2732,7 +2732,7 @@ export const vrats: Vrat[] = [
     dates: [
       "2026-09-03", "2026-09-04", "2026-09-05", "2026-09-06",
       "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10",
-    ],
+    , "2027-08-23", "2027-08-24", "2027-08-25", "2027-08-26", "2027-08-27", "2027-08-28", "2027-08-29", "2027-08-30"],
     deity: "Lord Mahavira",
     tradition: "Jain",
     foodsAllowed: [
@@ -2762,7 +2762,7 @@ export const vrats: Vrat[] = [
   {
     id: "samvatsari",
     name: "Samvatsari",
-    dates: ["2026-09-10"],
+    dates: ["2026-09-10", "2027-08-30"],
     deity: "Lord Mahavira",
     tradition: "Jain",
     foodsAllowed: [
@@ -2790,7 +2790,7 @@ export const vrats: Vrat[] = [
     dates: [
       "2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10",
       "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15",
-    ],
+    , "2027-08-26", "2027-08-27", "2027-08-28", "2027-08-29", "2027-08-30", "2027-08-31", "2027-09-01", "2027-09-02", "2027-09-03", "2027-09-04"],
     deity: "Lord Mahavira",
     tradition: "Jain",
     foodsAllowed: [
@@ -2821,7 +2821,7 @@ export const vrats: Vrat[] = [
     dates: [
       "2026-10-11", "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15",
       "2026-10-16", "2026-10-17", "2026-10-18", "2026-10-19",
-    ],
+    , "2027-09-30", "2027-10-01", "2027-10-02", "2027-10-03", "2027-10-04", "2027-10-05", "2027-10-06", "2027-10-07", "2027-10-08"],
     deity: "Navpad — the 9 Supreme Elements",
     tradition: "Jain",
     foodsAllowed: [
@@ -2851,7 +2851,7 @@ export const vrats: Vrat[] = [
   {
     id: "mahavira-nirvana",
     name: "Mahavira Nirvana — Jain Diwali",
-    dates: ["2026-10-20"],
+    dates: ["2026-10-20", "2027-10-20"],
     deity: "Lord Mahavira",
     tradition: "Jain",
     foodsAllowed: [
@@ -3146,7 +3146,7 @@ export const vrats: Vrat[] = [
   {
     id: "ahoi-ashtami",
     name: "Ahoi Ashtami",
-    dates: ["2026-10-14"],
+    dates: ["2026-10-14", "2027-10-03"],
     deity: "Goddess Ahoi Mata (form of Parvati)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3259,6 +3259,179 @@ export const vrats: Vrat[] = [
     color: "#22C55E",
     description: "The holy Shravan month (July–August) is especially sacred for Jains — auspicious days are observed with Ekasana (one meal) or Upvas (complete fast)",
     specialNote: "During monsoon, Jains take extra care to avoid green leafy vegetables as they may harbour more micro-organisms. Boiled water is especially important during this season.",
+  },
+  {
+    id: "ganesh-chaturthi",
+    name: "Ganesh Chaturthi",
+    dates: ["2026-08-12", "2027-09-01"],
+    deity: "Lord Ganesh",
+    tradition: "Hindu",
+    foodsAllowed: [
+      "Modak (steamed rice flour dumplings with coconut-jaggery filling) — Ganesh's favourite",
+      "Fruits of all kinds",
+      "Milk, curd, paneer, ghee",
+      "Coconut and coconut-based sweets",
+      "Sabudana (tapioca)",
+      "Rock salt (sendha namak)",
+      "Dry fruits and nuts",
+      "Makhana (fox nuts)",
+    ],
+    foodsAvoided: [
+      "Tulsi (basil) — never offered to Ganesh",
+      "Meat and eggs",
+      "Onion and garlic",
+      "Alcohol",
+      "Regular salt on fast days",
+      "Grains if keeping strict vrat",
+    ],
+    mantra: "ॐ गं गणपतये नमः",
+    mantraTranslation: "Om Gam Ganapataye Namaha — I bow to Ganesh, the remover of obstacles, the lord of beginnings",
+    mealIdea: "Steamed modak with coconut-jaggery filling, served after puja — the most beloved offering to Ganesha, eaten as prasad",
+    color: "#F97316",
+    description: "Ganesh Chaturthi marks the birth of Lord Ganesh on Bhadrapada Shukla 4. The 10-day festival fills homes with clay Ganesha idols, flowers, modak, and devotional music — ending with the grand immersion (Visarjan) on Anant Chaturdashi",
+    specialNote: "Never offer Tulsi leaves to Lord Ganesh — it is one of the few offerings he does not accept. Do not look at the moon on Ganesh Chaturthi night, as legend holds it brings false accusations. Offer durva grass, red flowers, and modak.",
+  },
+  {
+    id: "dussehra",
+    name: "Dussehra / Vijaya Dashami",
+    dates: ["2026-10-18", "2027-10-07"],
+    deity: "Goddess Durga / Lord Ram",
+    tradition: "Hindu",
+    foodsAllowed: [
+      "Fruits of all kinds",
+      "Milk, curd, paneer, ghee",
+      "Sabudana (tapioca)",
+      "Singhara atta (water chestnut flour)",
+      "Rock salt (sendha namak)",
+      "Kuttu atta (buckwheat flour)",
+      "Potatoes and sweet potatoes",
+      "Dry fruits and nuts",
+      "Paan (betel leaf) — auspicious to chew",
+    ],
+    foodsAvoided: [
+      "Meat and eggs",
+      "Onion and garlic",
+      "Alcohol",
+      "Regular salt if fasting",
+      "Grains if keeping strict vrat",
+    ],
+    mantra: "ॐ दुर्गायै नमः",
+    mantraTranslation: "Om Durgayai Namaha — I bow to Goddess Durga, the remover of suffering, the divine mother who conquers all evil",
+    mealIdea: "Aloo-singhara ki sabzi with kuttu puri — the classic Navratri-Dussehra vrat thali, eaten after the Ravana dahan ceremony",
+    color: "#DC2626",
+    description: "Dussehra (Vijaya Dashami) — the 10th day of Navratri — celebrates the victory of Lord Ram over Ravana and Goddess Durga over Mahishasura. The day of dharma triumphing over adharma. In many cities, giant effigies of Ravana, Kumbhakarna, and Meghanada are burned at dusk",
+    specialNote: "Vijaya Dashami is the most auspicious day to begin a new venture, start learning a new skill, or buy something important. Artisans and craftspeople worship their tools on this day (Ayudha Puja). The Shami tree (Prosopis cineraria) is especially revered — touching it on Dussehra is considered auspicious.",
+  },
+  {
+    id: "dhanteras",
+    name: "Dhanteras",
+    dates: ["2026-10-19", "2027-10-18"],
+    deity: "Lord Dhanvantari / Goddess Lakshmi / Lord Kuber",
+    tradition: "Hindu",
+    foodsAllowed: [
+      "Kheer (rice pudding with milk and sugar) — offered to Lakshmi",
+      "Fruits of all kinds",
+      "Milk, curd, paneer, ghee",
+      "Dry fruits and nuts",
+      "Coconut",
+      "Satvik sweets (barfi, halwa)",
+      "Coriander seeds (dhaniya) — essential for Dhanteras puja",
+    ],
+    foodsAvoided: [
+      "Meat and eggs",
+      "Onion and garlic",
+      "Alcohol",
+      "Iron utensils for cooking on this day",
+    ],
+    mantra: "ॐ श्रीं महालक्ष्म्यै नमः",
+    mantraTranslation: "Om Shreem Mahalakshmyai Namaha — I bow to Mahalakshmi, goddess of wealth, abundance, and auspiciousness",
+    mealIdea: "Kheer and fresh fruits as prasad — sweet, pure, and offered first to Goddess Lakshmi before the family eats",
+    color: "#EAB308",
+    description: "Dhanteras — the first day of the five-day Diwali festival — is the day Lord Dhanvantari emerged from the churning of the cosmic ocean bearing the pot of amrit. It is the most auspicious day of the year to buy gold, silver, or new utensils for the home",
+    specialNote: "Buy at least something gold, silver, or metal on Dhanteras — even a small coin is enough to invite Lakshmi's blessings into the home. Light 13 diyas in the evening facing south to ward off Yama (the god of death). Coriander seeds (dhaniya) are kept on the puja thali as a symbol of Dhan (wealth).",
+  },
+  {
+    id: "diwali",
+    name: "Diwali — Lakshmi Puja",
+    dates: ["2026-10-21", "2027-10-20"],
+    deity: "Goddess Lakshmi / Lord Ganesh",
+    tradition: "Hindu",
+    foodsAllowed: [
+      "Traditional sweets — kaju katli, besan ladoo, gulab jamun",
+      "Dry fruits and nuts — especially almonds, cashews, pistachios",
+      "Kheer and halwa",
+      "Fruits of all kinds",
+      "Milk, curd, paneer, ghee",
+      "Coconut — sacred offering to Lakshmi",
+      "Panchamrit (milk, curd, honey, ghee, sugar)",
+    ],
+    foodsAvoided: [
+      "Meat and eggs — keep the home satvik on this sacred night",
+      "Alcohol (traditionally) — though customs vary by family",
+      "Stale or reheated food — fresh food only for the puja",
+    ],
+    mantra: "ॐ श्रीं महालक्ष्म्यै नमः",
+    mantraTranslation: "Om Shreem Mahalakshmyai Namaha — I bow to Mahalakshmi, the goddess of light, wealth, and all auspicious things",
+    mealIdea: "A full mithai (sweet) spread with kaju katli, besan ladoo, and kheer — shared with family and neighbours as prasad after the Lakshmi puja",
+    color: "#F59E0B",
+    description: "Diwali — the festival of lights — falls on Kartik Amavasya, the darkest night of the year, which the light of a thousand diyas and the grace of Goddess Lakshmi transforms into the most luminous. Lakshmi Puja is performed at night with lighted lamps, rangoli, flowers, and sweet offerings",
+    specialNote: "Clean and decorate your entire home before sunset — Lakshmi enters only clean, welcoming homes. Keep the main entrance lit and open. Light diyas in every room, especially near the tulsi plant and the threshold. The puja should ideally happen in the pradosh (post-sunset) hour for maximum blessings.",
+  },
+  {
+    id: "govardhan-puja",
+    name: "Govardhan Puja",
+    dates: ["2026-10-22", "2027-10-21"],
+    deity: "Lord Krishna / Govardhan Parvat",
+    tradition: "Hindu",
+    foodsAllowed: [
+      "56 varieties of food (Chhappan Bhog) — offered to Lord Krishna",
+      "Annakut (mountain of cooked food) — the highlight of this puja",
+      "Rice, dal, sabzi — all grains are eaten on this day (not a fasting day)",
+      "All dairy — milk, ghee, butter, curd",
+      "Sweets — peda, kheer, makhan mishri",
+      "Seasonal vegetables and fruits",
+    ],
+    foodsAvoided: [
+      "Meat and eggs",
+      "Alcohol",
+      "Onion and garlic (in the offering)",
+    ],
+    mantra: "ॐ नमो भगवते वासुदेवाय",
+    mantraTranslation: "Om Namo Bhagavate Vasudevaya — I bow to Lord Vasudeva, Krishna, the lord of all being",
+    mealIdea: "Annakut — a grand vegetarian feast with dozens of dishes offered to Krishna and then shared with all",
+    color: "#22C55E",
+    description: "The day after Diwali, Govardhan Puja commemorates Lord Krishna lifting the Govardhan Hill with his little finger to shelter the people of Vrindavan from Indra's wrath. It is a day of joy, feasting, and gratitude — the only day in the Diwali cluster where fasting is not traditional",
+    specialNote: "Govardhan Puja celebrates the abundance of nature and the protection of Lord Krishna. Many families cook dozens of dishes and create an 'annakut' (mountain of food) in their puja room, symbolising the Govardhan Hill itself. The food is offered first, then shared as prasad with the entire family and neighbours.",
+  },
+  {
+    id: "chhath-puja",
+    name: "Chhath Puja",
+    dates: ["2026-10-27", "2027-10-26"],
+    deity: "Surya Dev (Sun God) / Chhathi Maiya",
+    tradition: "Hindu",
+    foodsAllowed: [
+      "Thekua (whole wheat biscuits with jaggery and ghee) — the essential Chhath prasad",
+      "Rice laddoo (chawal ke laddoo)",
+      "Fruits — especially sugarcane, banana, coconut, guava, grapefruit",
+      "Ginger (adrak) — important in Chhath offerings",
+      "Turmeric root (kacchi haldi) as offering",
+      "Coconut",
+      "Rock salt (sendha namak)",
+    ],
+    foodsAvoided: [
+      "Regular salt (table salt) — strict rock salt only",
+      "Onion and garlic",
+      "Meat and eggs",
+      "Alcohol",
+      "Any food cooked in iron utensils — only brass or earthen pots",
+      "Eating during the 36-hour nirjala fast (for those observing strictly)",
+    ],
+    mantra: "ॐ सूर्याय नमः",
+    mantraTranslation: "Om Suryaya Namaha — I bow to Surya, the life-giving sun, the source of all light and energy",
+    mealIdea: "Thekua with sugarcane juice — the sacred Chhath prasad eaten after offering arghya to the setting and rising sun",
+    color: "#F97316",
+    description: "Chhath Puja is one of the most ancient and demanding Hindu vrats — a 4-day festival in which devotees (primarily women) observe a 36-hour nirjala fast, standing in water at sunset and sunrise to offer arghya to the Sun God. Kartik Shukla 6 is the main fasting day (Sandhya Arghya)",
+    specialNote: "Chhath is unique in that the worship is performed in rivers, ponds, or any natural water body — not at home or in temples. The vrat is extraordinarily strict: no food, no water for 36 hours, with the fast broken only after offering arghya to the rising sun. If you observe Chhath, prepare thekua and fruit baskets (soop) a day in advance. This is one of the most powerful vrats — its blessings are said to extend to the entire family for generations.",
   },
   {
     id: "ram-navami",
