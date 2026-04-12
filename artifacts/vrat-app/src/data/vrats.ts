@@ -19,7 +19,7 @@ export const vrats: Vrat[] = [
   {
     id: "maha-shivratri",
     name: "Maha Shivratri",
-    dates: ["2026-02-26"],
+    dates: ["2026-02-26", "2027-02-17"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -53,7 +53,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jan-1",
     name: "Ekadashi",
-    dates: ["2026-01-11"],
+    dates: ["2026-01-11", "2027-01-14"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -84,7 +84,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jan-2",
     name: "Ekadashi",
-    dates: ["2026-01-25"],
+    dates: ["2026-01-25", "2027-01-29"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -115,7 +115,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-feb-1",
     name: "Ekadashi",
-    dates: ["2026-02-09"],
+    dates: ["2026-02-09", "2027-02-13"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -146,7 +146,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-feb-2",
     name: "Ekadashi",
-    dates: ["2026-02-24"],
+    dates: ["2026-02-24", "2027-02-27"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -177,7 +177,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-mar-1",
     name: "Ekadashi",
-    dates: ["2026-03-10"],
+    dates: ["2026-03-10", "2027-03-15"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -208,7 +208,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-mar-2",
     name: "Ekadashi",
-    dates: ["2026-03-26"],
+    dates: ["2026-03-26", "2027-03-30"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -239,7 +239,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-apr-1",
     name: "Ekadashi",
-    dates: ["2026-04-08"],
+    dates: ["2026-04-08", "2027-04-14"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -270,7 +270,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-apr-2",
     name: "Ekadashi",
-    dates: ["2026-04-24"],
+    dates: ["2026-04-24", "2027-04-28"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -301,7 +301,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-may-1",
     name: "Ekadashi",
-    dates: ["2026-05-08"],
+    dates: ["2026-05-08", "2027-05-13"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -332,7 +332,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-may-2",
     name: "Ekadashi",
-    dates: ["2026-05-23"],
+    dates: ["2026-05-23", "2027-05-27"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -363,7 +363,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jun-1",
     name: "Ekadashi",
-    dates: ["2026-06-06"],
+    dates: ["2026-06-06", "2027-06-12"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -394,7 +394,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jun-2",
     name: "Ekadashi",
-    dates: ["2026-06-22"],
+    dates: ["2026-06-22", "2027-06-26"],
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -797,7 +797,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-jan-1",
     name: "Pradosh Vrat",
-    dates: ["2026-01-12"],
+    dates: ["2026-01-12", "2027-01-01"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -826,7 +826,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-jan-2",
     name: "Pradosh Vrat",
-    dates: ["2026-01-27"],
+    dates: ["2026-01-27", "2027-01-16"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -855,7 +855,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-feb-1",
     name: "Pradosh Vrat",
-    dates: ["2026-02-11"],
+    dates: ["2026-02-11", "2027-01-31"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -884,7 +884,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-feb-2",
     name: "Pradosh Vrat",
-    dates: ["2026-02-25"],
+    dates: ["2026-02-25", "2027-02-16"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -913,7 +913,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-mar-1",
     name: "Pradosh Vrat",
-    dates: ["2026-03-13"],
+    dates: ["2026-03-13", "2027-03-02"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -942,7 +942,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-mar-2",
     name: "Pradosh Vrat",
-    dates: ["2026-03-28"],
+    dates: ["2026-03-28", "2027-03-17"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -971,7 +971,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-apr-1",
     name: "Pradosh Vrat",
-    dates: ["2026-04-11"],
+    dates: ["2026-04-11", "2027-04-01"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1000,7 +1000,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-apr-2",
     name: "Pradosh Vrat",
-    dates: ["2026-04-27"],
+    dates: ["2026-04-27", "2027-04-15"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1029,7 +1029,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-may-1",
     name: "Pradosh Vrat",
-    dates: ["2026-05-11"],
+    dates: ["2026-05-11", "2027-04-30"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1058,7 +1058,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-may-2",
     name: "Pradosh Vrat",
-    dates: ["2026-05-26"],
+    dates: ["2026-05-26", "2027-05-15"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1087,7 +1087,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-jun-1",
     name: "Pradosh Vrat",
-    dates: ["2026-06-09"],
+    dates: ["2026-06-09", "2027-05-30"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1116,7 +1116,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosh-jun-2",
     name: "Pradosh Vrat",
-    dates: ["2026-06-25"],
+    dates: ["2026-06-25", "2027-06-13"],
     deity: "Lord Shiva",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1493,7 +1493,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-jan",
     name: "Purnima Vrat",
-    dates: ["2026-01-13"],
+    dates: ["2026-01-13", "2027-01-03"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1523,7 +1523,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-feb",
     name: "Purnima Vrat",
-    dates: ["2026-02-12"],
+    dates: ["2026-02-12", "2027-02-02"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1553,7 +1553,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-mar",
     name: "Purnima Vrat",
-    dates: ["2026-03-14"],
+    dates: ["2026-03-14", "2027-03-04"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1583,7 +1583,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-apr",
     name: "Purnima Vrat",
-    dates: ["2026-04-12"],
+    dates: ["2026-04-12", "2027-04-03"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1613,7 +1613,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-may",
     name: "Purnima Vrat — Buddha Purnima",
-    dates: ["2026-05-12"],
+    dates: ["2026-05-12", "2027-05-02"],
     deity: "Lord Vishnu / Buddha",
     tradition: "Both",
     foodsAllowed: [
@@ -1643,7 +1643,7 @@ export const vrats: Vrat[] = [
   {
     id: "purnima-jun",
     name: "Purnima Vrat",
-    dates: ["2026-06-11"],
+    dates: ["2026-06-11", "2027-06-01"],
     deity: "Lord Vishnu / Satyanarayan",
     tradition: "Hindu",
     foodsAllowed: [
@@ -1983,7 +1983,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-jan",
     name: "Sankashti Chaturthi",
-    dates: ["2026-01-17"],
+    dates: ["2026-01-17", "2027-01-07"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2014,7 +2014,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-feb",
     name: "Sankashti Chaturthi",
-    dates: ["2026-02-15"],
+    dates: ["2026-02-15", "2027-02-06"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2045,7 +2045,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-mar",
     name: "Sankashti Chaturthi",
-    dates: ["2026-03-16"],
+    dates: ["2026-03-16", "2027-03-08"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2076,7 +2076,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-apr",
     name: "Sankashti Chaturthi",
-    dates: ["2026-04-15"],
+    dates: ["2026-04-15", "2027-04-07"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2107,7 +2107,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-may",
     name: "Sankashti Chaturthi",
-    dates: ["2026-05-15"],
+    dates: ["2026-05-15", "2027-05-06"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2138,7 +2138,7 @@ export const vrats: Vrat[] = [
   {
     id: "sankashti-jun",
     name: "Sankashti Chaturthi",
-    dates: ["2026-06-13"],
+    dates: ["2026-06-13", "2027-06-05"],
     deity: "Lord Ganesha",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2355,7 +2355,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-jan",
     name: "Amavasya",
-    dates: ["2026-01-29"],
+    dates: ["2026-01-29", "2027-01-18"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2381,7 +2381,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-feb",
     name: "Amavasya",
-    dates: ["2026-02-28"],
+    dates: ["2026-02-28", "2027-02-18"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2407,7 +2407,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-mar",
     name: "Amavasya",
-    dates: ["2026-03-29"],
+    dates: ["2026-03-29", "2027-03-19"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2433,7 +2433,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-apr",
     name: "Amavasya",
-    dates: ["2026-04-28"],
+    dates: ["2026-04-28", "2027-04-17"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2459,7 +2459,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-may",
     name: "Amavasya",
-    dates: ["2026-05-27"],
+    dates: ["2026-05-27", "2027-05-17"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -2485,7 +2485,7 @@ export const vrats: Vrat[] = [
   {
     id: "amavasya-jun",
     name: "Amavasya",
-    dates: ["2026-06-25"],
+    dates: ["2026-06-25", "2027-06-15"],
     deity: "Ancestors (Pitru)",
     tradition: "Hindu",
     foodsAllowed: [
@@ -3259,6 +3259,101 @@ export const vrats: Vrat[] = [
     color: "#22C55E",
     description: "The holy Shravan month (July–August) is especially sacred for Jains — auspicious days are observed with Ekasana (one meal) or Upvas (complete fast)",
     specialNote: "During monsoon, Jains take extra care to avoid green leafy vegetables as they may harbour more micro-organisms. Boiled water is especially important during this season.",
+  },
+  {
+    id: "ram-navami",
+    name: "Ram Navami",
+    dates: ["2026-04-06", "2027-03-28"],
+    deity: "Lord Ram",
+    tradition: "Hindu",
+    foodsAllowed: [
+      "Fruits of all kinds",
+      "Milk, curd, paneer, ghee",
+      "Sabudana (tapioca pearls)",
+      "Kuttu atta (buckwheat flour)",
+      "Singhara atta (water chestnut flour)",
+      "Rock salt (sendha namak)",
+      "Potatoes and sweet potatoes",
+      "Dry fruits and nuts",
+      "Coconut",
+      "Panchamrit (milk, curd, honey, ghee, sugar)",
+    ],
+    foodsAvoided: [
+      "Regular salt (table salt)",
+      "Grains (wheat, rice, corn)",
+      "Lentils and legumes",
+      "Onion and garlic",
+      "Meat and eggs",
+      "Alcohol",
+      "Non-vegetarian food",
+    ],
+    mantra: "ॐ श्री रामाय नमः",
+    mantraTranslation: "Om Shri Ramaya Namaha — I bow to Lord Ram, the embodiment of righteousness, dharma, and devotion",
+    mealIdea: "Fruit chaat with rock salt and cumin, or sabudana khichdi — light, satvik, and blessed in Ram's name",
+    color: "#10B981",
+    description: "Ram Navami marks the birth of Lord Ram — the seventh avatar of Vishnu — on the 9th day of the bright fortnight of Chaitra. Temples resound with the chanting of Ram's name, readings of the Ramayana, and offerings of panchamrit and tulsi leaves",
+    specialNote: "Many devotees fast strictly until noon or sunset, some observing a full nirjala fast. The evening puja and aarti mark the end of the fast — Ram's name is the greatest purifier.",
+  },
+  {
+    id: "hanuman-jayanti",
+    name: "Hanuman Jayanti",
+    dates: ["2026-04-12", "2027-04-03"],
+    deity: "Lord Hanuman",
+    tradition: "Hindu",
+    foodsAllowed: [
+      "Fruits, especially bananas — Hanuman's favourite",
+      "Milk and dairy (paneer, ghee, curd)",
+      "Sabudana (tapioca)",
+      "Rock salt (sendha namak)",
+      "Boondi (offered as prasad)",
+      "Besan ke ladoo (chickpea flour sweets as prasad)",
+      "Dry fruits and nuts",
+      "Coconut and coconut water",
+    ],
+    foodsAvoided: [
+      "Meat and eggs",
+      "Onion and garlic",
+      "Alcohol",
+      "Regular salt on fast days",
+      "Grains if keeping strict vrat",
+    ],
+    mantra: "ॐ हनुमते नमः",
+    mantraTranslation: "Om Hanumate Namaha — I bow to Hanuman, the devoted, the fearless, the remover of all obstacles",
+    mealIdea: "Banana prasad with boondi, or sabudana vada with coriander chutney — simple and offered first to Hanumanji",
+    color: "#F97316",
+    description: "Hanuman Jayanti celebrates the birth of Lord Hanuman on Chaitra Purnima — the full moon of the Chaitra month. Hanuman, the devoted son of Vayu and servant of Lord Ram, is worshipped for strength, courage, and protection from evil forces",
+    specialNote: "Offer red flowers, sindoor, and bananas to Hanumanji. Read or listen to the Hanuman Chalisa — 11 times on this day is especially auspicious. Tuesday is Hanuman's day; Jayanti on a Tuesday is doubly blessed.",
+  },
+  {
+    id: "akshaya-tritiya",
+    name: "Akshaya Tritiya",
+    dates: ["2026-04-30", "2027-04-20"],
+    deity: "Lord Vishnu / Goddess Lakshmi",
+    tradition: "Hindu",
+    foodsAllowed: [
+      "Fruits of all kinds",
+      "Milk, curd, paneer, ghee",
+      "Sabudana and makhana",
+      "Rock salt (sendha namak)",
+      "Kuttu atta (buckwheat flour)",
+      "Potatoes and sweet potatoes",
+      "Dry fruits — especially raisins and almonds",
+      "Coconut and coconut water",
+      "Satvik sweets made without grain",
+    ],
+    foodsAvoided: [
+      "Meat and eggs",
+      "Onion and garlic",
+      "Alcohol",
+      "Regular salt on fast days",
+      "Tamasic or heavily spiced food",
+    ],
+    mantra: "ॐ श्रीं महालक्ष्म्यै नमः",
+    mantraTranslation: "Om Shreem Mahalakshmyai Namaha — I bow to Mahalakshmi, the goddess of abundance and prosperity",
+    mealIdea: "Chilled sattu sharbat with rock salt, or fruit bowl with coconut — light, cooling, and auspicious for a day of new beginnings",
+    color: "#EAB308",
+    description: "Akshaya Tritiya — 'the third day that never diminishes' — falls on the 3rd day of the bright fortnight of Vaishakha. It is one of the most auspicious days in the Hindu calendar: every action taken bears everlasting fruit. Start a new venture, make a charitable gift, buy gold, or begin a new fast on this day",
+    specialNote: "The word Akshaya means 'that which never diminishes.' Charity given on this day grows boundlessly. It is also the traditional day to begin the recitation of the Mahabharata and the Vedas. Many women start new jewelry, and families donate sesame, water pots (matkas), and umbrellas to the poor.",
   },
 ];
 

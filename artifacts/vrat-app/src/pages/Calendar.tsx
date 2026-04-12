@@ -346,7 +346,7 @@ export default function Calendar() {
         <div className="text-center mb-4">
           <h1 className="font-serif text-2xl font-bold text-foreground">Vrat Calendar</h1>
           <p className="text-muted-foreground text-sm mt-1">
-            2026 — Tap any highlighted date
+            2026–2027 — Tap any highlighted date
           </p>
         </div>
 
@@ -358,7 +358,7 @@ export default function Calendar() {
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
                 filter === value
                   ? value === "jain"
-                    ? "bg-teal-600 text-white shadow-sm"
+                    ? "bg-green-500 text-white shadow-sm"
                     : "saffron-gradient text-white shadow-sm"
                   : "bg-card border border-card-border text-muted-foreground hover:text-foreground"
               }`}
