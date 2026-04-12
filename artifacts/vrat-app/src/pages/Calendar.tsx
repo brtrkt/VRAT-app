@@ -5,6 +5,7 @@ import type { Vrat } from "@/data/vrats";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import { getUserTradition, getObservedVrats, isVratObserved } from "@/hooks/useUserPrefs";
+import VratKathaSection from "@/components/VratKathaSection";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -187,6 +188,8 @@ function VratDetailSheet({
             </h4>
             <p className="text-sm text-muted-foreground leading-relaxed">{activeVrat.mealIdea}</p>
           </div>
+
+          <VratKathaSection vratId={activeVrat.id} />
         </div>
       </div>
     </div>
