@@ -1,0 +1,23 @@
+Update the food lists for ALL Jain vrats in the app using the following accurate Jain Panchang food guide. Apply the correct food rules per fast type — Upvas, Ekasana, Ayambil — as they are all different. Do not change any Hindu vrat food lists.
+JAIN YEAR-ROUND RULES (apply to every Jain vrat regardless of fast type):
+Always avoided — root vegetables (potatoes, onions, garlic, carrots, radishes, beetroot, turnip — anything grown underground), meat, fish, eggs, honey, alcohol, fermented foods (bread with yeast, vinegar, pickles), eggplant/brinjal, mushrooms, cauliflower, multi-seeded vegetables like brinjal and green chillies (they contain many lives), no eating after sunset — ever, no cold or unboiled water.
+Water rule — all water must be boiled and consumed only between sunrise and sunset. No cold drinks, no ice, no unboiled raw water.
+UPVAS (complete fast — Paryushana main days, Samvatsari):
+Allowed: boiled water only between sunrise and sunset. Nothing else.
+Avoided: all food and drink except boiled water.
+Note: Some observe Nirjal Upvas — no water either. Add health warning for this.
+EKASANA (one meal — general Jain fasting days):
+Allowed: one simple meal before sunset — rice, dal (moong, chana, urad, tur), roti (wheat), non-root vegetables (lauki, tori, pumpkin, cabbage, capsicum, tomato, cucumber, beans, peas), fresh fruits, nuts and seeds, ghee, mild dry spices.
+Avoided: all root vegetables, milk mixed with pulses, eating after sunset, snacking between meals, fermented foods.
+AYAMBIL (one bland meal — Navpad Oli and austerity days):
+Allowed: one meal only — rice, dal, simple roti — cooked completely plain with NO oil, NO ghee, NO milk, NO curd, NO sugar, NO salt, NO spices of any kind, NO butter. Boiled water only.
+Avoided: all taste enhancers — the six tastes (sweet, sour, salty, bitter, spicy, astringent) are all avoided. No dairy. No flavouring of any kind. The meal must be completely bland.
+Note: This is the strictest Jain fast short of complete Upvas. The purpose is to eat without attachment to taste.
+PARYUSHANA specific additional rules:
+Also avoid during Paryushana: green leafy vegetables (spinach, methi, coriander), tea, coffee, stimulants of any kind. These are avoided only during Paryushana — not on regular Ekasana days.
+GENERAL JAIN FASTING MEAL IDEAS (for Ekasana days):
+Moong dal khichdi (plain, no onion garlic), plain rice with simple dal, boiled vegetables with mild cumin tempering, fresh fruit bowl, plain roti with lauki sabzi.
+AYAMBIL MEAL IDEAS:
+Plain boiled rice with plain moong dal — no salt, no ghee, no spices. This is the only option. It should taste like nothing.
+Display food lists clearly under three headings for each Jain vrat: "Always allowed," "Avoided year-round," and "Additional restrictions on this fast day." This helps users understand what is a permanent Jain rule versus what is specific to their fast.
+Do not change anything else in the app.

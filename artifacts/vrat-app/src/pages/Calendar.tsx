@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { getAllVratDates, formatDateStr } from "@/data/vrats";
+import { getAllVratDates, formatDateStr, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
@@ -195,39 +195,77 @@ function VratDetailSheet({
           )}
 
           {/* Foods */}
-          <div>
-            <h4 className="font-serif text-sm font-semibold text-foreground mb-2 flex items-center gap-1">
-              <span className="text-green-600">✓</span> Foods Allowed
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {activeVrat.foodsAllowed.map((f, i) => (
-                <span
-                  key={i}
-                  className="text-xs bg-green-50 border border-green-100 text-green-700 px-2.5 py-1 rounded-full"
-                  data-testid={`detail-allowed-${i}`}
-                >
-                  {f}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h4 className="font-serif text-sm font-semibold text-foreground mb-2 flex items-center gap-1">
-              <span className="text-red-500">✗</span> Foods to Avoid
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {activeVrat.foodsAvoided.map((f, i) => (
-                <span
-                  key={i}
-                  className="text-xs bg-red-50 border border-red-100 text-red-700 px-2.5 py-1 rounded-full"
-                  data-testid={`detail-avoided-${i}`}
-                >
-                  {f}
-                </span>
-              ))}
-            </div>
-          </div>
+          {isJain ? (
+            <>
+              <div>
+                <h4 className="font-serif text-sm font-semibold text-foreground mb-1.5 flex items-center gap-1">
+                  <span className="text-green-600">✓</span> Always Allowed
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {JAIN_ALWAYS_ALLOWED.map((f, i) => (
+                    <span key={i} className="text-xs bg-green-50 border border-green-100 text-green-700 px-2.5 py-1 rounded-full">{f}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h4 className="font-serif text-sm font-semibold text-foreground mb-1.5 flex items-center gap-1">
+                  <span className="text-red-500">✗</span> Avoided Year-Round
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {JAIN_YEAR_ROUND_AVOIDED.map((f, i) => (
+                    <span key={i} className="text-xs bg-red-50 border border-red-100 text-red-700 px-2.5 py-1 rounded-full">{f}</span>
+                  ))}
+                </div>
+              </div>
+              {activeVrat.jainFastRestrictions && (
+                <div>
+                  <h4 className="font-serif text-sm font-semibold text-foreground mb-1.5 flex items-center gap-1">
+                    <span className="text-amber-600">⚑</span> Additional Restrictions on this Fast Day
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {activeVrat.jainFastRestrictions.map((f, i) => (
+                      <span key={i} className="text-xs bg-amber-50 border border-amber-200 text-amber-800 px-2.5 py-1 rounded-full">{f}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              <div>
+                <h4 className="font-serif text-sm font-semibold text-foreground mb-2 flex items-center gap-1">
+                  <span className="text-green-600">✓</span> Foods Allowed
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {activeVrat.foodsAllowed.map((f, i) => (
+                    <span
+                      key={i}
+                      className="text-xs bg-green-50 border border-green-100 text-green-700 px-2.5 py-1 rounded-full"
+                      data-testid={`detail-allowed-${i}`}
+                    >
+                      {f}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h4 className="font-serif text-sm font-semibold text-foreground mb-2 flex items-center gap-1">
+                  <span className="text-red-500">✗</span> Foods to Avoid
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {activeVrat.foodsAvoided.map((f, i) => (
+                    <span
+                      key={i}
+                      className="text-xs bg-red-50 border border-red-100 text-red-700 px-2.5 py-1 rounded-full"
+                      data-testid={`detail-avoided-${i}`}
+                    >
+                      {f}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="bg-card border border-card-border rounded-2xl p-4">
             <h4 className="font-serif text-sm font-semibold text-foreground mb-2 flex items-center gap-2">

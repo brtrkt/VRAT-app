@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getVratsForDate, getNextVrat } from "@/data/vrats";
+import { getVratsForDate, getNextVrat, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
@@ -264,14 +264,15 @@ function FoodList({
 }: {
   title: string;
   items: string[];
-  type: "allowed" | "avoided";
+  type: "allowed" | "avoided" | "restricted";
 }) {
   const isAllowed = type === "allowed";
+  const isRestricted = type === "restricted";
   return (
     <div className="mb-5">
       <div className="flex items-center gap-2 mb-3">
-        <span className={`text-lg ${isAllowed ? "text-green-600" : "text-red-500"}`}>
-          {isAllowed ? "✓" : "✗"}
+        <span className={`text-lg ${isAllowed ? "text-green-600" : isRestricted ? "text-amber-600" : "text-red-500"}`}>
+          {isAllowed ? "✓" : isRestricted ? "⚑" : "✗"}
         </span>
         <h3 className="font-serif text-base font-semibold text-foreground">{title}</h3>
       </div>
@@ -285,6 +286,8 @@ function FoodList({
               className={`px-4 py-3 rounded-xl ${
                 isAllowed
                   ? "bg-green-50 border border-green-100"
+                  : isRestricted
+                  ? "bg-amber-50 border border-amber-200"
                   : "bg-red-50 border border-red-100"
               }`}
               data-testid={`food-${type}-${i}`}
@@ -294,10 +297,12 @@ function FoodList({
                   className={`mt-0.5 flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-xs font-bold ${
                     isAllowed
                       ? "bg-green-200 text-green-700"
+                      : isRestricted
+                      ? "bg-amber-200 text-amber-800"
                       : "bg-red-200 text-red-700"
                   }`}
                 >
-                  {isAllowed ? "✓" : "✗"}
+                  {isAllowed ? "✓" : isRestricted ? "!" : "✗"}
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
@@ -374,17 +379,45 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
       </div>
 
       <div className="vrat-card p-5 mb-4">
-        <FoodList
-          title="Foods Allowed"
-          items={vrat.foodsAllowed}
-          type="allowed"
-        />
-        <div className="h-px bg-border my-4" />
-        <FoodList
-          title="Foods to Avoid"
-          items={vrat.foodsAvoided}
-          type="avoided"
-        />
+        {vrat.tradition === "Jain" ? (
+          <>
+            <FoodList
+              title="Always Allowed"
+              items={JAIN_ALWAYS_ALLOWED}
+              type="allowed"
+            />
+            <div className="h-px bg-border my-4" />
+            <FoodList
+              title="Avoided Year-Round"
+              items={JAIN_YEAR_ROUND_AVOIDED}
+              type="avoided"
+            />
+            {vrat.jainFastRestrictions && (
+              <>
+                <div className="h-px bg-border my-4" />
+                <FoodList
+                  title="Additional Restrictions on this Fast Day"
+                  items={vrat.jainFastRestrictions}
+                  type="restricted"
+                />
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <FoodList
+              title="Foods Allowed"
+              items={vrat.foodsAllowed}
+              type="allowed"
+            />
+            <div className="h-px bg-border my-4" />
+            <FoodList
+              title="Foods to Avoid"
+              items={vrat.foodsAvoided}
+              type="avoided"
+            />
+          </>
+        )}
       </div>
 
       <MealIdeasSection vrat={vrat} />
