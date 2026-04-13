@@ -6,3 +6,9 @@ id = "HtqA5SDomVvf5XuSCpe8U"
 uri = "file://artifacts/vrat-app/dist/vrat-app.tar.gz"
 type = "unspecified"
 title = "VRAT — Production Build (vrat-app.tar.gz)"
+
+[[outputs]]
+id = "CS9nnhqeBJjjEiqLCi1or"
+uri = "file://artifacts/vrat-app/dist/vrat-app.zip"
+type = "unspecified"
+title = "VRAT — Production Build (vrat-app.zip)"
