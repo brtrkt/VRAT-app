@@ -132,9 +132,11 @@ function VratDetailSheet({
               <div>
                 <p className="text-xs font-semibold text-sky-800 mb-0.5">Jain Panchang Dates</p>
                 <p className="text-xs text-sky-700 leading-relaxed">
-                  Jain dates follow the <strong>Veer Nirvana Samvat</strong> (Jain Panchang). Dates may differ slightly from the Hindu Drik Panchang. Please verify with your local Jain community or{" "}
+                  Dates follow the <strong>Jain Panchang (Veer Nirvana Samvat 2552)</strong>. Confirmed with{" "}
                   <a href="https://www.jainworld.com" target="_blank" rel="noopener noreferrer" className="underline font-medium">jainworld.com</a>{" "}
-                  for confirmed dates.
+                  and{" "}
+                  <a href="https://www.festivaldays.in" target="_blank" rel="noopener noreferrer" className="underline font-medium">festivaldays.in</a>.
+                  Dates may differ slightly from the Hindu Drik Panchang — please verify with your local Jain community.
                 </p>
               </div>
             </div>
