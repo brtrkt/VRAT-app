@@ -1,0 +1,16 @@
+dd a new section to the app called "Regional Vrats." Here is exactly how it should work:
+On first launch, after the location selector (India, UK, USA/Canada, Australia), add a second question: "Which region do you follow?" with these options: North India, Maharashtra, Gujarat, Bengal/Odisha, Tamil Nadu/Andhra/Karnataka, Punjab/Haryana, Rajasthan/UP/Bihar, All Regions.
+Store this preference and show it in settings so the user can change it later.
+Add a "Regional Vrats" tab or section in the calendar screen. This shows vrats specific to the user's selected region in addition to the pan-Indian vrats.
+Add the following regional vrats with dates, deity, food rules, and mantra for each:
+North India: Hartalika Teej (Aug 26 2026 — Goddess Parvati, nirjala fast), Kajari Teej (Aug 13 2026 — Goddess Parvati, partial fast), Ahoi Ashtami (Oct 16 2026 — Goddess Ahoi Mata, star-sighting fast)
+Maharashtra: Mangala Gauri (every Tuesday in Shravan July-Aug 2026 — Goddess Parvati, partial fast), Vat Pournima (May 28 2026 — same as Vat Savitri), Lalita Panchami (Sep 25 2026 — Goddess Lalita, partial fast)
+Gujarat: Agyaras (same dates as Ekadashi — this is the Gujarati name for Ekadashi, show as an alternate name), Sharad Purnima (Oct 28 2026 — especially sacred in Gujarat, moonlit kheer tradition)
+Bengal/Odisha: Lokhhi Pujo fast (Oct 28 2026 — Goddess Lakshmi, partial fast), Jitiya (Sep 24-26 2026 — nirjala fast for sons, already in app — add Bengal tag), Saraswati Puja fast (Feb 2 2026 — Goddess Saraswati, partial fast)
+Tamil Nadu/Andhra/Karnataka: Varalakshmi Vratam (Aug 7 2026 — Goddess Lakshmi, already in app — add South India tag), Karadaiyan Nombu (Mar 14 2026 — Goddess Savitri, rice and dal fast broken at specific time), Skanda Sashti (Oct 28 - Nov 2 2026 — Lord Murugan, 6-day partial fast)
+Punjab/Haryana: Teeyan/Teej (Aug 26 2026 — Goddess Parvati, celebrated with fasting and mehendi), Sawan fasting (all Mondays in Sawan July-Aug 2026 — already in app — add Punjab tag)
+Rajasthan/UP/Bihar: Chhath Puja (Oct 26-29 2026 — already in app — add regional tag), Jivitputrika (Sep 24-26 2026 — already in app — add Bihar tag)
+If user selects All Regions — show everything.
+Each regional vrat should show a small regional tag badge — for example a pill that says "Maharashtra" or "South India" — so users can see at a glance which region it belongs to.
+For regional vrat dates use Drik Panchang as the primary source and add the same disclaimer as pan-Indian vrats.
+Do not remove or change any existing vrats. Only add the new Regional Vrats section alongside what already exists.

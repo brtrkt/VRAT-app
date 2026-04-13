@@ -5,9 +5,12 @@ import {
   OBSERVED_KEY,
   CITY_KEY,
   LOCATION_KEY,
+  REGION_KEY,
   LOCATION_OPTIONS,
+  REGION_OPTIONS,
   type Tradition,
   type UserLocation,
+  type UserRegion,
 } from "@/hooks/useUserPrefs";
 
 const DISCLAIMER_KEY = "vrat_disclaimer_accepted";
@@ -177,9 +180,10 @@ export default function Onboarding({ onComplete }: Props) {
   const [tradition, setTradition] = useState<Tradition>("Hindu");
   const [observed, setObserved] = useState<string[]>(HINDU_DEFAULTS);
   const [location, setLocation] = useState<UserLocation>("india");
+  const [region, setRegion] = useState<UserRegion>("all");
   const [city, setCity] = useState("");
 
-  const TOTAL_STEPS = 6;
+  const TOTAL_STEPS = 7;
 
   function chooseTradition(t: Tradition) {
     setTradition(t);
@@ -197,6 +201,7 @@ export default function Onboarding({ onComplete }: Props) {
     localStorage.setItem(OBSERVED_KEY, JSON.stringify(observed));
     localStorage.setItem(CITY_KEY, city.trim());
     localStorage.setItem(LOCATION_KEY, location);
+    localStorage.setItem(REGION_KEY, region);
     localStorage.setItem(ONBOARDING_KEY, "1");
     localStorage.setItem(DISCLAIMER_KEY, "1");
     onComplete();
@@ -254,7 +259,7 @@ export default function Onboarding({ onComplete }: Props) {
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 1 of 4</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 1 of 5</p>
             <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Which tradition do you follow?</h2>
             <p className="text-sm text-muted-foreground mb-8">
               We'll personalise your calendar and vrat guidance accordingly.
@@ -338,7 +343,7 @@ export default function Onboarding({ onComplete }: Props) {
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="px-6 pb-3 safe-top">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 2 of 4</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 2 of 5</p>
             <h2 className="font-serif text-3xl font-bold text-foreground mb-1">Which vrats do you observe?</h2>
             <p className="text-sm text-muted-foreground">
               Toggle on the ones you keep. Your personal vrats will be starred in the calendar.
@@ -383,7 +388,7 @@ export default function Onboarding({ onComplete }: Props) {
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 3 of 4</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 3 of 5</p>
             <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Where are you based?</h2>
             <p className="text-sm text-muted-foreground mb-8">
               Panchang dates are rooted in IST. We'll show you a regional note so you can confirm with your local pandit.
@@ -436,13 +441,69 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
         </div>
 
-        {/* ── Screen 5: City ───────────────────────────────────── */}
+        {/* ── Screen 5: Region ─────────────────────────────────── */}
         <div
           className="flex-shrink-0 h-full flex flex-col px-6 pb-12 safe-top overflow-y-auto"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 4 of 4</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 4 of 5</p>
+            <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Which region do you follow?</h2>
+            <p className="text-sm text-muted-foreground mb-6">
+              We'll add regional vrats for your area alongside the pan-Indian calendar.
+            </p>
+
+            <div className="space-y-2">
+              {REGION_OPTIONS.map((opt) => {
+                const selected = region === opt.id;
+                return (
+                  <button
+                    key={opt.id}
+                    onClick={() => setRegion(opt.id)}
+                    className="w-full flex items-center gap-4 p-4 rounded-2xl text-left transition-all active:scale-98"
+                    style={{
+                      border: `2px solid ${selected ? "#E07B2A" : "#E5E7EB"}`,
+                      background: selected ? "#E07B2A12" : "white",
+                    }}
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-base text-foreground">{opt.label}</p>
+                    </div>
+                    {selected && (
+                      <div
+                        className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: "#E07B2A" }}
+                      >
+                        <svg viewBox="0 0 12 12" fill="white" className="w-3 h-3">
+                          <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="max-w-sm mx-auto w-full">
+            <StepDots total={TOTAL_STEPS} current={4} />
+            <button
+              onClick={() => setStep(5)}
+              className="mt-4 w-full py-4 rounded-2xl font-semibold text-base text-white tracking-wide transition-opacity active:opacity-80"
+              style={{ background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+
+        {/* ── Screen 6: City ───────────────────────────────────── */}
+        <div
+          className="flex-shrink-0 h-full flex flex-col px-6 pb-12 safe-top overflow-y-auto"
+          style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
+        >
+          <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 5 of 5</p>
             <h2 className="font-serif text-3xl font-bold text-foreground mb-2">What is your city?</h2>
             <p className="text-sm text-muted-foreground mb-8">
               We use this to calculate Brahma Muhurta and moonrise times accurately for your location.
@@ -474,9 +535,9 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
 
           <div className="max-w-sm mx-auto w-full">
-            <StepDots total={TOTAL_STEPS} current={4} />
+            <StepDots total={TOTAL_STEPS} current={5} />
             <button
-              onClick={() => setStep(5)}
+              onClick={() => setStep(6)}
               className="mt-4 w-full py-4 rounded-2xl font-semibold text-base text-white tracking-wide transition-opacity active:opacity-80"
               style={{ background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }}
             >

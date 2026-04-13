@@ -5,9 +5,36 @@ export const TRADITION_KEY = "vrat_tradition";
 export const OBSERVED_KEY = "vrat_observed";
 export const CITY_KEY = "vrat_city";
 export const LOCATION_KEY = "vrat_location";
+export const REGION_KEY = "vrat_region";
 
 export type Tradition = "Hindu" | "Jain" | "Both";
 export type UserLocation = "india" | "uk" | "usa" | "australia";
+export type UserRegion =
+  | "all"
+  | "north-india"
+  | "maharashtra"
+  | "gujarat"
+  | "bengal-odisha"
+  | "south-india"
+  | "punjab-haryana"
+  | "rajasthan-up-bihar";
+
+export interface RegionInfo {
+  id: UserRegion;
+  label: string;
+  shortLabel: string;
+}
+
+export const REGION_OPTIONS: RegionInfo[] = [
+  { id: "all",                label: "All Regions",                      shortLabel: "All" },
+  { id: "north-india",        label: "North India",                      shortLabel: "North India" },
+  { id: "maharashtra",        label: "Maharashtra",                      shortLabel: "Maharashtra" },
+  { id: "gujarat",            label: "Gujarat",                          shortLabel: "Gujarat" },
+  { id: "bengal-odisha",      label: "Bengal / Odisha",                  shortLabel: "Bengal" },
+  { id: "south-india",        label: "Tamil Nadu / Andhra / Karnataka",  shortLabel: "South India" },
+  { id: "punjab-haryana",     label: "Punjab / Haryana",                 shortLabel: "Punjab" },
+  { id: "rajasthan-up-bihar", label: "Rajasthan / UP / Bihar",           shortLabel: "Raj · UP · Bihar" },
+];
 
 export const DEFAULT_OBSERVED = ["ekadashi", "purnima", "pradosh"];
 
@@ -49,6 +76,18 @@ export const LOCATION_OPTIONS: LocationInfo[] = [
     note: "Dates per Drik Panchang IST. Some dates may fall a day later — verify with your local pandit.",
   },
 ];
+
+export function getUserRegion(): UserRegion {
+  return (localStorage.getItem(REGION_KEY) as UserRegion) || "all";
+}
+
+export function setUserRegion(region: UserRegion): void {
+  localStorage.setItem(REGION_KEY, region);
+}
+
+export function getRegionInfo(id?: UserRegion): RegionInfo {
+  return REGION_OPTIONS.find((r) => r.id === (id ?? getUserRegion())) ?? REGION_OPTIONS[0];
+}
 
 export function getUserTradition(): Tradition {
   return (localStorage.getItem(TRADITION_KEY) as Tradition) || "Both";

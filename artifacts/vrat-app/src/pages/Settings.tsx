@@ -5,14 +5,18 @@ import {
   OBSERVED_KEY,
   CITY_KEY,
   LOCATION_KEY,
+  REGION_KEY,
   ONBOARDING_KEY,
   LOCATION_OPTIONS,
+  REGION_OPTIONS,
   type Tradition,
   type UserLocation,
+  type UserRegion,
   getUserTradition,
   getObservedVrats,
   getUserCity,
   getUserLocation,
+  getUserRegion,
   isVratObserved,
 } from "@/hooks/useUserPrefs";
 import PageFooter from "@/components/PageFooter";
@@ -70,7 +74,7 @@ function SectionHeader({ title }: { title: string }) {
   );
 }
 
-type Section = "main" | "location" | "tradition" | "vrats";
+type Section = "main" | "location" | "region" | "tradition" | "vrats";
 
 export default function Settings() {
   const [, navigate] = useLocation();
@@ -81,16 +85,18 @@ export default function Settings() {
   const [observed, setObserved] = useState<string[]>(getObservedVrats);
   const [city, setCity] = useState(getUserCity);
   const [location, setLocation] = useState<UserLocation>(getUserLocation);
+  const [region, setRegion] = useState<UserRegion>(getUserRegion);
 
   const save = useCallback(() => {
     localStorage.setItem(TRADITION_KEY, tradition);
     localStorage.setItem(OBSERVED_KEY, JSON.stringify(observed));
     localStorage.setItem(CITY_KEY, city.trim());
     localStorage.setItem(LOCATION_KEY, location);
+    localStorage.setItem(REGION_KEY, region);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
     if (section !== "main") setSection("main");
-  }, [tradition, observed, city, location, section]);
+  }, [tradition, observed, city, location, region, section]);
 
   function toggleVrat(id: string) {
     setObserved((prev) =>
@@ -99,6 +105,7 @@ export default function Settings() {
   }
 
   const currentLocationInfo = LOCATION_OPTIONS.find((l) => l.id === location) ?? LOCATION_OPTIONS[0];
+  const currentRegionInfo = REGION_OPTIONS.find((r) => r.id === region) ?? REGION_OPTIONS[0];
   const ACCENT = "#E07B2A";
 
   if (section === "location") {
@@ -163,6 +170,62 @@ export default function Settings() {
             style={{ background: `linear-gradient(135deg, ${ACCENT} 0%, #C86B1A 100%)` }}
           >
             Save location
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (section === "region") {
+    return (
+      <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
+        <div className="max-w-md mx-auto px-5 pt-6 pb-8">
+          <button
+            onClick={() => setSection("main")}
+            className="flex items-center gap-2 text-sm text-muted-foreground mb-6 -ml-1 active:opacity-70"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M15 18l-6-6 6-6" /></svg>
+            Back
+          </button>
+
+          <h2 className="font-serif text-2xl font-bold text-foreground mb-1">My region</h2>
+          <p className="text-sm text-muted-foreground mb-6">
+            Regional vrats specific to your area will appear alongside the pan-Indian calendar.
+          </p>
+
+          <div className="space-y-2">
+            {REGION_OPTIONS.map((opt) => {
+              const selected = region === opt.id;
+              return (
+                <button
+                  key={opt.id}
+                  onClick={() => setRegion(opt.id)}
+                  className="w-full flex items-center gap-4 p-4 rounded-2xl text-left transition-all"
+                  style={{
+                    border: `2px solid ${selected ? ACCENT : "#E5E7EB"}`,
+                    background: selected ? `${ACCENT}12` : "white",
+                  }}
+                  data-testid={`settings-region-${opt.id}`}
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-base text-foreground">{opt.label}</p>
+                  </div>
+                  {selected && (
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ACCENT }}>
+                      <svg viewBox="0 0 12 12" fill="white" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            onClick={save}
+            className="mt-6 w-full py-4 rounded-2xl font-semibold text-base text-white tracking-wide transition-opacity active:opacity-80"
+            style={{ background: `linear-gradient(135deg, ${ACCENT} 0%, #C86B1A 100%)` }}
+          >
+            Save region
           </button>
         </div>
       </div>
@@ -300,6 +363,23 @@ export default function Settings() {
         <p className="text-xs text-muted-foreground mt-2 px-1">
           {currentLocationInfo.note}
         </p>
+
+        <SectionHeader title="Region" />
+        <button
+          onClick={() => setSection("region")}
+          className="w-full vrat-card p-4 flex items-center gap-4 text-left active:opacity-70 transition-opacity"
+          data-testid="settings-change-region"
+        >
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-foreground">{currentRegionInfo.label}</p>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              {currentRegionInfo.id === "all" ? "Showing all regional vrats" : "Regional vrats for your area are shown"}
+            </p>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-muted-foreground flex-shrink-0">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
 
         <SectionHeader title="Tradition" />
         <button

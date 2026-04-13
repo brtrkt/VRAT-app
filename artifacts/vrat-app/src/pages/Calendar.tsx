@@ -4,7 +4,7 @@ import { getAllVratDates, formatDateStr } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
-import { getUserTradition, getObservedVrats, isVratObserved, getLocationInfo } from "@/hooks/useUserPrefs";
+import { getUserTradition, getObservedVrats, isVratObserved, getLocationInfo, getUserRegion } from "@/hooks/useUserPrefs";
 import VratKathaSection from "@/components/VratKathaSection";
 
 const MONTHS = [
@@ -49,13 +49,18 @@ function VratDetailSheet({
         >
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
                 <p className="text-white/70 text-xs uppercase tracking-widest">
                   {formatDateStr(dateStr)}
                 </p>
                 {isJain && (
                   <span className="bg-white/25 text-white text-xs px-2 py-0.5 rounded-full font-medium">
                     Jain
+                  </span>
+                )}
+                {activeVrat.regionLabel && (
+                  <span className="bg-white/25 text-white text-xs px-2 py-0.5 rounded-full font-medium">
+                    {activeVrat.regionLabel}
                   </span>
                 )}
               </div>
@@ -347,15 +352,18 @@ export default function Calendar() {
   const [observedVrats] = useState<string[]>(() => getObservedVrats());
 
   const allVratDates = getAllVratDates();
+  const userRegion = getUserRegion();
 
   const filteredVratDates = allVratDates
     .map(({ date, vrats }) => ({
       date,
       vrats: vrats.filter((v) => {
-        if (filter === "all") return true;
-        if (filter === "hindu") return v.tradition === "Hindu" || v.tradition === "Both";
-        if (filter === "jain") return v.tradition === "Jain" || v.tradition === "Both";
-        return true;
+        const traditionOk =
+          filter === "all" ||
+          (filter === "hindu" && (v.tradition === "Hindu" || v.tradition === "Both")) ||
+          (filter === "jain" && (v.tradition === "Jain" || v.tradition === "Both"));
+        const regionOk = !v.region || userRegion === "all" || v.region === userRegion;
+        return traditionOk && regionOk;
       }),
     }))
     .filter(({ vrats }) => vrats.length > 0);
