@@ -56,20 +56,17 @@ function useCountdown(targetTime: Date | null) {
 }
 
 function BrahmaMuhurta() {
-  // 96 minutes before default sunrise of 6:30 AM = 4:54 AM
-  const SUNRISE_MINS = 6 * 60 + 30; // 390
-  const brahmaMins = SUNRISE_MINS - 96; // 294
-  const bHour = Math.floor(brahmaMins / 60); // 4
-  const bMin = brahmaMins % 60; // 54
-  const bTimeStr = `${bHour}:${String(bMin).padStart(2, "0")}am`;
+  // Traditional Brahma Muhurta window: 3:30 AM – 5:00 AM
+  const alarmHour = 3;
+  const alarmMin = 30;
 
   // Detect Android for the SET_ALARM intent (iOS ignores intent:// URLs)
   const isAndroid = /android/i.test(navigator.userAgent);
   const alarmUrl =
     `intent:#Intent;action=android.intent.action.SET_ALARM;` +
     `S.android.intent.extra.alarm.MESSAGE=Brahma%20Muhurta;` +
-    `i.android.intent.extra.alarm.HOUR=${bHour};` +
-    `i.android.intent.extra.alarm.MINUTES=${bMin};` +
+    `i.android.intent.extra.alarm.HOUR=${alarmHour};` +
+    `i.android.intent.extra.alarm.MINUTES=${alarmMin};` +
     `Z.android.intent.extra.alarm.SKIP_UI=false;end`;
 
   return (
@@ -86,7 +83,7 @@ function BrahmaMuhurta() {
       </div>
       <p className="text-foreground text-sm leading-relaxed mb-2">
         <span className="font-serif font-semibold text-base text-amber-900">
-          Tomorrow: {bTimeStr}
+          3:30 AM – 5:00 AM
         </span>
         {" — "}the most auspicious time for prayer and meditation.{" "}
         {isAndroid ? (
@@ -94,18 +91,18 @@ function BrahmaMuhurta() {
             href={alarmUrl}
             className="text-amber-700 underline underline-offset-2 font-semibold hover:text-amber-900 transition-colors"
             data-testid="alarm-link"
-            aria-label={`Open Clock app to set alarm for Brahma Muhurta at ${bTimeStr}`}
+            aria-label="Open Clock app to set alarm for Brahma Muhurta at 3:30 AM"
           >
             Tap to set your alarm
           </a>
         ) : (
           <span className="text-amber-700 font-semibold">
-            Set your alarm for {bTimeStr}
+            Set your alarm for 3:30 AM
           </span>
         )}
       </p>
       <p className="text-xs text-amber-600/60 mt-1">
-        96 minutes before sunrise (6:30 am default)
+        Exact timing varies slightly by season and location — approx. 96 minutes before local sunrise.
       </p>
     </div>
   );
