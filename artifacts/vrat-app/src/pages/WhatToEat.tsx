@@ -440,7 +440,7 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
 
       <MealIdeasSection vrat={vrat} />
 
-      <VratKathaSection vratId={vrat.id} />
+      <VratKathaSection vratId={vrat.id} vratName={vrat.name} />
     </div>
   );
 }

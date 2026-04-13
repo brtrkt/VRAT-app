@@ -332,7 +332,7 @@ function VratDetailSheet({
             </button>
           )}
 
-          <VratKathaSection vratId={activeVrat.id} />
+          <VratKathaSection vratId={activeVrat.id} vratName={activeVrat.name} />
         </div>
       </div>
 
