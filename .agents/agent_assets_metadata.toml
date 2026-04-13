@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "HtqA5SDomVvf5XuSCpe8U"
+uri = "file://artifacts/vrat-app/dist/vrat-app.tar.gz"
+type = "unspecified"
+title = "VRAT — Production Build (vrat-app.tar.gz)"
