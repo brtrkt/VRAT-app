@@ -1,0 +1,24 @@
+Good morning! Ready to go. Let's knock these out one by one — starting with the fasting timer since it's the most impactful for user experience on nirjala days.
+Here's your Replit prompt:
+
+Add a fasting timer feature to the app. Here is exactly how it should work:
+On nirjala fasting days only (Karva Chauth, Hartalika Teej, Maha Shivratri, Nirjala Ekadashi, Jain Upvas days) show a live fasting timer on the home screen.
+The timer shows two things:
+1. Time elapsed since fast began — shown as "Fasting for X hours Y minutes"
+2. Time remaining until fast ends — shown as "X hours Y minutes until you can break your fast"
+For Karva Chauth — fast ends at moonrise. Show a live moonrise countdown specific to the user's selected region (India, UK, USA/Canada, Australia). Use approximate moonrise times: India 7:45pm, UK 7:15pm, USA/Canada Eastern 7:30pm, Australia 6:45pm.
+For Maha Shivratri — fast ends at sunrise next morning. Show countdown to 6:00am.
+For Nirjala Ekadashi — fast ends at Dwadashi sunrise next morning. Show countdown to 6:00am.
+For Hartalika Teej — fast ends at sunrise next morning. Show countdown to 6:00am.
+For Jain Upvas days — fast ends at sunset. Show countdown to sunset time: India 6:30pm, UK 8:00pm (summer) or 4:30pm (winter), USA/Canada 7:00pm, Australia 6:00pm.
+The timer display should be:
+— A beautiful circular progress ring in saffron gold colour
+— Large clear time remaining in the centre
+— Small text below saying "Stay strong — you are doing beautifully"
+— On Karva Chauth specifically show "Fasting for your husband's long life 🌙"
+— On Jain Upvas show "Fasting in the spirit of ahimsa 🙏"
+Add a "Start my fast" button that the user taps at the beginning of their fast. This sets the start time in localStorage. The timer then counts from that moment.
+Add a gentle notification reminder every 3 hours during the fast saying "Stay hydrated with your permitted drinks — you are doing beautifully."
+On nirjala days (Karva Chauth, Hartalika Teej, Nirjala Ekadashi) the notification changes to "Nirjala fast — no food or water. Stay strong. You are almost there."
+When the fast ends show a celebration message: "Fast complete 🙏 Jai Mata Di — your devotion is beautiful. Please break your fast gently with water first." For Karva Chauth add "Look at the moon through a sieve, then see your husband's face. Karva Chauth Mubarak 🌙"
+Do not change anything else in the app.

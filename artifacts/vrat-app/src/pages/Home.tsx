@@ -15,6 +15,13 @@ import {
   type StreakItem,
   type BadgeResult,
 } from "@/hooks/useVratHistory";
+import NirjalaFastTimer from "@/components/NirjalaFastTimer";
+
+const NIRJALA_TIMER_IDS = new Set([
+  "karva-chauth", "hartalika-teej", "maha-shivratri", "ekadashi-jun-1",
+  "chhath-puja", "jitiya", "paryushana", "samvatsari", "kshamavani",
+]);
+function isNirjalaTimerVrat(v: { id: string }) { return NIRJALA_TIMER_IDS.has(v.id); }
 
 function getParanaTime(vrat: Vrat, now: Date): Date {
   const name = vrat.name.toLowerCase();
@@ -506,6 +513,7 @@ export default function Home() {
   const nextVrat = getNextVrat(today);
 
   const allVrats = vratsToday.length > 0 ? vratsToday : [];
+  const nirjalaVrat = vratsToday.find(isNirjalaTimerVrat) ?? null;
 
   return (
     <div className="min-h-screen cream-gradient">
@@ -525,7 +533,11 @@ export default function Home() {
         <BadgeCelebration />
 
         <TodayCard todayStr={todayStr} vratsToday={vratsToday} />
-        <FastingTimer vratsToday={vratsToday} />
+        {nirjalaVrat ? (
+          <NirjalaFastTimer vrat={nirjalaVrat} />
+        ) : (
+          <FastingTimer vratsToday={vratsToday} />
+        )}
         <HydrationTracker vratsToday={vratsToday} todayStr={todayStr} />
         <MyStreaks />
         <NextVratCard nextVrat={nextVrat} />
