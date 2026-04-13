@@ -5,6 +5,7 @@ import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import VratKathaSection from "@/components/VratKathaSection";
+import SankalpModal, { SankalpButton } from "@/components/SankalpModal";
 
 const HYDRATING_LABELS = new Set(["Water", "Coconut Water", "Lassi", "Buttermilk", "Herbal Tea"]);
 
@@ -364,9 +365,15 @@ function MealIdeasSection({ vrat }: { vrat: Vrat }) {
 }
 
 function VratFoodCard({ vrat }: { vrat: Vrat }) {
+  const [showSankalp, setShowSankalp] = useState(false);
+  const isJain = vrat.tradition === "Jain";
+
   return (
     <div data-testid={`vrat-food-card-${vrat.id}`}>
-      <div className="saffron-gradient rounded-2xl p-4 mb-4 text-white">
+      <div
+        className={`rounded-2xl p-4 mb-4 text-white${isJain ? "" : " saffron-gradient"}`}
+        style={isJain ? { background: "linear-gradient(135deg, #15803D 0%, #22C55E 100%)" } : undefined}
+      >
         <p className="text-xs font-medium tracking-widest uppercase text-white/70 mb-1">Fasting Today</p>
         <h2 className="font-serif text-2xl font-bold">{vrat.name}</h2>
         {vrat.nirjala && (
@@ -377,6 +384,17 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
         <p className="text-white/80 text-sm mt-1">Deity: {vrat.deity}</p>
         <p className="text-white/70 text-xs mt-2 leading-relaxed">{vrat.description}</p>
       </div>
+
+      {/* Sankalp */}
+      <SankalpButton
+        vrat={vrat}
+        onOpen={() => setShowSankalp(true)}
+        isJain={isJain}
+      />
+
+      {showSankalp && (
+        <SankalpModal vrat={vrat} onClose={() => setShowSankalp(false)} />
+      )}
 
       <div className="vrat-card p-5 mb-4">
         {vrat.tradition === "Jain" ? (

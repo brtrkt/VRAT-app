@@ -7,6 +7,7 @@ import NirjalaWarning from "@/components/NirjalaWarning";
 import { getUserTradition, getObservedVrats, isVratObserved, getLocationInfo, getUserRegion } from "@/hooks/useUserPrefs";
 import VratKathaSection from "@/components/VratKathaSection";
 import { addObservation, removeObservation, isObservedDate } from "@/hooks/useVratHistory";
+import SankalpModal, { SankalpButton } from "@/components/SankalpModal";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -38,8 +39,11 @@ function VratDetailSheet({
   const canObserve = dateStr <= todayStr;
   const [observed, setObserved] = useState(() => isObservedDate(activeVrat.id, dateStr));
 
+  const [showSankalp, setShowSankalp] = useState(false);
+
   useEffect(() => {
     setObserved(isObservedDate(activeVrat.id, dateStr));
+    setShowSankalp(false);
   }, [activeVrat.id, dateStr]);
 
   function toggleObserved() {
@@ -126,6 +130,13 @@ function VratDetailSheet({
           <p className="text-xs text-muted-foreground leading-relaxed italic">
             {activeVrat.description}
           </p>
+
+          {/* Sankalp */}
+          <SankalpButton
+            vrat={activeVrat}
+            onOpen={() => setShowSankalp(true)}
+            isJain={isJain}
+          />
 
           {/* Jain water & root veg reminder */}
           {isJain && (
@@ -324,6 +335,10 @@ function VratDetailSheet({
           <VratKathaSection vratId={activeVrat.id} />
         </div>
       </div>
+
+      {showSankalp && (
+        <SankalpModal vrat={activeVrat} onClose={() => setShowSankalp(false)} />
+      )}
     </div>
   );
 }

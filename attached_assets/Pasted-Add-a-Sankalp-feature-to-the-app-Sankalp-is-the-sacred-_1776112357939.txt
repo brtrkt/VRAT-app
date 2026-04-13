@@ -1,0 +1,45 @@
+Add a Sankalp feature to the app. Sankalp is the sacred vow a devotee takes before beginning a vrat — stating their intention, the deity, and the purpose of the fast. Here is exactly how it should work:
+On each vrat detail page add a "Take Sankalp" button below the vrat description. It should appear before the food guide and mantra sections — because sankalp is always taken first.
+When the user taps "Take Sankalp" show a beautiful full screen card in saffron and gold with:
+1. The sankalp text in Sanskrit (transliterated in English letters so diaspora women can read it)
+2. The English meaning below each line
+3. A "I have taken my sankalp 🙏" confirmation button at the bottom
+Here are the accurate sankalp texts for each major vrat:
+EKADASHI SANKALP:
+Sanskrit: "Om Adya Bhagavan Vishnu preethyartham, Ekadashi Vratam Karishye"
+Meaning: "Today, to please Lord Vishnu, I take the vow of Ekadashi fast. I will not consume grains or pulses. I will observe this fast with full devotion."
+NAVRATRI SANKALP:
+Sanskrit: "Om Adya Devi Durgaa preethyartham, Navratri Vratam Karishye"
+Meaning: "Today, to please Goddess Durga, I take the vow of Navratri fast for nine days. I surrender myself to the divine mother and seek her blessings."
+MAHA SHIVRATRI SANKALP:
+Sanskrit: "Om Adya Mahadev preethyartham, Shivratri Vratam Karishye"
+Meaning: "Today, to please Lord Shiva, I take the vow of Shivratri fast. I will stay awake through the night in devotion and offer my prayers at each prahar."
+PRADOSH SANKALP:
+Sanskrit: "Om Adya Shiva Parvathi preethyartham, Pradosh Vratam Karishye"
+Meaning: "Today, to please Lord Shiva and Goddess Parvati, I take the vow of Pradosh fast. I will worship during the Pradosh Kaal at sunset."
+PURNIMA SANKALP:
+Sanskrit: "Om Adya Satyanarayan preethyartham, Purnima Vratam Karishye"
+Meaning: "Today, to please Lord Satyanarayan, I take the vow of Purnima fast. I will observe this fast with pure heart and offer my prayers to the full moon."
+KARVA CHAUTH SANKALP:
+Sanskrit: "Om Adya Shiva Parvathi preethyartham, pati deerghaayu kaamnaa Karva Chauth Vratam Karishye"
+Meaning: "Today, desiring a long life for my husband, I take the vow of Karva Chauth fast. I will not eat or drink until I sight the moon and my husband's face."
+SANKASHTI CHATURTHI SANKALP:
+Sanskrit: "Om Adya Ganapataye preethyartham, Sankashti Chaturthi Vratam Karishye"
+Meaning: "Today, to please Lord Ganesha remover of all obstacles, I take the vow of Sankashti Chaturthi fast. I will break my fast only after sighting the moon."
+JANMASHTAMI SANKALP:
+Sanskrit: "Om Adya Shri Krishna preethyartham, Janmashtami Vratam Karishye"
+Meaning: "Today, to please Lord Krishna, I take the vow of Janmashtami fast. I will fast until midnight when Lord Krishna is born and break my fast with panchamrit."
+VAT SAVITRI SANKALP:
+Sanskrit: "Om Adya Savitri preethyartham, pati deerghaayu kaamnaa Vat Savitri Vratam Karishye"
+Meaning: "Today, following the example of Savitri, I take the vow of Vat Savitri fast for the long life of my husband. I will worship the banyan tree with full devotion."
+JAIN SANKALP (for all Jain vrats):
+Text: "Namokar Mantra — Namo Arihantanam. I take this vow today in the presence of the Panch Parmeshti. I will observe this fast with ahimsa, truth and non-attachment. I will not consume food (or taste) until the designated time. May this fast purify my karma."
+For all other vrats not listed above use this universal sankalp:
+Sanskrit: "Om Adya [Deity name] preethyartham, [Vrat name] Vratam Karishye"
+Meaning: "Today, to please [Deity], I take the vow of [Vrat name] fast. I will observe this fast with full devotion and a pure heart."
+After the user taps "I have taken my sankalp" — mark it in their daily log and show a warm confirmation: "Your sankalp has been taken 🙏 May [Deity] bless your fast today."
+Also add a small note below the sankalp: "Traditionally sankalp is taken after a morning bath, facing east, with water cupped in your hands. Pour the water gently after taking the vow."
+The sankalp card should feel sacred and beautiful — saffron background, gold text, simple and clean. No clutter.
+Do not change anything else in the app.
+
+Paste that in and hit Run. While it builds tell me — do you want vrat kathas next or offline mode? Offline mode is more technically important but vrat kathas are more content-rich. Your call.Sonnet 4.6
