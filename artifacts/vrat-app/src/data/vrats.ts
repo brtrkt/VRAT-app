@@ -4124,3 +4124,7 @@ export function getDaysUntil(dateStr: string, fromDate: Date): number {
   const diff = target.getTime() - from.getTime();
   return Math.round(diff / (1000 * 60 * 60 * 24));
 }
+
+export function getAllVrats(): Vrat[] {
+  return vrats;
+}

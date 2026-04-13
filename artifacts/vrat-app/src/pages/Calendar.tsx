@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, X, CheckCircle2, Circle } from "lucide-react";
 import { getAllVratDates, formatDateStr, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import { getUserTradition, getObservedVrats, isVratObserved, getLocationInfo, getUserRegion } from "@/hooks/useUserPrefs";
 import VratKathaSection from "@/components/VratKathaSection";
+import { addObservation, removeObservation, isObservedDate } from "@/hooks/useVratHistory";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -33,6 +34,22 @@ function VratDetailSheet({
 }) {
   const [activeVrat, setActiveVrat] = useState(vrats[0]);
   const isJain = activeVrat.tradition === "Jain";
+  const todayStr = new Date().toISOString().split("T")[0];
+  const canObserve = dateStr <= todayStr;
+  const [observed, setObserved] = useState(() => isObservedDate(activeVrat.id, dateStr));
+
+  useEffect(() => {
+    setObserved(isObservedDate(activeVrat.id, dateStr));
+  }, [activeVrat.id, dateStr]);
+
+  function toggleObserved() {
+    if (observed) {
+      removeObservation(activeVrat.id, dateStr);
+    } else {
+      addObservation(activeVrat.id, dateStr);
+    }
+    setObserved((prev) => !prev);
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-end" data-testid="vrat-detail-sheet">
@@ -273,6 +290,36 @@ function VratDetailSheet({
             </h4>
             <p className="text-sm text-muted-foreground leading-relaxed">{activeVrat.mealIdea}</p>
           </div>
+
+          {canObserve && (
+            <button
+              onClick={toggleObserved}
+              data-testid="observe-vrat-btn"
+              className={`w-full flex items-center justify-center gap-2.5 py-3.5 rounded-2xl font-semibold text-sm transition-all active:scale-95 ${
+                observed
+                  ? "text-emerald-800 border-2 border-emerald-400"
+                  : "text-white"
+              }`}
+              style={
+                observed
+                  ? { background: "rgba(16,185,129,0.10)" }
+                  : { background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }
+              }
+              aria-pressed={observed}
+            >
+              {observed ? (
+                <>
+                  <CheckCircle2 size={18} className="text-emerald-600" />
+                  Observed ✓
+                </>
+              ) : (
+                <>
+                  <Circle size={18} />
+                  I observed this vrat
+                </>
+              )}
+            </button>
+          )}
 
           <VratKathaSection vratId={activeVrat.id} />
         </div>

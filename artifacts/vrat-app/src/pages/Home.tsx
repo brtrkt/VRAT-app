@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { getVratsForDate, getNextVrat, getDaysUntil, formatDateStr } from "@/data/vrats";
+import { useLocation } from "wouter";
+import { getVratsForDate, getNextVrat, getDaysUntil, formatDateStr, getAllVrats } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
@@ -7,6 +8,13 @@ import NirjalaWarning from "@/components/NirjalaWarning";
 import NavratriCard from "@/components/NavratriCard";
 import HydrationTracker from "@/components/HydrationTracker";
 import { getDaysRemaining } from "@/hooks/useUserPrefs";
+import {
+  getTopStreaks,
+  checkBadges,
+  markBadgesSeen,
+  type StreakItem,
+  type BadgeResult,
+} from "@/hooks/useVratHistory";
 
 function getParanaTime(vrat: Vrat, now: Date): Date {
   const name = vrat.name.toLowerCase();
@@ -388,6 +396,109 @@ function MantraCard({ vrats }: { vrats: Vrat[] }) {
   );
 }
 
+function BadgeCelebration() {
+  const allVrats = getAllVrats();
+  const [newBadges] = useState<BadgeResult[]>(() => {
+    const badges = checkBadges(allVrats);
+    return badges.filter((b) => b.newlyEarned);
+  });
+
+  useEffect(() => {
+    if (newBadges.length > 0) {
+      markBadgesSeen(newBadges.map((b) => b.id));
+    }
+  }, [newBadges]);
+
+  if (newBadges.length === 0) return null;
+
+  const badgeIcon = (id: string) =>
+    id === "shubh-aarambh" ? "🪔" : id === "ekadashi-sevak" ? "🌙" : "🪷";
+
+  return (
+    <div className="mb-4">
+      {newBadges.map((badge) => (
+        <div
+          key={badge.id}
+          className="rounded-2xl p-5 mb-3 border-2"
+          style={{
+            background: "linear-gradient(135deg, #FEF3E2 0%, #FFF9F0 100%)",
+            borderColor: "#E07B2A",
+          }}
+        >
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
+            <span className="text-xl" aria-hidden="true">{badgeIcon(badge.id)}</span>
+            <span className="font-serif font-bold text-foreground">{badge.name}</span>
+            <span
+              className="text-xs px-2 py-0.5 rounded-full font-semibold text-white"
+              style={{ background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }}
+            >
+              Earned
+            </span>
+          </div>
+          <p className="text-xs font-semibold text-amber-700 mb-1">{badge.subtitle}</p>
+          <p className="text-sm text-foreground/80 leading-relaxed">{badge.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function MyStreaks() {
+  const allVrats = getAllVrats();
+  const [, setLocation] = useLocation();
+  const [streaks, setStreaks] = useState<StreakItem[]>(() => getTopStreaks(allVrats, 3));
+
+  useEffect(() => {
+    setStreaks(getTopStreaks(allVrats, 3));
+  }, [allVrats]);
+
+  return (
+    <div className="vrat-card p-5 mb-4" data-testid="my-streaks-section">
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+          My Streaks
+        </p>
+        <button
+          onClick={() => setLocation("/vrat-history")}
+          className="text-xs font-semibold"
+          style={{ color: "#C86B1A" }}
+          data-testid="view-history-link"
+        >
+          View History →
+        </button>
+      </div>
+
+      {streaks.length === 0 ? (
+        <p className="text-sm text-muted-foreground text-center py-1">
+          Tap "I observed this vrat" in the Calendar to start tracking
+        </p>
+      ) : (
+        <div className="space-y-2">
+          {streaks.map((item) => (
+            <div
+              key={item.vrat.id}
+              className="flex items-center justify-between rounded-xl px-3 py-2.5"
+              style={
+                item.isNirjala
+                  ? {
+                      background: "rgba(212,160,23,0.09)",
+                      border: "2px solid #D4A017",
+                    }
+                  : { background: "rgba(224,123,42,0.08)" }
+              }
+            >
+              <span className="text-sm font-medium text-foreground">{item.vrat.name}</span>
+              <span className="text-sm font-bold" style={{ color: "#C86B1A" }}>
+                🔥 {item.streak} {item.unit}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Home() {
   const [today] = useState(new Date());
   const todayStr = today.toISOString().split("T")[0];
@@ -411,10 +522,12 @@ export default function Home() {
         </div>
 
         <TrialBanner />
+        <BadgeCelebration />
 
         <TodayCard todayStr={todayStr} vratsToday={vratsToday} />
         <FastingTimer vratsToday={vratsToday} />
         <HydrationTracker vratsToday={vratsToday} todayStr={todayStr} />
+        <MyStreaks />
         <NextVratCard nextVrat={nextVrat} />
         <MantraCard vrats={allVrats} />
         <BrahmaMuhurta />

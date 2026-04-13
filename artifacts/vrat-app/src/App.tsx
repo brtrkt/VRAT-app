@@ -10,6 +10,7 @@ import Settings from "@/pages/Settings";
 import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
 import Paywall from "@/pages/Paywall";
+import VratHistory from "@/pages/VratHistory";
 import Onboarding from "@/components/Onboarding";
 import { ONBOARDING_KEY, initTrial, isTrialExpired } from "@/hooks/useUserPrefs";
 
@@ -215,6 +216,7 @@ function Router() {
         <Route path="/settings" component={Settings} />
         <Route path="/privacy" component={Privacy} />
         <Route path="/terms" component={Terms} />
+        <Route path="/vrat-history" component={VratHistory} />
         <Route component={NotFound} />
       </Switch>
       <BottomNav />
