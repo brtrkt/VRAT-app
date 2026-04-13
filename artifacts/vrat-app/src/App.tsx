@@ -12,6 +12,8 @@ import Terms from "@/pages/Terms";
 import Paywall from "@/pages/Paywall";
 import VratHistory from "@/pages/VratHistory";
 import Onboarding from "@/components/Onboarding";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import HowToInstall from "@/pages/HowToInstall";
 import { ONBOARDING_KEY, initTrial, isTrialExpired } from "@/hooks/useUserPrefs";
 
 const queryClient = new QueryClient();
@@ -217,9 +219,11 @@ function Router() {
         <Route path="/privacy" component={Privacy} />
         <Route path="/terms" component={Terms} />
         <Route path="/vrat-history" component={VratHistory} />
+        <Route path="/how-to-install" component={HowToInstall} />
         <Route component={NotFound} />
       </Switch>
       <BottomNav />
+      <PWAInstallPrompt />
     </div>
   );
 }

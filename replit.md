@@ -44,6 +44,10 @@ pnpm workspace monorepo using TypeScript. Contains the VRAT app — a sacred fas
 - `src/components/NirjalaWarning.tsx` — nirjala health warning badge/modal
 - `src/components/DisclaimerBanner.tsx` — health disclaimer banner
 - `src/pages/Calendar.tsx` — personalised calendar with gold dots
+- `src/pages/HowToInstall.tsx` — PWA installation guide (iPhone + Android steps)
+- `src/components/PWAInstallPrompt.tsx` — bottom-banner install prompt (shows after 2 visits)
+- `public/sw.js` — service worker (stale-while-revalidate offline caching)
+- `public/icon-192.png`, `public/icon-512.png`, `public/apple-touch-icon.png` — generated diya PWA icons
 
 ## Stack
 

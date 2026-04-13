@@ -1,24 +1,47 @@
 {
   "name": "VRAT — Your Fast, Your Way",
   "short_name": "VRAT",
-  "description": "A sacred fasting companion for Hindu and Jain devotees.",
+  "description": "The first fasting companion app for Hindu and Jain women",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FEF9EC",
-  "theme_color": "#E07B2A",
+  "background_color": "#FFFDE7",
+  "theme_color": "#FF6F00",
   "orientation": "portrait",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["lifestyle", "health", "religion"],
   "icons": [
     {
-      "src": "/opengraph.jpg",
-      "sizes": "1200x630",
-      "type": "image/jpeg",
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
       "purpose": "any"
     },
     {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "maskable any"
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/opengraph.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "form_factor": "wide"
     }
   ]
 }

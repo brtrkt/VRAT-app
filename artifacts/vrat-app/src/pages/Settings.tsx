@@ -434,6 +434,22 @@ export default function Settings() {
           Save changes
         </button>
 
+        <SectionHeader title="Install" />
+        <a
+          href="/how-to-install"
+          className="w-full vrat-card p-4 flex items-center gap-3 text-left active:opacity-70 transition-opacity"
+          data-testid="settings-how-to-install"
+        >
+          <span className="text-xl flex-shrink-0" aria-hidden="true">🪔</span>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-foreground">How to install VRAT</p>
+            <p className="text-xs text-muted-foreground mt-0.5">Add to your home screen in seconds</p>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-muted-foreground flex-shrink-0">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </a>
+
         <div className="mt-8 pt-6 border-t border-stone-200">
           <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-3">About</p>
           <div className="space-y-3">
