@@ -1,16 +1,21 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import panchangData from "@/data/panchangData.json";
 
-// ─── Tithi calculation ─────────────────────────────────────────────────────────
-// Reference: Amavasya (New Moon) on Jan 29, 2026 IST
+// ─── Types ─────────────────────────────────────────────────────────────────────
+interface PanchangEntry {
+  tithi: string;
+  paksha: string;
+  nakshatra: string;
+}
+
+const lookup = panchangData as Record<string, PanchangEntry>;
+
+// ─── Fallback approximation (used when date not in lookup table) ───────────────
 const REF_AMAVASYA = new Date("2026-01-29T00:00:00+05:30").getTime();
 const LUNAR_MONTH_MS = 29.53059 * 24 * 60 * 60 * 1000;
-
-// ─── Nakshatra calculation ─────────────────────────────────────────────────────
-// Reference: Magha Purnima Jan 13, 2026 = Moon in Magha nakshatra (index 9)
-const REF_NAKSHATRA_DATE = new Date("2026-01-13T00:00:00+05:30").getTime();
-const REF_NAKSHATRA_IDX = 9;
-const SIDEREAL_MONTH_MS = 27.32166 * 24 * 60 * 60 * 1000;
-const NAKSHATRA_MS = SIDEREAL_MONTH_MS / 27;
+const REF_NAKSHATRA_DATE = new Date("2026-01-29T12:36:00+00:00").getTime();
+const REF_NAKSHATRA_IDX = 22; // Dhanishtha
+const NAKSHATRA_MS = (27.32166 / 27) * 24 * 60 * 60 * 1000;
 
 const TITHI_NAMES = [
   "Pratipada", "Dwitiya", "Tritiya", "Chaturthi", "Panchami",
@@ -30,46 +35,52 @@ const NAKSHATRA_NAMES = [
   "Purva Bhadrapada", "Uttara Bhadrapada", "Revati",
 ];
 
-function getTodayPanchang(now: Date): {
-  tithi: string;
-  paksha: string;
-  tithiNum: number;
-  nakshatra: string;
-  isSpecial: boolean;
-  specialLabel: string;
-} {
-  const ms = now.getTime();
-
-  // Tithi
+function getApproximatePanchang(ms: number): PanchangEntry {
   const diffFromAmavasya = ms - REF_AMAVASYA;
   const lunarAge = ((diffFromAmavasya % LUNAR_MONTH_MS) + LUNAR_MONTH_MS) % LUNAR_MONTH_MS;
-  const tithiFloat = (lunarAge / LUNAR_MONTH_MS) * 30;
-  const tithiIdx = Math.floor(tithiFloat) % 30;
+  const tithiIdx = Math.floor((lunarAge / LUNAR_MONTH_MS) * 30) % 30;
   const tithi = TITHI_NAMES[tithiIdx];
-  const tithiNum = tithiIdx + 1;
-  const paksha = tithiNum <= 15 ? "Shukla" : "Krishna";
-
-  // Nakshatra
-  const daysSinceRef = (ms - REF_NAKSHATRA_DATE) / NAKSHATRA_MS;
-  const nakshatraIdx = Math.floor(((REF_NAKSHATRA_IDX + daysSinceRef) % 27 + 27)) % 27;
-  const nakshatra = NAKSHATRA_NAMES[nakshatraIdx];
-
-  // Special tithis
-  const isSpecial = [1, 4, 8, 11, 14, 15, 30].includes(tithiNum);
-  const specialMap: Record<number, string> = {
-    11: "Ekadashi — fasting day",
-    15: "Purnima — full moon",
-    30: "Amavasya — new moon",
-    4: "Chaturthi — Lord Ganesha",
-    8: "Ashtami — Goddess Durga",
-    14: "Chaturdashi — Lord Shiva",
-    1: "Pratipada — auspicious start",
-  };
-  const specialLabel = specialMap[tithiNum] ?? "";
-
-  return { tithi, paksha, tithiNum, nakshatra, isSpecial, specialLabel };
+  const paksha = tithiIdx < 15 ? "Shukla" : "Krishna";
+  const nakshatraFloat = REF_NAKSHATRA_IDX + (ms - REF_NAKSHATRA_DATE) / NAKSHATRA_MS;
+  const nakshatra = NAKSHATRA_NAMES[Math.floor(((nakshatraFloat % 27) + 27)) % 27];
+  return { tithi, paksha, nakshatra };
 }
 
+// ─── Main lookup ───────────────────────────────────────────────────────────────
+function getTodayPanchang(now: Date): PanchangEntry & {
+  tithiNum: number;
+  isSpecial: boolean;
+  specialLabel: string;
+  fromLookup: boolean;
+} {
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, "0");
+  const d = String(now.getDate()).padStart(2, "0");
+  const dateKey = `${y}-${m}-${d}`;
+
+  const entry = lookup[dateKey] ?? getApproximatePanchang(now.getTime());
+  const fromLookup = !!lookup[dateKey];
+
+  const tithiNum = TITHI_NAMES.indexOf(entry.tithi) + 1 || 1;
+
+  const isSpecial = [1, 4, 8, 11, 14, 15, 30].includes(tithiNum) ||
+    entry.tithi === "Amavasya" || entry.tithi === "Purnima";
+
+  const specialMap: Record<string, string> = {
+    "Ekadashi":    "Ekadashi — fasting day",
+    "Purnima":     "Purnima — full moon",
+    "Amavasya":    "Amavasya — new moon",
+    "Chaturthi":   "Chaturthi — Lord Ganesha",
+    "Ashtami":     "Ashtami — Goddess Durga",
+    "Chaturdashi": "Chaturdashi — Lord Shiva",
+    "Pratipada":   "Pratipada — auspicious start",
+  };
+  const specialLabel = specialMap[entry.tithi] ?? "";
+
+  return { ...entry, tithiNum, isSpecial, specialLabel, fromLookup };
+}
+
+// ─── Component ────────────────────────────────────────────────────────────────
 export default function PanchangCard() {
   const { t } = useLanguage();
   const now = new Date();
@@ -100,7 +111,6 @@ export default function PanchangCard() {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        {/* Tithi */}
         <div
           className="rounded-2xl px-4 py-3"
           style={{ background: "rgba(212,160,23,0.09)" }}
@@ -109,7 +119,6 @@ export default function PanchangCard() {
           <p className="font-serif text-base font-bold text-amber-900">{tithi}</p>
         </div>
 
-        {/* Nakshatra */}
         <div
           className="rounded-2xl px-4 py-3"
           style={{ background: "rgba(124,98,53,0.08)" }}
