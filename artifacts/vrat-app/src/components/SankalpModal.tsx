@@ -217,8 +217,7 @@ export default function SankalpModal({ vrat, onClose }: Props) {
                 className="text-xs leading-relaxed"
                 style={{ color: creamText, opacity: 0.65 }}
               >
-                Traditionally sankalp is taken after a morning bath, facing east,
-                with water cupped in your hands. Pour the water gently after taking the vow.
+                After your morning bath, face east. Light a diya. Hold raw rice and Gangajal (or clean water) cupped in your right palm. Say your name, your city, your country, and your gotra — if your gotra is unknown, say Kashyap gotra. Recite the sankalp mantra above. Then gently pour the rice and water next to the diya — your vow is sealed. 🙏
               </p>
             </div>
 
