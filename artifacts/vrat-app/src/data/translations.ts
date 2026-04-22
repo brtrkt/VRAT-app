@@ -43,6 +43,8 @@ const en: T = {
   "home.topStreaks":      "Top Fasting Streaks",
   "home.noStreaks":       "Complete your first vrat to start your streak",
   "home.badgeEarned":    "Badge Earned",
+  "home.panchangTitle":  "Today's Panchang",
+  "home.share":          "Share on WhatsApp",
   "home.brahmaTitle":    "Brahma Muhurta",
   "home.brahmaDesc":     "— the most auspicious time for prayer and meditation.",
   "home.brahmaAlarm":    "Tap to set your alarm",

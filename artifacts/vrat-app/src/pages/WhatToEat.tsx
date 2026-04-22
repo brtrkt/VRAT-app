@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { getVratsForDate, getNextVrat, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
@@ -509,6 +510,7 @@ function NoFastToday({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | nu
 
 export default function WhatToEat() {
   const { t } = useLanguage();
+  const [, setLocation] = useLocation();
   const [today] = useState(new Date());
   const todayStr = today.toISOString().split("T")[0];
   const vratsToday = getVratsForDate(todayStr);
@@ -535,6 +537,24 @@ export default function WhatToEat() {
         )}
 
         <FoodLog todayStr={todayStr} />
+
+        {/* Recipes link */}
+        <button
+          onClick={() => setLocation("/recipes")}
+          className="vrat-card p-5 mb-4 flex items-center justify-between gap-3 w-full text-left active:opacity-80 transition-opacity"
+          data-testid="recipes-link"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-2xl" aria-hidden="true">🍳</span>
+            <div>
+              <p className="font-serif text-base font-semibold text-foreground">Fasting Recipes</p>
+              <p className="text-xs text-muted-foreground mt-0.5">10 traditional recipes — step by step</p>
+            </div>
+          </div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 text-muted-foreground flex-shrink-0" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
 
         <div className="vrat-card p-4 text-center">
           <p className="text-xs text-muted-foreground italic leading-relaxed">

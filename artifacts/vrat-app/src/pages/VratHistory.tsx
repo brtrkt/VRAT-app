@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import { getAllVrats } from "@/data/vrats";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -11,8 +11,34 @@ import {
   type VratSummary,
   type BadgeResult,
 } from "@/hooks/useVratHistory";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Pencil, Check, X } from "lucide-react";
 
+// ─── Journal (localStorage) ───────────────────────────────────────────────────
+const JOURNAL_KEY = "vrat_journal_v1";
+
+function journalEntryKey(entry: HistoryEntry): string {
+  return `${entry.date}__${entry.vratId}`;
+}
+
+function getJournal(): Record<string, string> {
+  try {
+    return JSON.parse(localStorage.getItem(JOURNAL_KEY) ?? "{}");
+  } catch {
+    return {};
+  }
+}
+
+function saveNote(key: string, note: string) {
+  const journal = getJournal();
+  if (note.trim()) {
+    journal[key] = note.trim();
+  } else {
+    delete journal[key];
+  }
+  localStorage.setItem(JOURNAL_KEY, JSON.stringify(journal));
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 function formatDate(dateStr: string): string {
   const [y, m, d] = dateStr.split("-").map(Number);
   const date = new Date(y, m - 1, d);
@@ -24,6 +50,7 @@ function formatDate(dateStr: string): string {
   });
 }
 
+// ─── BadgeCard ────────────────────────────────────────────────────────────────
 function BadgeCard({ badge }: { badge: BadgeResult }) {
   if (!badge.earned) return null;
   return (
@@ -61,6 +88,7 @@ function BadgeCard({ badge }: { badge: BadgeResult }) {
   );
 }
 
+// ─── SummaryRow ───────────────────────────────────────────────────────────────
 function SummaryRow({ summary }: { summary: VratSummary }) {
   return (
     <div className="flex items-center justify-between py-3 border-b border-border last:border-0">
@@ -80,20 +108,106 @@ function SummaryRow({ summary }: { summary: VratSummary }) {
   );
 }
 
-function HistoryRow({ entry }: { entry: HistoryEntry }) {
+// ─── HistoryRow with journal ───────────────────────────────────────────────────
+function HistoryRow({ entry, journal, onNoteChange }: {
+  entry: HistoryEntry;
+  journal: Record<string, string>;
+  onNoteChange: (key: string, note: string) => void;
+}) {
+  const key = journalEntryKey(entry);
+  const existingNote = journal[key] ?? "";
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(existingNote);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  function startEdit() {
+    setDraft(existingNote);
+    setEditing(true);
+    setTimeout(() => textareaRef.current?.focus(), 50);
+  }
+
+  function save() {
+    saveNote(key, draft);
+    onNoteChange(key, draft.trim());
+    setEditing(false);
+  }
+
+  function cancel() {
+    setDraft(existingNote);
+    setEditing(false);
+  }
+
   return (
-    <div className="flex items-center justify-between py-3 border-b border-border last:border-0">
-      <div className="flex items-center gap-2 flex-1 min-w-0">
-        {entry.isNirjala && (
-          <span className="text-xs" title="Nirjala fast" aria-label="Nirjala fast">✦</span>
-        )}
-        <span className="text-sm text-foreground font-medium truncate">{entry.vratName}</span>
+    <div className="py-3 border-b border-border last:border-0">
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          {entry.isNirjala && (
+            <span className="text-xs flex-shrink-0" title="Nirjala fast" aria-label="Nirjala fast">✦</span>
+          )}
+          <span className="text-sm text-foreground font-medium truncate">{entry.vratName}</span>
+        </div>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <span className="text-xs text-muted-foreground">{formatDate(entry.date)}</span>
+          <button
+            onClick={startEdit}
+            className="w-7 h-7 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+            style={{ background: "rgba(212,160,23,0.08)" }}
+            aria-label="Add note"
+            data-testid={`journal-edit-${key}`}
+          >
+            <Pencil size={13} />
+          </button>
+        </div>
       </div>
-      <span className="text-xs text-muted-foreground ml-3 flex-shrink-0">{formatDate(entry.date)}</span>
+
+      {/* Existing note display */}
+      {!editing && existingNote && (
+        <p
+          className="text-xs text-amber-800 mt-1.5 leading-relaxed pl-1 border-l-2 border-amber-200"
+          style={{ paddingLeft: "8px" }}
+        >
+          {existingNote}
+        </p>
+      )}
+
+      {/* Edit mode */}
+      {editing && (
+        <div className="mt-2">
+          <textarea
+            ref={textareaRef}
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            placeholder="Add a personal note — how did this fast feel? What did you pray for?"
+            className="w-full text-xs rounded-xl border border-amber-200 bg-amber-50/60 px-3 py-2 text-foreground resize-none focus:outline-none focus:border-amber-400"
+            rows={3}
+            maxLength={300}
+            data-testid={`journal-input-${key}`}
+          />
+          <div className="flex items-center gap-2 mt-1.5">
+            <button
+              onClick={save}
+              className="flex items-center gap-1 text-xs font-semibold text-white px-3 py-1.5 rounded-lg transition-opacity active:opacity-70"
+              style={{ background: "linear-gradient(135deg, #E07B2A, #C86B1A)" }}
+              data-testid={`journal-save-${key}`}
+            >
+              <Check size={12} /> Save
+            </button>
+            <button
+              onClick={cancel}
+              className="flex items-center gap-1 text-xs font-medium text-muted-foreground px-3 py-1.5 rounded-lg transition-colors hover:text-foreground"
+              style={{ background: "rgba(0,0,0,0.05)" }}
+            >
+              <X size={12} /> Cancel
+            </button>
+            <span className="text-xs text-muted-foreground ml-auto">{draft.length}/300</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
+// ─── Main page ────────────────────────────────────────────────────────────────
 export default function VratHistory() {
   const { t } = useLanguage();
   const [, setLocation] = useLocation();
@@ -101,11 +215,24 @@ export default function VratHistory() {
   const [history] = useState<HistoryEntry[]>(() => getFullHistory(allVrats));
   const [summaries] = useState<VratSummary[]>(() => getVratSummaries(allVrats));
   const [badges] = useState<BadgeResult[]>(() => checkBadges(allVrats));
+  const [journal, setJournal] = useState<Record<string, string>>(() => getJournal());
 
   useEffect(() => {
     const newlyEarned = badges.filter((b) => b.newlyEarned).map((b) => b.id);
     if (newlyEarned.length > 0) markBadgesSeen(newlyEarned);
   }, [badges]);
+
+  function handleNoteChange(key: string, note: string) {
+    setJournal((prev) => {
+      const next = { ...prev };
+      if (note) {
+        next[key] = note;
+      } else {
+        delete next[key];
+      }
+      return next;
+    });
+  }
 
   const earnedBadges = badges.filter((b) => b.earned);
   const totalObservations = history.length;
@@ -175,11 +302,21 @@ export default function VratHistory() {
 
         {history.length > 0 && (
           <div className="vrat-card p-5 mb-4">
-            <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3">
-              Full Log
-            </p>
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+                Full Log
+              </p>
+              <p className="text-xs text-muted-foreground flex items-center gap-1">
+                <Pencil size={11} /> tap to add notes
+              </p>
+            </div>
             {history.map((entry, i) => (
-              <HistoryRow key={`${entry.vratId}-${entry.date}-${i}`} entry={entry} />
+              <HistoryRow
+                key={`${entry.vratId}-${entry.date}-${i}`}
+                entry={entry}
+                journal={journal}
+                onNoteChange={handleNoteChange}
+              />
             ))}
           </div>
         )}

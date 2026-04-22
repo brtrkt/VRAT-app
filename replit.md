@@ -50,6 +50,12 @@ pnpm workspace monorepo using TypeScript. Contains the VRAT app — a sacred fas
 - "Restore purchase" flow: user enters confirmation code → sets `vrat_subscribed_v1`
 - Trial banner shown at bottom of Home screen: "X free days remaining ✨" (urgent style when ≤5 days)
 
+**New features (April 2026):**
+- WhatsApp sharing: tap "Share on WhatsApp" on TodayCard (fast days) → pre-filled message with vrat name
+- Panchang card on Home: shows today's tithi, paksha (Shukla/Krishna), nakshatra. Computed from lunar calendar reference (Amavasya Jan 29, 2026). Component: `src/components/PanchangCard.tsx`
+- Fasting recipes page at `/recipes`: 10 traditional recipes (sabudana khichdi, kuttu ki puri, singhara halwa, makhana kheer, sama rice pulao, aloo jeera, rajgira ladoo, banana lassi, shakarkand chaat, fruit chaat). Filter by energy level. Linked from WhatToEat. Component: `src/pages/Recipes.tsx`
+- Vrat journal in VratHistory: tap pencil icon on any history entry to add a personal note (max 300 chars). Stored in localStorage under `vrat_journal_v1` (JSON object, keys: `date__vratId`)
+
 **Key files:**
 - `src/data/vrats.ts` — all vrat data (130+ entries) with `region?` and `regionLabel?` fields
 - `src/hooks/useUserPrefs.ts` — localStorage helpers; exports UserRegion type, REGION_OPTIONS, getUserRegion, setUserRegion

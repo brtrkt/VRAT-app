@@ -14,6 +14,7 @@ import VratHistory from "@/pages/VratHistory";
 import Onboarding from "@/components/Onboarding";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import HowToInstall from "@/pages/HowToInstall";
+import Recipes from "@/pages/Recipes";
 import { ONBOARDING_KEY, initTrial, isTrialExpired } from "@/hooks/useUserPrefs";
 import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
 
@@ -222,6 +223,7 @@ function Router() {
         <Route path="/terms" component={Terms} />
         <Route path="/vrat-history" component={VratHistory} />
         <Route path="/how-to-install" component={HowToInstall} />
+        <Route path="/recipes" component={Recipes} />
         <Route component={NotFound} />
       </Switch>
       <BottomNav />
