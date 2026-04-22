@@ -64,3 +64,24 @@ pnpm workspace monorepo using TypeScript. Contains the VRAT app — a sacred fas
 - `pnpm --filter @workspace/vrat-app run dev` — run VRAT app locally
 
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
+
+## GitHub Push
+
+- **Repo**: https://github.com/brtrkt/VRAT-app
+- **Token secret**: `GITHUB_TOKEN` (stored in Replit Secrets — never share or print this)
+- **Branch**: `main`
+
+To push from the Shell, create and run the script:
+```bash
+# Create the script
+echo 'git remote set-url origin https://brtrkt:$GITHUB_TOKEN@github.com/brtrkt/VRAT-app.git && git push origin main' > push.sh
+# Run it
+bash push.sh
+# Clean up
+rm push.sh
+```
+
+Or in one line in the Shell:
+```
+git remote set-url origin https://brtrkt:$GITHUB_TOKEN@github.com/brtrkt/VRAT-app.git && git push origin main
+```
