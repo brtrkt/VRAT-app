@@ -57,49 +57,51 @@ He declared — "Whoever worships me at this twilight time on the trayodashi tit
 
 This is why Pradosh Vrat is observed twice each lunar month. We worship Shiva at sunset — the hour when he swallowed the poison of the world so that we might live in peace.`,
 
-  navratri: `The demon Mahishasura performed terrible austerities for a thousand years and received a powerful boon — that no man or god could kill him. Growing invincible, he attacked the heavens with a vast army and drove the gods from their kingdom. The gods wandered the earth without a home, humiliated and powerless.
+  navratri: `In ancient times there was a powerful demon king named Mahishasura. He had performed severe penance and received a boon from Lord Brahma — that no man or god could kill him. With this boon he became arrogant and began terrorising the three worlds. He defeated the gods and threw them out of Swarga.
 
-In their despair, the gods went together to Lord Brahma who took them to Lord Vishnu, and from Vishnu they went to Lord Shiva. The three great gods listened to the suffering of the devas. Their rage rose together — from Brahma, Vishnu and Shiva combined rays of divine light burst forth and merged into a single blazing form. From this combined shakti of all the gods emerged Goddess Durga — a warrior of incomparable power and radiance.
+The gods went to Lord Brahma, then to Lord Vishnu, then to Lord Shiva in desperation. From the combined divine energy of all the gods a great light emerged — golden, blinding, magnificent. From this light the divine mother was born — Goddess Durga — riding a lion, carrying weapons in her ten arms, radiant with the power of all creation.
 
-Each god offered their most powerful weapon. Shiva gave his trident. Vishnu gave his Sudarshana Chakra. Indra gave his thunderbolt. The ocean gave jewels and a lion as her vehicle.
+The gods offered her their weapons — Vishnu gave his Sudarshana Chakra, Shiva gave his trishul, Indra gave his vajra, Varuna gave his conch. Armed with divine power Goddess Durga fought Mahishasura for nine days and nine nights. The demon changed forms — from buffalo to lion to elephant to man — but the goddess was relentless.
 
-For nine days the Goddess battled the demon armies. Each day she took a different form to overcome different forces of evil. On the tenth day, Dussehra, Goddess Durga slew Mahishasura himself, restoring peace to all the worlds.
+On the ninth day she pierced him with her trishul and destroyed him. The three worlds were freed. The gods sang her praises and the nine days of battle became Navratri — the nine nights of the divine mother.
 
-We celebrate these nine days honouring the divine feminine power that protects all creation. Each night we worship one of her nine forms — Shailaputri, Brahmacharini, Chandraghanta, Kushmanda, Skandamata, Katyayani, Kalaratri, Mahagauri and Siddhidatri. They are the nine aspects of the one mother who holds the universe in her care.`,
+Each of the nine days is dedicated to one of her nine forms: Day 1 Shailputri, Day 2 Brahmacharini, Day 3 Chandraghanta, Day 4 Kushmanda, Day 5 Skandamata, Day 6 Katyayani, Day 7 Kalaratri, Day 8 Mahagauri, Day 9 Siddhidatri.
 
-  "karva-chauth": `Savitri was a princess of rare intelligence and deep love who chose to marry a young man named Satyavan, knowing that a divine prophecy foretold he would die exactly one year after their wedding.
+Devotees who fast for all nine days with devotion receive her blessings of strength, courage, prosperity and liberation. Jai Mata Di. Om Dum Durgayei Namaha.`,
 
-For a year she served her husband and his blind parents with complete devotion. As the fateful day approached, Savitri fasted and prayed without ceasing. On that last morning she followed Satyavan into the forest as he went to cut wood. At noon beneath a great banyan tree he grew faint and laid his head in her lap. Yama — the god of death — arrived on his buffalo with his noose.
+  "karva-chauth": `Long ago there was a beautiful and devoted woman named Veeravati. She was the only sister of seven loving brothers. After her marriage she came to her parents home for her first Karva Chauth. She observed the nirjala fast — no food, no water from sunrise.
 
-Savitri laid her husband's head gently on the ground and followed Yama as he carried Satyavan's soul southward. Yama turned and told her to go back — she could not follow the dead. But Savitri kept walking, speaking words of dharma and wisdom so profound that Yama stopped three times to offer her boons, each time asking her not to follow further.
+By evening she was weak with hunger and thirst. Her seven brothers could not bear to see their sister suffer. They lit a fire behind a hill and held up a mirror to make it look like the moon had risen. "Sister, the moon has risen — you can break your fast!" they called out. Veeravati, trusting her brothers, broke her fast.
 
-Her first boon: sight for her father-in-law. Her second boon: restoration of her father-in-law's kingdom. Her third boon: a hundred sons for her father. Only then did Yama realise she had outwitted him — for a hundred sons required her husband to be alive. Defeated by her love and her wisdom, Yama returned Satyavan's life.
+The moment she did — news came that her husband had died. Devastated she ran to her husband's home. On the way the goddess Indrani appeared and revealed what her brothers had done.
 
-Women fast on Karva Chauth from before sunrise to moonrise, eating nothing and drinking nothing, praying for the long life of their husbands just as Savitri fought death itself for Satyavan. At moonrise they look at the moon and their husband's face — two lights equally precious to them.`,
+Veeravati prayed and wept for a year. The next Karva Chauth she observed the fast perfectly — not a drop of water, not a morsel of food — until she sighted the real moon. Her devotion was so pure that her husband was restored to life.
 
-  "maha-shivratri": `On this night Lord Shiva and Goddess Parvati were wed — the most sacred marriage in all the cosmos. But first Parvati had to earn him.
+From that day Karva Chauth became the most sacred fast for married women — a vow of love and devotion so powerful it conquers even death. Always wait for the real moon. Never be deceived. Your devotion is your husband's protection. Karva Chauth Mubarak. Om Namah Shivaya.`,
 
-After the death of Sati — his first wife who gave her life in protest of her father's disrespect to Shiva — Shiva withdrew from the world. He closed his eyes in meditation so deep that the universe began to grow cold and dim without his engagement. The gods grew afraid.
+  "maha-shivratri": `Long ago there was a poor hunter named Gurudruha who lived in the forest. One Shivratri night he went hunting but found no animals. Exhausted and hungry he climbed a Bilva tree near a Shiva Lingam to wait for animals to come to the water below.
 
-Parvati — born as the daughter of the Himalaya and the reincarnation of Sati — heard her calling. From childhood she loved Shiva. She went to the forest and performed the most severe austerities imaginable — fasting for years, standing in fire in summer, sitting in freezing water in winter, sleeping on bare rock. When tested and tempted she was immovable.
+Through the night — without knowing it — he dropped Bilva leaves onto the Shiva Lingam below. He also shed tears of exhaustion that fell on the lingam. He fasted through the night without intending to.
 
-Moved by her devotion, Shiva opened his eyes. He accepted Parvati as his equal and his wife. Their wedding was attended by all the gods, sages, and beings of all the worlds.
+At dawn a deer came to drink water. As Gurudruha raised his bow the deer spoke — "Please do not kill me now. Let me go home and say goodbye to my family. I promise I will return." The hunter, moved by compassion, let it go. Three more deer came and each made the same promise. Each time the hunter let them go.
 
-It is also the night Lord Shiva performed the Tandava — his great cosmic dance that sustains the rhythm of the universe — with Parvati by his side. Devotees stay awake all night as Shiva himself is believed to be most present, most accessible, most easily moved to compassion. The four prahar pujas through the night mirror the four watches of his sacred night.
+By releasing them with compassion — and having unknowingly offered Bilva leaves, tears and a night-long fast to Lord Shiva — the hunter had performed the complete Shivratri puja without knowing it. Lord Shiva was so pleased that when the hunter died his messengers came to take him to Vaikuntha. The hunter who had never prayed consciously received moksha through the grace of Shivratri.
 
-Light a lamp. Stay awake. Offer a bilva leaf. He will hear you.`,
+Lord Shiva then declared — "Whoever fasts on Shivratri, stays awake through the night, and offers Bilva leaves to my lingam — even unknowingly — I grant them liberation from the cycle of birth and death."
 
-  janmashtami: `In the prison of the tyrant Kansa in Mathura, at the stroke of midnight in a thunderstorm, the eighth child of Devaki and Vasudeva was born. The earth shook. The stars stood still. Flowers fell from the sky though no one had thrown them.
+Om Namah Shivaya. Har Har Mahadev.`,
 
-This child was Lord Krishna — an avatar of Vishnu himself, who had descended to Earth to restore dharma. From birth he carried the mark of divinity — four arms, the dark complexion of a rain cloud, eyes like lotuses, and a smile that could quiet a crying universe.
+  janmashtami: `On the eighth day of the dark fortnight in the month of Bhadrapada, in the prison of King Kansa in Mathura, a divine light filled the cell where Devaki and Vasudeva were imprisoned. Kansa had imprisoned his own sister Devaki and her husband because a divine prophecy said their eighth child would destroy him. He had killed seven of their children.
 
-The moment he was born, the prison chains fell away. The guards slept. The iron doors opened by themselves. His father Vasudeva wrapped the infant in cloth and placed him on his head in a basket. The Yamuna river — flooded and raging from the monsoon — parted before him. At every step Ananta Shesha, the divine serpent, spread his hood overhead as a canopy to protect the child from the rain.
+But on this night the eighth child was born — Lord Krishna — glowing with divine light, holding a conch and a lotus, wearing a crown of peacock feathers. The moment he was born the prison guards fell asleep, the chains fell off Vasudeva's hands, and the prison doors opened on their own.
 
-Vasudeva reached Gokul safely and placed the child beside sleeping Yashoda, the wife of the cowherd chief Nanda. He returned to the prison with Yashoda's newborn daughter. When Kansa heard the birth and came to kill the eighth child, the baby slipped from his hands, rose into the sky, transformed into the goddess and warned him — your destroyer has already been born.
+Vasudeva wrapped the newborn Krishna and carried him through the night, crossing the flooding Yamuna river. The river parted as Krishna's feet touched the water. Vasudeva placed the baby with Nanda and Yashoda in Gokul and returned with their newborn daughter.
 
-Krishna grew up in Gokul, stealing butter and hearts in equal measure, playing his flute that made every living thing stop and listen, eventually returning to Mathura to fulfill his destiny.
+When Kansa came to kill the eighth child, the baby girl slipped from his hands, rose into the sky and declared — "The one who will destroy you is already born and safe, O Kansa." Krishna grew up in Gokul, performed divine miracles, and fulfilled the prophecy.
 
-We fast until midnight and celebrate his birth with joy, bhajans, and devotion — because the very hour of his birth is the hour when dharma returns to the world.`,
+Devotees fast on Janmashtami until midnight — the hour of Krishna's birth — and break their fast with panchamrit after the midnight puja. Fasting on this day with devotion brings Krishna's blessings of joy, wisdom, and liberation.
+
+Om Namo Bhagavate Vasudevaya. Jai Shri Krishna.`,
 
   "vat-savitri": `Savitri was so beautiful and so accomplished that no man was brave enough to ask for her hand. Her father sent her to choose her own husband. She traveled the forests and returned with her heart given — to Satyavan, a prince living as a forest hermit after his father lost his kingdom and his sight.
 
