@@ -45,6 +45,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits (banana, apple, mango)",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy (curd, ghee)",
       "Sabudana (tapioca pearls)",
       "Singhara atta (water chestnut flour)",
@@ -79,6 +81,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -110,6 +114,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -141,6 +147,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -172,6 +180,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -203,6 +213,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -234,6 +246,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -265,6 +279,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -296,6 +312,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -327,6 +345,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -358,6 +378,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -389,6 +411,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -421,6 +445,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -452,6 +478,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -483,6 +511,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -514,6 +544,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -545,6 +577,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -576,6 +610,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -607,6 +643,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -638,6 +676,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -669,6 +709,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -700,6 +742,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -731,6 +775,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -762,6 +808,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -793,6 +841,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Kuttu atta (buckwheat flour)",
@@ -824,6 +874,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -853,6 +905,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -882,6 +936,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -911,6 +967,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -940,6 +998,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -969,6 +1029,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -998,6 +1060,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1027,6 +1091,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1056,6 +1122,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1085,6 +1153,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1114,6 +1184,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1143,6 +1215,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1172,6 +1246,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1201,6 +1277,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1230,6 +1308,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1259,6 +1339,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1288,6 +1370,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1317,6 +1401,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1346,6 +1432,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1375,6 +1463,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1404,6 +1494,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1433,6 +1525,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1462,6 +1556,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1491,6 +1587,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy products",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -1986,6 +2084,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Milk, curd, butter, ghee",
       "Fruits (especially bananas and berries)",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Panchamrit (five nectars: milk, honey, curd, ghee, sugar)",
       "Sabudana",
       "Rock salt",
@@ -2447,6 +2547,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -2472,6 +2574,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -2497,6 +2601,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -2522,6 +2628,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -2547,6 +2655,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -2572,6 +2682,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -2597,6 +2709,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -2622,6 +2736,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -2647,6 +2763,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -2672,6 +2790,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -2697,6 +2817,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -2722,6 +2844,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Simple satvik food",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Sesame seeds (til)",
       "Coconut",
@@ -3335,6 +3459,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits grown above the ground only",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Vegetables that grow above ground — no root vegetables",
       "Dairy — milk, curd, ghee",
       "Wild or forest-grown foods (not cultivated by oxen/tractors)",
@@ -3396,6 +3522,8 @@ export const vrats: Vrat[] = [
       "Sesame seeds (til) — especially in tarpan offering",
       "Barley (jau) — offered with water",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Coconut",
     ],
@@ -3426,6 +3554,8 @@ export const vrats: Vrat[] = [
       "Sesame seeds (til) — essential for tarpan",
       "Barley (jau)",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Coconut",
     ],
@@ -3481,6 +3611,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Modak (steamed rice flour dumplings with coconut-jaggery filling) — Ganesh's favourite",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Coconut and coconut-based sweets",
       "Sabudana (tapioca)",
@@ -3511,6 +3643,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca)",
       "Singhara atta (water chestnut flour)",
@@ -3543,6 +3677,8 @@ export const vrats: Vrat[] = [
     foodsAllowed: [
       "Kheer (rice pudding with milk and sugar) — offered to Lakshmi",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Dry fruits and nuts",
       "Coconut",
@@ -3573,6 +3709,8 @@ export const vrats: Vrat[] = [
       "Dry fruits and nuts — especially almonds, cashews, pistachios",
       "Kheer and halwa",
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Coconut — sacred offering to Lakshmi",
       "Panchamrit (milk, curd, honey, ghee, sugar)",
@@ -3625,6 +3763,8 @@ export const vrats: Vrat[] = [
       "Thekua (whole wheat biscuits with jaggery and ghee) — the essential Chhath prasad",
       "Rice laddoo (chawal ke laddoo)",
       "Fruits — especially sugarcane, banana, coconut, guava, grapefruit",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Ginger (adrak) — important in Chhath offerings",
       "Turmeric root (kacchi haldi) as offering",
       "Coconut",
@@ -3655,6 +3795,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana (tapioca pearls)",
       "Kuttu atta (buckwheat flour)",
@@ -3689,6 +3831,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits, especially bananas — Hanuman's favourite",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy (ghee, curd)",
       "Sabudana (tapioca)",
       "Rock salt (sendha namak)",
@@ -3719,6 +3863,8 @@ export const vrats: Vrat[] = [
     tradition: "Hindu",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk, curd, ghee",
       "Sabudana and makhana",
       "Rock salt (sendha namak)",
@@ -3931,6 +4077,8 @@ export const vrats: Vrat[] = [
     regionLabel: "Bengal · Odisha",
     foodsAllowed: [
       "Fruits of all kinds",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Chira (flattened rice) — the traditional Vasant Panchami offering",
       "Coconut and naru (sweets)",
@@ -4021,6 +4169,8 @@ export const vrats: Vrat[] = [
       "Karadai (steamed rice and lentil cakes) — the specific prasad of this vrat",
       "Butter and jaggery (served with karadai)",
       "Fruits",
+      "Banana chips (made with sendha namak and ghee/coconut oil)",
+      "All fresh fruits — including banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal fruits",
       "Milk and dairy",
       "Water",
     ],
