@@ -228,7 +228,6 @@ function FloralDivider() {
 }
 
 function TrialBanner() {
-  const { t } = useLanguage();
   const days = getDaysRemaining();
   if (days === 0) return null;
 
@@ -236,22 +235,21 @@ function TrialBanner() {
 
   return (
     <div
-      className="flex items-center justify-center gap-1.5 rounded-xl px-3 py-2 mb-4"
+      className="flex items-center justify-center gap-2 rounded-2xl px-4 py-3 mb-4"
       style={{
-        background: isLow ? "rgba(220,104,0,0.10)" : "rgba(0,0,0,0.04)",
-        border: isLow ? "1px solid rgba(220,104,0,0.20)" : "1px solid rgba(0,0,0,0.07)",
+        background: isLow ? "rgba(220,104,0,0.10)" : "rgba(212,160,23,0.07)",
+        border: isLow ? "1px solid rgba(220,104,0,0.25)" : "1px solid rgba(212,160,23,0.18)",
       }}
       data-testid="trial-banner"
     >
-      <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 flex-shrink-0" style={{ color: isLow ? "#C86B1A" : "#8B7355" }}>
-        <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M8 5v3.5l2 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-      <p className="text-xs" style={{ color: isLow ? "#C86B1A" : "#8B7355" }}>
-        {t("home.freeTrial")} —{" "}
-        <span className={isLow ? "font-semibold" : "font-medium"}>
-          {days} {days === 1 ? t("home.day") : t("home.days")} remaining
+      <span className="text-sm" aria-hidden="true">✨</span>
+      <p className="text-xs" style={{ color: isLow ? "#C86B1A" : "#7C6235" }}>
+        <span className={isLow ? "font-bold" : "font-semibold"} style={{ color: isLow ? "#C86B1A" : "#92400E" }}>
+          {days} free {days === 1 ? "day" : "days"} remaining ✨
         </span>
+        {isLow && (
+          <span className="font-normal"> — upgrade to keep your journey going</span>
+        )}
       </p>
     </div>
   );
@@ -537,8 +535,6 @@ export default function Home() {
           <h1 className="font-serif text-3xl font-bold text-foreground">VRAT</h1>
           <p className="text-muted-foreground text-sm mt-1 tracking-wide">Your Fast, Your Way</p>
         </div>
-
-        <TrialBanner />
         <BadgeCelebration />
 
         <TodayCard todayStr={todayStr} vratsToday={vratsToday} />
@@ -553,6 +549,7 @@ export default function Home() {
         <MantraCard vrats={allVrats} />
         <BrahmaMuhurta />
 
+        <TrialBanner />
         <DisclaimerBanner />
         <PageFooter />
 

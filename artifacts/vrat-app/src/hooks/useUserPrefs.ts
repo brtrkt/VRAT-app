@@ -6,6 +6,24 @@ export const OBSERVED_KEY = "vrat_observed";
 export const CITY_KEY = "vrat_city";
 export const LOCATION_KEY = "vrat_location";
 export const REGION_KEY = "vrat_region";
+export const USER_EMAIL_KEY = "vrat_user_email_v1";
+export const SUBSCRIBED_KEY = "vrat_subscribed_v1";
+
+export function getUserEmail(): string {
+  return localStorage.getItem(USER_EMAIL_KEY) || "";
+}
+
+export function setUserEmail(email: string): void {
+  localStorage.setItem(USER_EMAIL_KEY, email.trim().toLowerCase());
+}
+
+export function isSubscribed(): boolean {
+  return !!localStorage.getItem(SUBSCRIBED_KEY);
+}
+
+export function setSubscribed(): void {
+  localStorage.setItem(SUBSCRIBED_KEY, "1");
+}
 
 export type Tradition = "Hindu" | "Jain" | "Both";
 export type UserLocation = "india" | "uk" | "usa" | "australia";

@@ -36,6 +36,19 @@ pnpm workspace monorepo using TypeScript. Contains the VRAT app — a sacred fas
 - `vrat_observed` — JSON array of observed vrat ID patterns
 - `vrat_city` — user's city for moonrise/sunrise calculations
 - `vrat_disclaimer_accepted` — health disclaimer accepted
+- `vrat_trial_start` — Unix ms timestamp when trial began (set on first launch)
+- `vrat_user_email_v1` — user email collected on paywall email step
+- `vrat_subscribed_v1` — set to "1" when user restores/confirms subscription
+- `vrat_language_v1` — selected language code (en/hi/gu/pa/mr/ta/te/kn)
+
+**Monetization:**
+- 30-day free trial, no credit card required
+- Trial start tracked via `vrat_trial_start` (set by `initTrial()` on first launch)
+- After trial: two-step paywall — email collection → plan selection
+- Plans: Monthly $2.99/mo, Annual $19.99/yr (save 44%)
+- Stripe URLs: placeholders in `src/pages/Paywall.tsx` constants `STRIPE_MONTHLY_URL` / `STRIPE_ANNUAL_URL` — replace with real links when ready
+- "Restore purchase" flow: user enters confirmation code → sets `vrat_subscribed_v1`
+- Trial banner shown at bottom of Home screen: "X free days remaining ✨" (urgent style when ≤5 days)
 
 **Key files:**
 - `src/data/vrats.ts` — all vrat data (130+ entries) with `region?` and `regionLabel?` fields
