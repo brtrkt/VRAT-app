@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getVratKatha } from "@/data/kathas";
 import type { ChapteredKatha } from "@/data/kathas";
 import KathaReadingView from "@/components/KathaReadingView";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function VratKathaSection({
   vratId,
@@ -10,6 +11,7 @@ export default function VratKathaSection({
   vratId: string;
   vratName?: string;
 }) {
+  const { t } = useLanguage();
   const katha = getVratKatha(vratId);
   const [showReader, setShowReader] = useState(false);
   if (!katha) return null;
@@ -59,7 +61,7 @@ export default function VratKathaSection({
             data-testid="read-katha-btn"
           >
             <span aria-hidden="true">📖</span>
-            Read Vrat Katha
+            {t("katha.read")}
           </button>
 
           <p

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import type { Vrat } from "@/data/vrats";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // ─── localStorage ─────────────────────────────────────────────────────────────
 const SANKALP_KEY = "vrat_sankalp_log_v1";
@@ -117,6 +118,7 @@ interface Props {
 }
 
 export default function SankalpModal({ vrat, onClose }: Props) {
+  const { t } = useLanguage();
   const sankalp = getSankalpData(vrat);
   const isJain = sankalp.isJain;
   const [confirmed, setConfirmed] = useState(false);
@@ -233,7 +235,7 @@ export default function SankalpModal({ vrat, onClose }: Props) {
               }}
               data-testid="confirm-sankalp-btn"
             >
-              I have taken my sankalp 🙏
+              {t("sankalp.confirm")}
             </button>
           </>
         ) : (
@@ -269,6 +271,7 @@ export function SankalpButton({
   onOpen: () => void;
   isJain?: boolean;
 }) {
+  const { t } = useLanguage();
   const alreadyTaken = isSankalpTakenToday(vrat.id);
 
   if (alreadyTaken) {
@@ -287,7 +290,7 @@ export function SankalpButton({
             className="text-xs font-semibold"
             style={{ color: isJain ? "#15803D" : "#92400E" }}
           >
-            Sankalp taken today
+            {t("sankalp.taken")}
           </p>
           <p className="text-xs text-muted-foreground">
             May {vrat.deity} bless your fast
@@ -320,7 +323,7 @@ export function SankalpButton({
           className="text-sm font-semibold"
           style={{ color: isJain ? "#15803D" : "#92400E" }}
         >
-          Take Sankalp
+          {t("sankalp.take")}
         </p>
         <p className="text-xs text-muted-foreground">
           Begin your fast with intention and devotion

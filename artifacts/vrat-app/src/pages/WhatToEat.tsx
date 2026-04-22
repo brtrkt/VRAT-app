@@ -6,6 +6,8 @@ import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import VratKathaSection from "@/components/VratKathaSection";
 import SankalpModal, { SankalpButton } from "@/components/SankalpModal";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translateFood } from "@/data/translations";
 
 const HYDRATING_LABELS = new Set(["Water", "Coconut Water", "Lassi", "Buttermilk", "Herbal Tea"]);
 
@@ -267,8 +269,17 @@ function FoodList({
   items: string[];
   type: "allowed" | "avoided" | "restricted";
 }) {
+  const { lang, t } = useLanguage();
   const isAllowed = type === "allowed";
   const isRestricted = type === "restricted";
+
+  const energyLabel = (level: string) => {
+    if (level === "Light") return t("food.light");
+    if (level === "Medium") return t("food.medium");
+    if (level === "Heavy") return t("food.heavy");
+    return level;
+  };
+
   return (
     <div className="mb-5">
       <div className="flex items-center gap-2 mb-3">
@@ -281,6 +292,7 @@ function FoodList({
         {items.map((item, i) => {
           const info = isAllowed ? getFoodInfo(item) : null;
           const style = info ? ENERGY_STYLES[info.energy] : null;
+          const translatedItem = translateFood(item, lang);
           return (
             <div
               key={i}
@@ -307,7 +319,7 @@ function FoodList({
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
-                    <span className="text-sm text-foreground leading-relaxed">{item}</span>
+                    <span className="text-sm text-foreground leading-relaxed">{translatedItem}</span>
                     {style && (
                       <span
                         className="flex-shrink-0 flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full mt-0.5"
@@ -319,7 +331,7 @@ function FoodList({
                           className="w-1.5 h-1.5 rounded-full flex-shrink-0"
                           style={{ background: style.dot }}
                         />
-                        {style.label}
+                        {energyLabel(style.label)}
                       </span>
                     )}
                   </div>
@@ -343,11 +355,12 @@ function FoodList({
 }
 
 function MealIdeasSection({ vrat }: { vrat: Vrat }) {
+  const { t } = useLanguage();
   return (
     <div className="vrat-card p-5 mb-4" data-testid="meal-ideas-section">
       <div className="flex items-center gap-2 mb-3">
         <span className="text-xl">🍽</span>
-        <h3 className="font-serif text-base font-semibold text-foreground">Meal Idea</h3>
+        <h3 className="font-serif text-base font-semibold text-foreground">{t("food.mealIdea")}</h3>
       </div>
       <div className="bg-accent/40 rounded-2xl p-4">
         <p className="text-sm text-foreground leading-relaxed" data-testid="meal-idea-text">
@@ -365,6 +378,7 @@ function MealIdeasSection({ vrat }: { vrat: Vrat }) {
 }
 
 function VratFoodCard({ vrat }: { vrat: Vrat }) {
+  const { t } = useLanguage();
   const [showSankalp, setShowSankalp] = useState(false);
   const isJain = vrat.tradition === "Jain";
 
@@ -374,7 +388,7 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
         className={`rounded-2xl p-4 mb-4 text-white${isJain ? "" : " saffron-gradient"}`}
         style={isJain ? { background: "linear-gradient(135deg, #15803D 0%, #22C55E 100%)" } : undefined}
       >
-        <p className="text-xs font-medium tracking-widest uppercase text-white/70 mb-1">Fasting Today</p>
+        <p className="text-xs font-medium tracking-widest uppercase text-white/70 mb-1">{t("home.fastDay")}</p>
         <h2 className="font-serif text-2xl font-bold">{vrat.name}</h2>
         {vrat.nirjala && (
           <div className="mt-1.5 mb-1">
@@ -385,7 +399,6 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
         <p className="text-white/70 text-xs mt-2 leading-relaxed">{vrat.description}</p>
       </div>
 
-      {/* Sankalp */}
       <SankalpButton
         vrat={vrat}
         onOpen={() => setShowSankalp(true)}
@@ -400,13 +413,13 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
         {vrat.tradition === "Jain" ? (
           <>
             <FoodList
-              title="Always Allowed"
+              title={t("food.jainAllowed")}
               items={JAIN_ALWAYS_ALLOWED}
               type="allowed"
             />
             <div className="h-px bg-border my-4" />
             <FoodList
-              title="Avoided Year-Round"
+              title={t("food.jainAvoided")}
               items={JAIN_YEAR_ROUND_AVOIDED}
               type="avoided"
             />
@@ -424,13 +437,13 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
         ) : (
           <>
             <FoodList
-              title="Foods Allowed"
+              title={t("food.allowed")}
               items={vrat.foodsAllowed}
               type="allowed"
             />
             <div className="h-px bg-border my-4" />
             <FoodList
-              title="Foods to Avoid"
+              title={t("food.avoid")}
               items={vrat.foodsAvoided}
               type="avoided"
             />
@@ -495,6 +508,7 @@ function NoFastToday({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | nu
 }
 
 export default function WhatToEat() {
+  const { t } = useLanguage();
   const [today] = useState(new Date());
   const todayStr = today.toISOString().split("T")[0];
   const vratsToday = getVratsForDate(todayStr);
@@ -506,7 +520,7 @@ export default function WhatToEat() {
     <div className="min-h-screen cream-gradient">
       <div className="max-w-md mx-auto px-4 pt-8 pb-24">
         <div className="text-center mb-6">
-          <h1 className="font-serif text-2xl font-bold text-foreground">What to Eat</h1>
+          <h1 className="font-serif text-2xl font-bold text-foreground">{t("nav.eat")}</h1>
           <p className="text-muted-foreground text-sm mt-1">
             {vratsToday.length > 0
               ? "Your fasting guide for today"

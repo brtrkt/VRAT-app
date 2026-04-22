@@ -15,6 +15,7 @@ import Onboarding from "@/components/Onboarding";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import HowToInstall from "@/pages/HowToInstall";
 import { ONBOARDING_KEY, initTrial, isTrialExpired } from "@/hooks/useUserPrefs";
+import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
 
 const queryClient = new QueryClient();
 
@@ -78,11 +79,12 @@ function DisclaimerPopup() {
 
 function BottomNav() {
   const [location] = useLocation();
+  const { t } = useLanguage();
 
   const tabs = [
     {
       path: "/",
-      label: "Home",
+      label: t("nav.home"),
       icon: (active: boolean) => (
         <svg
           viewBox="0 0 24 24"
@@ -101,7 +103,7 @@ function BottomNav() {
     },
     {
       path: "/eat",
-      label: "What to Eat",
+      label: t("nav.eat"),
       icon: (active: boolean) => (
         <svg
           viewBox="0 0 24 24"
@@ -123,7 +125,7 @@ function BottomNav() {
     },
     {
       path: "/calendar",
-      label: "Calendar",
+      label: t("nav.calendar"),
       icon: (active: boolean) => (
         <svg
           viewBox="0 0 24 24"
@@ -145,7 +147,7 @@ function BottomNav() {
     },
     {
       path: "/settings",
-      label: "Settings",
+      label: t("nav.settings"),
       icon: (active: boolean) => (
         <svg
           viewBox="0 0 24 24"
@@ -247,16 +249,18 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          {!onboardingDone ? (
-            <Onboarding onComplete={handleOnboardingComplete} />
-          ) : trialExpired ? (
-            <Paywall />
-          ) : (
-            <DisclaimerPopup />
-          )}
-          {!trialExpired && <Router />}
-        </WouterRouter>
+        <LanguageProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            {!onboardingDone ? (
+              <Onboarding onComplete={handleOnboardingComplete} />
+            ) : trialExpired ? (
+              <Paywall />
+            ) : (
+              <DisclaimerPopup />
+            )}
+            {!trialExpired && <Router />}
+          </WouterRouter>
+        </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

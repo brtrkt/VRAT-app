@@ -16,6 +16,8 @@ import {
   type BadgeResult,
 } from "@/hooks/useVratHistory";
 import NirjalaFastTimer from "@/components/NirjalaFastTimer";
+import LanguageSelector from "@/components/LanguageSelector";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const NIRJALA_TIMER_IDS = new Set([
   "karva-chauth", "hartalika-teej", "maha-shivratri", "ekadashi-jun-1",
@@ -71,11 +73,10 @@ function useCountdown(targetTime: Date | null) {
 }
 
 function BrahmaMuhurta() {
-  // Traditional Brahma Muhurta window: 3:30 AM – 5:00 AM
+  const { t } = useLanguage();
   const alarmHour = 3;
   const alarmMin = 30;
 
-  // Detect Android for the SET_ALARM intent (iOS ignores intent:// URLs)
   const isAndroid = /android/i.test(navigator.userAgent);
   const alarmUrl =
     `intent:#Intent;action=android.intent.action.SET_ALARM;` +
@@ -93,14 +94,14 @@ function BrahmaMuhurta() {
       <div className="flex items-center gap-2 mb-2">
         <span className="text-lg" aria-hidden="true">🌅</span>
         <p className="text-xs font-medium tracking-widest uppercase text-amber-700">
-          Brahma Muhurta
+          {t("home.brahmaTitle")}
         </p>
       </div>
       <p className="text-foreground text-sm leading-relaxed mb-2">
         <span className="font-serif font-semibold text-base text-amber-900">
           3:30 AM – 5:00 AM
         </span>
-        {" — "}the most auspicious time for prayer and meditation.{" "}
+        {" "}{t("home.brahmaDesc")}{" "}
         {isAndroid ? (
           <a
             href={alarmUrl}
@@ -108,22 +109,23 @@ function BrahmaMuhurta() {
             data-testid="alarm-link"
             aria-label="Open Clock app to set alarm for Brahma Muhurta at 3:30 AM"
           >
-            Tap to set your alarm
+            {t("home.brahmaAlarm")}
           </a>
         ) : (
           <span className="text-amber-700 font-semibold">
-            Set your alarm for 3:30 AM
+            {t("home.brahmaAlarmIos")}
           </span>
         )}
       </p>
       <p className="text-xs text-amber-600/60 mt-1">
-        Exact timing varies slightly by season and location — approx. 96 minutes before local sunrise.
+        {t("home.brahmaNote")}
       </p>
     </div>
   );
 }
 
 function FastingTimer({ vratsToday }: { vratsToday: Vrat[] }) {
+  const { t } = useLanguage();
   const now = new Date();
   const vrat = vratsToday[0] ?? null;
   const paranaTime = vrat ? getParanaTime(vrat, now) : null;
@@ -137,25 +139,25 @@ function FastingTimer({ vratsToday }: { vratsToday: Vrat[] }) {
       {!vrat ? (
         <>
           <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-1">
-            Fasting Countdown
+            {t("home.fastCountdown")}
           </p>
           <p className="font-serif text-xl text-muted-foreground" data-testid="timer-no-fast">
-            No fast today
+            {t("home.noFastTimer")}
           </p>
         </>
       ) : countdown?.done ? (
         <>
           <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-1">
-            Fasting Countdown
+            {t("home.fastCountdown")}
           </p>
           <p className="font-serif text-xl text-primary" data-testid="timer-done">
-            Your fast is complete — well done
+            {t("home.fastDone")}
           </p>
         </>
       ) : (
         <>
           <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-2">
-            Fasting Countdown
+            {t("home.fastCountdown")}
           </p>
           <p
             className="font-serif font-bold text-primary leading-none"
@@ -165,10 +167,10 @@ function FastingTimer({ vratsToday }: { vratsToday: Vrat[] }) {
             {countdown?.hours}h {String(countdown?.mins).padStart(2, "0")}m
           </p>
           <p className="text-sm text-muted-foreground mt-2" data-testid="timer-label">
-            remaining in your fast
+            {t("home.remaining")}
           </p>
           <p className="text-xs text-muted-foreground/60 mt-1" data-testid="timer-parana">
-            Parana at{" "}
+            {t("home.parana")}{" "}
             {paranaTime?.toLocaleTimeString("en-IN", {
               hour: "2-digit",
               minute: "2-digit",
@@ -176,7 +178,7 @@ function FastingTimer({ vratsToday }: { vratsToday: Vrat[] }) {
             })}
             {paranaTime &&
               paranaTime.getDate() !== now.getDate() &&
-              " (tomorrow)"}
+              ` ${t("home.tomorrow")}`}
           </p>
         </>
       )}
@@ -226,6 +228,7 @@ function FloralDivider() {
 }
 
 function TrialBanner() {
+  const { t } = useLanguage();
   const days = getDaysRemaining();
   if (days === 0) return null;
 
@@ -245,9 +248,9 @@ function TrialBanner() {
         <path d="M8 5v3.5l2 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
       <p className="text-xs" style={{ color: isLow ? "#C86B1A" : "#8B7355" }}>
-        Free trial —{" "}
+        {t("home.freeTrial")} —{" "}
         <span className={isLow ? "font-semibold" : "font-medium"}>
-          {days} {days === 1 ? "day" : "days"} remaining
+          {days} {days === 1 ? t("home.day") : t("home.days")} remaining
         </span>
       </p>
     </div>
@@ -255,6 +258,7 @@ function TrialBanner() {
 }
 
 function TodayCard({ todayStr, vratsToday }: { todayStr: string; vratsToday: Vrat[] }) {
+  const { t } = useLanguage();
   const today = new Date(todayStr + "T00:00:00");
   const weekday = today.toLocaleDateString("en-IN", { weekday: "long" });
   const dateFormatted = today.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
@@ -296,7 +300,7 @@ function TodayCard({ todayStr, vratsToday }: { todayStr: string; vratsToday: Vra
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="bg-white/20 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">
-                Fast Day
+                {t("home.fastDay")}
               </span>
             </div>
             {vratsToday.map((v) => (
@@ -317,10 +321,10 @@ function TodayCard({ todayStr, vratsToday }: { todayStr: string; vratsToday: Vra
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="bg-muted text-muted-foreground text-xs px-3 py-1 rounded-full font-medium">
-                Free Day
+                {t("home.today")}
               </span>
             </div>
-            <p className="text-foreground font-medium">No fast today</p>
+            <p className="text-foreground font-medium">{t("home.noFastToday")}</p>
             <p className="text-muted-foreground text-sm mt-1">Enjoy your meals with joy and gratitude</p>
           </div>
         )}
@@ -330,6 +334,7 @@ function TodayCard({ todayStr, vratsToday }: { todayStr: string; vratsToday: Vra
 }
 
 function NextVratCard({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | null }) {
+  const { t } = useLanguage();
   if (!nextVrat) return null;
 
   const daysLeft = getDaysUntil(nextVrat.date, new Date());
@@ -338,7 +343,7 @@ function NextVratCard({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | n
   return (
     <div data-testid="next-vrat-card" className="vrat-card p-5 mb-4">
       <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-2">
-        Next Vrat
+        {t("home.nextFast")}
       </p>
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1">
@@ -354,7 +359,7 @@ function NextVratCard({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | n
             data-testid="countdown-days"
           >
             <span className="text-white font-bold text-xl leading-none">{daysLeft}</span>
-            <span className="text-white/80 text-xs">days</span>
+            <span className="text-white/80 text-xs">{t("home.days")}</span>
           </div>
         </div>
       </div>
@@ -404,6 +409,7 @@ function MantraCard({ vrats }: { vrats: Vrat[] }) {
 }
 
 function BadgeCelebration() {
+  const { t } = useLanguage();
   const allVrats = getAllVrats();
   const [newBadges] = useState<BadgeResult[]>(() => {
     const badges = checkBadges(allVrats);
@@ -439,7 +445,7 @@ function BadgeCelebration() {
               className="text-xs px-2 py-0.5 rounded-full font-semibold text-white"
               style={{ background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }}
             >
-              Earned
+              {t("home.badgeEarned")}
             </span>
           </div>
           <p className="text-xs font-semibold text-amber-700 mb-1">{badge.subtitle}</p>
@@ -451,6 +457,7 @@ function BadgeCelebration() {
 }
 
 function MyStreaks() {
+  const { t } = useLanguage();
   const allVrats = getAllVrats();
   const [, setLocation] = useLocation();
   const [streaks, setStreaks] = useState<StreakItem[]>(() => getTopStreaks(allVrats, 3));
@@ -463,7 +470,7 @@ function MyStreaks() {
     <div className="vrat-card p-5 mb-4" data-testid="my-streaks-section">
       <div className="flex items-center justify-between mb-3">
         <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
-          My Streaks
+          {t("home.topStreaks")}
         </p>
         <button
           onClick={() => setLocation("/vrat-history")}
@@ -471,13 +478,13 @@ function MyStreaks() {
           style={{ color: "#C86B1A" }}
           data-testid="view-history-link"
         >
-          View History →
+          {t("nav.history")} →
         </button>
       </div>
 
       {streaks.length === 0 ? (
         <p className="text-sm text-muted-foreground text-center py-1">
-          Tap "I observed this vrat" in the Calendar to start tracking
+          {t("home.noStreaks")}
         </p>
       ) : (
         <div className="space-y-2">
@@ -519,6 +526,8 @@ export default function Home() {
     <div className="min-h-screen cream-gradient">
       <div className="max-w-md mx-auto px-4 pt-8 pb-24">
         <NavratriCard todayStr={todayStr} />
+
+        <LanguageSelector />
 
         <div className="text-center mb-4">
           <div className="flex items-end justify-center gap-4 mb-2">

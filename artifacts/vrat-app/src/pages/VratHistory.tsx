@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { getAllVrats } from "@/data/vrats";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   getFullHistory,
   getVratSummaries,
@@ -94,6 +95,7 @@ function HistoryRow({ entry }: { entry: HistoryEntry }) {
 }
 
 export default function VratHistory() {
+  const { t } = useLanguage();
   const [, setLocation] = useLocation();
   const allVrats = getAllVrats();
   const [history] = useState<HistoryEntry[]>(() => getFullHistory(allVrats));
@@ -120,7 +122,7 @@ export default function VratHistory() {
             <ChevronLeft size={20} />
           </button>
           <div>
-            <h1 className="font-serif text-2xl font-bold text-foreground">My Vrat History</h1>
+            <h1 className="font-serif text-2xl font-bold text-foreground">{t("nav.history")}</h1>
             <p className="text-muted-foreground text-xs mt-0.5">
               {totalObservations === 0
                 ? "No observations yet"

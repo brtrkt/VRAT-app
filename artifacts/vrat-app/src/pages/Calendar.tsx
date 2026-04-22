@@ -8,6 +8,7 @@ import { getUserTradition, getObservedVrats, isVratObserved, getLocationInfo, ge
 import VratKathaSection from "@/components/VratKathaSection";
 import { addObservation, removeObservation, isObservedDate } from "@/hooks/useVratHistory";
 import SankalpModal, { SankalpButton } from "@/components/SankalpModal";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -458,6 +459,7 @@ const JAIN_LEGEND = [
 ];
 
 export default function Calendar() {
+  const { t } = useLanguage();
   const today = new Date();
   const todayStr = today.toISOString().split("T")[0];
 
@@ -465,9 +467,9 @@ export default function Calendar() {
   const [viewMonth, setViewMonth] = useState(today.getFullYear() === 2026 ? today.getMonth() : 0);
   const [selected, setSelected] = useState<{ dateStr: string; vrats: Vrat[] } | null>(null);
   const [filter, setFilter] = useState<TraditionFilter>(() => {
-    const t = getUserTradition();
-    if (t === "Hindu") return "hindu";
-    if (t === "Jain") return "jain";
+    const trad = getUserTradition();
+    if (trad === "Hindu") return "hindu";
+    if (trad === "Jain") return "jain";
     return "all";
   });
   const [observedVrats] = useState<string[]>(() => getObservedVrats());
@@ -521,7 +523,7 @@ export default function Calendar() {
     <div className="min-h-screen cream-gradient">
       <div className="max-w-md mx-auto px-4 pt-8 pb-24">
         <div className="text-center mb-4">
-          <h1 className="font-serif text-2xl font-bold text-foreground">Vrat Calendar</h1>
+          <h1 className="font-serif text-2xl font-bold text-foreground">{t("nav.calendar")}</h1>
           <p className="text-muted-foreground text-sm mt-1">
             2026–2027 — Tap any highlighted date
           </p>

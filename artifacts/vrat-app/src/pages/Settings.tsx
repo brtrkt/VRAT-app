@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { useLocation } from "wouter";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   TRADITION_KEY,
   OBSERVED_KEY,
@@ -77,6 +78,7 @@ function SectionHeader({ title }: { title: string }) {
 type Section = "main" | "location" | "region" | "tradition" | "vrats";
 
 export default function Settings() {
+  const { t } = useLanguage();
   const [, navigate] = useLocation();
   const [section, setSection] = useState<Section>("main");
   const [saved, setSaved] = useState(false);
@@ -333,7 +335,7 @@ export default function Settings() {
   return (
     <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
       <div className="max-w-md mx-auto px-5 pt-6 pb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground mb-1">Settings</h1>
+        <h1 className="font-serif text-3xl font-bold text-foreground mb-1">{t("nav.settings")}</h1>
         <p className="text-sm text-muted-foreground mb-6">Personalise your VRAT experience.</p>
 
         {saved && (
