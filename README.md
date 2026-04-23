@@ -127,7 +127,7 @@ Pricing is milestone-gated:
 **Energy framing, not calorie counting.** The food guide uses light/medium/heavy energy categories — a deliberate, culturally resonant choice for this audience.
 
 **Regional sensitivity built-in.** State filtering, location detection for moonrise times, and regional disclaimers acknowledge that vrat practices vary by community and geography.
-
+Content is proprietary — see CONTENT_LICENSE.md
 ---
 
 ## Roadmap
