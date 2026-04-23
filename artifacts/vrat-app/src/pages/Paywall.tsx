@@ -1,8 +1,23 @@
 import { useState } from "react";
-import { getUserEmail, setUserEmail, setSubscribed } from "@/hooks/useUserPrefs";
+import { getUserEmail, setUserEmail, setSubscribed, getUserLocation } from "@/hooks/useUserPrefs";
 
-const STRIPE_MONTHLY_URL = "https://buy.stripe.com/placeholder_monthly";
-const STRIPE_ANNUAL_URL  = "https://buy.stripe.com/placeholder_annual";
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "";
+
+function detectCurrency(): "usd" | "inr" {
+  return getUserLocation() === "india" ? "inr" : "usd";
+}
+
+type Prices = {
+  monthly: { usd: string; inr: string };
+  annual: { usd: string; inr: string };
+  savingsLabel: string;
+};
+
+const PRICES: Prices = {
+  monthly: { usd: "$2.99/month", inr: "₹249/month" },
+  annual:  { usd: "$19.99/year", inr: "₹1,699/year" },
+  savingsLabel: "Save 44%",
+};
 
 function DiyaFlame() {
   return (
@@ -57,11 +72,8 @@ function EmailStep({ onContinue }: { onContinue: () => void }) {
         <p className="text-base font-serif leading-relaxed" style={{ color: "#FDE68A" }}>
           Enter your email to continue
         </p>
-        <p
-          className="text-sm mt-3 leading-relaxed px-2"
-          style={{ color: "#FEF3E2", opacity: 0.85 }}
-        >
-          We'll notify you of new vrat guides, kathas, and features.
+        <p className="text-sm mt-3 leading-relaxed px-2" style={{ color: "#FEF3E2", opacity: 0.85 }}>
+          We'll send your receipt and renewal reminders here.
         </p>
       </div>
 
@@ -82,9 +94,7 @@ function EmailStep({ onContinue }: { onContinue: () => void }) {
           autoComplete="email"
           inputMode="email"
         />
-        {error && (
-          <p className="text-xs px-1" style={{ color: "#FCA5A5" }}>{error}</p>
-        )}
+        {error && <p className="text-xs px-1" style={{ color: "#FCA5A5" }}>{error}</p>}
         <button
           onClick={handleContinue}
           className="w-full py-4 rounded-2xl font-semibold text-base tracking-wide transition-all active:scale-[0.98]"
@@ -104,27 +114,74 @@ function EmailStep({ onContinue }: { onContinue: () => void }) {
 
 type Plan = "monthly" | "annual";
 
-function SubscriptionStep() {
+function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
   const [selected, setSelected] = useState<Plan>("annual");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [restoring, setRestoring] = useState(false);
 
-  function handleSubscribe() {
-    const url = selected === "annual" ? STRIPE_ANNUAL_URL : STRIPE_MONTHLY_URL;
-    window.open(url, "_blank", "noopener");
-  }
+  const currency = detectCurrency();
+  const email = getUserEmail();
 
-  function handleRestore() {
-    const code = window.prompt("Enter your subscription confirmation code:");
-    if (code && code.trim().length > 0) {
-      setSubscribed();
-      window.location.reload();
+  async function handleSubscribe() {
+    if (!email) return;
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch(`${API_BASE}/api/stripe/checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, plan: selected, currency }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch {
+      setError("Could not connect. Please check your internet and try again.");
+    } finally {
+      setLoading(false);
     }
   }
+
+  async function handleRestore() {
+    if (!email) return;
+    setRestoring(true);
+    setError("");
+
+    try {
+      const res = await fetch(`${API_BASE}/api/stripe/verify?email=${encodeURIComponent(email)}`);
+      const data = await res.json();
+
+      if (data.subscribed) {
+        setSubscribed();
+        window.location.reload();
+      } else {
+        setError("No active subscription found for this email. Please subscribe to continue.");
+      }
+    } catch {
+      setError("Could not verify. Please check your internet connection.");
+    } finally {
+      setRestoring(false);
+    }
+  }
+
+  const monthlyPrice = currency === "inr" ? PRICES.monthly.inr : PRICES.monthly.usd;
+  const annualPrice  = currency === "inr" ? PRICES.annual.inr  : PRICES.annual.usd;
 
   return (
     <div className="w-full max-w-sm">
       <DiyaFlame />
 
-      <div className="text-center mt-5 mb-7">
+      <div className="text-center mt-5 mb-6">
         <h1
           className="font-serif text-2xl font-bold leading-snug mb-2"
           style={{ color: "#FEF9EC" }}
@@ -136,6 +193,11 @@ function SubscriptionStep() {
           Continue your vrat journey with{" "}
           <span className="font-semibold">VRAT Premium</span>
         </p>
+        {showCancelled && (
+          <p className="text-xs mt-2 px-2" style={{ color: "#FCA5A5" }}>
+            Payment was not completed. You can try again below.
+          </p>
+        )}
       </div>
 
       <div className="space-y-3 mb-5">
@@ -144,9 +206,7 @@ function SubscriptionStep() {
           className="w-full rounded-2xl px-5 py-4 text-left transition-all active:scale-[0.98] relative"
           style={{
             background: selected === "annual" ? "#FEF9EC" : "rgba(255,255,255,0.12)",
-            border: selected === "annual"
-              ? "2px solid #FEF9EC"
-              : "1.5px solid rgba(255,255,255,0.3)",
+            border: selected === "annual" ? "2px solid #FEF9EC" : "1.5px solid rgba(255,255,255,0.3)",
             color: selected === "annual" ? "#C86B1A" : "#FEF9EC",
           }}
           data-testid="plan-annual"
@@ -154,11 +214,8 @@ function SubscriptionStep() {
           <div className="flex items-center justify-between">
             <div>
               <p className="font-semibold text-base">Yearly</p>
-              <p
-                className="text-sm mt-0.5"
-                style={{ color: selected === "annual" ? "#9A3412" : "#FDE68Acc" }}
-              >
-                $19.99 / year
+              <p className="text-sm mt-0.5" style={{ color: selected === "annual" ? "#9A3412" : "#FDE68Acc" }}>
+                {annualPrice}
               </p>
             </div>
             <div className="flex flex-col items-end gap-1">
@@ -171,11 +228,8 @@ function SubscriptionStep() {
               >
                 BEST VALUE
               </span>
-              <span
-                className="text-xs font-medium"
-                style={{ color: selected === "annual" ? "#9A3412" : "#FDE68Acc" }}
-              >
-                Save 44%
+              <span className="text-xs font-medium" style={{ color: selected === "annual" ? "#9A3412" : "#FDE68Acc" }}>
+                {PRICES.savingsLabel}
               </span>
             </div>
           </div>
@@ -186,52 +240,58 @@ function SubscriptionStep() {
           className="w-full rounded-2xl px-5 py-4 text-left transition-all active:scale-[0.98]"
           style={{
             background: selected === "monthly" ? "#FEF9EC" : "rgba(255,255,255,0.12)",
-            border: selected === "monthly"
-              ? "2px solid #FEF9EC"
-              : "1.5px solid rgba(255,255,255,0.3)",
+            border: selected === "monthly" ? "2px solid #FEF9EC" : "1.5px solid rgba(255,255,255,0.3)",
             color: selected === "monthly" ? "#C86B1A" : "#FEF9EC",
           }}
           data-testid="plan-monthly"
         >
           <p className="font-semibold text-base">Monthly</p>
-          <p
-            className="text-sm mt-0.5"
-            style={{ color: selected === "monthly" ? "#9A3412" : "#FDE68Acc" }}
-          >
-            $2.99 / month
+          <p className="text-sm mt-0.5" style={{ color: selected === "monthly" ? "#9A3412" : "#FDE68Acc" }}>
+            {monthlyPrice}
           </p>
         </button>
       </div>
 
+      {error && (
+        <p className="text-xs text-center mb-3 px-2" style={{ color: "#FCA5A5" }}>
+          {error}
+        </p>
+      )}
+
       <button
         onClick={handleSubscribe}
-        className="w-full py-4 rounded-2xl font-bold text-base tracking-wide transition-all active:scale-[0.98]"
+        disabled={loading}
+        className="w-full py-4 rounded-2xl font-bold text-base tracking-wide transition-all active:scale-[0.98] disabled:opacity-60"
         style={{
           background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
           color: "#1c1917",
         }}
         data-testid="subscribe-btn"
       >
-        Subscribe Now
+        {loading ? "Redirecting to payment…" : "Subscribe Now"}
       </button>
 
       <p className="text-center text-xs mt-4" style={{ color: "#FEF3E2", opacity: 0.6 }}>
         Full access · Cancel anytime · No ads
       </p>
+      <p className="text-center text-xs mt-1" style={{ color: "#FEF3E2", opacity: 0.45 }}>
+        Your first 30 days were free — no card was required.
+      </p>
 
       <button
         onClick={handleRestore}
-        className="w-full text-center text-xs mt-3 py-2 transition-opacity active:opacity-50"
+        disabled={restoring}
+        className="w-full text-center text-xs mt-4 py-2 transition-opacity active:opacity-50 disabled:opacity-40"
         style={{ color: "#FEF3E2", opacity: 0.7 }}
         data-testid="restore-purchase-btn"
       >
-        Already subscribed? Restore purchase
+        {restoring ? "Checking…" : "Already subscribed? Restore access"}
       </button>
     </div>
   );
 }
 
-export default function Paywall() {
+export default function Paywall({ showCancelled }: { showCancelled?: boolean }) {
   const savedEmail = getUserEmail();
   const [step, setStep] = useState<"email" | "subscribe">(
     savedEmail ? "subscribe" : "email"
@@ -247,7 +307,7 @@ export default function Paywall() {
         {step === "email" ? (
           <EmailStep onContinue={() => setStep("subscribe")} />
         ) : (
-          <SubscriptionStep />
+          <SubscriptionStep showCancelled={showCancelled} />
         )}
       </div>
     </div>

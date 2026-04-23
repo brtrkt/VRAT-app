@@ -15,10 +15,11 @@ import Onboarding from "@/components/Onboarding";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import HowToInstall from "@/pages/HowToInstall";
 import Recipes from "@/pages/Recipes";
-import { ONBOARDING_KEY, initTrial, isTrialExpired } from "@/hooks/useUserPrefs";
+import { ONBOARDING_KEY, initTrial, isTrialExpired, isSubscribed, setSubscribed } from "@/hooks/useUserPrefs";
 import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
 
 const queryClient = new QueryClient();
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "";
 
 const DISCLAIMER_KEY = "vrat_disclaimer_accepted";
 
@@ -236,16 +237,62 @@ function App() {
   const [onboardingDone, setOnboardingDone] = useState(
     () => !!localStorage.getItem(ONBOARDING_KEY)
   );
-  const [trialExpired, setTrialExpired] = useState(false);
+  const [showPaywall, setShowPaywall] = useState(false);
+  const [checkoutCancelled, setCheckoutCancelled] = useState(false);
+  const [verifying, setVerifying] = useState(false);
 
   useEffect(() => {
     initTrial();
-    setTrialExpired(isTrialExpired());
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("checkout_success") === "1") {
+      const sessionId = params.get("session_id") ?? "";
+      window.history.replaceState({}, "", window.location.pathname);
+      setVerifying(true);
+
+      fetch(`${API_BASE}/api/stripe/verify?session_id=${encodeURIComponent(sessionId)}`)
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.subscribed) {
+            setSubscribed();
+          } else {
+            setShowPaywall(isTrialExpired() && !isSubscribed());
+          }
+        })
+        .catch(() => {
+          setShowPaywall(isTrialExpired() && !isSubscribed());
+        })
+        .finally(() => setVerifying(false));
+      return;
+    }
+
+    if (params.get("checkout_cancel") === "1") {
+      window.history.replaceState({}, "", window.location.pathname);
+      setCheckoutCancelled(true);
+    }
+
+    setShowPaywall(isTrialExpired() && !isSubscribed());
   }, []);
 
   function handleOnboardingComplete() {
     initTrial();
     setOnboardingDone(true);
+  }
+
+  if (verifying) {
+    return (
+      <div
+        className="fixed inset-0 flex items-center justify-center"
+        style={{ background: "linear-gradient(160deg, #C86B1A 0%, #E07B2A 50%, #D97706 100%)" }}
+      >
+        <div className="text-center">
+          <div className="text-4xl mb-4">🙏</div>
+          <p className="text-white font-semibold text-lg">Confirming your subscription…</p>
+          <p className="text-amber-100 text-sm mt-2 opacity-80">Just a moment</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -255,12 +302,12 @@ function App() {
           <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
             {!onboardingDone ? (
               <Onboarding onComplete={handleOnboardingComplete} />
-            ) : trialExpired ? (
-              <Paywall />
+            ) : showPaywall ? (
+              <Paywall showCancelled={checkoutCancelled} />
             ) : (
               <DisclaimerPopup />
             )}
-            {!trialExpired && <Router />}
+            {!showPaywall && onboardingDone && <Router />}
           </WouterRouter>
         </LanguageProvider>
       </TooltipProvider>

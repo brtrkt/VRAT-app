@@ -3,8 +3,48 @@ import cors from "cors";
 import pinoHttp from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
+import { WebhookHandlers } from "./webhookHandlers";
 
 const app: Express = express();
+
+const allowedOrigins = [
+  /\.netlify\.app$/,
+  /\.replit\.dev$/,
+  /\.repl\.co$/,
+  /^http:\/\/localhost/,
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      const allowed = allowedOrigins.some((pattern) =>
+        typeof pattern === 'string' ? origin === pattern : pattern.test(origin)
+      );
+      callback(null, allowed ? origin : false);
+    },
+    credentials: true,
+  })
+);
+
+app.post(
+  '/api/stripe/webhook',
+  express.raw({ type: 'application/json' }),
+  async (req, res) => {
+    const signature = req.headers['stripe-signature'];
+    if (!signature) {
+      return res.status(400).json({ error: 'Missing stripe-signature' });
+    }
+    try {
+      const sig = Array.isArray(signature) ? signature[0] : signature;
+      await WebhookHandlers.processWebhook(req.body as Buffer, sig);
+      res.status(200).json({ received: true });
+    } catch (error: any) {
+      logger.error({ err: error }, 'Webhook error');
+      res.status(400).json({ error: 'Webhook processing error' });
+    }
+  }
+);
 
 app.use(
   pinoHttp({
@@ -25,7 +65,7 @@ app.use(
     },
   }),
 );
-app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
