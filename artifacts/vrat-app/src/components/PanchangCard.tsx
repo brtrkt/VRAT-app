@@ -53,10 +53,8 @@ function getTodayPanchang(now: Date): PanchangEntry & {
   specialLabel: string;
   fromLookup: boolean;
 } {
-  const y = now.getFullYear();
-  const m = String(now.getMonth() + 1).padStart(2, "0");
-  const d = String(now.getDate()).padStart(2, "0");
-  const dateKey = `${y}-${m}-${d}`;
+  // Always resolve the date in IST (Asia/Kolkata) regardless of device timezone
+  const dateKey = now.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
 
   const entry = lookup[dateKey] ?? getApproximatePanchang(now.getTime());
   const fromLookup = !!lookup[dateKey];
