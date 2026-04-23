@@ -1,4 +1,7 @@
-<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
   <rect width="180" height="180" rx="36" fill="#FF6F00"/>
-  <text x="90" y="125" font-family="serif" font-size="100" text-anchor="middle" fill="#FFFDE7">ॐ</text>
+  <path d="M90 38 C90 38 110 65 110 85 C110 97 102 108 90 112 C78 108 70 97 70 85 C70 65 90 38 90 38Z" fill="#FFCC00"/>
+  <path d="M90 58 C90 58 103 75 103 87 C103 95 97 102 90 105 C83 102 77 95 77 87 C77 75 90 58 90 58Z" fill="#FFFDE7"/>
+  <ellipse cx="90" cy="125" rx="28" ry="8" fill="#FFB300" opacity="0.7"/>
+  <rect x="82" y="115" width="16" height="14" rx="4" fill="#FFB300"/>
 </svg>
