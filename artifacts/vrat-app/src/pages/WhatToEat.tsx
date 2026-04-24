@@ -382,6 +382,9 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
   const { t } = useLanguage();
   const [showSankalp, setShowSankalp] = useState(false);
   const isJain = vrat.tradition === "Jain";
+  const vnsYear = isJain
+    ? (vrat.dates?.[0] >= "2026-11-09" ? 2553 : 2552)
+    : null;
 
   return (
     <div data-testid={`vrat-food-card-${vrat.id}`}>
@@ -398,6 +401,11 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
         )}
         <p className="text-white/80 text-sm mt-1">Deity: {vrat.deity}</p>
         <p className="text-white/70 text-xs mt-2 leading-relaxed">{vrat.description}</p>
+        {isJain && vnsYear && (
+          <p className="text-white/50 text-xs mt-2 font-medium tracking-wide">
+            ◆ Veer Nirvana Samvat {vnsYear}
+          </p>
+        )}
       </div>
 
       <SankalpButton
