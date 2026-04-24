@@ -1,22 +1,15 @@
-import { useState } from "react";
-import { getUserEmail, setUserEmail, setSubscribed, getUserLocation } from "@/hooks/useUserPrefs";
+import { useState, useEffect } from "react";
+import { getUserEmail, setUserEmail, setSubscribed } from "@/hooks/useUserPrefs";
+import { detectCurrency, type Currency } from "@/utils/currencyDetect";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "";
 
-function detectCurrency(): "usd" | "inr" {
-  return getUserLocation() === "india" ? "inr" : "usd";
-}
+type Plan = "monthly" | "annual" | "lifetime";
 
-type Prices = {
-  monthly: { usd: string; inr: string };
-  annual: { usd: string; inr: string };
-  savingsLabel: string;
-};
-
-const PRICES: Prices = {
-  monthly: { usd: "$2.99/month", inr: "₹249/month" },
-  annual:  { usd: "$19.99/year", inr: "₹1,699/year" },
-  savingsLabel: "Save 44%",
+const PRICES = {
+  monthly:  { usd: "$2.99/month",  inr: "₹249/month"  },
+  annual:   { usd: "$19.99/year",  inr: "₹1,699/year" },
+  lifetime: { usd: "$49.99",       inr: "₹3,999"      },
 };
 
 function DiyaFlame() {
@@ -64,7 +57,6 @@ function EmailStep({ onContinue }: { onContinue: () => void }) {
   return (
     <div className="w-full max-w-sm">
       <DiyaFlame />
-
       <div className="text-center mt-6 mb-8">
         <h1 className="font-serif text-3xl font-bold mb-3" style={{ color: "#FEF9EC" }}>
           VRAT
@@ -76,7 +68,6 @@ function EmailStep({ onContinue }: { onContinue: () => void }) {
           We'll send your receipt and renewal reminders here.
         </p>
       </div>
-
       <div className="space-y-3">
         <input
           type="email"
@@ -104,7 +95,6 @@ function EmailStep({ onContinue }: { onContinue: () => void }) {
           Continue →
         </button>
       </div>
-
       <p className="text-center text-xs mt-5" style={{ color: "#FEF3E2", opacity: 0.55 }}>
         No spam, ever. Unsubscribe anytime.
       </p>
@@ -112,19 +102,21 @@ function EmailStep({ onContinue }: { onContinue: () => void }) {
   );
 }
 
-type Plan = "monthly" | "annual";
-
 function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
   const [selected, setSelected] = useState<Plan>("annual");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [restoring, setRestoring] = useState(false);
+  const [currency, setCurrency] = useState<Currency | null>(null);
 
-  const currency = detectCurrency();
   const email = getUserEmail();
 
+  useEffect(() => {
+    detectCurrency().then(setCurrency);
+  }, []);
+
   async function handleSubscribe() {
-    if (!email) return;
+    if (!email || !currency) return;
     setLoading(true);
     setError("");
 
@@ -174,8 +166,31 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
     }
   }
 
-  const monthlyPrice = currency === "inr" ? PRICES.monthly.inr : PRICES.monthly.usd;
-  const annualPrice  = currency === "inr" ? PRICES.annual.inr  : PRICES.annual.usd;
+  const c = currency ?? "usd";
+  const monthlyPrice  = PRICES.monthly[c];
+  const annualPrice   = PRICES.annual[c];
+  const lifetimePrice = PRICES.lifetime[c];
+
+  const plans: { id: Plan; label: string; price: string; badge?: string; sub?: string }[] = [
+    {
+      id: "annual",
+      label: "Yearly",
+      price: annualPrice,
+      badge: "BEST VALUE",
+      sub: "Save 44%",
+    },
+    {
+      id: "monthly",
+      label: "Monthly",
+      price: monthlyPrice,
+    },
+    {
+      id: "lifetime",
+      label: "Lifetime",
+      price: lifetimePrice,
+      sub: "Pay once, yours forever",
+    },
+  ];
 
   return (
     <div className="w-full max-w-sm">
@@ -200,57 +215,65 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
         )}
       </div>
 
-      <div className="space-y-3 mb-5">
-        <button
-          onClick={() => setSelected("annual")}
-          className="w-full rounded-2xl px-5 py-4 text-left transition-all active:scale-[0.98] relative"
-          style={{
-            background: selected === "annual" ? "#FEF9EC" : "rgba(255,255,255,0.12)",
-            border: selected === "annual" ? "2px solid #FEF9EC" : "1.5px solid rgba(255,255,255,0.3)",
-            color: selected === "annual" ? "#C86B1A" : "#FEF9EC",
-          }}
-          data-testid="plan-annual"
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-semibold text-base">Yearly</p>
-              <p className="text-sm mt-0.5" style={{ color: selected === "annual" ? "#9A3412" : "#FDE68Acc" }}>
-                {annualPrice}
-              </p>
-            </div>
-            <div className="flex flex-col items-end gap-1">
-              <span
-                className="text-xs font-bold px-2 py-0.5 rounded-full"
+      {currency === null ? (
+        <div className="space-y-3 mb-5">
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              className="w-full rounded-2xl px-5 py-4 animate-pulse"
+              style={{ background: "rgba(255,255,255,0.12)", height: 68 }}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="space-y-3 mb-5">
+          {plans.map((plan) => {
+            const active = selected === plan.id;
+            return (
+              <button
+                key={plan.id}
+                onClick={() => setSelected(plan.id)}
+                className="w-full rounded-2xl px-5 py-4 text-left transition-all active:scale-[0.98]"
                 style={{
-                  background: selected === "annual" ? "#E07B2A" : "rgba(255,255,255,0.2)",
-                  color: selected === "annual" ? "white" : "#FEF9EC",
+                  background: active ? "#FEF9EC" : "rgba(255,255,255,0.12)",
+                  border: active ? "2px solid #FEF9EC" : "1.5px solid rgba(255,255,255,0.3)",
+                  color: active ? "#C86B1A" : "#FEF9EC",
                 }}
+                data-testid={`plan-${plan.id}`}
               >
-                BEST VALUE
-              </span>
-              <span className="text-xs font-medium" style={{ color: selected === "annual" ? "#9A3412" : "#FDE68Acc" }}>
-                {PRICES.savingsLabel}
-              </span>
-            </div>
-          </div>
-        </button>
-
-        <button
-          onClick={() => setSelected("monthly")}
-          className="w-full rounded-2xl px-5 py-4 text-left transition-all active:scale-[0.98]"
-          style={{
-            background: selected === "monthly" ? "#FEF9EC" : "rgba(255,255,255,0.12)",
-            border: selected === "monthly" ? "2px solid #FEF9EC" : "1.5px solid rgba(255,255,255,0.3)",
-            color: selected === "monthly" ? "#C86B1A" : "#FEF9EC",
-          }}
-          data-testid="plan-monthly"
-        >
-          <p className="font-semibold text-base">Monthly</p>
-          <p className="text-sm mt-0.5" style={{ color: selected === "monthly" ? "#9A3412" : "#FDE68Acc" }}>
-            {monthlyPrice}
-          </p>
-        </button>
-      </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-semibold text-base">{plan.label}</p>
+                    <p className="text-sm mt-0.5" style={{ color: active ? "#9A3412" : "#FDE68Acc" }}>
+                      {plan.price}
+                    </p>
+                  </div>
+                  {(plan.badge || plan.sub) && (
+                    <div className="flex flex-col items-end gap-1">
+                      {plan.badge && (
+                        <span
+                          className="text-xs font-bold px-2 py-0.5 rounded-full"
+                          style={{
+                            background: active ? "#E07B2A" : "rgba(255,255,255,0.2)",
+                            color: active ? "white" : "#FEF9EC",
+                          }}
+                        >
+                          {plan.badge}
+                        </span>
+                      )}
+                      {plan.sub && (
+                        <span className="text-xs font-medium" style={{ color: active ? "#9A3412" : "#FDE68Acc" }}>
+                          {plan.sub}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {error && (
         <p className="text-xs text-center mb-3 px-2" style={{ color: "#FCA5A5" }}>
@@ -260,7 +283,7 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
 
       <button
         onClick={handleSubscribe}
-        disabled={loading}
+        disabled={loading || currency === null}
         className="w-full py-4 rounded-2xl font-bold text-base tracking-wide transition-all active:scale-[0.98] disabled:opacity-60"
         style={{
           background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
@@ -268,11 +291,13 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
         }}
         data-testid="subscribe-btn"
       >
-        {loading ? "Redirecting to payment…" : "Subscribe Now"}
+        {loading ? "Redirecting to payment…" : selected === "lifetime" ? "Get Lifetime Access" : "Subscribe Now"}
       </button>
 
       <p className="text-center text-xs mt-4" style={{ color: "#FEF3E2", opacity: 0.6 }}>
-        Full access · Cancel anytime · No ads
+        {selected === "lifetime"
+          ? "Pay once · Full access forever · No renewal"
+          : "Full access · Cancel anytime · No ads"}
       </p>
       <p className="text-center text-xs mt-1" style={{ color: "#FEF3E2", opacity: 0.45 }}>
         Your first 30 days were free — no card was required.

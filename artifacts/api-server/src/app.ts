@@ -55,6 +55,17 @@ app.post(
           await storage.upsertSubscription(sub.customer, sub.id, 'canceled');
           break;
         }
+        case 'checkout.session.completed': {
+          const session = event.data.object as any;
+          if (session.mode === 'payment' && session.payment_status === 'paid') {
+            const customerId = typeof session.customer === 'string' ? session.customer : null;
+            if (customerId) {
+              await storage.upsertSubscription(customerId, session.id, 'lifetime');
+              logger.info({ customerId }, 'Lifetime purchase recorded');
+            }
+          }
+          break;
+        }
       }
 
       res.status(200).json({ received: true });

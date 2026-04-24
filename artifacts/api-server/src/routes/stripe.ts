@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { storage } from '../storage';
-import { getStripeClient, getWebhookSecret } from '../stripeClient';
+import { getStripeClient } from '../stripeClient';
 import { logger } from '../lib/logger';
 
 const router = Router();
@@ -9,7 +9,7 @@ router.post('/stripe/checkout', async (req, res) => {
   try {
     const { email, plan, currency } = req.body as {
       email: string;
-      plan: 'monthly' | 'annual';
+      plan: 'monthly' | 'annual' | 'lifetime';
       currency: 'usd' | 'inr';
     };
 
@@ -39,14 +39,16 @@ router.post('/stripe/checkout', async (req, res) => {
     }
 
     const origin = req.headers.origin || `https://${req.headers.host}`;
+    const isLifetime = plan === 'lifetime';
+
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       payment_method_types: ['card'],
       line_items: [{ price: priceId, quantity: 1 }],
-      mode: 'subscription',
+      mode: isLifetime ? 'payment' : 'subscription',
       success_url: `${origin}/?checkout_success=1&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/?checkout_cancel=1`,
-      customer_update: { address: 'auto' },
+      ...(!isLifetime && { customer_update: { address: 'auto' } }),
       automatic_tax: { enabled: false },
     });
 
@@ -73,6 +75,9 @@ router.get('/stripe/verify', async (req, res) => {
           await storage.getOrCreateUser(customerEmail);
           if (session.customer && typeof session.customer === 'string') {
             await storage.updateStripeCustomerId(customerEmail, session.customer);
+            if (session.mode === 'payment') {
+              await storage.upsertSubscription(session.customer, session.id, 'lifetime');
+            }
           }
         }
         return res.json({ subscribed: true, email: customerEmail });

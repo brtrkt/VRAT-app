@@ -116,14 +116,14 @@ export class Storage {
     const result = await db.query(
       `SELECT * FROM vrat_subscriptions
        WHERE stripe_customer_id = $1
-         AND status IN ('active', 'trialing')
+         AND status IN ('active', 'trialing', 'lifetime')
        LIMIT 1`,
       [stripeCustomerId]
     );
     return result.rows[0] || null;
   }
 
-  async getPriceByPlanAndCurrency(plan: 'monthly' | 'annual', currency: 'usd' | 'inr'): Promise<string | null> {
+  async getPriceByPlanAndCurrency(plan: 'monthly' | 'annual' | 'lifetime', currency: 'usd' | 'inr'): Promise<string | null> {
     const db = getPool();
     const result = await db.query(
       `SELECT id FROM vrat_prices WHERE plan = $1 AND currency = $2 LIMIT 1`,
