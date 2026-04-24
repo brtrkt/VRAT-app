@@ -1,36 +1,14 @@
-import { runMigrations } from 'stripe-replit-sync';
-import { getStripeSync } from "./stripeClient";
 import app from "./app";
 import { logger } from "./lib/logger";
+import { storage } from "./storage";
 
-async function initStripe() {
-  const databaseUrl = process.env.DATABASE_URL;
-  if (!databaseUrl) {
-    logger.warn('DATABASE_URL not set — skipping Stripe init');
-    return;
-  }
-
+async function initSchema() {
   try {
-    logger.info('Initializing Stripe schema...');
-    await runMigrations({ databaseUrl, schema: 'stripe' });
-    logger.info('Stripe schema ready');
-
-    const stripeSync = await getStripeSync();
-
-    const domains = process.env.REPLIT_DOMAINS?.split(',') ?? [];
-    const host = domains[0];
-    if (host) {
-      const webhookUrl = `https://${host}/api/stripe/webhook`;
-      logger.info({ webhookUrl }, 'Setting up managed webhook');
-      await stripeSync.findOrCreateManagedWebhook(webhookUrl);
-      logger.info('Webhook configured');
-    }
-
-    stripeSync.syncBackfill()
-      .then(() => logger.info('Stripe data synced'))
-      .catch((err) => logger.error({ err }, 'Stripe backfill error'));
+    logger.info('Initializing database schema...');
+    await storage.initSchema();
+    logger.info('Database schema ready');
   } catch (err: any) {
-    logger.warn({ err: err.message }, 'Stripe init skipped — integration not connected yet');
+    logger.warn({ err: err.message }, 'Database schema init failed');
   }
 }
 
@@ -46,7 +24,7 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-await initStripe();
+await initSchema();
 
 app.listen(port, (err) => {
   if (err) {

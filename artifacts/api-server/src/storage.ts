@@ -19,6 +19,35 @@ export interface VratUser {
 }
 
 export class Storage {
+  async initSchema(): Promise<void> {
+    const db = getPool();
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS vrat_users (
+        id          TEXT PRIMARY KEY,
+        email       TEXT UNIQUE NOT NULL,
+        stripe_customer_id TEXT,
+        stripe_subscription_id TEXT,
+        trial_started_at TIMESTAMPTZ,
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+
+      CREATE TABLE IF NOT EXISTS vrat_subscriptions (
+        stripe_customer_id    TEXT PRIMARY KEY,
+        stripe_subscription_id TEXT NOT NULL,
+        status                TEXT NOT NULL,
+        updated_at            TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+
+      CREATE TABLE IF NOT EXISTS vrat_prices (
+        id       TEXT PRIMARY KEY,
+        plan     TEXT NOT NULL,
+        currency TEXT NOT NULL,
+        amount   INTEGER NOT NULL,
+        UNIQUE (plan, currency)
+      );
+    `);
+  }
+
   async getOrCreateUser(email: string): Promise<VratUser> {
     const db = getPool();
     const normalized = email.trim().toLowerCase();
@@ -60,11 +89,28 @@ export class Storage {
     );
   }
 
+  async upsertSubscription(
+    stripeCustomerId: string,
+    stripeSubscriptionId: string,
+    status: string
+  ): Promise<void> {
+    const db = getPool();
+    await db.query(
+      `INSERT INTO vrat_subscriptions (stripe_customer_id, stripe_subscription_id, status, updated_at)
+       VALUES ($1, $2, $3, NOW())
+       ON CONFLICT (stripe_customer_id) DO UPDATE
+         SET stripe_subscription_id = EXCLUDED.stripe_subscription_id,
+             status = EXCLUDED.status,
+             updated_at = NOW()`,
+      [stripeCustomerId, stripeSubscriptionId, status]
+    );
+  }
+
   async getActiveSubscriptionForCustomer(stripeCustomerId: string): Promise<any | null> {
     const db = getPool();
     const result = await db.query(
-      `SELECT * FROM stripe.subscriptions
-       WHERE customer = $1
+      `SELECT * FROM vrat_subscriptions
+       WHERE stripe_customer_id = $1
          AND status IN ('active', 'trialing')
        LIMIT 1`,
       [stripeCustomerId]
@@ -74,19 +120,22 @@ export class Storage {
 
   async getPriceByPlanAndCurrency(plan: 'monthly' | 'annual', currency: 'usd' | 'inr'): Promise<string | null> {
     const db = getPool();
-    const interval = plan === 'monthly' ? 'month' : 'year';
     const result = await db.query(
-      `SELECT pr.id FROM stripe.prices pr
-       JOIN stripe.products p ON pr.product = p.id
-       WHERE pr.active = true
-         AND pr.currency = $1
-         AND pr.recurring->>'interval' = $2
-         AND p.active = true
-         AND p.metadata->>'vrat_plan' IS NOT NULL
-       LIMIT 1`,
-      [currency, interval]
+      `SELECT id FROM vrat_prices WHERE plan = $1 AND currency = $2 LIMIT 1`,
+      [plan, currency]
     );
     return result.rows[0]?.id || null;
+  }
+
+  async upsertPrice(id: string, plan: string, currency: string, amount: number): Promise<void> {
+    const db = getPool();
+    await db.query(
+      `INSERT INTO vrat_prices (id, plan, currency, amount)
+       VALUES ($1, $2, $3, $4)
+       ON CONFLICT (plan, currency) DO UPDATE
+         SET id = EXCLUDED.id, amount = EXCLUDED.amount`,
+      [id, plan, currency, amount]
+    );
   }
 }
 

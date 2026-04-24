@@ -3,7 +3,8 @@ import cors from "cors";
 import pinoHttp from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
-import { WebhookHandlers } from "./webhookHandlers";
+import { getStripeClient, getWebhookSecret } from "./stripeClient";
+import { storage } from "./storage";
 
 const app: Express = express();
 
@@ -31,17 +32,35 @@ app.post(
   '/api/stripe/webhook',
   express.raw({ type: 'application/json' }),
   async (req, res) => {
-    const signature = req.headers['stripe-signature'];
-    if (!signature) {
-      return res.status(400).json({ error: 'Missing stripe-signature' });
-    }
+    const sig = req.headers['stripe-signature'];
+    if (!sig) return res.status(400).json({ error: 'Missing stripe-signature' });
+
     try {
-      const sig = Array.isArray(signature) ? signature[0] : signature;
-      await WebhookHandlers.processWebhook(req.body as Buffer, sig);
+      const stripe = getStripeClient();
+      const webhookSecret = getWebhookSecret();
+      const signature = Array.isArray(sig) ? sig[0] : sig;
+      const event = stripe.webhooks.constructEvent(req.body as Buffer, signature, webhookSecret);
+
+      logger.info({ type: event.type }, 'Stripe webhook received');
+
+      switch (event.type) {
+        case 'customer.subscription.created':
+        case 'customer.subscription.updated': {
+          const sub = event.data.object as any;
+          await storage.upsertSubscription(sub.customer, sub.id, sub.status);
+          break;
+        }
+        case 'customer.subscription.deleted': {
+          const sub = event.data.object as any;
+          await storage.upsertSubscription(sub.customer, sub.id, 'canceled');
+          break;
+        }
+      }
+
       res.status(200).json({ received: true });
-    } catch (error: any) {
-      logger.error({ err: error }, 'Webhook error');
-      res.status(400).json({ error: 'Webhook processing error' });
+    } catch (err: any) {
+      logger.error({ err }, 'Webhook error');
+      res.status(400).json({ error: err.message });
     }
   }
 );

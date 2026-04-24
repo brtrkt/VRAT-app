@@ -24,6 +24,9 @@ catalogs:
     '@types/node':
       specifier: ^25.3.3
       version: 25.3.5
+    '@types/pg':
+      specifier: ^8.11.14
+      version: 8.18.0
     '@types/react':
       specifier: ^19.2.0
       version: 19.2.14
@@ -48,12 +51,18 @@ catalogs:
     lucide-react:
       specifier: ^0.545.0
       version: 0.545.0
+    pg:
+      specifier: ^8.20.0
+      version: 8.20.0
     react:
       specifier: 19.1.0
       version: 19.1.0
     react-dom:
       specifier: 19.1.0
       version: 19.1.0
+    stripe:
+      specifier: ^22.0.2
+      version: 22.0.2
     tailwind-merge:
       specifier: ^3.3.1
       version: 3.5.0
@@ -651,10 +660,20 @@ importers:
         version: 0.31.9
 
   scripts:
+    dependencies:
+      pg:
+        specifier: 'catalog:'
+        version: 8.20.0
+      stripe:
+        specifier: 'catalog:'
+        version: 22.0.2(@types/node@25.3.5)
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
         version: 25.3.5
+      '@types/pg':
+        specifier: 'catalog:'
+        version: 8.18.0
       tsx:
         specifier: 'catalog:'
         version: 4.21.0

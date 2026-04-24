@@ -45,10 +45,18 @@ pnpm workspace monorepo using TypeScript. Contains the VRAT app — a sacred fas
 - 30-day free trial, no credit card required
 - Trial start tracked via `vrat_trial_start` (set by `initTrial()` on first launch)
 - After trial: two-step paywall — email collection → plan selection
-- Plans: Monthly $2.99/mo, Annual $19.99/yr (save 44%)
-- Stripe URLs: placeholders in `src/pages/Paywall.tsx` constants `STRIPE_MONTHLY_URL` / `STRIPE_ANNUAL_URL` — replace with real links when ready
-- "Restore purchase" flow: user enters confirmation code → sets `vrat_subscribed_v1`
+- Plans: Monthly $2.99/mo (₹249/mo), Annual $19.99/yr (₹1,699/yr, save 44%)
+- Stripe Checkout: frontend calls `/api/stripe/checkout` → API creates session → redirects to Stripe
+- Currency auto-detected: India → INR, elsewhere → USD
+- "Restore access" flow: user enters email → API verifies active subscription in DB
 - Trial banner shown at bottom of Home screen: "X free days remaining ✨" (urgent style when ≤5 days)
+
+**Stripe setup (direct API keys — NOT Replit integration):**
+- `STRIPE_SECRET_KEY` secret: Replit Secret (starts with `sk_test_` for test mode)
+- `STRIPE_WEBHOOK_SECRET` secret: Replit Secret (from Stripe Dashboard → Webhooks → signing secret)
+- After adding keys: run `pnpm --filter @workspace/scripts run seed-products` in Shell to create products in Stripe and save price IDs to DB
+- Webhook endpoint: `https://<your-domain>/api/stripe/webhook` — register this in Stripe Dashboard → Webhooks
+- NOTE: Replit Stripe integration was dismissed; using env secrets directly instead
 
 **New features (April 2026):**
 - WhatsApp sharing: tap "Share on WhatsApp" on TodayCard (fast days) → pre-filled message with vrat name

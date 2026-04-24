@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { storage } from '../storage';
-import { getUncachableStripeClient } from '../stripeClient';
+import { getStripeClient, getWebhookSecret } from '../stripeClient';
 import { logger } from '../lib/logger';
 
 const router = Router();
@@ -21,12 +21,12 @@ router.post('/stripe/checkout', async (req, res) => {
     if (!priceId) {
       return res.status(404).json({
         error: 'Price not found. Products may not be seeded yet.',
-        hint: 'Run: pnpm --filter @workspace/scripts exec tsx src/seed-products.ts'
+        hint: 'Run: pnpm --filter @workspace/scripts run seed-products'
       });
     }
 
     const user = await storage.getOrCreateUser(email);
-    const stripe = await getUncachableStripeClient();
+    const stripe = getStripeClient();
 
     let customerId = user.stripe_customer_id;
     if (!customerId) {
@@ -62,7 +62,7 @@ router.get('/stripe/verify', async (req, res) => {
     const { session_id, email } = req.query as { session_id?: string; email?: string };
 
     if (session_id) {
-      const stripe = await getUncachableStripeClient();
+      const stripe = getStripeClient();
       const session = await stripe.checkout.sessions.retrieve(session_id, {
         expand: ['subscription'],
       });
@@ -108,7 +108,7 @@ router.post('/stripe/portal', async (req, res) => {
       return res.status(404).json({ error: 'No subscription found for this email' });
     }
 
-    const stripe = await getUncachableStripeClient();
+    const stripe = getStripeClient();
     const origin = req.headers.origin || `https://${req.headers.host}`;
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: user.stripe_customer_id,

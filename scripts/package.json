@@ -8,8 +8,13 @@
     "seed-products": "tsx ./src/seed-products.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
+  "dependencies": {
+    "pg": "catalog:",
+    "stripe": "catalog:"
+  },
   "devDependencies": {
     "@types/node": "catalog:",
+    "@types/pg": "catalog:",
     "tsx": "catalog:"
   }
 }
