@@ -13,6 +13,7 @@ const allowedOrigins = [
   /\.replit\.dev$/,
   /\.repl\.co$/,
   /^http:\/\/localhost/,
+  /^https?:\/\/(www\.)?vrat-app\.com$/,
 ];
 
 app.use(
