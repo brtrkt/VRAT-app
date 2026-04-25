@@ -459,9 +459,9 @@ const JAIN_LEGEND = [
   { label: "Shared (Purnima)", color: "#C084FC" },
 ];
 const SIKH_LEGEND = [
-  { label: "Gurpurabs & Shaheedi", color: "#1D4ED8" },
-  { label: "Sangrand (monthly)", color: "#1E3A8A" },
-  { label: "Shaheedi Diwas", color: "#7F1D1D" },
+  { label: "Gurpurabs & Observances", color: "#003DA5" },
+  { label: "Sangrand (monthly)", color: "#003DA5" },
+  { label: "Shaheedi Diwas (Martyrdom)", color: "#7F1D1D" },
 ];
 
 export default function Calendar() {

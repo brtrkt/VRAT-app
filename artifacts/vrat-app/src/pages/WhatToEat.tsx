@@ -357,22 +357,29 @@ function FoodList({
 
 function MealIdeasSection({ vrat }: { vrat: Vrat }) {
   const { t } = useLanguage();
+  const isSikh = vrat.tradition === "Sikh";
   return (
     <div className="vrat-card p-5 mb-4" data-testid="meal-ideas-section">
       <div className="flex items-center gap-2 mb-3">
         <span className="text-xl">🍽</span>
         <h3 className="font-serif text-base font-semibold text-foreground">{t("food.mealIdea")}</h3>
       </div>
-      <div className="bg-accent/40 rounded-2xl p-4">
+      <div className="rounded-2xl p-4" style={isSikh ? { background: "#EFF6FF" } : { background: "var(--accent, #FFF7ED)" }}>
         <p className="text-sm text-foreground leading-relaxed" data-testid="meal-idea-text">
           {vrat.mealIdea}
         </p>
       </div>
       <div className="mt-3 bg-muted/40 rounded-2xl p-4">
-        <p className="text-xs text-muted-foreground italic text-center">
-          All vrat-friendly dishes use sendha namak (rock salt) and no onion or garlic.
-          Your kitchen becomes your temple.
-        </p>
+        {isSikh ? (
+          <p className="text-xs text-muted-foreground italic text-center">
+            Sikh observances focus on langar (community meals) — simple vegetarian food served freely to all as an act of seva (selfless service). No special fasting foods required.
+          </p>
+        ) : (
+          <p className="text-xs text-muted-foreground italic text-center">
+            All vrat-friendly dishes use sendha namak (rock salt) and no onion or garlic.
+            Your kitchen becomes your temple.
+          </p>
+        )}
       </div>
     </div>
   );
@@ -382,31 +389,59 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
   const { t } = useLanguage();
   const [showSankalp, setShowSankalp] = useState(false);
   const isJain = vrat.tradition === "Jain";
+  const isSikh = vrat.tradition === "Sikh";
   const vnsYear = isJain
     ? (vrat.dates?.[0] >= "2026-11-09" ? 2553 : 2552)
     : null;
 
+  const headerStyle = isSikh
+    ? { background: "linear-gradient(135deg, #001A6E 0%, #003DA5 60%, #0052CC 100%)" }
+    : isJain
+    ? { background: "linear-gradient(135deg, #15803D 0%, #22C55E 100%)" }
+    : undefined;
+
   return (
     <div data-testid={`vrat-food-card-${vrat.id}`}>
       <div
-        className={`rounded-2xl p-4 mb-4 text-white${isJain ? "" : " saffron-gradient"}`}
-        style={isJain ? { background: "linear-gradient(135deg, #15803D 0%, #22C55E 100%)" } : undefined}
+        className={`rounded-2xl p-4 mb-4 text-white${!isSikh && !isJain ? " saffron-gradient" : ""}`}
+        style={headerStyle}
       >
-        <p className="text-xs font-medium tracking-widest uppercase text-white/70 mb-1">{t("home.fastDay")}</p>
+        <p className="text-xs font-medium tracking-widest uppercase mb-1"
+          style={{ color: isSikh ? "#F4A900" : "rgba(255,255,255,0.7)" }}>
+          {isSikh ? "ਸਿੱਖ ਤਿਉਹਾਰ · Sikh Observance" : t("home.fastDay")}
+        </p>
         <h2 className="font-serif text-2xl font-bold">{vrat.name}</h2>
+        {isSikh && vrat.punjabiName && (
+          <p className="text-base font-medium mt-0.5" style={{ color: "#F4A900" }}>
+            {vrat.punjabiName}
+          </p>
+        )}
         {vrat.nirjala && (
           <div className="mt-1.5 mb-1">
             <NirjalaWarning variant="light" />
           </div>
         )}
-        <p className="text-white/80 text-sm mt-1">Deity: {vrat.deity}</p>
+        <p className="text-white/80 text-sm mt-1">{isSikh ? "Observance" : "Deity"}: {vrat.deity}</p>
         <p className="text-white/70 text-xs mt-2 leading-relaxed">{vrat.description}</p>
         {isJain && vnsYear && (
           <p className="text-white/50 text-xs mt-2 font-medium tracking-wide">
             ◆ Veer Nirvana Samvat {vnsYear}
           </p>
         )}
+        {isSikh && vrat.nanakshahiDate && (
+          <p className="text-xs mt-2 font-semibold tracking-wide" style={{ color: "#F4A900" }}>
+            ◆ {vrat.nanakshahiDate}
+          </p>
+        )}
       </div>
+
+      {isSikh && (
+        <div className="rounded-xl px-4 py-3 mb-4 text-xs leading-relaxed border"
+          style={{ background: "#EFF6FF", borderColor: "#BFDBFE", color: "#1E3A8A" }}>
+          <span className="font-semibold">📅 Calendar note:</span>{" "}
+          Sikh observances follow the Nanakshahi Calendar. Dates may vary slightly by local Gurdwara tradition.
+        </div>
+      )}
 
       <SankalpButton
         vrat={vrat}
