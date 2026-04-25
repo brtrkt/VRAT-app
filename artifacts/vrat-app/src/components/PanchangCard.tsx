@@ -6,6 +6,7 @@ interface PanchangEntry {
   tithi: string;
   paksha: string;
   nakshatra: string;
+  special?: string;
 }
 
 const lookup = panchangData as Record<string, PanchangEntry>;
@@ -73,9 +74,10 @@ function getTodayPanchang(now: Date): PanchangEntry & {
     "Chaturdashi": "Chaturdashi — Lord Shiva",
     "Pratipada":   "Pratipada — auspicious start",
   };
-  const specialLabel = specialMap[entry.tithi] ?? "";
+  const specialLabel = entry.special ?? specialMap[entry.tithi] ?? "";
+  const isSpecialFinal = isSpecial || !!entry.special;
 
-  return { ...entry, tithiNum, isSpecial, specialLabel, fromLookup };
+  return { ...entry, tithiNum, isSpecial: isSpecialFinal, specialLabel, fromLookup };
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
