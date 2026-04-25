@@ -220,6 +220,18 @@ function JainSymbol({ className = "" }: { className?: string }) {
   );
 }
 
+function KhandaSymbol({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 60 60" fill="currentColor" aria-hidden="true" className={className}>
+      <circle cx="30" cy="30" r="13" fill="none" stroke="currentColor" strokeWidth="3.5" />
+      <path d="M30 6 L27 24 L24 42 L30 48 L36 42 L33 24 Z" />
+      <path d="M10 10 L22 28 L20 44 L24 42 L24 26 Z" />
+      <path d="M50 10 L38 28 L40 44 L36 42 L36 26 Z" />
+      <path d="M18 26 L42 26 L42 29 L18 29 Z" />
+    </svg>
+  );
+}
+
 function FloralDivider() {
   return (
     <div className="decorative-divider my-4">
@@ -400,6 +412,8 @@ function MantraCard({ vrats }: { vrats: Vrat[] }) {
       <div className="flex items-center gap-2 mb-3">
         {displayVrat.tradition === "Jain"
           ? <JainSymbol className="text-green-600 w-5 h-6 flex-shrink-0" />
+          : displayVrat.tradition === "Sikh"
+          ? <KhandaSymbol className="text-blue-700 w-5 h-5 flex-shrink-0" />
           : <OmSymbol className="text-primary text-lg" />
         }
         <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground">

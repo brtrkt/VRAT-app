@@ -37,32 +37,40 @@ const PRICES = {
   lifetime: { usd: "$49.99",       inr: "₹3,999"      },
 } as const;
 
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" }[] = [
-  { id: "ekadashi",         label: "Ekadashi",              subtitle: "24 days a year",                       tradition: "Hindu" },
-  { id: "purnima",          label: "Purnima",               subtitle: "Full moon · 12 days a year",           tradition: "Hindu" },
-  { id: "pradosh",          label: "Pradosh / Pradosham",   subtitle: "For Lord Shiva · 24 days a year",      tradition: "Hindu" },
-  { id: "amavasya",         label: "Amavasya",              subtitle: "New moon · 12 days a year",            tradition: "Hindu" },
-  { id: "sankashti",        label: "Sankashti Chaturthi",   subtitle: "For Lord Ganesha · 12 days a year",    tradition: "Hindu" },
-  { id: "maha-shivratri",   label: "Maha Shivratri",        subtitle: "The great night of Shiva",             tradition: "Hindu" },
-  { id: "navratri",         label: "Navratri",              subtitle: "Nine nights of Durga · twice a year",  tradition: "Hindu" },
-  { id: "janmashtami",      label: "Janmashtami",           subtitle: "Birth of Lord Krishna",                tradition: "Hindu" },
-  { id: "ram-navami",       label: "Ram Navami",            subtitle: "Birth of Lord Ram",                    tradition: "Hindu" },
-  { id: "hanuman-jayanti",  label: "Hanuman Jayanti",       subtitle: "Hanuman ji",                           tradition: "Hindu" },
-  { id: "ganesh-chaturthi", label: "Ganesh Chaturthi",      subtitle: "Birth of Lord Ganesha",                tradition: "Hindu" },
-  { id: "diwali",           label: "Diwali / Lakshmi Puja", subtitle: "Festival of lights",                   tradition: "Hindu" },
-  { id: "karva-chauth",     label: "Karva Chauth",          subtitle: "For a husband's long life",            tradition: "Hindu" },
-  { id: "hartalika-teej",   label: "Hartalika Teej",        subtitle: "For Lord Shiva and Parvati",           tradition: "Hindu" },
-  { id: "hariyali-teej",    label: "Hariyali Teej",         subtitle: "Monsoon celebration of Parvati",       tradition: "Hindu" },
-  { id: "vat-savitri",      label: "Vat Savitri",           subtitle: "For a husband's longevity",            tradition: "Hindu" },
-  { id: "ahoi-ashtami",     label: "Ahoi Ashtami",          subtitle: "For children's wellbeing",             tradition: "Hindu" },
-  { id: "chhath-puja",      label: "Chhath Puja",           subtitle: "For the Sun God · 36-hour strict fast",tradition: "Hindu" },
-  { id: "akshaya-tritiya",  label: "Akshaya Tritiya",       subtitle: "The auspicious third",                 tradition: "Hindu" },
-  { id: "mahavir-jayanti",  label: "Mahavir Jayanti",       subtitle: "Birth of Lord Mahavira",               tradition: "Jain"  },
-  { id: "paryushana",       label: "Paryushana",            subtitle: "Eight days of reflection and fasting", tradition: "Jain"  },
-  { id: "samvatsari",       label: "Samvatsari Pratikraman",subtitle: "Annual day of forgiveness",            tradition: "Jain"  },
-  { id: "navpad-oli",       label: "Navpad Oli",            subtitle: "Nine days of austerity · twice a year",tradition: "Jain"  },
-  { id: "das-lakshana",     label: "Das Lakshana Parva",    subtitle: "Ten days of dharma",                   tradition: "Jain"  },
-  { id: "mahavira-nirvana", label: "Mahavira Nirvana",      subtitle: "Jain Diwali · day of liberation",     tradition: "Jain"  },
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" }[] = [
+  { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                           tradition: "Hindu" },
+  { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",               tradition: "Hindu" },
+  { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",          tradition: "Hindu" },
+  { id: "amavasya",                   label: "Amavasya",                       subtitle: "New moon · 12 days a year",                tradition: "Hindu" },
+  { id: "sankashti",                  label: "Sankashti Chaturthi",            subtitle: "For Lord Ganesha · 12 days a year",        tradition: "Hindu" },
+  { id: "maha-shivratri",             label: "Maha Shivratri",                 subtitle: "The great night of Shiva",                 tradition: "Hindu" },
+  { id: "navratri",                   label: "Navratri",                       subtitle: "Nine nights of Durga · twice a year",      tradition: "Hindu" },
+  { id: "janmashtami",                label: "Janmashtami",                    subtitle: "Birth of Lord Krishna",                    tradition: "Hindu" },
+  { id: "ram-navami",                 label: "Ram Navami",                     subtitle: "Birth of Lord Ram",                        tradition: "Hindu" },
+  { id: "hanuman-jayanti",            label: "Hanuman Jayanti",                subtitle: "Hanuman ji",                               tradition: "Hindu" },
+  { id: "ganesh-chaturthi",           label: "Ganesh Chaturthi",               subtitle: "Birth of Lord Ganesha",                   tradition: "Hindu" },
+  { id: "diwali",                     label: "Diwali / Lakshmi Puja",          subtitle: "Festival of lights",                      tradition: "Hindu" },
+  { id: "karva-chauth",               label: "Karva Chauth",                   subtitle: "For a husband's long life",               tradition: "Hindu" },
+  { id: "hartalika-teej",             label: "Hartalika Teej",                 subtitle: "For Lord Shiva and Parvati",              tradition: "Hindu" },
+  { id: "hariyali-teej",              label: "Hariyali Teej",                  subtitle: "Monsoon celebration of Parvati",          tradition: "Hindu" },
+  { id: "vat-savitri",                label: "Vat Savitri",                    subtitle: "For a husband's longevity",               tradition: "Hindu" },
+  { id: "ahoi-ashtami",               label: "Ahoi Ashtami",                   subtitle: "For children's wellbeing",                tradition: "Hindu" },
+  { id: "chhath-puja",                label: "Chhath Puja",                    subtitle: "For the Sun God · 36-hour strict fast",   tradition: "Hindu" },
+  { id: "akshaya-tritiya",            label: "Akshaya Tritiya",                subtitle: "The auspicious third",                    tradition: "Hindu" },
+  { id: "mahavir-jayanti",            label: "Mahavir Jayanti",                subtitle: "Birth of Lord Mahavira",                  tradition: "Jain"  },
+  { id: "paryushana",                 label: "Paryushana",                     subtitle: "Eight days of reflection and fasting",    tradition: "Jain"  },
+  { id: "samvatsari",                 label: "Samvatsari Pratikraman",         subtitle: "Annual day of forgiveness",               tradition: "Jain"  },
+  { id: "navpad-oli",                 label: "Navpad Oli",                     subtitle: "Nine days of austerity · twice a year",   tradition: "Jain"  },
+  { id: "das-lakshana",               label: "Das Lakshana Parva",             subtitle: "Ten days of dharma",                      tradition: "Jain"  },
+  { id: "mahavira-nirvana",           label: "Mahavira Nirvana",               subtitle: "Jain Diwali · day of liberation",         tradition: "Jain"  },
+  { id: "guru-nanak-gurpurab",        label: "Guru Nanak Dev Ji Gurpurab",     subtitle: "Birth anniversary of Guru Nanak Ji",      tradition: "Sikh"  },
+  { id: "baisakhi-sikh",              label: "Baisakhi (Vaisakhi)",            subtitle: "Founding of the Khalsa · April 14",       tradition: "Sikh"  },
+  { id: "guru-gobind-singh-gurpurab", label: "Guru Gobind Singh Ji Gurpurab",  subtitle: "Birth anniversary of Guru Gobind Singh Ji", tradition: "Sikh" },
+  { id: "sangrand",                   label: "Sangrand",                       subtitle: "Monthly Sikh observance · 12 per year",   tradition: "Sikh"  },
+  { id: "hola-mohalla",               label: "Hola Mohalla",                   subtitle: "Sikh martial arts festival",              tradition: "Sikh"  },
+  { id: "bandi-chhor-divas",          label: "Bandi Chhor Divas",              subtitle: "Day of Liberation · coincides with Diwali", tradition: "Sikh" },
+  { id: "guru-arjan-dev-shaheedi",    label: "Guru Arjan Dev Ji Shaheedi",     subtitle: "Martyrdom Day · June",                    tradition: "Sikh"  },
+  { id: "guru-tegh-bahadur-shaheedi", label: "Guru Tegh Bahadur Ji Shaheedi", subtitle: "Martyrdom Day · November",                tradition: "Sikh"  },
 ];
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
@@ -333,8 +341,9 @@ export default function Settings() {
   if (section === "tradition") {
     const OPTIONS: { value: Tradition; label: string; subtitle: string }[] = [
       { value: "Hindu", label: "Hindu", subtitle: "Ekadashi, Navratri, Karva Chauth and more" },
-      { value: "Jain", label: "Jain", subtitle: "Paryushana, Navpad Oli, Samvatsari and more" },
-      { value: "Both", label: "Both", subtitle: "Hindu and Jain observances together" },
+      { value: "Jain",  label: "Jain",  subtitle: "Paryushana, Navpad Oli, Samvatsari and more" },
+      { value: "Sikh",  label: "Sikh",  subtitle: "Gurpurabs, Baisakhi, Sangrand and more" },
+      { value: "Both",  label: "Both",  subtitle: "Hindu and Jain observances together" },
     ];
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
@@ -378,9 +387,11 @@ export default function Settings() {
 
   if (section === "vrats") {
     const hinduVrats = VRAT_OPTIONS.filter((v) => v.tradition === "Hindu");
-    const jainVrats = VRAT_OPTIONS.filter((v) => v.tradition === "Jain");
+    const jainVrats  = VRAT_OPTIONS.filter((v) => v.tradition === "Jain");
+    const sikhVrats  = VRAT_OPTIONS.filter((v) => v.tradition === "Sikh");
     const showHindu = tradition === "Hindu" || tradition === "Both";
-    const showJain = tradition === "Jain" || tradition === "Both";
+    const showJain  = tradition === "Jain"  || tradition === "Both";
+    const showSikh  = tradition === "Sikh";
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
         <div className="max-w-md mx-auto px-5 pt-6 pb-8">
@@ -409,6 +420,19 @@ export default function Settings() {
             <>
               {tradition === "Both" && <SectionHeader title="Jain" />}
               {jainVrats.map((opt) => (
+                <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm font-medium text-foreground">{opt.label}</p>
+                    <p className="text-xs text-muted-foreground">{opt.subtitle}</p>
+                  </div>
+                  <Toggle on={isVratObserved(opt.id, observed)} onToggle={() => toggleVrat(opt.id)} />
+                </div>
+              ))}
+            </>
+          )}
+          {showSikh && (
+            <>
+              {sikhVrats.map((opt) => (
                 <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
                   <div className="flex-1 mr-4">
                     <p className="text-sm font-medium text-foreground">{opt.label}</p>
@@ -599,7 +623,7 @@ export default function Settings() {
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-foreground">{tradition}</p>
             <p className="text-xs text-muted-foreground mt-0.5">
-              {tradition === "Hindu" ? "Hindu vrats only" : tradition === "Jain" ? "Jain vrats only" : "Hindu and Jain vrats"}
+              {tradition === "Hindu" ? "Hindu vrats only" : tradition === "Jain" ? "Jain vrats only" : tradition === "Sikh" ? "Sikh Gurpurabs and observances" : "Hindu and Jain vrats"}
             </p>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-muted-foreground flex-shrink-0">

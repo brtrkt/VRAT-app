@@ -435,12 +435,13 @@ function CalendarGrid({
   );
 }
 
-type TraditionFilter = "all" | "hindu" | "jain";
+type TraditionFilter = "all" | "hindu" | "jain" | "sikh";
 
 const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
-  { value: "all", label: "All" },
+  { value: "all",   label: "All" },
   { value: "hindu", label: "Hindu" },
-  { value: "jain", label: "Jain" },
+  { value: "jain",  label: "Jain" },
+  { value: "sikh",  label: "Sikh" },
 ];
 
 const HINDU_LEGEND = [
@@ -457,6 +458,11 @@ const JAIN_LEGEND = [
   { label: "Jain Festivals", color: "#22C55E" },
   { label: "Shared (Purnima)", color: "#C084FC" },
 ];
+const SIKH_LEGEND = [
+  { label: "Gurpurabs & Shaheedi", color: "#1D4ED8" },
+  { label: "Sangrand (monthly)", color: "#1E3A8A" },
+  { label: "Shaheedi Diwas", color: "#7F1D1D" },
+];
 
 export default function Calendar() {
   const { t } = useLanguage();
@@ -469,7 +475,8 @@ export default function Calendar() {
   const [filter, setFilter] = useState<TraditionFilter>(() => {
     const trad = getUserTradition();
     if (trad === "Hindu") return "hindu";
-    if (trad === "Jain") return "jain";
+    if (trad === "Jain")  return "jain";
+    if (trad === "Sikh")  return "sikh";
     return "all";
   });
   const [observedVrats] = useState<string[]>(() => getObservedVrats());
@@ -484,7 +491,8 @@ export default function Calendar() {
         const traditionOk =
           filter === "all" ||
           (filter === "hindu" && (v.tradition === "Hindu" || v.tradition === "Both")) ||
-          (filter === "jain" && (v.tradition === "Jain" || v.tradition === "Both"));
+          (filter === "jain"  && (v.tradition === "Jain"  || v.tradition === "Both")) ||
+          (filter === "sikh"  && v.tradition === "Sikh");
         const regionOk = !v.region || userRegion === "all" || v.region === userRegion;
         return traditionOk && regionOk;
       }),
@@ -603,7 +611,7 @@ export default function Calendar() {
               />
               <span className="text-xs font-medium text-foreground">Your observed vrats (gold)</span>
             </div>
-            {(filter === "jain" ? JAIN_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
+            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
               <div key={item.label} className="flex items-center gap-2" data-testid={`legend-${item.label}`}>
                 <span
                   className="w-3 h-3 rounded-full flex-shrink-0"
