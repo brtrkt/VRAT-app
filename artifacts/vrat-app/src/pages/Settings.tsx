@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
@@ -19,8 +19,23 @@ import {
   getUserLocation,
   getUserRegion,
   isVratObserved,
+  isSubscribed,
+  getDaysRemaining,
+  isTrialExpired,
+  getUserEmail,
+  setUserEmail,
+  setSubscribed,
 } from "@/hooks/useUserPrefs";
+import { detectCurrency, type Currency } from "@/utils/currencyDetect";
 import PageFooter from "@/components/PageFooter";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "";
+
+const PRICES = {
+  monthly:  { usd: "$2.99/month",  inr: "₹249/month"  },
+  annual:   { usd: "$19.99/year",  inr: "₹1,699/year" },
+  lifetime: { usd: "$49.99",       inr: "₹3,999"      },
+} as const;
 
 const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" }[] = [
   { id: "ekadashi",         label: "Ekadashi",              subtitle: "24 days a year",                       tradition: "Hindu" },
@@ -75,7 +90,8 @@ function SectionHeader({ title }: { title: string }) {
   );
 }
 
-type Section = "main" | "location" | "region" | "tradition" | "vrats";
+type Section = "main" | "location" | "region" | "tradition" | "vrats" | "subscribe";
+type Plan = "monthly" | "annual" | "lifetime";
 
 export default function Settings() {
   const { t } = useLanguage();
@@ -89,6 +105,24 @@ export default function Settings() {
   const [location, setLocation] = useState<UserLocation>(getUserLocation);
   const [region, setRegion] = useState<UserRegion>(getUserRegion);
 
+  const subscribed = isSubscribed();
+  const daysRemaining = getDaysRemaining();
+  const trialOver = isTrialExpired();
+
+  const [subEmail, setSubEmail] = useState(getUserEmail);
+  const [subPlan, setSubPlan] = useState<Plan>("annual");
+  const [subCurrency, setSubCurrency] = useState<Currency | null>(null);
+  const [subLoading, setSubLoading] = useState(false);
+  const [subError, setSubError] = useState("");
+  const [restoring, setRestoring] = useState(false);
+  const [portalLoading, setPortalLoading] = useState(false);
+
+  useEffect(() => {
+    if (section === "subscribe") {
+      detectCurrency().then(setSubCurrency);
+    }
+  }, [section]);
+
   const save = useCallback(() => {
     localStorage.setItem(TRADITION_KEY, tradition);
     localStorage.setItem(OBSERVED_KEY, JSON.stringify(observed));
@@ -99,6 +133,68 @@ export default function Settings() {
     setTimeout(() => setSaved(false), 2000);
     if (section !== "main") setSection("main");
   }, [tradition, observed, city, location, region, section]);
+
+  async function handleSubscribe() {
+    const email = subEmail.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setSubError("Please enter a valid email address.");
+      return;
+    }
+    if (!subCurrency) return;
+    setUserEmail(email);
+    setSubLoading(true);
+    setSubError("");
+    try {
+      const res = await fetch(`${API_BASE}/api/stripe/checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, plan: subPlan, currency: subCurrency }),
+      });
+      const data = await res.json();
+      if (!res.ok) { setSubError(data.error || "Something went wrong. Please try again."); return; }
+      if (data.url) window.location.href = data.url;
+    } catch {
+      setSubError("Could not connect. Please check your internet and try again.");
+    } finally {
+      setSubLoading(false);
+    }
+  }
+
+  async function handleRestore() {
+    const email = subEmail.trim();
+    if (!email) { setSubError("Enter your email to restore access."); return; }
+    setRestoring(true);
+    setSubError("");
+    try {
+      const res = await fetch(`${API_BASE}/api/stripe/verify?email=${encodeURIComponent(email)}`);
+      const data = await res.json();
+      if (data.subscribed) { setSubscribed(); window.location.reload(); }
+      else { setSubError("No active subscription found for this email."); }
+    } catch {
+      setSubError("Could not verify. Please check your internet connection.");
+    } finally {
+      setRestoring(false);
+    }
+  }
+
+  async function handlePortal() {
+    const email = getUserEmail();
+    if (!email) return;
+    setPortalLoading(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/stripe/portal`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    } catch {
+      // silent
+    } finally {
+      setPortalLoading(false);
+    }
+  }
 
   function toggleVrat(id: string) {
     setObserved((prev) =>
@@ -332,6 +428,117 @@ export default function Settings() {
     );
   }
 
+  if (section === "subscribe") {
+    const c = subCurrency ?? "usd";
+    const plans: { id: Plan; label: string; price: string; badge?: string; sub?: string }[] = [
+      { id: "annual",   label: "Yearly",   price: PRICES.annual[c],   badge: "BEST VALUE", sub: "Save 44%" },
+      { id: "monthly",  label: "Monthly",  price: PRICES.monthly[c]  },
+      { id: "lifetime", label: "Lifetime", price: PRICES.lifetime[c], sub: "Pay once, yours forever" },
+    ];
+
+    return (
+      <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
+        <div className="max-w-md mx-auto px-5 pt-6 pb-8">
+          <button onClick={() => setSection("main")} className="flex items-center gap-2 text-sm text-muted-foreground mb-6 -ml-1 active:opacity-70">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M15 18l-6-6 6-6" /></svg>
+            Back
+          </button>
+
+          <h2 className="font-serif text-2xl font-bold text-foreground mb-1">Choose your plan</h2>
+          <p className="text-sm text-muted-foreground mb-6">Unlock VRAT Premium — full access to all 140+ vrats, fasting guides, mantras, and katha.</p>
+
+          <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-3">Your email</p>
+          <div className="vrat-card p-4 mb-6">
+            <input
+              type="email"
+              value={subEmail}
+              onChange={(e) => { setSubEmail(e.target.value); setSubError(""); }}
+              placeholder="your@email.com"
+              className="w-full text-sm bg-transparent outline-none text-foreground placeholder:text-muted-foreground"
+              inputMode="email"
+              autoComplete="email"
+              data-testid="sub-email-input"
+            />
+          </div>
+
+          <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-3">Plan</p>
+          {subCurrency === null ? (
+            <div className="space-y-3 mb-6">
+              {[0, 1, 2].map((i) => (
+                <div key={i} className="w-full rounded-2xl animate-pulse" style={{ background: "#F5E6D3", height: 68 }} />
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-3 mb-6">
+              {plans.map((plan) => {
+                const active = subPlan === plan.id;
+                return (
+                  <button
+                    key={plan.id}
+                    onClick={() => setSubPlan(plan.id)}
+                    className="w-full flex items-center gap-4 p-4 rounded-2xl text-left transition-all active:scale-[0.99]"
+                    style={{
+                      border: `2px solid ${active ? ACCENT : "#E5E7EB"}`,
+                      background: active ? `${ACCENT}12` : "white",
+                    }}
+                    data-testid={`settings-plan-${plan.id}`}
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-sm text-foreground">{plan.label}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{plan.price}</p>
+                    </div>
+                    <div className="flex flex-col items-end gap-1">
+                      {plan.badge && (
+                        <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: active ? ACCENT : "#F3F4F6", color: active ? "white" : "#6B7280" }}>
+                          {plan.badge}
+                        </span>
+                      )}
+                      {plan.sub && (
+                        <span className="text-xs" style={{ color: active ? "#9A3412" : "#9CA3AF" }}>{plan.sub}</span>
+                      )}
+                    </div>
+                    {active && (
+                      <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ACCENT }}>
+                        <svg viewBox="0 0 12 12" fill="white" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          {subError && (
+            <p className="text-xs text-red-600 text-center mb-3 px-2">{subError}</p>
+          )}
+
+          <button
+            onClick={handleSubscribe}
+            disabled={subLoading || subCurrency === null}
+            className="w-full py-4 rounded-2xl font-bold text-base text-white tracking-wide transition-opacity active:opacity-80 disabled:opacity-60"
+            style={{ background: `linear-gradient(135deg, ${ACCENT} 0%, #C86B1A 100%)` }}
+            data-testid="settings-subscribe-btn"
+          >
+            {subLoading ? "Redirecting to payment…" : subPlan === "lifetime" ? "Get Lifetime Access" : "Subscribe Now"}
+          </button>
+
+          <p className="text-center text-xs text-muted-foreground mt-3">
+            {subPlan === "lifetime" ? "Pay once · Full access forever · No renewal" : "Full access · Cancel anytime · No ads"}
+          </p>
+
+          <button
+            onClick={handleRestore}
+            disabled={restoring}
+            className="w-full text-center text-xs mt-5 py-2 transition-opacity active:opacity-50 disabled:opacity-40 text-muted-foreground"
+            data-testid="settings-restore-btn"
+          >
+            {restoring ? "Checking…" : "Already subscribed? Restore access"}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
       <div className="max-w-md mx-auto px-5 pt-6 pb-8">
@@ -435,6 +642,58 @@ export default function Settings() {
         >
           Save changes
         </button>
+
+        <SectionHeader title="Subscription" />
+        {subscribed ? (
+          <div className="vrat-card p-4 flex items-center gap-4">
+            <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "#DCFCE7" }}>
+              <svg viewBox="0 0 20 20" fill="#16A34A" className="w-5 h-5"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-foreground">Premium Active</p>
+              <p className="text-xs text-muted-foreground mt-0.5">Full access to all vrats and features</p>
+            </div>
+            <button
+              onClick={handlePortal}
+              disabled={portalLoading}
+              className="text-xs font-semibold px-3 py-1.5 rounded-xl transition-opacity active:opacity-70 disabled:opacity-50"
+              style={{ background: "#F3F4F6", color: "#374151" }}
+              data-testid="settings-manage-btn"
+            >
+              {portalLoading ? "…" : "Manage"}
+            </button>
+          </div>
+        ) : trialOver ? (
+          <button
+            onClick={() => setSection("subscribe")}
+            className="w-full vrat-card p-4 flex items-center gap-4 text-left active:opacity-70 transition-opacity"
+            data-testid="settings-subscribe-card"
+          >
+            <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "#FEE2E2" }}>
+              <svg viewBox="0 0 20 20" fill="#DC2626" className="w-5 h-5"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" /></svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-foreground">Free trial ended</p>
+              <p className="text-xs text-muted-foreground mt-0.5">Subscribe to continue your vrat journey</p>
+            </div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-muted-foreground flex-shrink-0"><path d="M9 18l6-6-6-6" /></svg>
+          </button>
+        ) : (
+          <button
+            onClick={() => setSection("subscribe")}
+            className="w-full vrat-card p-4 flex items-center gap-4 text-left active:opacity-70 transition-opacity"
+            data-testid="settings-subscribe-card"
+          >
+            <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "#FEF3C7" }}>
+              <svg viewBox="0 0 20 20" fill="#D97706" className="w-5 h-5"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" clipRule="evenodd" /></svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-foreground">Free Trial — {daysRemaining} day{daysRemaining !== 1 ? "s" : ""} remaining</p>
+              <p className="text-xs text-muted-foreground mt-0.5">Subscribe now to keep full access</p>
+            </div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-muted-foreground flex-shrink-0"><path d="M9 18l6-6-6-6" /></svg>
+          </button>
+        )}
 
         <SectionHeader title="Install" />
         <a
