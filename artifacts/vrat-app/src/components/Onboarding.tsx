@@ -263,7 +263,7 @@ export default function Onboarding({ onComplete }: Props) {
             <div className="flex items-center justify-center gap-3 mb-6">
               <OmSvg className="w-12 h-12 text-amber-200 opacity-90" />
               <JainHandSvg className="w-8 h-11 text-amber-100 opacity-80" />
-              <KhandaSvg className="w-12 h-12" style={{ color: "#003DA5" }} />
+              <span className="text-5xl leading-none" style={{ color: "#003DA5" }} aria-label="Khanda">☬</span>
             </div>
             <h1 className="font-serif text-6xl font-bold mb-4 tracking-tight" style={{ color: "#FEF9EC" }}>
               VRAT
