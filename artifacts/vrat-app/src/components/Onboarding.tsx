@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import {
   ONBOARDING_KEY,
   TRADITION_KEY,
@@ -94,9 +94,9 @@ function JainHandSvg({ className = "" }: { className?: string }) {
   );
 }
 
-function KhandaSvg({ className = "" }: { className?: string }) {
+function KhandaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
-    <svg viewBox="0 0 60 60" className={className} fill="currentColor" aria-hidden="true">
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
       {/* Chakkar (circle) */}
       <circle cx="30" cy="30" r="13" fill="none" stroke="currentColor" strokeWidth="3.5" />
       {/* Central double-edged Khanda sword */}
@@ -263,6 +263,7 @@ export default function Onboarding({ onComplete }: Props) {
             <div className="flex items-center justify-center gap-3 mb-6">
               <OmSvg className="w-12 h-12 text-amber-200 opacity-90" />
               <JainHandSvg className="w-8 h-11 text-amber-100 opacity-80" />
+              <KhandaSvg className="w-12 h-12" style={{ color: "#003DA5" }} />
             </div>
             <h1 className="font-serif text-6xl font-bold mb-4 tracking-tight" style={{ color: "#FEF9EC" }}>
               VRAT
