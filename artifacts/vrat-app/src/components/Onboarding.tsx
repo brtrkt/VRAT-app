@@ -320,8 +320,8 @@ export default function Onboarding({ onComplete }: Props) {
                     value: "Sikh" as Tradition,
                     label: "Sikh",
                     subtitle: "Gurpurabs, Baisakhi, Sangrand and more",
-                    icon: <KhandaSvg className="w-11 h-11 text-blue-700" />,
-                    accent: "#1D4ED8",
+                    icon: <span className="text-4xl leading-none" style={{ color: "#003DA5" }} aria-label="Khanda">☬</span>,
+                    accent: "#003DA5",
                   },
                   {
                     value: "Both" as Tradition,

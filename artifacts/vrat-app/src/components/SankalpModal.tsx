@@ -33,6 +33,7 @@ interface SankalpData {
   text: string;
   meaning: string;
   isJain?: boolean;
+  isSikh?: boolean;
 }
 
 const SANKALP: Record<string, SankalpData> = {
@@ -87,10 +88,17 @@ const SANKALP: Record<string, SankalpData> = {
       "I will observe this fast with ahimsa, truth and non-attachment.\nI will not consume food (or taste) until the designated time.\nMay this fast purify my karma.",
     isJain: true,
   },
+  sikh: {
+    text: "Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh.\nI begin this day of simran and seva with gratitude and humility.",
+    meaning:
+      "The Khalsa belongs to Waheguru; all victory belongs to Waheguru.\nI dedicate this day to prayer (simran), selfless service (seva), and sharing in the langar.\nMay Waheguru's grace and kirpa guide every step.",
+    isSikh: true,
+  },
 };
 
 function getSankalpData(vrat: Vrat): SankalpData {
   if (vrat.tradition === "Jain") return SANKALP["jain"];
+  if (vrat.tradition === "Sikh") return SANKALP["sikh"];
 
   const id = vrat.id;
   if (id.includes("ekadashi")) return SANKALP["ekadashi"];
@@ -121,6 +129,7 @@ export default function SankalpModal({ vrat, onClose }: Props) {
   const { t } = useLanguage();
   const sankalp = getSankalpData(vrat);
   const isJain = sankalp.isJain;
+  const isSikh = sankalp.isSikh;
   const [confirmed, setConfirmed] = useState(false);
 
   function handleConfirm() {
@@ -159,7 +168,7 @@ export default function SankalpModal({ vrat, onClose }: Props) {
         {/* Flame / symbol */}
         <div className="text-center mb-6">
           <span className="text-5xl" aria-hidden="true">
-            {isJain ? "🕉" : "🪔"}
+            {isSikh ? "☬" : isJain ? "🤚" : "🪔"}
           </span>
           <p
             className="text-xs font-medium tracking-[0.2em] uppercase mt-3 mb-1"
@@ -273,14 +282,15 @@ export function SankalpButton({
 }) {
   const { t } = useLanguage();
   const alreadyTaken = isSankalpTakenToday(vrat.id);
+  const isSikh = vrat.tradition === "Sikh";
 
   if (alreadyTaken) {
     return (
       <div
         className="flex items-center gap-3 rounded-2xl px-4 py-3 mb-2"
         style={{
-          background: isJain ? "rgba(22,163,74,0.10)" : "rgba(245,158,11,0.12)",
-          border: isJain ? "1px solid rgba(22,163,74,0.25)" : "1px solid rgba(245,158,11,0.3)",
+          background: isSikh ? "rgba(0,61,165,0.08)" : isJain ? "rgba(22,163,74,0.10)" : "rgba(245,158,11,0.12)",
+          border: isSikh ? "1px solid rgba(0,61,165,0.25)" : isJain ? "1px solid rgba(22,163,74,0.25)" : "1px solid rgba(245,158,11,0.3)",
         }}
         data-testid="sankalp-taken-badge"
       >
@@ -288,7 +298,7 @@ export function SankalpButton({
         <div>
           <p
             className="text-xs font-semibold"
-            style={{ color: isJain ? "#15803D" : "#92400E" }}
+            style={{ color: isSikh ? "#003DA5" : isJain ? "#15803D" : "#92400E" }}
           >
             {t("sankalp.taken")}
           </p>
@@ -305,10 +315,14 @@ export function SankalpButton({
       onClick={onOpen}
       className="w-full flex items-center gap-3 rounded-2xl px-4 py-3.5 mb-2 text-left transition-all active:scale-[0.98]"
       style={{
-        background: isJain
+        background: isSikh
+          ? "linear-gradient(135deg, rgba(0,61,165,0.10) 0%, rgba(0,82,204,0.07) 100%)"
+          : isJain
           ? "linear-gradient(135deg, rgba(21,128,61,0.12) 0%, rgba(34,197,94,0.08) 100%)"
           : "linear-gradient(135deg, rgba(245,158,11,0.14) 0%, rgba(217,119,6,0.09) 100%)",
-        border: isJain
+        border: isSikh
+          ? "1px solid rgba(0,61,165,0.28)"
+          : isJain
           ? "1px solid rgba(22,163,74,0.28)"
           : "1px solid rgba(245,158,11,0.35)",
       }}
@@ -316,12 +330,12 @@ export function SankalpButton({
       aria-label="Take sankalp"
     >
       <span className="text-2xl flex-shrink-0" aria-hidden="true">
-        {isJain ? "🕉" : "🪔"}
+        {isSikh ? "☬" : isJain ? "🤚" : "🪔"}
       </span>
       <div className="flex-1 min-w-0">
         <p
           className="text-sm font-semibold"
-          style={{ color: isJain ? "#15803D" : "#92400E" }}
+          style={{ color: isSikh ? "#003DA5" : isJain ? "#15803D" : "#92400E" }}
         >
           {t("sankalp.take")}
         </p>
