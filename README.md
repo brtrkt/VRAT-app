@@ -14,7 +14,7 @@ VRAT is a dedicated vrat (religious fasting) companion built for Hindu and Jain 
 
 ## Features
 
-- **50+ vrats covered** across Hindu and Jain traditions
+- **140+ vrats covered** across Hindu, Jain, and Sikh traditions
 - **Food guide** using light/medium/heavy energy categories (not calorie counts)
 - **Mantras with Sanskrit text, transliteration, and English meaning**
 - **Puja vidhi (step-by-step worship instructions)** for every vrat

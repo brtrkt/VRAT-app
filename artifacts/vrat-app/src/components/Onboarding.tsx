@@ -605,7 +605,11 @@ export default function Onboarding({ onComplete }: Props) {
               You are all set.
             </h2>
             <p className="text-2xl font-serif font-semibold mb-4" style={{ color: "#FDE68A" }}>
-              Jai Mata Di.
+              {tradition === "Sikh"
+                ? "Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh."
+                : tradition === "Jain"
+                ? "Jai Jinendra."
+                : "Jai Mata Di."}
             </p>
             <p className="text-sm leading-relaxed opacity-80" style={{ color: "#FEF3E2" }}>
               Your personal vrat calendar is ready.{" "}

@@ -335,7 +335,11 @@ function NirjalaFastTimerInner({ vrat, config }: { vrat: Vrat; config: FastConfi
             Fast complete
           </p>
           <p className="text-sm text-foreground/80 leading-relaxed mb-2">
-            Jai Mata Di — your devotion is beautiful. Please break your fast gently with water first.
+            {isJain
+              ? "Jai Jinendra — your devotion is beautiful. Please break your fast gently with boiled water first."
+              : vrat.tradition === "Sikh"
+              ? "Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh — your devotion is beautiful. Please break your fast gently."
+              : "Jai Mata Di — your devotion is beautiful. Please break your fast gently with water first."}
           </p>
           {config.completionAddendum && (
             <p className="text-sm font-medium leading-relaxed mt-2" style={{ color: accentColor }}>

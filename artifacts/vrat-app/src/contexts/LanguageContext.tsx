@@ -17,6 +17,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     try {
       const saved = localStorage.getItem(LANG_KEY) as LangCode | null;
       if (saved && saved in TRANSLATIONS) return saved;
+      const tradition = localStorage.getItem("vrat_tradition");
+      if (tradition === "Sikh") return "pa";
     } catch {}
     return "en";
   });

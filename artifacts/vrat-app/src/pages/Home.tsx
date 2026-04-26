@@ -7,7 +7,7 @@ import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import NavratriCard from "@/components/NavratriCard";
 import HydrationTracker from "@/components/HydrationTracker";
-import { getDaysRemaining } from "@/hooks/useUserPrefs";
+import { getDaysRemaining, getUserTradition } from "@/hooks/useUserPrefs";
 import {
   getTopStreaks,
   checkBadges,
@@ -567,8 +567,18 @@ export default function Home() {
 
         <div className="text-center mb-4">
           <div className="flex items-end justify-center gap-4 mb-2">
-            <OmSymbol className="text-primary text-3xl" />
-            <JainSymbol className="text-green-600 w-7 h-9" />
+            {(() => {
+              const t = getUserTradition();
+              if (t === "Sikh")  return <KhandaSvg className="w-10 h-12" style={{ color: "#003DA5" }} />;
+              if (t === "Jain")  return <JainSymbol className="text-green-600 w-7 h-9" />;
+              if (t === "Hindu") return <OmSymbol className="text-primary text-3xl" />;
+              return (
+                <>
+                  <OmSymbol className="text-primary text-3xl" />
+                  <JainSymbol className="text-green-600 w-7 h-9" />
+                </>
+              );
+            })()}
           </div>
           <h1 className="font-serif text-3xl font-bold text-foreground">VRAT</h1>
           <p className="text-muted-foreground text-sm mt-1 tracking-wide">Your Fast, Your Way</p>
