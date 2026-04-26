@@ -520,10 +520,13 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
 function KhandaSvg({ className = "", style = {} }: { className?: string; style?: CSSProperties }) {
   return (
     <svg viewBox="0 0 100 120" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <path d="M50 2 C50 2 44 30 30 52 C20 68 8 76 8 76 L50 58 L92 76 C92 76 80 68 70 52 C56 30 50 2 50 2 Z" />
-      <circle cx="50" cy="88" r="18" fill="none" stroke="currentColor" strokeWidth="7" />
-      <path d="M50 8 L50 110 M50 8 L50 110" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-      <rect x="20" y="66" width="60" height="7" rx="3.5" />
+      <path d="M14 6 C3 34 3 64 20 83 C24 89 31 93 39 95" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M86 6 C97 34 97 64 80 83 C76 89 69 93 61 95" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="50" cy="76" r="18" fill="none" stroke="currentColor" strokeWidth="6" />
+      <path d="M50 4 L43 50 L50 58 L57 50 Z" />
+      <rect x="25" y="50" width="50" height="7" rx="3.5" />
+      <rect x="47" y="58" width="6" height="22" rx="2" />
+      <ellipse cx="50" cy="83" rx="7" ry="4" />
     </svg>
   );
 }

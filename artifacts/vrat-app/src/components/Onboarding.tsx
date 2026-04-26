@@ -97,22 +97,20 @@ function JainHandSvg({ className = "" }: { className?: string }) {
 function KhandaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
     <svg viewBox="0 0 100 120" className={className} style={style} fill="currentColor" aria-hidden="true">
-      {/* Left kirpan — arched curved sword */}
-      <path d="M18 8 C8 35 10 68 30 88" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="18" cy="8" r="4.5" />
+      {/* Left kirpan — blade tip at top-left, curves out then back in */}
+      <path d="M14 6 C3 34 3 64 20 83 C24 89 31 93 39 95" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
       {/* Right kirpan — mirror */}
-      <path d="M82 8 C92 35 90 68 70 88" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="82" cy="8" r="4.5" />
-      {/* Chakkar (ring) */}
-      <circle cx="50" cy="80" r="22" fill="none" stroke="currentColor" strokeWidth="7" />
-      {/* Central blade — double-edged pointed top */}
-      <path d="M50 6 L44 46 L50 54 L56 46 Z" />
+      <path d="M86 6 C97 34 97 64 80 83 C76 89 69 93 61 95" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Chakkar (circular ring) */}
+      <circle cx="50" cy="76" r="18" fill="none" stroke="currentColor" strokeWidth="6" />
+      {/* Central khanda blade — double-edged, pointed tip at top */}
+      <path d="M50 4 L43 50 L50 58 L57 50 Z" />
       {/* Crossguard */}
-      <rect x="30" y="42" width="40" height="7" rx="3.5" />
-      {/* Handle grip (passes through chakkar) */}
-      <rect x="47" y="54" width="6" height="18" rx="2" />
+      <rect x="25" y="50" width="50" height="7" rx="3.5" />
+      {/* Handle (passes through chakkar) */}
+      <rect x="47" y="58" width="6" height="22" rx="2" />
       {/* Pommel */}
-      <ellipse cx="50" cy="74" rx="6" ry="4" />
+      <ellipse cx="50" cy="83" rx="7" ry="4" />
     </svg>
   );
 }
