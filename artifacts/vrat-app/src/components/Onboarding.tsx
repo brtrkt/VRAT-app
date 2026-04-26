@@ -261,36 +261,67 @@ export default function Onboarding({ onComplete }: Props) {
       >
         {/* ── Screen 1: Welcome ─────────────────────────────────── */}
         <div
-          className="flex-shrink-0 h-full flex flex-col items-center justify-between px-6 pb-12 safe-top"
+          className="flex-shrink-0 h-full flex flex-col items-center justify-between px-6 pb-10 safe-top"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #C86B1A 0%, #E07B2A 50%, #D97706 100%)" }}
         >
           <div />
-          <div className="text-center text-white">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <OmSvg className="w-12 h-12 text-amber-200 opacity-90" />
-              <JainHandSvg className="w-8 h-11 text-amber-100 opacity-80" />
-              <KhandaSvg className="w-12 h-12" style={{ color: "#003DA5" }} />
-            </div>
-            <h1 className="font-serif text-6xl font-bold mb-4 tracking-tight" style={{ color: "#FEF9EC" }}>
+
+          {/* Title */}
+          <div className="text-center text-white w-full max-w-xs">
+            <h1 className="font-serif text-6xl font-bold mb-2 tracking-tight" style={{ color: "#FEF9EC" }}>
               VRAT
             </h1>
-            <p className="text-3xl font-serif font-semibold mb-3" style={{ color: "#FDE68A" }}>
+            <p className="text-2xl font-serif font-semibold mb-1" style={{ color: "#FDE68A" }}>
               Your fast. Your way.
             </p>
-            <p className="text-base leading-relaxed opacity-85" style={{ color: "#FEF3E2" }}>
-              A sacred companion for Hindu, Jain, and Sikh families
+            <p className="text-sm leading-relaxed mb-8 opacity-85" style={{ color: "#FEF3E2" }}>
+              Tap your tradition to begin
             </p>
-          </div>
-          <div className="w-full max-w-xs">
-            <StepDots total={TOTAL_STEPS} current={0} />
+
+            {/* ── Tradition selector cards ── */}
+            <div className="grid grid-cols-3 gap-3 w-full">
+              {/* Hindu */}
+              <button
+                onClick={() => { chooseTradition("Hindu"); setStep(2); }}
+                className="flex flex-col items-center justify-center gap-2 rounded-2xl py-5 px-2 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <OmSvg className="w-14 h-14 text-amber-100" />
+                <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Hindu</span>
+              </button>
+
+              {/* Jain */}
+              <button
+                onClick={() => { chooseTradition("Jain"); setStep(2); }}
+                className="flex flex-col items-center justify-center gap-2 rounded-2xl py-5 px-2 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <JainHandSvg className="w-10 h-14 text-amber-100" />
+                <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Jain</span>
+              </button>
+
+              {/* Sikh */}
+              <button
+                onClick={() => { chooseTradition("Sikh"); setStep(2); }}
+                className="flex flex-col items-center justify-center gap-2 rounded-2xl py-5 px-2 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <KhandaSvg className="w-14 h-14" style={{ color: "#7EC8F0" }} />
+                <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Sikh</span>
+              </button>
+            </div>
+
+            {/* Both / Hindu+Jain option */}
             <button
-              onClick={() => setStep(1)}
-              className="mt-5 w-full py-4 rounded-2xl font-semibold text-base tracking-wide transition-opacity active:opacity-80"
-              style={{ background: "rgba(255,255,255,0.2)", color: "#FEF9EC", border: "1.5px solid rgba(255,255,255,0.4)" }}
+              onClick={() => { chooseTradition("Both"); setStep(2); }}
+              className="mt-3 w-full py-3 rounded-2xl text-xs font-semibold tracking-wide transition-opacity active:opacity-70"
+              style={{ background: "rgba(255,255,255,0.10)", color: "#FDE68A", border: "1px solid rgba(255,255,255,0.25)" }}
             >
-              Begin my journey
+              Hindu + Jain
             </button>
           </div>
+
+          <StepDots total={TOTAL_STEPS} current={0} />
         </div>
 
         {/* ── Screen 2: Tradition ──────────────────────────────── */}
