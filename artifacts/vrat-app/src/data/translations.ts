@@ -1,14 +1,14 @@
 export type LangCode = "en" | "hi" | "gu" | "pa" | "mr" | "ta" | "te" | "kn";
 
-export const LANGUAGE_META: Record<LangCode, { flag: string; name: string; native: string }> = {
-  en: { flag: "🇬🇧", name: "English",  native: "English" },
-  hi: { flag: "🇮🇳", name: "Hindi",    native: "हिंदी" },
-  gu: { flag: "🇮🇳", name: "Gujarati", native: "ગુજરાતી" },
-  pa: { flag: "🇮🇳", name: "Punjabi",  native: "ਪੰਜਾਬੀ" },
-  mr: { flag: "🇮🇳", name: "Marathi",  native: "मराठी" },
-  ta: { flag: "🇮🇳", name: "Tamil",    native: "தமிழ்" },
-  te: { flag: "🇮🇳", name: "Telugu",   native: "తెలుగు" },
-  kn: { flag: "🇮🇳", name: "Kannada",  native: "ಕನ್ನಡ" },
+export const LANGUAGE_META: Record<LangCode, { name: string; native: string }> = {
+  en: { name: "English",  native: "English" },
+  hi: { name: "Hindi",    native: "हिंदी" },
+  gu: { name: "Gujarati", native: "ગુજરાતી" },
+  pa: { name: "Punjabi",  native: "ਪੰਜਾਬੀ" },
+  mr: { name: "Marathi",  native: "मराठी" },
+  ta: { name: "Tamil",    native: "தமிழ்" },
+  te: { name: "Telugu",   native: "తెలుగు" },
+  kn: { name: "Kannada",  native: "ಕನ್ನಡ" },
 };
 
 export const LANGUAGE_ORDER: LangCode[] = ["en", "hi", "gu", "pa", "mr", "ta", "te", "kn"];
