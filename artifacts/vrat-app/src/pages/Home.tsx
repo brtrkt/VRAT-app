@@ -570,6 +570,7 @@ export default function Home() {
                 <>
                   <OmSymbol className="text-primary text-3xl" />
                   <JainSymbol className="text-green-600 w-7 h-9" />
+                  <KhandaSvg className="w-10 h-12" style={{ color: "#003DA5" }} />
                 </>
               );
             })()}
