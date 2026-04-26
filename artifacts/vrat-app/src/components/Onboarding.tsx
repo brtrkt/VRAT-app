@@ -96,17 +96,23 @@ function JainHandSvg({ className = "" }: { className?: string }) {
 
 function KhandaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
-    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
-      {/* Chakkar (circle) */}
-      <circle cx="30" cy="30" r="13" fill="none" stroke="currentColor" strokeWidth="3.5" />
-      {/* Central double-edged Khanda sword */}
-      <path d="M30 6 L27 24 L24 42 L30 48 L36 42 L33 24 Z" />
-      {/* Left Kirpan */}
-      <path d="M10 10 L22 28 L20 44 L24 42 L24 26 Z" />
-      {/* Right Kirpan */}
-      <path d="M50 10 L38 28 L40 44 L36 42 L36 26 Z" />
-      {/* Quillon (crossguard) */}
-      <path d="M18 26 L42 26 L42 29 L18 29 Z" rx="1" />
+    <svg viewBox="0 0 100 120" className={className} style={style} fill="currentColor" aria-hidden="true">
+      {/* Left kirpan — arched curved sword */}
+      <path d="M18 8 C8 35 10 68 30 88" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="18" cy="8" r="4.5" />
+      {/* Right kirpan — mirror */}
+      <path d="M82 8 C92 35 90 68 70 88" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="82" cy="8" r="4.5" />
+      {/* Chakkar (ring) */}
+      <circle cx="50" cy="80" r="22" fill="none" stroke="currentColor" strokeWidth="7" />
+      {/* Central blade — double-edged pointed top */}
+      <path d="M50 6 L44 46 L50 54 L56 46 Z" />
+      {/* Crossguard */}
+      <rect x="30" y="42" width="40" height="7" rx="3.5" />
+      {/* Handle grip (passes through chakkar) */}
+      <rect x="47" y="54" width="6" height="18" rx="2" />
+      {/* Pommel */}
+      <ellipse cx="50" cy="74" rx="6" ry="4" />
     </svg>
   );
 }
@@ -263,7 +269,7 @@ export default function Onboarding({ onComplete }: Props) {
             <div className="flex items-center justify-center gap-3 mb-6">
               <OmSvg className="w-12 h-12 text-amber-200 opacity-90" />
               <JainHandSvg className="w-8 h-11 text-amber-100 opacity-80" />
-              <span className="text-5xl leading-none" style={{ color: "#003DA5" }} aria-label="Khanda">☬</span>
+              <KhandaSvg className="w-12 h-12" style={{ color: "#003DA5" }} />
             </div>
             <h1 className="font-serif text-6xl font-bold mb-4 tracking-tight" style={{ color: "#FEF9EC" }}>
               VRAT
@@ -320,7 +326,7 @@ export default function Onboarding({ onComplete }: Props) {
                     value: "Sikh" as Tradition,
                     label: "Sikh",
                     subtitle: "Gurpurabs, Baisakhi, Sangrand and more",
-                    icon: <span className="text-4xl leading-none" style={{ color: "#003DA5" }} aria-label="Khanda">☬</span>,
+                    icon: <KhandaSvg className="w-12 h-12" style={{ color: "#003DA5" }} />,
                     accent: "#003DA5",
                   },
                   {

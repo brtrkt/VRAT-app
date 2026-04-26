@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type CSSProperties } from "react";
 import { useLocation } from "wouter";
 import { getVratsForDate, getNextVrat, getDaysUntil, formatDateStr, getAllVrats } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
@@ -184,6 +184,22 @@ function FastingTimer({ vratsToday }: { vratsToday: Vrat[] }) {
         </>
       )}
     </div>
+  );
+}
+
+function KhandaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 100 120" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <path d="M18 8 C8 35 10 68 30 88" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="18" cy="8" r="4.5" />
+      <path d="M82 8 C92 35 90 68 70 88" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="82" cy="8" r="4.5" />
+      <circle cx="50" cy="80" r="22" fill="none" stroke="currentColor" strokeWidth="7" />
+      <path d="M50 6 L44 46 L50 54 L56 46 Z" />
+      <rect x="30" y="42" width="40" height="7" rx="3.5" />
+      <rect x="47" y="54" width="6" height="18" rx="2" />
+      <ellipse cx="50" cy="74" rx="6" ry="4" />
+    </svg>
   );
 }
 
@@ -402,7 +418,7 @@ function MantraCard({ vrats }: { vrats: Vrat[] }) {
         {displayVrat.tradition === "Jain"
           ? <JainSymbol className="text-green-600 w-5 h-6 flex-shrink-0" />
           : displayVrat.tradition === "Sikh"
-          ? <span className="text-lg leading-none flex-shrink-0" style={{ color: "#003DA5" }} aria-label="Khanda">☬</span>
+          ? <KhandaSvg className="w-5 h-5 flex-shrink-0" style={{ color: "#003DA5" }} />
           : <OmSymbol className="text-primary text-lg" />
         }
         <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground">

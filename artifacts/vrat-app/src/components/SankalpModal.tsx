@@ -1,7 +1,23 @@
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { X } from "lucide-react";
 import type { Vrat } from "@/data/vrats";
 import { useLanguage } from "@/contexts/LanguageContext";
+
+function KhandaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 100 120" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <path d="M18 8 C8 35 10 68 30 88" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="18" cy="8" r="4.5" />
+      <path d="M82 8 C92 35 90 68 70 88" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="82" cy="8" r="4.5" />
+      <circle cx="50" cy="80" r="22" fill="none" stroke="currentColor" strokeWidth="7" />
+      <path d="M50 6 L44 46 L50 54 L56 46 Z" />
+      <rect x="30" y="42" width="40" height="7" rx="3.5" />
+      <rect x="47" y="54" width="6" height="18" rx="2" />
+      <ellipse cx="50" cy="74" rx="6" ry="4" />
+    </svg>
+  );
+}
 
 // ─── localStorage ─────────────────────────────────────────────────────────────
 const SANKALP_KEY = "vrat_sankalp_log_v1";
@@ -168,7 +184,7 @@ export default function SankalpModal({ vrat, onClose }: Props) {
         {/* Flame / symbol */}
         <div className="text-center mb-6">
           <span className="text-5xl" aria-hidden="true">
-            {isSikh ? "☬" : isJain ? "🤚" : "🪔"}
+            {isSikh ? <KhandaSvg className="w-12 h-12 inline-block" style={{ color: "#003DA5" }} /> : isJain ? "🤚" : "🪔"}
           </span>
           <p
             className="text-xs font-medium tracking-[0.2em] uppercase mt-3 mb-1"
@@ -330,7 +346,7 @@ export function SankalpButton({
       aria-label="Take sankalp"
     >
       <span className="text-2xl flex-shrink-0" aria-hidden="true">
-        {isSikh ? "☬" : isJain ? "🤚" : "🪔"}
+        {isSikh ? <KhandaSvg className="w-6 h-6 inline-block" style={{ color: "#003DA5" }} /> : isJain ? "🤚" : "🪔"}
       </span>
       <div className="flex-1 min-w-0">
         <p
