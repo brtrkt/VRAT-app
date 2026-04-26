@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type CSSProperties } from "react";
 import { useLocation } from "wouter";
-import { getVratsForDate, getNextVrat, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED } from "@/data/vrats";
+import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
+import { getUserTradition } from "@/hooks/useUserPrefs";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
@@ -72,6 +73,18 @@ const LOG_ITEMS = [
   { label: "Makhana", emoji: "🌾" },
   { label: "Sabudana", emoji: "🍚" },
   { label: "Nuts", emoji: "🥜" },
+];
+
+const SIKH_LOG_ITEMS = [
+  { label: "Water", emoji: "💧" },
+  { label: "Langar Chai", emoji: "☕" },
+  { label: "Lassi", emoji: "🥛" },
+  { label: "Dal", emoji: "🫘" },
+  { label: "Roti", emoji: "🫓" },
+  { label: "Rice", emoji: "🍚" },
+  { label: "Sabzi", emoji: "🥬" },
+  { label: "Kadah Prasad", emoji: "🙏" },
+  { label: "Fruits", emoji: "🍎" },
 ];
 
 interface LogEntry {
@@ -157,6 +170,8 @@ function HydrationBar({ log }: { log: LogEntry[] }) {
 
 function FoodLog({ todayStr }: { todayStr: string }) {
   const [log, setLog] = useState<LogEntry[]>(() => loadLog(todayStr));
+  const tradition = getUserTradition();
+  const logItems = tradition === "Sikh" ? SIKH_LOG_ITEMS : LOG_ITEMS;
 
   useEffect(() => {
     saveLog(log);
@@ -190,7 +205,7 @@ function FoodLog({ todayStr }: { todayStr: string }) {
       </div>
 
       <div className="flex flex-wrap gap-2 mb-4">
-        {LOG_ITEMS.map((item) => (
+        {logItems.map((item) => (
           <button
             key={item.label}
             onClick={() => addEntry(item)}
@@ -502,49 +517,80 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
   );
 }
 
-function NoFastToday({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | null }) {
+function KhandaSvg({ className = "", style = {} }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 100 120" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <path d="M50 2 C50 2 44 30 30 52 C20 68 8 76 8 76 L50 58 L92 76 C92 76 80 68 70 52 C56 30 50 2 50 2 Z" />
+      <circle cx="50" cy="88" r="18" fill="none" stroke="currentColor" strokeWidth="7" />
+      <path d="M50 8 L50 110 M50 8 L50 110" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+      <rect x="20" y="66" width="60" height="7" rx="3.5" />
+    </svg>
+  );
+}
+
+function NoFastToday({ nextVrat, tradition }: { nextVrat: { vrat: Vrat; date: string } | null; tradition: string }) {
+  const isSikh = tradition === "Sikh";
   return (
     <div data-testid="no-fast-message">
       <div className="vrat-card p-6 mb-4 text-center">
-        <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-          <OmSymbol className="text-primary text-2xl" />
+        <div
+          className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4${isSikh ? "" : " bg-accent"}`}
+          style={isSikh ? { background: "#EFF6FF" } : undefined}
+        >
+          {isSikh
+            ? <KhandaSvg className="w-8 h-10" style={{ color: "#003DA5" }} />
+            : <OmSymbol className="text-primary text-2xl" />
+          }
         </div>
         <h2 className="font-serif text-xl font-semibold text-foreground mb-2">
-          No fast today
+          {isSikh ? "No observance today" : "No fast today"}
         </h2>
         <p className="text-muted-foreground text-sm leading-relaxed">
-          Enjoy your meals with mindfulness and gratitude. Nourish your body as you would nourish your soul.
+          {isSikh
+            ? "Eat well, serve others, and remember Waheguru. Every day is a day for simran and seva."
+            : "Enjoy your meals with mindfulness and gratitude. Nourish your body as you would nourish your soul."}
         </p>
       </div>
 
       {nextVrat && (
         <div className="vrat-card p-5 mb-4">
           <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-3">
-            Prepare for Next Vrat
+            {isSikh ? "Upcoming Observance" : "Prepare for Next Vrat"}
           </p>
           <h3 className="font-serif text-lg font-semibold text-foreground mb-1">
             {nextVrat.vrat.name}
           </h3>
           <p className="text-sm text-muted-foreground mb-4">
-            Deity: {nextVrat.vrat.deity}
+            {isSikh ? "Observance" : "Deity"}: {nextVrat.vrat.deity}
           </p>
-          <div className="space-y-2 mb-4">
-            <p className="text-sm font-medium text-foreground">Foods you'll need:</p>
-            {nextVrat.vrat.foodsAllowed.slice(0, 5).map((f, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-2 text-sm text-muted-foreground"
-                data-testid={`upcoming-food-${i}`}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                {f}
+          {!isSikh && (
+            <>
+              <div className="space-y-2 mb-4">
+                <p className="text-sm font-medium text-foreground">Foods you'll need:</p>
+                {nextVrat.vrat.foodsAllowed.slice(0, 5).map((f, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 text-sm text-muted-foreground"
+                    data-testid={`upcoming-food-${i}`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    {f}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="bg-accent/40 rounded-xl p-3">
-            <p className="text-xs text-foreground font-medium mb-1">Meal idea for that day:</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">{nextVrat.vrat.mealIdea}</p>
-          </div>
+              <div className="bg-accent/40 rounded-xl p-3">
+                <p className="text-xs text-foreground font-medium mb-1">Meal idea for that day:</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{nextVrat.vrat.mealIdea}</p>
+              </div>
+            </>
+          )}
+          {isSikh && (
+            <div className="rounded-xl p-3" style={{ background: "#EFF6FF" }}>
+              <p className="text-xs leading-relaxed" style={{ color: "#1E3A8A" }}>
+                Sikh observances are days of simran (meditation), seva (selfless service), and sharing in the langar. No special food restrictions — eat simple, vegetarian food with gratitude.
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -556,8 +602,9 @@ export default function WhatToEat() {
   const [, setLocation] = useLocation();
   const [today] = useState(new Date());
   const todayStr = today.toISOString().split("T")[0];
-  const vratsToday = getVratsForDate(todayStr);
-  const nextVrat = getNextVrat(today);
+  const userTradition = getUserTradition();
+  const vratsToday = filterVratsByTradition(getVratsForDate(todayStr), userTradition);
+  const nextVrat = getNextVratForTradition(today, userTradition);
 
   const primaryVrat = vratsToday[0];
 
@@ -576,7 +623,7 @@ export default function WhatToEat() {
         {primaryVrat ? (
           <VratFoodCard vrat={primaryVrat} />
         ) : (
-          <NoFastToday nextVrat={nextVrat} />
+          <NoFastToday nextVrat={nextVrat} tradition={userTradition} />
         )}
 
         <FoodLog todayStr={todayStr} />
@@ -590,8 +637,14 @@ export default function WhatToEat() {
           <div className="flex items-center gap-3">
             <span className="text-2xl" aria-hidden="true">🍳</span>
             <div>
-              <p className="font-serif text-base font-semibold text-foreground">Fasting Recipes</p>
-              <p className="text-xs text-muted-foreground mt-0.5">10 traditional recipes — step by step</p>
+              <p className="font-serif text-base font-semibold text-foreground">
+                {userTradition === "Sikh" ? "Langar Recipes" : "Fasting Recipes"}
+              </p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {userTradition === "Sikh"
+                  ? "5 langar-style recipes — simple & nourishing"
+                  : "10 traditional recipes — step by step"}
+              </p>
             </div>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 text-muted-foreground flex-shrink-0" aria-hidden="true">
@@ -601,8 +654,9 @@ export default function WhatToEat() {
 
         <div className="vrat-card p-4 text-center">
           <p className="text-xs text-muted-foreground italic leading-relaxed">
-            "Ahaar shuddhi se chitta shuddhi hoti hai" — Pure food leads to a pure mind.
-            Your fast is a gift you give to your spirit.
+            {userTradition === "Sikh"
+              ? "\"Ik Onkar — Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh.\" Food prepared with love and shared freely is the highest seva."
+              : "\"Ahaar shuddhi se chitta shuddhi hoti hai\" — Pure food leads to a pure mind. Your fast is a gift you give to your spirit."}
           </p>
         </div>
 

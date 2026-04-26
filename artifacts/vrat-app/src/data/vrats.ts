@@ -5040,3 +5040,26 @@ export function getDaysUntil(dateStr: string, fromDate: Date): number {
 export function getAllVrats(): Vrat[] {
   return vrats;
 }
+
+export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] {
+  if (tradition === "Both") return list.filter((v) => v.tradition === "Hindu" || v.tradition === "Jain" || v.tradition === "Both");
+  if (tradition === "Hindu") return list.filter((v) => v.tradition === "Hindu" || v.tradition === "Both");
+  if (tradition === "Jain")  return list.filter((v) => v.tradition === "Jain"  || v.tradition === "Both");
+  if (tradition === "Sikh")  return list.filter((v) => v.tradition === "Sikh");
+  return list;
+}
+
+export function getNextVratForTradition(fromDate: Date, tradition: string): { vrat: Vrat; date: string } | null {
+  const today = fromDate.toISOString().split("T")[0];
+  const pairs: { date: string; vrat: Vrat }[] = [];
+  for (const vrat of vrats) {
+    const filtered = filterVratsByTradition([vrat], tradition);
+    if (filtered.length === 0) continue;
+    for (const date of vrat.dates) {
+      if (date >= today) pairs.push({ date, vrat });
+    }
+  }
+  pairs.sort((a, b) => a.date.localeCompare(b.date));
+  const next = pairs.find((p) => p.date > today);
+  return next ? { vrat: next.vrat, date: next.date } : null;
+}

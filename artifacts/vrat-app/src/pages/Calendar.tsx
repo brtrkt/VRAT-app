@@ -626,6 +626,21 @@ export default function Calendar() {
         <div className="p-4 text-center">
           {(() => {
             const loc = getLocationInfo();
+            const trad = getUserTradition();
+            if (trad === "Sikh") {
+              return (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dates follow the Nanakshahi Sikh calendar. Local Gurdwara observances may vary — please verify with your local Gurdwara.
+                </p>
+              );
+            }
+            if (trad === "Jain") {
+              return (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dates follow Drik Panchang IST. Regional dates may vary — please verify with your local Jain community.
+                </p>
+              );
+            }
             return (
               <p className="text-xs text-muted-foreground leading-relaxed">
                 {loc.id === "india"

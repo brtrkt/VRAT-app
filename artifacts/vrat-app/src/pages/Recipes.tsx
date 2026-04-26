@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { ChevronLeft, ChevronDown, ChevronUp } from "lucide-react";
 import PageFooter from "@/components/PageFooter";
+import { getUserTradition } from "@/hooks/useUserPrefs";
 
 interface Recipe {
   id: string;
@@ -302,6 +303,165 @@ const RECIPES: Recipe[] = [
   },
 ];
 
+const SIKH_RECIPES: Recipe[] = [
+  {
+    id: "langar-dal",
+    name: "Langar Dal",
+    emoji: "🫘",
+    desc: "The heart of every Gurdwara kitchen — a simple, nourishing lentil dal cooked in large quantities and served freely to all.",
+    prepMins: 10,
+    cookMins: 30,
+    serves: 4,
+    energy: "Medium",
+    tags: ["Sikh Langar", "Gurpurab", "Everyday"],
+    ingredients: [
+      "1 cup chana dal (split chickpeas) or toor dal, soaked 30 min",
+      "1 medium onion, finely chopped",
+      "2 medium tomatoes, chopped",
+      "1 tsp ginger-garlic paste",
+      "1 tsp cumin seeds",
+      "½ tsp turmeric",
+      "1 tsp coriander powder",
+      "½ tsp red chilli powder",
+      "Salt to taste",
+      "2 tbsp ghee or vegetable oil",
+      "Fresh coriander to garnish",
+    ],
+    steps: [
+      "Pressure cook the soaked dal with 2.5 cups water, turmeric, and salt for 4–5 whistles until completely soft. Mash lightly.",
+      "Heat ghee in a pan. Add cumin seeds and let them splutter.",
+      "Add onions and cook on medium heat for 8–10 minutes until golden brown.",
+      "Add ginger-garlic paste and cook for 2 minutes. Add tomatoes and cook until the oil separates — about 8 minutes.",
+      "Add coriander powder and red chilli. Mix well for 1 minute.",
+      "Pour the cooked dal into the pan. Stir and simmer for 10 minutes so the flavours merge.",
+      "Adjust salt and consistency (add water if too thick). Garnish with coriander. Serve with roti.",
+    ],
+    tip: "In the Langar, dal is cooked slowly in large degs (cauldrons) with gentle stirring. At home, the key is to cook the onions and tomatoes until completely broken down — this is what gives langar dal its depth.",
+  },
+  {
+    id: "kadah-prasad",
+    name: "Kadah Prasad",
+    emoji: "🙏",
+    desc: "The sacred halwa offered in every Gurdwara — made from equal parts atta, ghee, sugar, and water. Simple, sacred, and deeply comforting.",
+    prepMins: 5,
+    cookMins: 20,
+    serves: 6,
+    energy: "Heavy",
+    tags: ["Sikh Prasad", "Gurpurab", "Sacred Offering"],
+    ingredients: [
+      "1 cup whole wheat flour (atta)",
+      "1 cup ghee",
+      "1 cup sugar",
+      "3 cups water",
+    ],
+    steps: [
+      "Boil 3 cups water with 1 cup sugar in a pot until the sugar dissolves completely. Keep this syrup warm on a low flame.",
+      "In a separate heavy-bottomed pan (karahi), melt ghee on medium heat.",
+      "Add the atta to the ghee all at once. Stir continuously and vigorously — do not stop or it will burn.",
+      "Roast the atta in ghee on medium-low flame for 15–20 minutes, stirring non-stop, until it turns a deep golden colour and smells nutty and sweet.",
+      "Very carefully pour the warm sugar syrup into the atta-ghee (it will splutter — stand back). Stir quickly and continuously.",
+      "Cook for 2–3 minutes until the halwa pulls away from the sides of the pan and comes together into a smooth, shiny mass.",
+      "The Kadah Prasad is ready. Traditionally offered with both hands cupped together.",
+    ],
+    tip: "The equal ratio of atta, ghee, and sugar is essential — this is the traditional Langar formula. Do not reduce ghee. The continuous stirring during roasting is what makes Kadah Prasad smooth; stopping even for a minute causes lumps.",
+  },
+  {
+    id: "aloo-gobhi-langar",
+    name: "Langar Aloo Gobhi",
+    emoji: "🥔",
+    desc: "Simple, dry-cooked potato and cauliflower sabzi — the most common vegetable dish served in the Gurdwara langar.",
+    prepMins: 10,
+    cookMins: 20,
+    serves: 3,
+    energy: "Medium",
+    tags: ["Sikh Langar", "Gurpurab", "Everyday"],
+    ingredients: [
+      "1 medium cauliflower, cut into florets",
+      "3 medium potatoes, peeled and cubed",
+      "1 medium onion, sliced",
+      "2 tomatoes, chopped",
+      "1 tsp ginger, grated",
+      "1 tsp cumin seeds",
+      "1 tsp turmeric",
+      "1 tsp coriander powder",
+      "½ tsp red chilli powder",
+      "Salt to taste",
+      "3 tbsp oil",
+      "Fresh coriander",
+    ],
+    steps: [
+      "Heat oil in a wide pan. Add cumin seeds; let them splutter.",
+      "Add onions and cook for 5 minutes until softened. Add ginger and cook for 1 minute.",
+      "Add tomatoes and all spices. Cook until the tomatoes break down and oil surfaces — about 6 minutes.",
+      "Add potatoes. Stir to coat in the masala. Cover and cook for 5 minutes.",
+      "Add cauliflower florets. Stir gently. Cover and cook on low heat for 10 minutes until both vegetables are tender.",
+      "Uncover and cook for 2 more minutes to dry out any extra moisture. Garnish with coriander.",
+    ],
+    tip: "Don't add water — the vegetables release their own moisture. Keeping the pan covered on low heat is the key to soft, well-cooked sabzi without burning.",
+  },
+  {
+    id: "langar-chole",
+    name: "Langar Chole",
+    emoji: "🍲",
+    desc: "Rich, spiced chickpea curry — one of the most beloved dishes in Sikh Langar. Filling, protein-rich, and deeply flavourful.",
+    prepMins: 10,
+    cookMins: 35,
+    serves: 4,
+    energy: "Heavy",
+    tags: ["Sikh Langar", "Gurpurab", "Baisakhi"],
+    ingredients: [
+      "2 cups kabuli chana (white chickpeas), soaked overnight",
+      "2 medium onions, finely chopped",
+      "3 tomatoes, pureed",
+      "1 tbsp ginger-garlic paste",
+      "1 tsp cumin seeds",
+      "1 tsp chole masala (or mix of amchur, cumin, coriander)",
+      "1 tsp turmeric",
+      "1 tsp red chilli powder",
+      "1 tsp coriander powder",
+      "1 tsp garam masala",
+      "Salt to taste",
+      "3 tbsp oil",
+      "Fresh coriander and a squeeze of lemon",
+    ],
+    steps: [
+      "Pressure cook the soaked chickpeas with 3 cups water and ½ tsp salt for 5–6 whistles until completely soft but not mushy.",
+      "Heat oil in a kadai. Add cumin seeds. Once they splutter, add onions and cook on medium heat for 12 minutes until deep golden.",
+      "Add ginger-garlic paste and cook for 2 minutes. Add pureed tomatoes and all spices except garam masala.",
+      "Cook the masala for 10–12 minutes, stirring, until the oil separates from the masala and it turns deep red.",
+      "Add the cooked chickpeas with their water. Mix well. Simmer for 15 minutes until the gravy thickens.",
+      "Add garam masala. Stir and cook for 2 more minutes. Finish with lemon juice and coriander.",
+    ],
+    tip: "The deep golden onion is the secret. Resist the temptation to rush — golden-brown onions take at least 12 minutes and create the flavour base of the entire dish. Any shortcut here will be tasted.",
+  },
+  {
+    id: "langar-roti",
+    name: "Langar Roti",
+    emoji: "🫓",
+    desc: "Simple whole wheat rotis made in enormous quantities in the Gurdwara. At home, these thin, soft rotis are perfected by patience and practice.",
+    prepMins: 15,
+    cookMins: 20,
+    serves: 4,
+    energy: "Medium",
+    tags: ["Sikh Langar", "Gurpurab", "Everyday"],
+    ingredients: [
+      "2 cups whole wheat flour (atta)",
+      "½ tsp salt",
+      "Water as needed (about ¾ cup)",
+      "A little ghee for spreading",
+    ],
+    steps: [
+      "Mix atta and salt in a bowl. Add water little by little, kneading until you get a soft, smooth, non-sticky dough. It should bounce back when pressed.",
+      "Cover with a damp cloth and rest for 15–20 minutes — this makes the dough easier to roll.",
+      "Divide into 10–12 equal balls. Dust a ball lightly with flour and roll into a thin, even circle (about 6 inches in diameter).",
+      "Place on a hot tawa (griddle) on medium-high heat. Cook for 45 seconds until small bubbles appear.",
+      "Flip and cook for 30 seconds. Then place directly on the flame and let it puff up (30 seconds). Flip once on the flame.",
+      "Remove and brush lightly with ghee. Stack in a clean cloth to stay soft.",
+    ],
+    tip: "Even thickness across the roti is the hardest part — a thicker centre means it won't cook evenly. In the Langar, skilled sewadars make hundreds of rotis with the same motion; practice and repetition is the only teacher.",
+  },
+];
+
 const ENERGY_STYLE: Record<string, { bg: string; text: string }> = {
   Light:  { bg: "rgba(21,128,61,0.10)",  text: "#15803D" },
   Medium: { bg: "rgba(180,83,9,0.10)",   text: "#B45309" },
@@ -428,8 +588,10 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
 export default function Recipes() {
   const [, setLocation] = useLocation();
   const [filter, setFilter] = useState<"All" | "Light" | "Medium" | "Heavy">("All");
-
-  const filtered = filter === "All" ? RECIPES : RECIPES.filter((r) => r.energy === filter);
+  const tradition = getUserTradition();
+  const isSikh = tradition === "Sikh";
+  const recipePool = isSikh ? SIKH_RECIPES : RECIPES;
+  const filtered = filter === "All" ? recipePool : recipePool.filter((r) => r.energy === filter);
 
   return (
     <div className="min-h-screen cream-gradient">
@@ -444,18 +606,30 @@ export default function Recipes() {
             <ChevronLeft size={20} />
           </button>
           <div>
-            <h1 className="font-serif text-2xl font-bold text-foreground">Fasting Recipes</h1>
-            <p className="text-muted-foreground text-xs mt-0.5">10 traditional recipes for fast days</p>
+            <h1 className="font-serif text-2xl font-bold text-foreground">
+              {isSikh ? "Langar Recipes" : "Fasting Recipes"}
+            </h1>
+            <p className="text-muted-foreground text-xs mt-0.5">
+              {isSikh
+                ? `${SIKH_RECIPES.length} langar-style recipes — simple & nourishing`
+                : `${RECIPES.length} traditional recipes for fast days`}
+            </p>
           </div>
         </div>
 
         {/* Intro */}
         <div
           className="rounded-2xl px-5 py-4 mb-5"
-          style={{ background: "rgba(212,160,23,0.09)", border: "1px solid rgba(212,160,23,0.18)" }}
+          style={isSikh
+            ? { background: "#EFF6FF", border: "1px solid #BFDBFE" }
+            : { background: "rgba(212,160,23,0.09)", border: "1px solid rgba(212,160,23,0.18)" }
+          }
         >
-          <p className="text-sm text-amber-800 leading-relaxed">
-            All recipes use only <span className="font-semibold">vrat-approved ingredients</span> — sendha namak instead of regular salt, no onion or garlic, and only fasting-safe flours and grains.
+          <p className="text-sm leading-relaxed" style={{ color: isSikh ? "#1E3A8A" : "#92400E" }}>
+            {isSikh
+              ? <><span className="font-semibold">Gurdwara langar recipes</span> — simple vegetarian food prepared with love and served freely to all. Regular salt and everyday vegetables are used. No fasting restrictions apply.</>
+              : <>All recipes use only <span className="font-semibold">vrat-approved ingredients</span> — sendha namak instead of regular salt, no onion or garlic, and only fasting-safe flours and grains.</>
+            }
           </p>
         </div>
 
@@ -468,8 +642,12 @@ export default function Recipes() {
               className="flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors"
               style={
                 filter === f
-                  ? { background: "linear-gradient(135deg, #E07B2A, #C86B1A)", color: "white" }
-                  : { background: "rgba(212,160,23,0.10)", color: "#92400E" }
+                  ? isSikh
+                    ? { background: "linear-gradient(135deg, #001A6E, #003DA5)", color: "white" }
+                    : { background: "linear-gradient(135deg, #E07B2A, #C86B1A)", color: "white" }
+                  : isSikh
+                    ? { background: "rgba(0,61,165,0.08)", color: "#003DA5" }
+                    : { background: "rgba(212,160,23,0.10)", color: "#92400E" }
               }
             >
               {f}
@@ -477,12 +655,32 @@ export default function Recipes() {
           ))}
         </div>
 
+        {filtered.length === 0 && (
+          <div className="text-center py-10 text-muted-foreground">
+            <p className="text-sm">No recipes in this energy category.</p>
+          </div>
+        )}
+
         {/* Recipes */}
         {filtered.map((r) => (
           <RecipeCard key={r.id} recipe={r} />
         ))}
 
-        <div className="mt-2">
+        {/* Back to Food Guide button — so users are never stuck at the bottom */}
+        <button
+          onClick={() => setLocation("/eat")}
+          className="mt-4 w-full flex items-center justify-center gap-2 rounded-2xl py-3.5 text-sm font-semibold transition-all active:scale-95 border"
+          style={isSikh
+            ? { background: "#EFF6FF", color: "#003DA5", borderColor: "#BFDBFE" }
+            : { background: "rgba(224,123,42,0.08)", color: "#C86B1A", borderColor: "rgba(212,160,23,0.20)" }
+          }
+          data-testid="back-to-food-guide"
+        >
+          <ChevronLeft size={16} />
+          Back to {isSikh ? "Langar Guide" : "Food Guide"}
+        </button>
+
+        <div className="mt-4">
           <PageFooter />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect, type CSSProperties } from "react";
 import { useLocation } from "wouter";
-import { getVratsForDate, getNextVrat, getDaysUntil, formatDateStr, getAllVrats } from "@/data/vrats";
+import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, getDaysUntil, formatDateStr, getAllVrats } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
@@ -406,8 +406,9 @@ function MantraCard({ vrats }: { vrats: Vrat[] }) {
   useEffect(() => { setToday(new Date()); }, []);
 
   const todayStr = today.toISOString().split("T")[0];
-  const currentVrats = getVratsForDate(todayStr);
-  const nextVratData = getNextVrat(today);
+  const tradition = getUserTradition();
+  const currentVrats = filterVratsByTradition(getVratsForDate(todayStr), tradition);
+  const nextVratData = getNextVratForTradition(today, tradition);
   const displayVrat = currentVrats[0] || nextVratData?.vrat;
 
   if (!displayVrat) return null;
@@ -552,8 +553,9 @@ function MyStreaks() {
 export default function Home() {
   const [today] = useState(new Date());
   const todayStr = today.toISOString().split("T")[0];
-  const vratsToday = getVratsForDate(todayStr);
-  const nextVrat = getNextVrat(today);
+  const userTradition = getUserTradition();
+  const vratsToday = filterVratsByTradition(getVratsForDate(todayStr), userTradition);
+  const nextVrat = getNextVratForTradition(today, userTradition);
 
   const allVrats = vratsToday.length > 0 ? vratsToday : [];
   const nirjalaVrat = vratsToday.find(isNirjalaTimerVrat) ?? null;
