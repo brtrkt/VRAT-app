@@ -15,7 +15,7 @@ import Onboarding from "@/components/Onboarding";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import HowToInstall from "@/pages/HowToInstall";
 import Recipes from "@/pages/Recipes";
-import { ONBOARDING_KEY, initTrial, isTrialExpired, isSubscribed, setSubscribed } from "@/hooks/useUserPrefs";
+import { ONBOARDING_KEY, TRADITION_KEY, initTrial, isTrialExpired, isSubscribed, setSubscribed } from "@/hooks/useUserPrefs";
 import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
 
 const queryClient = new QueryClient();
@@ -242,6 +242,10 @@ function App() {
   const [verifying, setVerifying] = useState(false);
 
   useEffect(() => {
+    if (!localStorage.getItem(ONBOARDING_KEY)) {
+      localStorage.removeItem(TRADITION_KEY);
+    }
+
     initTrial();
 
     const params = new URLSearchParams(window.location.search);
