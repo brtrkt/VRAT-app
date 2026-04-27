@@ -603,7 +603,6 @@ const TRADITION_OPTIONS: { value: Tradition; label: string }[] = [
   { value: "ISKCON",       label: "ISKCON" },
   { value: "Lingayat",     label: "Lingayat" },
   { value: "PushtiMarg",   label: "Pushti Marg" },
-  { value: "Both",         label: "Hindu + Jain" },
 ];
 
 function TraditionSwitcher() {

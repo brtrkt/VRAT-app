@@ -369,7 +369,6 @@ export default function Settings() {
       { value: "Hindu",        label: "Hindu",        subtitle: "Ekadashi, Navratri, Karva Chauth and more" },
       { value: "Jain",         label: "Jain",         subtitle: "Paryushana, Navpad Oli, Samvatsari and more" },
       { value: "Sikh",         label: "Sikh",         subtitle: "Gurpurabs, Baisakhi, Sangrand and more" },
-      { value: "Both",         label: "Both",         subtitle: "Hindu and Jain observances together" },
       { value: "Swaminarayan", label: "Swaminarayan", subtitle: "Jayanti, Fuldol, Annakut and strict Ekadashi" },
       { value: "ISKCON",       label: "ISKCON / Vaishnava", subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik" },
       { value: "Lingayat",     label: "Lingayat / Veerashaiva", subtitle: "Maha Shivaratri, Shravan Somavar, Basava Jayanti" },
@@ -424,8 +423,8 @@ export default function Settings() {
     const iskconVrats       = VRAT_OPTIONS.filter((v) => v.tradition === "ISKCON");
     const lingayatVrats     = VRAT_OPTIONS.filter((v) => v.tradition === "Lingayat");
     const pushtiMargVrats   = VRAT_OPTIONS.filter((v) => v.tradition === "PushtiMarg");
-    const showHindu        = tradition === "Hindu" || tradition === "Both";
-    const showJain         = tradition === "Jain"  || tradition === "Both";
+    const showHindu        = tradition === "Hindu";
+    const showJain         = tradition === "Jain";
     const showSikh         = tradition === "Sikh";
     const showSwaminarayan = tradition === "Swaminarayan";
     const showISKCON       = tradition === "ISKCON";
@@ -443,7 +442,6 @@ export default function Settings() {
 
           {showHindu && (
             <>
-              {tradition === "Both" && <SectionHeader title="Hindu" />}
               {hinduVrats.map((opt) => (
                 <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
                   <div className="flex-1 mr-4">
@@ -457,7 +455,6 @@ export default function Settings() {
           )}
           {showJain && (
             <>
-              {tradition === "Both" && <SectionHeader title="Jain" />}
               {jainVrats.map((opt) => (
                 <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
                   <div className="flex-1 mr-4">
@@ -714,7 +711,7 @@ export default function Settings() {
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-foreground">{tradition}</p>
             <p className="text-xs text-muted-foreground mt-0.5">
-              {tradition === "Hindu" ? "Hindu vrats only" : tradition === "Jain" ? "Jain vrats only" : tradition === "Sikh" ? "Sikh Gurpurabs and observances" : "Hindu and Jain vrats"}
+              {tradition === "Hindu" ? "Hindu vrats only" : tradition === "Jain" ? "Jain vrats only" : tradition === "Sikh" ? "Sikh Gurpurabs and observances" : tradition === "Swaminarayan" ? "Swaminarayan vrats and festivals" : tradition === "ISKCON" ? "ISKCON / Vaishnava observances" : tradition === "Lingayat" ? "Lingayat / Veerashaiva observances" : tradition === "PushtiMarg" ? "Pushti Marg utsavs and Ekadashi" : `${tradition} observances`}
             </p>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-muted-foreground flex-shrink-0">

@@ -108,7 +108,9 @@ export function getRegionInfo(id?: UserRegion): RegionInfo {
 }
 
 export function getUserTradition(): Tradition {
-  return (localStorage.getItem(TRADITION_KEY) as Tradition) || "Both";
+  const stored = localStorage.getItem(TRADITION_KEY) as Tradition | null;
+  if (!stored || stored === "Both") return "Hindu";
+  return stored;
 }
 
 export function getObservedVrats(): string[] {

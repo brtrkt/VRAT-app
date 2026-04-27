@@ -5685,8 +5685,16 @@ export function getVratsForDate(dateStr: string): Vrat[] {
   return vrats.filter((v) => v.dates.includes(dateStr));
 }
 
+function localDateStr(d: Date): string {
+  return [
+    d.getFullYear(),
+    String(d.getMonth() + 1).padStart(2, "0"),
+    String(d.getDate()).padStart(2, "0"),
+  ].join("-");
+}
+
 export function getNextVrat(fromDate: Date): { vrat: Vrat; date: string } | null {
-  const today = fromDate.toISOString().split("T")[0];
+  const today = localDateStr(fromDate);
 
   const allDateVratPairs: { date: string; vrat: Vrat }[] = [];
 
@@ -5753,7 +5761,7 @@ export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] 
 }
 
 export function getNextVratForTradition(fromDate: Date, tradition: string): { vrat: Vrat; date: string } | null {
-  const today = fromDate.toISOString().split("T")[0];
+  const today = localDateStr(fromDate);
   const pairs: { date: string; vrat: Vrat }[] = [];
   for (const vrat of vrats) {
     const filtered = filterVratsByTradition([vrat], tradition);

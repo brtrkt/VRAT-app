@@ -22,9 +22,14 @@ function getSankalpLog(): Record<string, string[]> {
   }
 }
 
+function todayLocal(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 export function markSankalpTaken(vratId: string): void {
   const log = getSankalpLog();
-  const today = new Date().toISOString().split("T")[0];
+  const today = todayLocal();
   if (!log[today]) log[today] = [];
   if (!log[today].includes(vratId)) log[today].push(vratId);
   localStorage.setItem(SANKALP_KEY, JSON.stringify(log));
@@ -32,7 +37,7 @@ export function markSankalpTaken(vratId: string): void {
 
 export function isSankalpTakenToday(vratId: string): boolean {
   const log = getSankalpLog();
-  const today = new Date().toISOString().split("T")[0];
+  const today = todayLocal();
   return (log[today] || []).includes(vratId);
 }
 

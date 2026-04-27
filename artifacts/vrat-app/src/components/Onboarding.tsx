@@ -424,14 +424,6 @@ export default function Onboarding({ onComplete }: Props) {
               </button>
             </div>
 
-            {/* Both / Hindu+Jain option */}
-            <button
-              onClick={() => { chooseTradition("Both"); setStep(2); }}
-              className="mt-3 w-full py-3 rounded-2xl text-xs font-semibold tracking-wide transition-opacity active:opacity-70"
-              style={{ background: "rgba(255,255,255,0.10)", color: "#FDE68A", border: "1px solid rgba(255,255,255,0.25)" }}
-            >
-              Hindu + Jain
-            </button>
           </div>
 
           <StepDots total={TOTAL_STEPS} current={0} />
@@ -472,13 +464,6 @@ export default function Onboarding({ onComplete }: Props) {
                     subtitle: "Gurpurabs, Baisakhi, Sangrand and more",
                     icon: <KhandaSvg className="w-12 h-12" style={{ color: "#003DA5" }} />,
                     accent: "#003DA5",
-                  },
-                  {
-                    value: "Both" as Tradition,
-                    label: "Both",
-                    subtitle: "Hindu and Jain observances together",
-                    icon: <BothSymbol className="w-14 h-10" />,
-                    accent: "#D4A017",
                   },
                   {
                     value: "Swaminarayan" as Tradition,
@@ -570,22 +555,9 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
 
           <div className="flex-1 overflow-y-auto px-6 py-2">
-            {tradition === "Both" ? (
-              <>
-                <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2 mt-2">Hindu</p>
-                {VRAT_OPTIONS.filter((v) => v.tradition === "Hindu").map((opt) => (
-                  <VratRow key={opt.id} opt={opt} on={observed.includes(opt.id)} onToggle={() => toggleVrat(opt.id)} />
-                ))}
-                <p className="text-xs font-semibold tracking-widest uppercase text-green-700 mb-2 mt-5">Jain</p>
-                {VRAT_OPTIONS.filter((v) => v.tradition === "Jain").map((opt) => (
-                  <VratRow key={opt.id} opt={opt} on={observed.includes(opt.id)} onToggle={() => toggleVrat(opt.id)} />
-                ))}
-              </>
-            ) : (
-              visibleVrats.map((opt) => (
-                <VratRow key={opt.id} opt={opt} on={observed.includes(opt.id)} onToggle={() => toggleVrat(opt.id)} />
-              ))
-            )}
+            {visibleVrats.map((opt) => (
+              <VratRow key={opt.id} opt={opt} on={observed.includes(opt.id)} onToggle={() => toggleVrat(opt.id)} />
+            ))}
             <div className="h-4" />
           </div>
 
@@ -785,9 +757,7 @@ export default function Onboarding({ onComplete }: Props) {
             </p>
             <p className="text-sm leading-relaxed opacity-80" style={{ color: "#FEF3E2" }}>
               Your personal vrat calendar is ready.{" "}
-              {tradition !== "Both"
-                ? `Showing ${tradition} vrats.`
-                : "Showing Hindu and Jain vrats."}
+              {`Showing ${tradition} vrats.`}
             </p>
           </div>
           <div className="w-full max-w-xs">

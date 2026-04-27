@@ -227,7 +227,8 @@ export default function NirjalaFastTimer({ vrat }: { vrat: Vrat }) {
 }
 
 function NirjalaFastTimerInner({ vrat, config }: { vrat: Vrat; config: FastConfig }) {
-  const todayStr = new Date().toISOString().split("T")[0];
+  const _d = new Date();
+  const todayStr = `${_d.getFullYear()}-${String(_d.getMonth() + 1).padStart(2, "0")}-${String(_d.getDate()).padStart(2, "0")}`;
   const location = getUserLocation();
 
   // ── Fast start time from localStorage ────────────────────────────────────
