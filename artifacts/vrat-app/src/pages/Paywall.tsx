@@ -127,6 +127,12 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
         body: JSON.stringify({ email, plan: selected, currency }),
       });
 
+      const contentType = res.headers.get("content-type") ?? "";
+      if (!contentType.includes("application/json")) {
+        setError("Payment system temporarily unavailable. Please try again in a moment.");
+        return;
+      }
+
       const data = await res.json();
 
       if (!res.ok) {
@@ -151,6 +157,13 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
 
     try {
       const res = await fetch(`${API_BASE}/api/stripe/verify?email=${encodeURIComponent(email)}`);
+
+      const contentType = res.headers.get("content-type") ?? "";
+      if (!contentType.includes("application/json")) {
+        setError("Could not reach the server. Please try again in a moment.");
+        return;
+      }
+
       const data = await res.json();
 
       if (data.subscribed) {
