@@ -103,12 +103,9 @@ function defaultsForTradition(t: Tradition): string[] {
 }
 
 // ─── SVG Symbols ─────────────────────────────────────────────────────────────
-function VaishnavaTilakSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+function IskconLogoSvg({ className = "" }: { className?: string; style?: CSSProperties }) {
   return (
-    <svg viewBox="0 0 48 72" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <path d="M24 4 C12 4 8 16 8 28 L8 68 L16 68 L16 32 C16 20 19 12 24 12 C29 12 32 20 32 32 L32 68 L40 68 L40 28 C40 16 36 4 24 4 Z" />
-      <ellipse cx="24" cy="38" rx="5" ry="10" fill="white" opacity="0.9" />
-    </svg>
+    <img src="/iskcon_logo.svg" className={className} alt="ISKCON" style={{ objectFit: "contain" }} />
   );
 }
 
@@ -390,7 +387,7 @@ export default function Onboarding({ onComplete }: Props) {
                 className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
-                <VaishnavaTilakSvg className="w-7 h-10" style={{ color: "#7EC8F0" }} />
+                <IskconLogoSvg className="w-7 h-10" />
                 <div className="text-left">
                   <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>ISKCON / Vaishnava</span>
                   <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>Hare Krishna · Ekadashi · Gaura Purnima</span>
@@ -476,7 +473,7 @@ export default function Onboarding({ onComplete }: Props) {
                     value: "ISKCON" as Tradition,
                     label: "ISKCON / Vaishnava",
                     subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik",
-                    icon: <VaishnavaTilakSvg className="w-10 h-14" style={{ color: "#0284C7" }} />,
+                    icon: <IskconLogoSvg className="w-10 h-14" />,
                     accent: "#0284C7",
                   },
                   {
