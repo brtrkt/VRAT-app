@@ -18,6 +18,7 @@ import {
 import NirjalaFastTimer from "@/components/NirjalaFastTimer";
 import LanguageSelector from "@/components/LanguageSelector";
 import PanchangCard from "@/components/PanchangCard";
+import NanakshahiCard from "@/components/NanakshahiCard";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const NIRJALA_TIMER_IDS = new Set([
@@ -595,7 +596,7 @@ export default function Home() {
         <MyStreaks />
         <NextVratCard nextVrat={nextVrat} />
         <MantraCard vrats={allVrats} />
-        <PanchangCard />
+        {userTradition === "Sikh" ? <NanakshahiCard /> : <PanchangCard />}
         <BrahmaMuhurta />
 
         <TrialBanner />
