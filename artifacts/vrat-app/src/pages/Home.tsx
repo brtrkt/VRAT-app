@@ -232,15 +232,14 @@ function JainSymbol({ className = "" }: { className?: string }) {
 function LotusSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
     <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <ellipse cx="30" cy="16" rx="6" ry="12" opacity="0.85" />
-      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(45 30 30)" opacity="0.85" />
-      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(90 30 30)" opacity="0.85" />
-      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(135 30 30)" opacity="0.85" />
-      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(180 30 30)" opacity="0.85" />
-      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(225 30 30)" opacity="0.85" />
-      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(270 30 30)" opacity="0.85" />
-      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(315 30 30)" opacity="0.85" />
-      <circle cx="30" cy="30" r="8" />
+      <ellipse cx="30" cy="24" rx="5" ry="14" opacity="0.9" />
+      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(-28 30 42)" opacity="0.85" />
+      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(28 30 42)" opacity="0.85" />
+      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(-58 30 42)" opacity="0.75" />
+      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(58 30 42)" opacity="0.75" />
+      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(-85 30 42)" opacity="0.6" />
+      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(85 30 42)" opacity="0.6" />
+      <circle cx="30" cy="42" r="7" />
     </svg>
   );
 }
