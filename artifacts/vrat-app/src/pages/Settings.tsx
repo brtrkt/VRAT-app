@@ -37,7 +37,7 @@ const PRICES = {
   lifetime: { usd: "$49.99",       inr: "₹3,999"      },
 } as const;
 
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" }[] = [
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" }[] = [
   { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                           tradition: "Hindu" },
   { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",               tradition: "Hindu" },
   { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",          tradition: "Hindu" },
@@ -82,6 +82,12 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "fuldol",                label: "Fuldol",                subtitle: "Phalgun Purnima · flower festival before Holi",            tradition: "Swaminarayan" },
   { id: "annakut",               label: "Annakut",               subtitle: "Day after Diwali · Swaminarayan New Year offering",        tradition: "Swaminarayan" },
   { id: "swaminarayan-ekadashi", label: "Swaminarayan Ekadashi", subtitle: "Ekadashi with strict satvik fast · no onion, garlic",     tradition: "Swaminarayan" },
+  { id: "iskcon-ekadashi",       label: "Ekadashi (Vaishnava)",  subtitle: "No grains · 24 days a year · Parana next morning",         tradition: "ISKCON" },
+  { id: "janmashtami-iskcon",    label: "Janmashtami",           subtitle: "Midnight fast · Lord Krishna's appearance day",             tradition: "ISKCON" },
+  { id: "gaura-purnima",         label: "Gaura Purnima",         subtitle: "Sri Chaitanya Mahaprabhu's appearance day",                 tradition: "ISKCON" },
+  { id: "radhashtami",           label: "Radhashtami",           subtitle: "Srimati Radharani's appearance day",                        tradition: "ISKCON" },
+  { id: "kartik-damodara",       label: "Kartik Damodara Month", subtitle: "Month-long vow · daily ghee lamp offering",                 tradition: "ISKCON" },
+  { id: "nityananda-trayodashi", label: "Nityananda Trayodashi", subtitle: "Sri Nityananda Prabhu's appearance day",                    tradition: "ISKCON" },
 ];
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
@@ -356,6 +362,7 @@ export default function Settings() {
       { value: "Sikh",         label: "Sikh",         subtitle: "Gurpurabs, Baisakhi, Sangrand and more" },
       { value: "Both",         label: "Both",         subtitle: "Hindu and Jain observances together" },
       { value: "Swaminarayan", label: "Swaminarayan", subtitle: "Jayanti, Fuldol, Annakut and strict Ekadashi" },
+      { value: "ISKCON",       label: "ISKCON / Vaishnava", subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik" },
     ];
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
@@ -403,10 +410,12 @@ export default function Settings() {
     const jainVrats         = VRAT_OPTIONS.filter((v) => v.tradition === "Jain");
     const sikhVrats         = VRAT_OPTIONS.filter((v) => v.tradition === "Sikh");
     const swaminarayanVrats = VRAT_OPTIONS.filter((v) => v.tradition === "Swaminarayan");
+    const iskconVrats       = VRAT_OPTIONS.filter((v) => v.tradition === "ISKCON");
     const showHindu        = tradition === "Hindu" || tradition === "Both";
     const showJain         = tradition === "Jain"  || tradition === "Both";
     const showSikh         = tradition === "Sikh";
     const showSwaminarayan = tradition === "Swaminarayan";
+    const showISKCON       = tradition === "ISKCON";
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
         <div className="max-w-md mx-auto px-5 pt-6 pb-8">
@@ -461,6 +470,19 @@ export default function Settings() {
           {showSwaminarayan && (
             <>
               {swaminarayanVrats.map((opt) => (
+                <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm font-medium text-foreground">{opt.label}</p>
+                    <p className="text-xs text-muted-foreground">{opt.subtitle}</p>
+                  </div>
+                  <Toggle on={isVratObserved(opt.id, observed)} onToggle={() => toggleVrat(opt.id)} />
+                </div>
+              ))}
+            </>
+          )}
+          {showISKCON && (
+            <>
+              {iskconVrats.map((opt) => (
                 <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
                   <div className="flex-1 mr-4">
                     <p className="text-sm font-medium text-foreground">{opt.label}</p>

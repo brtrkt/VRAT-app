@@ -20,7 +20,7 @@ interface Props {
 }
 
 // ─── Vrat catalogue for Screen 3 ────────────────────────────────────────────
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" }[] = [
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" }[] = [
   { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                      tradition: "Hindu" },
   { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",          tradition: "Hindu" },
   { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",     tradition: "Hindu" },
@@ -65,6 +65,12 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "fuldol",                label: "Fuldol",                subtitle: "Phalgun Purnima · flower festival before Holi",        tradition: "Swaminarayan" },
   { id: "annakut",               label: "Annakut",               subtitle: "Day after Diwali · Swaminarayan New Year offering",    tradition: "Swaminarayan" },
   { id: "swaminarayan-ekadashi", label: "Swaminarayan Ekadashi", subtitle: "Ekadashi with strict satvik fast · no onion, garlic", tradition: "Swaminarayan" },
+  { id: "iskcon-ekadashi",       label: "Ekadashi (Vaishnava)",  subtitle: "No grains · 24 days a year · Parana next morning",    tradition: "ISKCON" },
+  { id: "janmashtami-iskcon",    label: "Janmashtami",           subtitle: "Midnight fast · Lord Krishna's appearance day",        tradition: "ISKCON" },
+  { id: "gaura-purnima",         label: "Gaura Purnima",         subtitle: "Sri Chaitanya Mahaprabhu's appearance day",            tradition: "ISKCON" },
+  { id: "radhashtami",           label: "Radhashtami",           subtitle: "Srimati Radharani's appearance day",                   tradition: "ISKCON" },
+  { id: "kartik-damodara",       label: "Kartik Damodara Month", subtitle: "Month-long vow · daily ghee lamp offering",            tradition: "ISKCON" },
+  { id: "nityananda-trayodashi", label: "Nityananda Trayodashi", subtitle: "Sri Nityananda Prabhu's appearance day",               tradition: "ISKCON" },
 ];
 
 const HINDU_DEFAULTS        = ["ekadashi", "purnima", "pradosh"];
@@ -72,16 +78,27 @@ const JAIN_DEFAULTS         = ["paryushana", "navpad-oli", "samvatsari"];
 const SIKH_DEFAULTS         = ["guru-nanak-gurpurab", "baisakhi-sikh", "sangrand"];
 const BOTH_DEFAULTS         = ["ekadashi", "purnima", "pradosh", "paryushana", "navpad-oli"];
 const SWAMINARAYAN_DEFAULTS = ["swaminarayan-jayanti", "fuldol", "swaminarayan-ekadashi"];
+const ISKCON_DEFAULTS       = ["iskcon-ekadashi", "janmashtami-iskcon", "gaura-purnima", "radhashtami"];
 
 function defaultsForTradition(t: Tradition): string[] {
   if (t === "Hindu")        return HINDU_DEFAULTS;
   if (t === "Jain")         return JAIN_DEFAULTS;
   if (t === "Sikh")         return SIKH_DEFAULTS;
   if (t === "Swaminarayan") return SWAMINARAYAN_DEFAULTS;
+  if (t === "ISKCON")       return ISKCON_DEFAULTS;
   return BOTH_DEFAULTS;
 }
 
 // ─── SVG Symbols ─────────────────────────────────────────────────────────────
+function VaishnavaTilakSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 48 72" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <path d="M24 4 C12 4 8 16 8 28 L8 68 L16 68 L16 32 C16 20 19 12 24 12 C29 12 32 20 32 32 L32 68 L40 68 L40 28 C40 16 36 4 24 4 Z" />
+      <ellipse cx="24" cy="38" rx="5" ry="10" fill="white" opacity="0.9" />
+    </svg>
+  );
+}
+
 function LotusSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
     <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
@@ -259,6 +276,7 @@ export default function Onboarding({ onComplete }: Props) {
     tradition === "Jain"         ? VRAT_OPTIONS.filter((v) => v.tradition === "Jain") :
     tradition === "Sikh"         ? VRAT_OPTIONS.filter((v) => v.tradition === "Sikh") :
     tradition === "Swaminarayan" ? VRAT_OPTIONS.filter((v) => v.tradition === "Swaminarayan") :
+    tradition === "ISKCON"       ? VRAT_OPTIONS.filter((v) => v.tradition === "ISKCON") :
     VRAT_OPTIONS.filter((v) => v.tradition === "Hindu" || v.tradition === "Jain");
 
   return (
@@ -327,6 +345,19 @@ export default function Onboarding({ onComplete }: Props) {
                 <LotusSvg className="w-14 h-14" style={{ color: "#F4D58D" }} />
                 <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Swaminarayan</span>
               </button>
+
+              {/* ISKCON — full-width */}
+              <button
+                onClick={() => { chooseTradition("ISKCON"); setStep(2); }}
+                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <VaishnavaTilakSvg className="w-7 h-10" style={{ color: "#7EC8F0" }} />
+                <div className="text-left">
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>ISKCON / Vaishnava</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>Hare Krishna · Ekadashi · Gaura Purnima</span>
+                </div>
+              </button>
             </div>
 
             {/* Both / Hindu+Jain option */}
@@ -391,6 +422,13 @@ export default function Onboarding({ onComplete }: Props) {
                     subtitle: "Jayanti, Fuldol, Annakut and strict Ekadashi",
                     icon: <LotusSvg className="w-12 h-12" style={{ color: "#C4972A" }} />,
                     accent: "#C4972A",
+                  },
+                  {
+                    value: "ISKCON" as Tradition,
+                    label: "ISKCON / Vaishnava",
+                    subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik",
+                    icon: <VaishnavaTilakSvg className="w-10 h-14" style={{ color: "#0284C7" }} />,
+                    accent: "#0284C7",
                   },
                 ] as const
               ).map((opt) => {

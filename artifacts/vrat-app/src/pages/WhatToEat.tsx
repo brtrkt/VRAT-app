@@ -374,7 +374,8 @@ function MealIdeasSection({ vrat }: { vrat: Vrat }) {
   const { t } = useLanguage();
   const isSikh          = vrat.tradition === "Sikh";
   const isSwaminarayan  = vrat.tradition === "Swaminarayan";
-  const mealBg = isSikh ? "#EFF6FF" : isSwaminarayan ? "#FEF9EC" : "var(--accent, #FFF7ED)";
+  const isISKCON        = vrat.tradition === "ISKCON";
+  const mealBg = isSikh ? "#EFF6FF" : isSwaminarayan ? "#FEF9EC" : isISKCON ? "#EFF6FF" : "var(--accent, #FFF7ED)";
   return (
     <div className="vrat-card p-5 mb-4" data-testid="meal-ideas-section">
       <div className="flex items-center gap-2 mb-3">
@@ -395,6 +396,10 @@ function MealIdeasSection({ vrat }: { vrat: Vrat }) {
           <p className="text-xs text-muted-foreground italic text-center">
             Swaminarayan tradition follows a strictly satvik diet year-round — no onion, garlic, or brinjal. On fast days, sendha namak (rock salt) is used and only permitted foods are eaten.
           </p>
+        ) : isISKCON ? (
+          <p className="text-xs text-muted-foreground italic text-center">
+            ISKCON tradition consumes only prasadam — food offered to Krishna first. No onion or garlic ever. On Ekadashi, no grains of any kind.
+          </p>
         ) : (
           <p className="text-xs text-muted-foreground italic text-center">
             All vrat-friendly dishes use sendha namak (rock salt) and no onion or garlic.
@@ -412,6 +417,7 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
   const isJain         = vrat.tradition === "Jain";
   const isSikh         = vrat.tradition === "Sikh";
   const isSwaminarayan = vrat.tradition === "Swaminarayan";
+  const isISKCON       = vrat.tradition === "ISKCON";
   const vnsYear = isJain
     ? (vrat.dates?.[0] >= "2026-11-09" ? 2553 : 2552)
     : null;
@@ -422,17 +428,19 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
     ? { background: "linear-gradient(135deg, #15803D 0%, #22C55E 100%)" }
     : isSwaminarayan
     ? { background: "linear-gradient(135deg, #7A5500 0%, #C4972A 60%, #D4A520 100%)" }
+    : isISKCON
+    ? { background: "linear-gradient(135deg, #013E6F 0%, #0284C7 60%, #0EA5E9 100%)" }
     : undefined;
 
   return (
     <div data-testid={`vrat-food-card-${vrat.id}`}>
       <div
-        className={`rounded-2xl p-4 mb-4 text-white${!isSikh && !isJain && !isSwaminarayan ? " saffron-gradient" : ""}`}
+        className={`rounded-2xl p-4 mb-4 text-white${!isSikh && !isJain && !isSwaminarayan && !isISKCON ? " saffron-gradient" : ""}`}
         style={headerStyle}
       >
         <p className="text-xs font-medium tracking-widest uppercase mb-1"
-          style={{ color: isSikh ? "#F4A900" : isSwaminarayan ? "#F4D58D" : "rgba(255,255,255,0.7)" }}>
-          {isSikh ? "ਸਿੱਖ ਤਿਉਹਾਰ · Sikh Observance" : isSwaminarayan ? "સ્વામિનારાયણ · Swaminarayan Observance" : t("home.fastDay")}
+          style={{ color: isSikh ? "#F4A900" : isSwaminarayan ? "#F4D58D" : isISKCON ? "#BAE6FD" : "rgba(255,255,255,0.7)" }}>
+          {isSikh ? "ਸਿੱਖ ਤਿਉਹਾਰ · Sikh Observance" : isSwaminarayan ? "સ્વામિનારાયણ · Swaminarayan Observance" : isISKCON ? "हरे कृष्ण · ISKCON / Vaishnava" : t("home.fastDay")}
         </p>
         <h2 className="font-serif text-2xl font-bold">{vrat.name}</h2>
         {isSikh && vrat.punjabiName && (
@@ -477,6 +485,13 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
           style={{ background: "#EFF6FF", borderColor: "#BFDBFE", color: "#1E3A8A" }}>
           <span className="font-semibold">📅 Calendar note:</span>{" "}
           Sikh observances follow the Nanakshahi Calendar. Dates may vary slightly by local Gurdwara tradition.
+        </div>
+      )}
+      {isISKCON && (
+        <div className="rounded-xl px-4 py-3 mb-4 text-xs leading-relaxed border"
+          style={{ background: "#EFF6FF", borderColor: "#BAE6FD", color: "#075985" }}>
+          <span className="font-semibold">🌿 Prasadam only · No onion or garlic ever:</span>{" "}
+          ISKCON tradition consumes only food first offered to Krishna (prasadam). No onion, garlic, or meat ever. On Ekadashi, no grains of any kind — observe with fruits, dairy, nuts, and sendha namak only.
         </div>
       )}
 
