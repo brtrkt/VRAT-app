@@ -5269,6 +5269,36 @@ export const vrats: Vrat[] = [
     description: "Ekadashi — the 11th day of each lunar fortnight — is the most important fasting day in the Vaishnava calendar. ISKCON devotees strictly avoid ALL grains on Ekadashi. The day is spent in intensified chanting, hearing Bhagavatam, and devotional service. Parana (breaking the fast) is done the following morning before the Dvadasi end time",
     specialNote: "ISKCON Ekadashi rule: NO GRAINS of any kind — not even rice, corn, or oats. Most devotees observe a fruit and dairy fast; the most devoted observe nirjala (no water). Parana time next morning is typically between sunrise and 9 AM (check your temple's Vaishnava calendar for exact Dvadasi end time). Staying awake on Ekadashi night (jagaran) with kirtan greatly multiplies the benefit.",
   },
+  {
+    id: "narasimha-chaturdashi",
+    name: "Narasimha Chaturdashi",
+    dates: ["2026-05-11", "2027-04-30"],
+    deity: "Lord Narasimha (Nrsimhadeva) — the Man-Lion avatar who appeared to protect Prahlada",
+    tradition: "ISKCON",
+    foodsAllowed: [
+      "Fruits — banana, apple, mango, grapes, pomegranate (fast until sunset)",
+      "Milk, yogurt, and dairy",
+      "Nuts and dry fruits",
+      "Sendha namak (rock salt) only",
+      "Coconut water",
+      "After sunset puja: prasadam offered to Lord Narasimha",
+    ],
+    foodsAvoided: [
+      "ALL grains — no rice, wheat, corn, oats, dal",
+      "Onion and garlic — never in ISKCON prasadam",
+      "Meat, fish, eggs",
+      "Any food before the sunset puja and offering to the Lord",
+    ],
+    mantra: "Ugram viram maha-vishnum jvalantam sarvatomukham / Nrsimham bhishanam bhadram mrityur mrityum namamyaham",
+    mantraTransliteration: "Nrsimha Pranama — the eight-line prayer to the ferocious yet merciful Lord Narasimha",
+    mantraTranslation: "I bow to Lord Narasimha — the fierce, the heroic, the great Vishnu, blazing and facing all directions, frightening yet auspicious, the death of death itself",
+    mantraHow: "Fast from sunrise until sunset (the hour of Lord Narasimha's appearance). Chant 16 rounds of the Hare Krishna maha-mantra. At dusk, perform special Narasimha puja: offer a lamp, flowers, and prasadam to the Lord. Recite the Nrsimha Pranama 3 times and chant the Narasimha Kavach if possible. Break the fast only after the evening arati and offering.",
+    mantraBenefits: "Lord Narasimha appeared on Vaishakha Shukla Chaturdashi at the exact moment of dusk — neither day nor night — to fulfil all the boons of Hiranyakashipu and protect His pure devotee Prahlada. Fasting on this day and remembering this divine appearance destroys fear, evil, and all obstacles on the devotional path. Srila Prabhupada taught that Narasimha's protection is always available to a sincere devotee.",
+    mealIdea: "Fruit fast through the day — ripe mango with mishri, fresh coconut water, banana with ghee, and pomegranate seeds. After the sunset puja and Narasimha arati, take the prasadam reverently — whatever fruit or sweet was offered to the Lord",
+    color: "#0284C7",
+    description: "Narasimha Chaturdashi (Sri Nrsimha Caturdasi) celebrates the appearance of Lord Narasimha — the 4th of the Dashavatara. Hiranyakashipu received boons so that he could not be killed by day or night, inside or outside, by man or animal, on earth or in sky, with a weapon or without. At the moment of dusk, on the threshold of a pillar in his own palace, on his own lap, with bare hands — Narasimha fulfilled every condition and destroyed the demon. Prahlada's pure devotion was vindicated. Vaishakha Shukla Chaturdashi — 2026: May 11 · 2027: Apr 30",
+    specialNote: "This is one of the most powerful and auspicious days in the Vaishnava calendar. ISKCON temples worldwide hold grand Narasimha puja at sunset with elaborate flower offerings, fire ceremony, and recitation of the Narasimha Kavach. Fast until sunset, then break the fast with prasadam. Recite the Nrsimha Pranama 108 times and meditate on Prahlada's complete surrender — 'namas te narasimhaya prahlada-hlada-dayine' (Salutations to Narasimha, the giver of joy to Prahlada).",
+  },
 
   // ── Swaminarayan ────────────────────────────────────────────────────────────
   {
