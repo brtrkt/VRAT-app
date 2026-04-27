@@ -632,19 +632,20 @@ export default function WhatToEat() {
 
         {/* Recipes link */}
         <button
-          onClick={() => setLocation("/recipes")}
+          onClick={() => setLocation(userTradition === "Sikh" ? "/langar-recipes" : "/recipes")}
           className="vrat-card p-5 mb-4 flex items-center justify-between gap-3 w-full text-left active:opacity-80 transition-opacity"
           data-testid="recipes-link"
+          style={userTradition === "Sikh" ? { borderColor: "#BFDBFE" } : undefined}
         >
           <div className="flex items-center gap-3">
-            <span className="text-2xl" aria-hidden="true">🍳</span>
+            <span className="text-2xl" aria-hidden="true">{userTradition === "Sikh" ? "🫘" : "🍳"}</span>
             <div>
               <p className="font-serif text-base font-semibold text-foreground">
                 {userTradition === "Sikh" ? "Langar Recipes" : "Fasting Recipes"}
               </p>
               <p className="text-xs text-muted-foreground mt-0.5">
                 {userTradition === "Sikh"
-                  ? "5 langar-style recipes — simple & nourishing"
+                  ? "4 traditional langar dishes — with full method"
                   : "10 traditional recipes — step by step"}
               </p>
             </div>

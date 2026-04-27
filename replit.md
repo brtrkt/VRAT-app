@@ -65,7 +65,8 @@ pnpm workspace monorepo using TypeScript. Contains the VRAT app — a sacred fas
 **New features (April 2026):**
 - WhatsApp sharing: tap "Share on WhatsApp" on TodayCard (fast days) → pre-filled message with vrat name
 - Panchang card on Home: shows today's tithi, paksha (Shukla/Krishna), nakshatra. Computed from lunar calendar reference (Amavasya Jan 29, 2026). Component: `src/components/PanchangCard.tsx`
-- Fasting recipes page at `/recipes`: 10 traditional recipes (sabudana khichdi, kuttu ki puri, singhara halwa, makhana kheer, sama rice pulao, aloo jeera, rajgira ladoo, banana lassi, shakarkand chaat, fruit chaat). Filter by energy level. Linked from WhatToEat. Component: `src/pages/Recipes.tsx`
+- Fasting recipes page at `/recipes`: 10 traditional recipes (sabudana khichdi, kuttu ki puri, singhara halwa, makhana kheer, sama rice pulao, aloo jeera, rajgira ladoo, banana lassi, shakarkand chaat, fruit chaat). Filter by energy level. Linked from WhatToEat (Hindu/Jain only). Component: `src/pages/Recipes.tsx`
+- **Langar recipes page at `/langar-recipes`** (Sikh only): 4 traditional langar dishes — Khichdi (ਖਿਚੜੀ), Saag (ਸਾਗ), Meethe Chawal (ਮਿੱਠੇ ਚਾਵਲ), Dal Makhani (ਦਾਲ ਮਖਣੀ). Each card has: Punjabi name, description, occasion, dietary note, numbered ingredients, step-by-step method, langar tip. Sikh users are routed to `/langar-recipes` from WhatToEat; Hindu/Jain users continue to `/recipes`. Component: `src/pages/LangarRecipes.tsx`
 - Vrat journal in VratHistory: tap pencil icon on any history entry to add a personal note (max 300 chars). Stored in localStorage under `vrat_journal_v1` (JSON object, keys: `date__vratId`)
 
 **Key files:**
