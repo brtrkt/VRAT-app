@@ -20,7 +20,7 @@ interface Props {
 }
 
 // ─── Vrat catalogue for Screen 3 ────────────────────────────────────────────
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" }[] = [
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" }[] = [
   { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                      tradition: "Hindu" },
   { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",          tradition: "Hindu" },
   { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",     tradition: "Hindu" },
@@ -61,21 +61,43 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "bandi-chhor-divas",           label: "Bandi Chhor Divas",                  subtitle: "Katik 5 (Oct 20) · Day of Liberation",             tradition: "Sikh" },
   { id: "guru-nanak-gurpurab",         label: "Guru Nanak Dev Ji Gurpurab",          subtitle: "Katik 21 (Nov 5) · Founder of Sikhism",            tradition: "Sikh" },
   { id: "guru-tegh-bahadur-shaheedi", label: "Guru Tegh Bahadur Ji Shaheedi Divas", subtitle: "Maghar 10 (Nov 24) · 9th Guru's Martyrdom Day",    tradition: "Sikh" },
+  { id: "swaminarayan-jayanti",  label: "Swaminarayan Jayanti",  subtitle: "Chaitra Shukla Navami · Lord Swaminarayan's birth",    tradition: "Swaminarayan" },
+  { id: "fuldol",                label: "Fuldol",                subtitle: "Phalgun Purnima · flower festival before Holi",        tradition: "Swaminarayan" },
+  { id: "annakut",               label: "Annakut",               subtitle: "Day after Diwali · Swaminarayan New Year offering",    tradition: "Swaminarayan" },
+  { id: "swaminarayan-ekadashi", label: "Swaminarayan Ekadashi", subtitle: "Ekadashi with strict satvik fast · no onion, garlic", tradition: "Swaminarayan" },
 ];
 
-const HINDU_DEFAULTS = ["ekadashi", "purnima", "pradosh"];
-const JAIN_DEFAULTS  = ["paryushana", "navpad-oli", "samvatsari"];
-const SIKH_DEFAULTS  = ["guru-nanak-gurpurab", "baisakhi-sikh", "sangrand"];
-const BOTH_DEFAULTS  = ["ekadashi", "purnima", "pradosh", "paryushana", "navpad-oli"];
+const HINDU_DEFAULTS        = ["ekadashi", "purnima", "pradosh"];
+const JAIN_DEFAULTS         = ["paryushana", "navpad-oli", "samvatsari"];
+const SIKH_DEFAULTS         = ["guru-nanak-gurpurab", "baisakhi-sikh", "sangrand"];
+const BOTH_DEFAULTS         = ["ekadashi", "purnima", "pradosh", "paryushana", "navpad-oli"];
+const SWAMINARAYAN_DEFAULTS = ["swaminarayan-jayanti", "fuldol", "swaminarayan-ekadashi"];
 
 function defaultsForTradition(t: Tradition): string[] {
-  if (t === "Hindu") return HINDU_DEFAULTS;
-  if (t === "Jain")  return JAIN_DEFAULTS;
-  if (t === "Sikh")  return SIKH_DEFAULTS;
+  if (t === "Hindu")        return HINDU_DEFAULTS;
+  if (t === "Jain")         return JAIN_DEFAULTS;
+  if (t === "Sikh")         return SIKH_DEFAULTS;
+  if (t === "Swaminarayan") return SWAMINARAYAN_DEFAULTS;
   return BOTH_DEFAULTS;
 }
 
 // ─── SVG Symbols ─────────────────────────────────────────────────────────────
+function LotusSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <ellipse cx="30" cy="16" rx="6" ry="12" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(45 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(90 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(135 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(180 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(225 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(270 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(315 30 30)" opacity="0.85" />
+      <circle cx="30" cy="30" r="8" />
+    </svg>
+  );
+}
+
 function OmSvg({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 60 60" className={className} fill="currentColor" aria-hidden="true">
@@ -233,9 +255,10 @@ export default function Onboarding({ onComplete }: Props) {
   }
 
   const visibleVrats =
-    tradition === "Hindu" ? VRAT_OPTIONS.filter((v) => v.tradition === "Hindu") :
-    tradition === "Jain"  ? VRAT_OPTIONS.filter((v) => v.tradition === "Jain") :
-    tradition === "Sikh"  ? VRAT_OPTIONS.filter((v) => v.tradition === "Sikh") :
+    tradition === "Hindu"        ? VRAT_OPTIONS.filter((v) => v.tradition === "Hindu") :
+    tradition === "Jain"         ? VRAT_OPTIONS.filter((v) => v.tradition === "Jain") :
+    tradition === "Sikh"         ? VRAT_OPTIONS.filter((v) => v.tradition === "Sikh") :
+    tradition === "Swaminarayan" ? VRAT_OPTIONS.filter((v) => v.tradition === "Swaminarayan") :
     VRAT_OPTIONS.filter((v) => v.tradition === "Hindu" || v.tradition === "Jain");
 
   return (
@@ -264,7 +287,7 @@ export default function Onboarding({ onComplete }: Props) {
             </p>
 
             {/* ── Tradition selector cards ── */}
-            <div className="grid grid-cols-3 gap-3 w-full">
+            <div className="grid grid-cols-2 gap-3 w-full">
               {/* Hindu */}
               <button
                 onClick={() => { chooseTradition("Hindu"); setStep(2); }}
@@ -293,6 +316,16 @@ export default function Onboarding({ onComplete }: Props) {
               >
                 <KhandaSvg className="w-14 h-14" style={{ color: "#7EC8F0" }} />
                 <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Sikh</span>
+              </button>
+
+              {/* Swaminarayan */}
+              <button
+                onClick={() => { chooseTradition("Swaminarayan"); setStep(2); }}
+                className="flex flex-col items-center justify-center gap-2 rounded-2xl py-5 px-2 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <LotusSvg className="w-14 h-14" style={{ color: "#F4D58D" }} />
+                <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Swaminarayan</span>
               </button>
             </div>
 
@@ -351,6 +384,13 @@ export default function Onboarding({ onComplete }: Props) {
                     subtitle: "Hindu and Jain observances together",
                     icon: <BothSymbol className="w-14 h-10" />,
                     accent: "#D4A017",
+                  },
+                  {
+                    value: "Swaminarayan" as Tradition,
+                    label: "Swaminarayan",
+                    subtitle: "Jayanti, Fuldol, Annakut and strict Ekadashi",
+                    icon: <LotusSvg className="w-12 h-12" style={{ color: "#C4972A" }} />,
+                    accent: "#C4972A",
                   },
                 ] as const
               ).map((opt) => {

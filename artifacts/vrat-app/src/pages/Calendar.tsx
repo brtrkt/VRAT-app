@@ -440,13 +440,14 @@ function CalendarGrid({
   );
 }
 
-type TraditionFilter = "all" | "hindu" | "jain" | "sikh";
+type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan";
 
 const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
-  { value: "all",   label: "All" },
-  { value: "hindu", label: "Hindu" },
-  { value: "jain",  label: "Jain" },
-  { value: "sikh",  label: "Sikh" },
+  { value: "all",          label: "All" },
+  { value: "hindu",        label: "Hindu" },
+  { value: "jain",         label: "Jain" },
+  { value: "sikh",         label: "Sikh" },
+  { value: "swaminarayan", label: "Swaminarayan" },
 ];
 
 const HINDU_LEGEND = [
@@ -468,6 +469,11 @@ const SIKH_LEGEND = [
   { label: "Sangrand (monthly)", color: "#003DA5" },
   { label: "Shaheedi Diwas (Martyrdom)", color: "#7F1D1D" },
 ];
+const SWAMINARAYAN_LEGEND = [
+  { label: "Swaminarayan Jayanti", color: "#C4972A" },
+  { label: "Fuldol & Annakut", color: "#C4972A" },
+  { label: "Ekadashi (Swaminarayan)", color: "#C4972A" },
+];
 
 export default function Calendar() {
   const { t } = useLanguage();
@@ -479,9 +485,10 @@ export default function Calendar() {
   const [selected, setSelected] = useState<{ dateStr: string; vrats: Vrat[] } | null>(null);
   const [filter, setFilter] = useState<TraditionFilter>(() => {
     const trad = getUserTradition();
-    if (trad === "Hindu") return "hindu";
-    if (trad === "Jain")  return "jain";
-    if (trad === "Sikh")  return "sikh";
+    if (trad === "Hindu")         return "hindu";
+    if (trad === "Jain")          return "jain";
+    if (trad === "Sikh")          return "sikh";
+    if (trad === "Swaminarayan")  return "swaminarayan";
     return "all";
   });
   const [observedVrats] = useState<string[]>(() => getObservedVrats());
@@ -495,9 +502,10 @@ export default function Calendar() {
       vrats: vrats.filter((v) => {
         const traditionOk =
           filter === "all" ||
-          (filter === "hindu" && (v.tradition === "Hindu" || v.tradition === "Both")) ||
-          (filter === "jain"  && (v.tradition === "Jain"  || v.tradition === "Both")) ||
-          (filter === "sikh"  && v.tradition === "Sikh");
+          (filter === "hindu"        && (v.tradition === "Hindu" || v.tradition === "Both")) ||
+          (filter === "jain"         && (v.tradition === "Jain"  || v.tradition === "Both")) ||
+          (filter === "sikh"         && v.tradition === "Sikh") ||
+          (filter === "swaminarayan" && v.tradition === "Swaminarayan");
         const regionOk = !v.region || userRegion === "all" || v.region === userRegion;
         return traditionOk && regionOk;
       }),
@@ -616,7 +624,7 @@ export default function Calendar() {
               />
               <span className="text-xs font-medium text-foreground">Your observed vrats (gold)</span>
             </div>
-            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
+            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
               <div key={item.label} className="flex items-center gap-2" data-testid={`legend-${item.label}`}>
                 <span
                   className="w-3 h-3 rounded-full flex-shrink-0"
@@ -643,6 +651,13 @@ export default function Calendar() {
               return (
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Dates follow Drik Panchang IST. Regional dates may vary — please verify with your local Jain community.
+                </p>
+              );
+            }
+            if (trad === "Swaminarayan") {
+              return (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dates follow Drik Panchang IST. Swaminarayan observance dates may vary slightly between sampradays (BAPS, Swaminarayan Gadi, Nar Narayan Dev Gadi) — please verify with your local mandir.
                 </p>
               );
             }

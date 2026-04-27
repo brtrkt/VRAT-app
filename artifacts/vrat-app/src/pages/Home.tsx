@@ -229,6 +229,21 @@ function JainSymbol({ className = "" }: { className?: string }) {
   );
 }
 
+function LotusSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <ellipse cx="30" cy="16" rx="6" ry="12" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(45 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(90 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(135 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(180 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(225 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(270 30 30)" opacity="0.85" />
+      <ellipse cx="30" cy="16" rx="6" ry="12" transform="rotate(315 30 30)" opacity="0.85" />
+      <circle cx="30" cy="30" r="8" />
+    </svg>
+  );
+}
 
 function FloralDivider() {
   return (
@@ -569,9 +584,10 @@ export default function Home() {
           <div className="flex items-end justify-center gap-4 mb-2">
             {(() => {
               const t = getUserTradition();
-              if (t === "Sikh")  return <KhandaSvg className="w-10 h-12" style={{ color: "#003DA5" }} />;
-              if (t === "Jain")  return <JainSymbol className="text-green-600 w-7 h-9" />;
-              if (t === "Hindu") return <OmSymbol className="text-primary text-3xl" />;
+              if (t === "Sikh")          return <KhandaSvg className="w-10 h-12" style={{ color: "#003DA5" }} />;
+              if (t === "Jain")          return <JainSymbol className="text-green-600 w-7 h-9" />;
+              if (t === "Hindu")         return <OmSymbol className="text-primary text-3xl" />;
+              if (t === "Swaminarayan") return <LotusSvg className="w-10 h-10" style={{ color: "#C4972A" }} />;
               return (
                 <>
                   <OmSymbol className="text-primary text-3xl" />

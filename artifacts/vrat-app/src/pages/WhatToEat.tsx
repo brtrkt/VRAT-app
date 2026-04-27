@@ -372,14 +372,16 @@ function FoodList({
 
 function MealIdeasSection({ vrat }: { vrat: Vrat }) {
   const { t } = useLanguage();
-  const isSikh = vrat.tradition === "Sikh";
+  const isSikh          = vrat.tradition === "Sikh";
+  const isSwaminarayan  = vrat.tradition === "Swaminarayan";
+  const mealBg = isSikh ? "#EFF6FF" : isSwaminarayan ? "#FEF9EC" : "var(--accent, #FFF7ED)";
   return (
     <div className="vrat-card p-5 mb-4" data-testid="meal-ideas-section">
       <div className="flex items-center gap-2 mb-3">
         <span className="text-xl">🍽</span>
         <h3 className="font-serif text-base font-semibold text-foreground">{t("food.mealIdea")}</h3>
       </div>
-      <div className="rounded-2xl p-4" style={isSikh ? { background: "#EFF6FF" } : { background: "var(--accent, #FFF7ED)" }}>
+      <div className="rounded-2xl p-4" style={{ background: mealBg }}>
         <p className="text-sm text-foreground leading-relaxed" data-testid="meal-idea-text">
           {vrat.mealIdea}
         </p>
@@ -388,6 +390,10 @@ function MealIdeasSection({ vrat }: { vrat: Vrat }) {
         {isSikh ? (
           <p className="text-xs text-muted-foreground italic text-center">
             Sikh observances focus on langar (community meals) — simple vegetarian food served freely to all as an act of seva (selfless service). No special fasting foods required.
+          </p>
+        ) : isSwaminarayan ? (
+          <p className="text-xs text-muted-foreground italic text-center">
+            Swaminarayan tradition follows a strictly satvik diet year-round — no onion, garlic, or brinjal. On fast days, sendha namak (rock salt) is used and only permitted foods are eaten.
           </p>
         ) : (
           <p className="text-xs text-muted-foreground italic text-center">
@@ -403,8 +409,9 @@ function MealIdeasSection({ vrat }: { vrat: Vrat }) {
 function VratFoodCard({ vrat }: { vrat: Vrat }) {
   const { t } = useLanguage();
   const [showSankalp, setShowSankalp] = useState(false);
-  const isJain = vrat.tradition === "Jain";
-  const isSikh = vrat.tradition === "Sikh";
+  const isJain         = vrat.tradition === "Jain";
+  const isSikh         = vrat.tradition === "Sikh";
+  const isSwaminarayan = vrat.tradition === "Swaminarayan";
   const vnsYear = isJain
     ? (vrat.dates?.[0] >= "2026-11-09" ? 2553 : 2552)
     : null;
@@ -413,17 +420,19 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
     ? { background: "linear-gradient(135deg, #001A6E 0%, #003DA5 60%, #0052CC 100%)" }
     : isJain
     ? { background: "linear-gradient(135deg, #15803D 0%, #22C55E 100%)" }
+    : isSwaminarayan
+    ? { background: "linear-gradient(135deg, #7A5500 0%, #C4972A 60%, #D4A520 100%)" }
     : undefined;
 
   return (
     <div data-testid={`vrat-food-card-${vrat.id}`}>
       <div
-        className={`rounded-2xl p-4 mb-4 text-white${!isSikh && !isJain ? " saffron-gradient" : ""}`}
+        className={`rounded-2xl p-4 mb-4 text-white${!isSikh && !isJain && !isSwaminarayan ? " saffron-gradient" : ""}`}
         style={headerStyle}
       >
         <p className="text-xs font-medium tracking-widest uppercase mb-1"
-          style={{ color: isSikh ? "#F4A900" : "rgba(255,255,255,0.7)" }}>
-          {isSikh ? "ਸਿੱਖ ਤਿਉਹਾਰ · Sikh Observance" : t("home.fastDay")}
+          style={{ color: isSikh ? "#F4A900" : isSwaminarayan ? "#F4D58D" : "rgba(255,255,255,0.7)" }}>
+          {isSikh ? "ਸਿੱਖ ਤਿਉਹਾਰ · Sikh Observance" : isSwaminarayan ? "સ્વામિનારાયણ · Swaminarayan Observance" : t("home.fastDay")}
         </p>
         <h2 className="font-serif text-2xl font-bold">{vrat.name}</h2>
         {isSikh && vrat.punjabiName && (
@@ -454,6 +463,14 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
           </p>
         )}
       </div>
+
+      {isSwaminarayan && (
+        <div className="rounded-xl px-4 py-3 mb-4 text-xs leading-relaxed border"
+          style={{ background: "#FFFBEB", borderColor: "#FDE68A", color: "#78450A" }}>
+          <span className="font-semibold">🪷 Satvik diet:</span>{" "}
+          Swaminarayan tradition avoids onion, garlic, and brinjal year-round. On fast days, only permitted satvik foods and sendha namak are consumed.
+        </div>
+      )}
 
       {isSikh && (
         <div className="rounded-xl px-4 py-3 mb-4 text-xs leading-relaxed border"

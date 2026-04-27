@@ -37,7 +37,7 @@ const PRICES = {
   lifetime: { usd: "$49.99",       inr: "₹3,999"      },
 } as const;
 
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" }[] = [
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" }[] = [
   { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                           tradition: "Hindu" },
   { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",               tradition: "Hindu" },
   { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",          tradition: "Hindu" },
@@ -78,6 +78,10 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "bandi-chhor-divas",            label: "Bandi Chhor Divas",                  subtitle: "Katik 5 (Oct 20) · Day of Liberation · coincides with Diwali", tradition: "Sikh" },
   { id: "guru-nanak-gurpurab",          label: "Guru Nanak Dev Ji Gurpurab",          subtitle: "Katik 21 (Nov 5) · Founder of Sikhism's birth anniversary", tradition: "Sikh" },
   { id: "guru-tegh-bahadur-shaheedi",   label: "Guru Tegh Bahadur Ji Shaheedi Divas",subtitle: "Maghar 10 (Nov 24) · 9th Guru's Martyrdom Day",           tradition: "Sikh" },
+  { id: "swaminarayan-jayanti",  label: "Swaminarayan Jayanti",  subtitle: "Chaitra Shukla Navami · Lord Swaminarayan's birth",        tradition: "Swaminarayan" },
+  { id: "fuldol",                label: "Fuldol",                subtitle: "Phalgun Purnima · flower festival before Holi",            tradition: "Swaminarayan" },
+  { id: "annakut",               label: "Annakut",               subtitle: "Day after Diwali · Swaminarayan New Year offering",        tradition: "Swaminarayan" },
+  { id: "swaminarayan-ekadashi", label: "Swaminarayan Ekadashi", subtitle: "Ekadashi with strict satvik fast · no onion, garlic",     tradition: "Swaminarayan" },
 ];
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
@@ -347,10 +351,11 @@ export default function Settings() {
 
   if (section === "tradition") {
     const OPTIONS: { value: Tradition; label: string; subtitle: string }[] = [
-      { value: "Hindu", label: "Hindu", subtitle: "Ekadashi, Navratri, Karva Chauth and more" },
-      { value: "Jain",  label: "Jain",  subtitle: "Paryushana, Navpad Oli, Samvatsari and more" },
-      { value: "Sikh",  label: "Sikh",  subtitle: "Gurpurabs, Baisakhi, Sangrand and more" },
-      { value: "Both",  label: "Both",  subtitle: "Hindu and Jain observances together" },
+      { value: "Hindu",        label: "Hindu",        subtitle: "Ekadashi, Navratri, Karva Chauth and more" },
+      { value: "Jain",         label: "Jain",         subtitle: "Paryushana, Navpad Oli, Samvatsari and more" },
+      { value: "Sikh",         label: "Sikh",         subtitle: "Gurpurabs, Baisakhi, Sangrand and more" },
+      { value: "Both",         label: "Both",         subtitle: "Hindu and Jain observances together" },
+      { value: "Swaminarayan", label: "Swaminarayan", subtitle: "Jayanti, Fuldol, Annakut and strict Ekadashi" },
     ];
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
@@ -393,12 +398,14 @@ export default function Settings() {
   }
 
   if (section === "vrats") {
-    const hinduVrats = VRAT_OPTIONS.filter((v) => v.tradition === "Hindu");
-    const jainVrats  = VRAT_OPTIONS.filter((v) => v.tradition === "Jain");
-    const sikhVrats  = VRAT_OPTIONS.filter((v) => v.tradition === "Sikh");
-    const showHindu = tradition === "Hindu" || tradition === "Both";
-    const showJain  = tradition === "Jain"  || tradition === "Both";
-    const showSikh  = tradition === "Sikh";
+    const hinduVrats        = VRAT_OPTIONS.filter((v) => v.tradition === "Hindu");
+    const jainVrats         = VRAT_OPTIONS.filter((v) => v.tradition === "Jain");
+    const sikhVrats         = VRAT_OPTIONS.filter((v) => v.tradition === "Sikh");
+    const swaminarayanVrats = VRAT_OPTIONS.filter((v) => v.tradition === "Swaminarayan");
+    const showHindu        = tradition === "Hindu" || tradition === "Both";
+    const showJain         = tradition === "Jain"  || tradition === "Both";
+    const showSikh         = tradition === "Sikh";
+    const showSwaminarayan = tradition === "Swaminarayan";
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
         <div className="max-w-md mx-auto px-5 pt-6 pb-8">
@@ -440,6 +447,19 @@ export default function Settings() {
           {showSikh && (
             <>
               {sikhVrats.map((opt) => (
+                <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm font-medium text-foreground">{opt.label}</p>
+                    <p className="text-xs text-muted-foreground">{opt.subtitle}</p>
+                  </div>
+                  <Toggle on={isVratObserved(opt.id, observed)} onToggle={() => toggleVrat(opt.id)} />
+                </div>
+              ))}
+            </>
+          )}
+          {showSwaminarayan && (
+            <>
+              {swaminarayanVrats.map((opt) => (
                 <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
                   <div className="flex-1 mr-4">
                     <p className="text-sm font-medium text-foreground">{opt.label}</p>

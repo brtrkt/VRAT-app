@@ -3,7 +3,7 @@ export interface Vrat {
   name: string;
   dates: string[];
   deity: string;
-  tradition: "Hindu" | "Jain" | "Sikh" | "Both";
+  tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "Both";
   foodsAllowed: string[];
   foodsAvoided: string[];
   jainFastRestrictions?: string[];
@@ -5079,6 +5079,139 @@ export const vrats: Vrat[] = [
     description: "Shaheedi Diwas of Guru Tegh Bahadur Ji, the ninth Sikh Guru, martyred in Delhi on November 24, 1675 by Mughal Emperor Aurangzeb after refusing to convert to Islam. He gave his life to protect the religious freedom of Kashmiri Pandits, earning him the title 'Hind Ki Chadar' (Shield of India).",
     specialNote: "Guru Tegh Bahadur Ji's martyrdom is one of the most profound acts of courage in history — he sacrificed himself not for his own faith but to defend the freedom of another religion entirely.",
   },
+
+  // ── Swaminarayan ────────────────────────────────────────────────────────────
+  {
+    id: "swaminarayan-jayanti",
+    name: "Swaminarayan Jayanti",
+    dates: ["2026-03-26", "2027-03-28"],
+    deity: "Swaminarayan Bhagwan (Sahajanand Swami)",
+    tradition: "Swaminarayan",
+    foodsAllowed: [
+      "Fruits of all kinds — banana, apple, mango, chikoo, pomegranate, grapes",
+      "Milk and dairy — milk, curd, ghee, paneer",
+      "Sabudana (tapioca pearls)",
+      "Singhara atta (water chestnut flour) and kuttu atta (buckwheat flour)",
+      "Rock salt (sendha namak)",
+      "Dry fruits and nuts — cashews, almonds, raisins",
+      "Coconut and coconut water",
+      "Panchamrit (milk, curd, honey, ghee, sugar) — offered to Swaminarayan Bhagwan",
+      "Sweet potato and potato (farali foods)",
+    ],
+    foodsAvoided: [
+      "Onion and garlic — avoided year-round in Swaminarayan tradition",
+      "Meat, fish, eggs — strictly vegetarian",
+      "Alcohol and intoxicants",
+      "Regular salt (table salt) — only sendha namak on fasting days",
+      "Grains (wheat, rice, corn) — on strict fasting days",
+      "Lentils and legumes — on strict fasting days",
+      "Eggplant (brinjal) — traditionally avoided",
+      "Stale food — only freshly prepared food",
+    ],
+    mantra: "સ્વામિનારાયણ સ્વામિનારાયણ",
+    mantraTransliteration: "Swaminarayan Swaminarayan",
+    mantraTranslation: "Swaminarayan Swaminarayan — the divine name of Sahajanand Swami, chanted for liberation and inner peace",
+    mantraHow: "Chant 108 times on a tulsi mala, or continuously throughout the day. This is the maha-mantra given by Swaminarayan Bhagwan himself for the current age.",
+    mantraBenefits: "Chanting Swaminarayan's name purifies the mind, destroys sins of countless lifetimes, and leads the soul toward the divine abode of Akshardham. Swaminarayan Bhagwan promised that those who chant his name will never fall back into the cycle of birth and death.",
+    mealIdea: "Sabudana khichdi with roasted peanuts and rock salt, or a platter of fresh seasonal fruits with dry fruits — light, satvik, and offered first as bhog to Swaminarayan Bhagwan",
+    color: "#C4972A",
+    description: "Swaminarayan Jayanti celebrates the birth of Sahajanand Swami — Swaminarayan Bhagwan — on Chaitra Shukla Navami (the same tithi as Ram Navami, 1781 CE). Mandirs resound with kirtans, discourses, the chanting of 'Swaminarayan Swaminarayan', and the offering of Chhappan Bhog (56 food items) to Swaminarayan Bhagwan",
+    specialNote: "Swaminarayan Jayanti and Ram Navami fall on the same tithi — Chaitra Shukla Navami. Swaminarayan Bhagwan is revered as the Supreme Being (Parabrahman) in the Swaminarayan Sampraday. Observe a fruit fast or nirjala fast until the evening aarti. Visit the local mandir for darshan and participate in the Annakut (mountain of food offerings).",
+  },
+  {
+    id: "fuldol-swaminarayan",
+    name: "Fuldol",
+    dates: ["2026-03-13", "2027-03-03"],
+    deity: "Swaminarayan Bhagwan / Lord Krishna",
+    tradition: "Swaminarayan",
+    foodsAllowed: [
+      "All regular vegetarian food — this is a joyful celebration, not a strict fast",
+      "Thandai (milk drink with nuts and spices)",
+      "Traditional Gujarati sweets — mohanthal, basundi, shrikhand",
+      "Fresh flowers for offerings (marigold, rose, chameli)",
+      "Panchamrit for abhishek",
+    ],
+    foodsAvoided: [
+      "Onion and garlic — avoided year-round in Swaminarayan tradition",
+      "Meat, fish, eggs",
+      "Alcohol and intoxicants",
+      "Eggplant (brinjal)",
+    ],
+    mantra: "સ્વામિનારાયણ સ્વામિનારાયણ",
+    mantraTransliteration: "Swaminarayan Swaminarayan",
+    mantraTranslation: "Swaminarayan Swaminarayan — chanted in joy during Fuldol",
+    mantraHow: "Chant the name of Swaminarayan Bhagwan continuously as flowers are showered on the deity's image and on fellow devotees in the spirit of seva and devotion.",
+    mantraBenefits: "Celebrating Fuldol with devotion fills the heart with divine bliss (divya anand) and strengthens the bond with Swaminarayan Bhagwan and the satsang community.",
+    mealIdea: "Traditional Gujarati Fuldol thali — mohanthal, basundi, and farsan — shared in community prasad after the floral celebration at the mandir",
+    color: "#C4972A",
+    description: "Fuldol is the joyful Swaminarayan equivalent of Holi, celebrated on Phalgun Purnima. Instead of coloured powder, devotees shower each other and the deities with fragrant flower petals in an act of pure devotion. Mandirs are decorated with flowers, and the atmosphere fills with kirtans and the fragrance of marigold, rose, and chameli",
+    specialNote: "Fuldol replaces Holi in Swaminarayan tradition. Swaminarayan Bhagwan initiated this pure, satvik alternative to the use of chemical colours. Participate in the floral celebration at your local mandir, perform kirtan seva, and distribute prasad to all. This is a day of community joy, satvik fun, and devotion.",
+  },
+  {
+    id: "annakut-swaminarayan",
+    name: "Annakut (New Year)",
+    dates: ["2026-11-09", "2027-10-21"],
+    deity: "Swaminarayan Bhagwan / Lord Krishna",
+    tradition: "Swaminarayan",
+    foodsAllowed: [
+      "All vegetarian food — Annakut is a celebration, not a fast",
+      "56 varieties of food (Chhappan Bhog) offered to Swaminarayan Bhagwan",
+      "Rice, dal, sabzi — all grains eaten on this day",
+      "Sweets — mohanthal, basundi, shrikhand, ladoo, halwa",
+      "Dry fruits and nuts",
+      "Puri and bhakri",
+      "Fresh seasonal vegetables",
+    ],
+    foodsAvoided: [
+      "Onion and garlic — avoided year-round in Swaminarayan tradition",
+      "Meat, fish, eggs",
+      "Alcohol and intoxicants",
+      "Eggplant (brinjal)",
+    ],
+    mantra: "સ્વામિનારાયણ સ્વામિનારાયણ",
+    mantraTransliteration: "Swaminarayan Swaminarayan",
+    mantraTranslation: "Swaminarayan Swaminarayan — the divine name chanted as the New Year begins",
+    mealIdea: "Annakut thali — a mountain of food varieties offered to Swaminarayan Bhagwan and then served as prasad, including rice, dal, sabzi, puri, and sweet mohanthal",
+    color: "#C4972A",
+    description: "Annakut (literally 'mountain of food') marks the Swaminarayan New Year on Kartik Sud 1, the day after Diwali. Mandirs display an elaborate mountain of 56+ food varieties offered to Swaminarayan Bhagwan. The New Year begins with darshan, kirtan, and prasad shared with all",
+    specialNote: "Annakut coincides with Govardhan Puja in the Hindu calendar. In Swaminarayan mandirs, this is the most elaborate display of the year — rows of food arranged in the shape of Govardhan hill, all offered first to Swaminarayan Bhagwan and then distributed as prasad. Visit the mandir early for darshan of the Annakut.",
+  },
+  {
+    id: "ekadashi-swaminarayan-jan-1",
+    name: "Ekadashi",
+    dates: ["2026-01-10", "2026-01-25", "2026-02-09", "2026-02-23", "2026-03-11", "2026-03-25", "2026-04-10", "2026-04-24", "2026-05-10", "2026-05-24", "2026-06-08", "2026-06-23", "2026-07-08", "2026-07-23", "2026-08-07", "2026-08-21", "2026-09-05", "2026-09-20", "2026-10-05", "2026-10-20", "2026-11-04", "2026-11-18", "2026-12-04", "2026-12-18", "2027-01-07", "2027-01-22"],
+    deity: "Swaminarayan Bhagwan / Lord Vishnu",
+    tradition: "Swaminarayan",
+    foodsAllowed: [
+      "Fruits of all kinds",
+      "Milk and dairy — milk, curd, ghee",
+      "Sabudana (tapioca pearls)",
+      "Singhara atta (water chestnut flour)",
+      "Kuttu atta (buckwheat flour)",
+      "Rock salt (sendha namak)",
+      "Dry fruits and nuts",
+      "Potatoes and sweet potatoes",
+      "Coconut and coconut water",
+    ],
+    foodsAvoided: [
+      "All grains — rice, wheat, corn, bajra (no grains on Ekadashi)",
+      "Lentils and legumes",
+      "Onion and garlic — avoided year-round",
+      "Meat, fish, eggs",
+      "Alcohol and intoxicants",
+      "Regular salt (table salt)",
+      "Eggplant (brinjal)",
+    ],
+    mantra: "સ્વામિનારાયણ સ્વામિનારાયણ",
+    mantraTransliteration: "Swaminarayan Swaminarayan",
+    mantraTranslation: "Swaminarayan Swaminarayan — chant the divine name continuously on Ekadashi",
+    mantraHow: "Chant 'Swaminarayan Swaminarayan' continuously throughout the day. Swaminarayan Bhagwan placed great importance on Ekadashi, observing it strictly and instructing all satsangis (followers) to do the same.",
+    mantraBenefits: "Swaminarayan Bhagwan himself strictly observed Ekadashi and instructed all devotees to do the same. Observing Ekadashi with the chanting of Swaminarayan's name is believed to purify the soul, please Bhagwan, and accelerate the path to liberation in his divine abode.",
+    mealIdea: "Farali khichdi (sabudana with rock salt and peanuts) or a spread of seasonal fruits and dry fruits — satvik, light, and offered first as bhog",
+    color: "#C4972A",
+    description: "Ekadashi — the 11th day of each lunar fortnight — is strictly observed in Swaminarayan tradition. Swaminarayan Bhagwan himself fasted on Ekadashi and gave specific Ekadashi niyams (rules) in the Shikshapatri (verse 80), making it one of the most important observances for all satsangis",
+    specialNote: "The Shikshapatri (Swaminarayan's scripture) instructs all devotees to fast on Ekadashi. Swaminarayan Bhagwan observed nirjala (waterless) Ekadashi himself. Even if you cannot fast completely, avoid grains and observe a fruit fast. Spend the day in kirtan, Vachanamrut reading, and chanting 'Swaminarayan Swaminarayan'.",
+  },
 ];
 
 export function getVratsForDate(dateStr: string): Vrat[] {
@@ -5145,6 +5278,7 @@ export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] 
   if (tradition === "Hindu") return list.filter((v) => v.tradition === "Hindu" || v.tradition === "Both");
   if (tradition === "Jain")  return list.filter((v) => v.tradition === "Jain"  || v.tradition === "Both");
   if (tradition === "Sikh")  return list.filter((v) => v.tradition === "Sikh");
+  if (tradition === "Swaminarayan") return list.filter((v) => v.tradition === "Swaminarayan");
   return list;
 }
 
