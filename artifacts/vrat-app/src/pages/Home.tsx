@@ -254,6 +254,18 @@ function VaishnavaTilakSvg({ className = "", style }: { className?: string; styl
   );
 }
 
+function TrisulaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 48 68" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <rect x="21" y="26" width="6" height="38" rx="3"/>
+      <path d="M24 2 C24 2 20 10 20 18 L28 18 C28 10 24 2 24 2Z"/>
+      <path d="M11 8 C9 13 9 20 13 23 L18 23 L18 18 C14 18 12 14 13 10Z"/>
+      <path d="M37 8 C39 13 39 20 35 23 L30 23 L30 18 C34 18 36 14 35 10Z"/>
+      <rect x="11" y="20" width="26" height="4" rx="2"/>
+    </svg>
+  );
+}
+
 function FloralDivider() {
   return (
     <div className="decorative-divider my-4">
@@ -578,6 +590,7 @@ const TRADITION_OPTIONS: { value: Tradition; label: string }[] = [
   { value: "Sikh",         label: "Sikh" },
   { value: "Swaminarayan", label: "Swaminarayan" },
   { value: "ISKCON",       label: "ISKCON" },
+  { value: "Lingayat",     label: "Lingayat" },
   { value: "Both",         label: "Hindu + Jain" },
 ];
 
@@ -653,6 +666,7 @@ export default function Home() {
               if (t === "Hindu")         return <OmSymbol className="text-primary text-3xl" />;
               if (t === "Swaminarayan") return <LotusSvg className="w-10 h-10" style={{ color: "#C4972A" }} />;
               if (t === "ISKCON")        return <VaishnavaTilakSvg className="w-8 h-12" style={{ color: "#0284C7" }} />;
+              if (t === "Lingayat")      return <TrisulaSvg className="w-8 h-11" style={{ color: "#9B2335" }} />;
               return (
                 <>
                   <OmSymbol className="text-primary text-3xl" />

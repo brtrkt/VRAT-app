@@ -440,7 +440,7 @@ function CalendarGrid({
   );
 }
 
-type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan" | "iskcon";
+type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan" | "iskcon" | "lingayat";
 
 const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
   { value: "all",          label: "All" },
@@ -449,6 +449,7 @@ const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
   { value: "sikh",         label: "Sikh" },
   { value: "swaminarayan", label: "Swaminarayan" },
   { value: "iskcon",       label: "ISKCON" },
+  { value: "lingayat",     label: "Lingayat" },
 ];
 
 const HINDU_LEGEND = [
@@ -480,6 +481,11 @@ const ISKCON_LEGEND = [
   { label: "Gaura Purnima & Radhashtami", color: "#0284C7" },
   { label: "Janmashtami · Kartik month", color: "#0284C7" },
 ];
+const LINGAYAT_LEGEND = [
+  { label: "Maha Shivaratri · nirjala fast", color: "#9B2335" },
+  { label: "Shravan Somavar (Mondays)", color: "#9B2335" },
+  { label: "Basava Jayanti", color: "#9B2335" },
+];
 
 export default function Calendar() {
   const { t } = useLanguage();
@@ -496,6 +502,7 @@ export default function Calendar() {
     if (trad === "Sikh")          return "sikh";
     if (trad === "Swaminarayan")  return "swaminarayan";
     if (trad === "ISKCON")        return "iskcon";
+    if (trad === "Lingayat")      return "lingayat";
     return "all";
   });
   const [observedVrats] = useState<string[]>(() => getObservedVrats());
@@ -513,7 +520,8 @@ export default function Calendar() {
           (filter === "jain"         && (v.tradition === "Jain"  || v.tradition === "Both")) ||
           (filter === "sikh"         && v.tradition === "Sikh") ||
           (filter === "swaminarayan" && v.tradition === "Swaminarayan") ||
-          (filter === "iskcon"       && v.tradition === "ISKCON");
+          (filter === "iskcon"       && v.tradition === "ISKCON") ||
+          (filter === "lingayat"     && v.tradition === "Lingayat");
         const regionOk = !v.region || userRegion === "all" || v.region === userRegion;
         return traditionOk && regionOk;
       }),
@@ -632,7 +640,7 @@ export default function Calendar() {
               />
               <span className="text-xs font-medium text-foreground">Your observed vrats (gold)</span>
             </div>
-            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
+            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "lingayat" ? LINGAYAT_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
               <div key={item.label} className="flex items-center gap-2" data-testid={`legend-${item.label}`}>
                 <span
                   className="w-3 h-3 rounded-full flex-shrink-0"
@@ -673,6 +681,13 @@ export default function Calendar() {
               return (
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Dates follow Drik Panchang IST. ISKCON uses a Vaishnava calendar — Ekadashi and festival dates may occasionally fall one day after the standard Hindu Panchang. Always verify with your local ISKCON temple's published Vaishnava calendar.
+                </p>
+              );
+            }
+            if (trad === "Lingayat") {
+              return (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dates follow Drik Panchang IST. Shravan Somavar dates are for the holy month of Shravan. Basava Jayanti falls on Vaishakha Shukla Tritiya — please verify with your local Lingayat community or mathadipati.
                 </p>
               );
             }

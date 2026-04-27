@@ -3,7 +3,7 @@ export interface Vrat {
   name: string;
   dates: string[];
   deity: string;
-  tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Both";
+  tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "Both";
   foodsAllowed: string[];
   foodsAvoided: string[];
   jainFastRestrictions?: string[];
@@ -5402,6 +5402,103 @@ export const vrats: Vrat[] = [
     description: "Ekadashi — the 11th day of each lunar fortnight — is strictly observed in Swaminarayan tradition. Swaminarayan Bhagwan himself fasted on Ekadashi and gave specific Ekadashi niyams (rules) in the Shikshapatri (verse 80), making it one of the most important observances for all satsangis",
     specialNote: "The Shikshapatri (Swaminarayan's scripture) instructs all devotees to fast on Ekadashi. Swaminarayan Bhagwan observed nirjala (waterless) Ekadashi himself. Even if you cannot fast completely, avoid grains and observe a fruit fast. Spend the day in kirtan, Vachanamrut reading, and chanting 'Swaminarayan Swaminarayan'.",
   },
+
+  // ── Lingayat ─────────────────────────────────────────────────────────────
+  {
+    id: "maha-shivaratri-lingayat",
+    name: "Maha Shivaratri",
+    dates: ["2026-02-26", "2027-02-15"],
+    deity: "Lord Shiva (Ishtalinga)",
+    tradition: "Lingayat",
+    nirjala: true,
+    foodsAllowed: [
+      "Fruits of all kinds — banana, apple, mango, pomegranate, grapes, chikoo",
+      "Milk and dairy — milk, curd, ghee, paneer",
+      "Coconut and coconut water",
+      "Dry fruits and nuts — almonds, cashews, walnuts, raisins",
+      "Rock salt (sendha namak) in all preparations",
+      "Sabudana (tapioca pearls) — khichdi or vada",
+      "Singhara atta (water chestnut flour) and kuttu atta (buckwheat flour)",
+      "Sweet potato and potato (farali foods)",
+    ],
+    foodsAvoided: [
+      "All grains — rice, wheat, bajra, corn (no grains on Shivaratri)",
+      "Lentils and legumes — on strict fasting days",
+      "Meat, fish, eggs — Lingayat tradition is strictly vegetarian",
+      "Alcohol and intoxicants",
+      "Onion and garlic — avoided on fasting days",
+      "Regular salt (table salt) — only sendha namak on fast days",
+    ],
+    mantra: "ಓಂ ನಮಃ ಶಿವಾಯ",
+    mantraTransliteration: "Om Namah Shivaya",
+    mantraTranslation: "Om Namah Shivaya — I bow to Lord Shiva, the Supreme consciousness dwelling in all beings",
+    mantraHow: "Chant 108 times on a rudraksha mala while holding the Ishtalinga. Perform abhishek (water pouring) on the Shivalinga throughout the night — the four prahar (watches of night) are especially sacred.",
+    mantraBenefits: "Maha Shivaratri is the most sacred night for all Shaiva traditions. Basavanna taught that Shiva resides within as the Ishtalinga — holding and worshipping it through this night purifies the soul, destroys lifetimes of karma, and brings the devotee closer to Shiva-sharanu (surrender to Shiva).",
+    mealIdea: "Sabudana vada with coconut chutney and rock salt, or a plate of seasonal fruits with milk — simple, satvik food eaten after midnight worship when breaking the fast",
+    color: "#9B2335",
+    description: "Maha Shivaratri — the Great Night of Shiva — is the most important vrat in the Lingayat (Veerashaiva) tradition. Lingayats keep an all-night vigil, worshipping the Ishtalinga (personal Shiva linga worn on the body) through four rounds of abhishek with water, milk, honey, and bilva leaves. Basavanna's Vacanas are recited throughout the night",
+    specialNote: "In the Lingayat tradition, the Ishtalinga is worn on the body at all times — it is Shiva himself. On Maha Shivaratri, hold and worship your Ishtalinga with each round of abhishek. Observe nirjala fast (no water) until midnight, or a fruit-only fast if health does not permit. The Panchakshara mantra 'Om Namah Shivaya' is the core of all Lingayat worship.",
+  },
+  {
+    id: "somavara-lingayat",
+    name: "Shravan Somavar",
+    dates: ["2026-07-20", "2026-07-27", "2026-08-03", "2026-08-10", "2027-08-09", "2027-08-16", "2027-08-23", "2027-08-30"],
+    deity: "Lord Shiva (Ishtalinga)",
+    tradition: "Lingayat",
+    foodsAllowed: [
+      "Fruits of all kinds",
+      "Milk and dairy — milk, curd, ghee",
+      "Coconut and coconut water",
+      "Dry fruits and nuts",
+      "Rock salt (sendha namak)",
+      "Sabudana khichdi or vada",
+      "Singhara atta and kuttu atta preparations",
+    ],
+    foodsAvoided: [
+      "All grains — rice, wheat, corn on strict somavar",
+      "Meat, fish, eggs",
+      "Alcohol and intoxicants",
+      "Onion and garlic — avoided on fasting days",
+      "Regular salt (table salt)",
+    ],
+    mantra: "ಓಂ ನಮಃ ಶಿವಾಯ",
+    mantraTransliteration: "Om Namah Shivaya",
+    mantraTranslation: "Om Namah Shivaya — salutation to Lord Shiva on his sacred day, Monday",
+    mantraHow: "Chant 'Om Namah Shivaya' 108 times in the morning while performing Ishtalinga puja. Monday (Somavar / Shivavar) is Shiva's day — begin the day with abhishek and wear the Ishtalinga with devotion.",
+    mantraBenefits: "Shravan Somavar fasting pleases Lord Shiva immensely. Basavanna taught that the Ishtalinga is Shiva himself — worshipping it sincerely on Mondays in the holy month of Shravan is said to fulfil desires, remove obstacles, and advance the soul toward liberation (aikya — union with Shiva).",
+    mealIdea: "Sabudana khichdi with peanuts and rock salt, or fresh fruit platter with coconut water — light fasting food eaten after morning Ishtalinga puja",
+    color: "#9B2335",
+    description: "Somavar (Monday) is sacred to Lord Shiva, and the Mondays of Shravan (Shraavana) month are considered the holiest of all. Lingayat devotees observe a fruit fast on these days, performing elaborate Ishtalinga puja and reciting Basavanna's Vacanas. The Shravan Somavar fast is observed with particular devotion across Karnataka",
+    specialNote: "Shravan Somavar fasts are among the most widely observed in the Lingayat community. Each Monday of Shravan month, hold your Ishtalinga during morning puja, chant the Panchakshara ('Om Namah Shivaya'), and observe a fruit fast until evening. Visit your local Shiva mandir or perform puja at home. Basavanna's Vacanas make for ideal reading on these sacred days.",
+  },
+  {
+    id: "basava-jayanti",
+    name: "Basava Jayanti",
+    dates: ["2026-04-29", "2027-04-18"],
+    deity: "Basavanna / Lord Shiva",
+    tradition: "Lingayat",
+    foodsAllowed: [
+      "All vegetarian food — Basava Jayanti is a celebration, not a strict fast",
+      "Traditional Karnataka dishes — jolada rotti, hulli, kosambari, akki rotti",
+      "Milk-based sweets — mysore pak, holige (puran poli), payasa",
+      "Fresh fruits and coconut",
+      "Dry fruits and nuts",
+    ],
+    foodsAvoided: [
+      "Meat, fish, eggs — Lingayat tradition is strictly vegetarian",
+      "Alcohol and intoxicants",
+      "Onion and garlic — avoided in the Lingayat tradition",
+    ],
+    mantra: "ಓಂ ನಮಃ ಶಿವಾಯ",
+    mantraTransliteration: "Om Namah Shivaya",
+    mantraTranslation: "Om Namah Shivaya — honouring Basavanna, who gave the world the Vachana philosophy and the way of the Ishtalinga",
+    mantraHow: "Recite Basavanna's Vacanas (short philosophical poems) in Kannada throughout the day. His most celebrated Vacana begins: 'ಉಳ್ಳವರು ಶಿವಾಲಯ ಮಾಡುವರು ನಾನೇನು ಮಾಡಲಿ' (Those who have wealth build Shiva temples — what can I build? My body is the temple of Shiva).",
+    mantraBenefits: "Basavanna (c.1131–1167 CE) was the social reformer and saint who founded the Lingayat movement in Karnataka. His Vachanas (spiritual verses) teach equality, devotion (bhakti), and service (kaya-kaya). Celebrating his Jayanti renews commitment to his values of equality and sincere Ishtalinga worship.",
+    mealIdea: "Traditional Karnataka prasad — jolada rotti with hulli (lentil curry), kosambari (dal salad), and holige (sweet flatbread) — shared at community gatherings in honour of Basavanna",
+    color: "#9B2335",
+    description: "Basava Jayanti celebrates the birth of Basavanna (Basaveshwara), the 12th-century Kannada saint, philosopher, and social reformer who founded the Lingayat tradition. He introduced the Ishtalinga initiation, the Anubhava Mantapa (Hall of Spiritual Experience — perhaps the world's first parliament of spiritual equality), and composed hundreds of Vacanas (prose-poems) in Kannada that remain central to Lingayat spiritual life",
+    specialNote: "Basava Jayanti falls on Vaishakha Shukla Tritiya — the same tithi as Akshaya Tritiya in the Hindu calendar. It is a day of community celebration, Vachana recitation, and reaffirmation of Basavanna's ideals of social equality and devotion. This is not a strict fast day — it is a day of joy, service, and sharing.",
+  },
 ];
 
 export function getVratsForDate(dateStr: string): Vrat[] {
@@ -5470,6 +5567,7 @@ export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] 
   if (tradition === "Sikh")  return list.filter((v) => v.tradition === "Sikh");
   if (tradition === "Swaminarayan") return list.filter((v) => v.tradition === "Swaminarayan");
   if (tradition === "ISKCON") return list.filter((v) => v.tradition === "ISKCON");
+  if (tradition === "Lingayat") return list.filter((v) => v.tradition === "Lingayat");
   return list;
 }
 
