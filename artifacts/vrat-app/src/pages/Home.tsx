@@ -266,6 +266,18 @@ function TrisulaSvg({ className = "", style }: { className?: string; style?: CSS
   );
 }
 
+function PeacockFeatherSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 48 72" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <rect x="22" y="34" width="4" height="36" rx="2"/>
+      <ellipse cx="24" cy="18" rx="14" ry="20" opacity="0.2"/>
+      <ellipse cx="24" cy="18" rx="10" ry="14"/>
+      <ellipse cx="24" cy="18" rx="5" ry="7" fill="white" opacity="0.85"/>
+      <ellipse cx="24" cy="18" rx="2.5" ry="3.5"/>
+    </svg>
+  );
+}
+
 function FloralDivider() {
   return (
     <div className="decorative-divider my-4">
@@ -591,6 +603,7 @@ const TRADITION_OPTIONS: { value: Tradition; label: string }[] = [
   { value: "Swaminarayan", label: "Swaminarayan" },
   { value: "ISKCON",       label: "ISKCON" },
   { value: "Lingayat",     label: "Lingayat" },
+  { value: "PushtiMarg",   label: "Pushti Marg" },
   { value: "Both",         label: "Hindu + Jain" },
 ];
 
@@ -667,6 +680,7 @@ export default function Home() {
               if (t === "Swaminarayan") return <LotusSvg className="w-10 h-10" style={{ color: "#C4972A" }} />;
               if (t === "ISKCON")        return <VaishnavaTilakSvg className="w-8 h-12" style={{ color: "#0284C7" }} />;
               if (t === "Lingayat")      return <TrisulaSvg className="w-8 h-11" style={{ color: "#9B2335" }} />;
+              if (t === "PushtiMarg")    return <PeacockFeatherSvg className="w-9 h-12" style={{ color: "#0E7490" }} />;
               return (
                 <>
                   <OmSymbol className="text-primary text-3xl" />

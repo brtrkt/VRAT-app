@@ -376,7 +376,8 @@ function MealIdeasSection({ vrat }: { vrat: Vrat }) {
   const isSwaminarayan  = vrat.tradition === "Swaminarayan";
   const isISKCON        = vrat.tradition === "ISKCON";
   const isLingayat      = vrat.tradition === "Lingayat";
-  const mealBg = isSikh ? "#EFF6FF" : isSwaminarayan ? "#FEF9EC" : isISKCON ? "#EFF6FF" : isLingayat ? "#FFF1F2" : "var(--accent, #FFF7ED)";
+  const isPushtiMarg    = vrat.tradition === "PushtiMarg";
+  const mealBg = isSikh ? "#EFF6FF" : isSwaminarayan ? "#FEF9EC" : isISKCON ? "#EFF6FF" : isLingayat ? "#FFF1F2" : isPushtiMarg ? "#F0FDFA" : "var(--accent, #FFF7ED)";
   return (
     <div className="vrat-card p-5 mb-4" data-testid="meal-ideas-section">
       <div className="flex items-center gap-2 mb-3">
@@ -424,8 +425,12 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
   const isSwaminarayan = vrat.tradition === "Swaminarayan";
   const isISKCON       = vrat.tradition === "ISKCON";
   const isLingayat     = vrat.tradition === "Lingayat";
+  const isPushtiMarg   = vrat.tradition === "PushtiMarg";
   const vnsYear = isJain
     ? (vrat.dates?.[0] >= "2026-11-09" ? 2553 : 2552)
+    : null;
+  const vsYear = isPushtiMarg
+    ? (vrat.dates?.[0] >= "2027-04-09" ? 2084 : vrat.dates?.[0] >= "2026-04-20" ? 2083 : 2082)
     : null;
 
   const headerStyle = isSikh
@@ -438,17 +443,19 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
     ? { background: "linear-gradient(135deg, #013E6F 0%, #0284C7 60%, #0EA5E9 100%)" }
     : isLingayat
     ? { background: "linear-gradient(135deg, #5C0011 0%, #9B2335 60%, #BE123C 100%)" }
+    : isPushtiMarg
+    ? { background: "linear-gradient(135deg, #0C4A6E 0%, #0E7490 60%, #0891B2 100%)" }
     : undefined;
 
   return (
     <div data-testid={`vrat-food-card-${vrat.id}`}>
       <div
-        className={`rounded-2xl p-4 mb-4 text-white${!isSikh && !isJain && !isSwaminarayan && !isISKCON && !isLingayat ? " saffron-gradient" : ""}`}
+        className={`rounded-2xl p-4 mb-4 text-white${!isSikh && !isJain && !isSwaminarayan && !isISKCON && !isLingayat && !isPushtiMarg ? " saffron-gradient" : ""}`}
         style={headerStyle}
       >
         <p className="text-xs font-medium tracking-widest uppercase mb-1"
-          style={{ color: isSikh ? "#F4A900" : isSwaminarayan ? "#F4D58D" : isISKCON ? "#BAE6FD" : isLingayat ? "#FECDD3" : "rgba(255,255,255,0.7)" }}>
-          {isSikh ? "ਸਿੱਖ ਤਿਉਹਾਰ · Sikh Observance" : isSwaminarayan ? "સ્વામિનારાયણ · Swaminarayan Observance" : isISKCON ? "हरे कृष्ण · ISKCON / Vaishnava" : isLingayat ? "ಓಂ ನಮಃ ಶಿವಾಯ · Lingayat / Veerashaiva" : t("home.fastDay")}
+          style={{ color: isSikh ? "#F4A900" : isSwaminarayan ? "#F4D58D" : isISKCON ? "#BAE6FD" : isLingayat ? "#FECDD3" : isPushtiMarg ? "#CFFAFE" : "rgba(255,255,255,0.7)" }}>
+          {isSikh ? "ਸਿੱਖ ਤਿਉਹਾਰ · Sikh Observance" : isSwaminarayan ? "સ્વામિનારાયણ · Swaminarayan Observance" : isISKCON ? "हरे कृष्ण · ISKCON / Vaishnava" : isLingayat ? "ಓಂ ನಮಃ ಶಿವಾಯ · Lingayat / Veerashaiva" : isPushtiMarg ? "श्री नाथजी शरणम् मम · Pushti Marg / Vallabha" : t("home.fastDay")}
         </p>
         <h2 className="font-serif text-2xl font-bold">{vrat.name}</h2>
         {isSikh && vrat.punjabiName && (
@@ -471,6 +478,11 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
         {isJain && vnsYear && (
           <p className="text-white/50 text-xs mt-2 font-medium tracking-wide">
             ◆ Veer Nirvana Samvat {vnsYear}
+          </p>
+        )}
+        {isPushtiMarg && vsYear && (
+          <p className="text-xs mt-2 font-medium tracking-wide" style={{ color: "#CFFAFE", opacity: 0.75 }}>
+            ◆ Vikram Samvat {vsYear}
           </p>
         )}
         {isSikh && vrat.nanakshahiDate && (
@@ -507,6 +519,13 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
           style={{ background: "#FFF1F2", borderColor: "#FECDD3", color: "#881337" }}>
           <span className="font-semibold">🔱 Ishtalinga puja · Vachana philosophy:</span>{" "}
           The Lingayat tradition follows Basavanna's path — worship the Ishtalinga worn on your body before eating. Fasting uses fruits, milk, and nuts with sendha namak. No onion or garlic on fast days.
+        </div>
+      )}
+      {isPushtiMarg && (
+        <div className="rounded-xl px-4 py-3 mb-4 text-xs leading-relaxed border"
+          style={{ background: "#F0FDFA", borderColor: "#99F6E4", color: "#0F5E5A" }}>
+          <span className="font-semibold">🦚 Seva over fasting · Bhog before eating:</span>{" "}
+          Pushti Marg is a seva-based tradition — always offer food to Shrinathji before eating and receive it as prasad. No onion, garlic, or meat ever in Pushti Marg bhog. On Ekadashi, grain-free bhog only. On Annakut and Janmashtami, elaborate Chappan Bhog is the practice — not austerity.
         </div>
       )}
 

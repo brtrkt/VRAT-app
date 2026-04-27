@@ -440,7 +440,7 @@ function CalendarGrid({
   );
 }
 
-type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan" | "iskcon" | "lingayat";
+type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan" | "iskcon" | "lingayat" | "pushtimarg";
 
 const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
   { value: "all",          label: "All" },
@@ -450,6 +450,7 @@ const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
   { value: "swaminarayan", label: "Swaminarayan" },
   { value: "iskcon",       label: "ISKCON" },
   { value: "lingayat",     label: "Lingayat" },
+  { value: "pushtimarg",   label: "Pushti Marg" },
 ];
 
 const HINDU_LEGEND = [
@@ -486,6 +487,12 @@ const LINGAYAT_LEGEND = [
   { label: "Shravan Somavar (Mondays)", color: "#9B2335" },
   { label: "Basava Jayanti", color: "#9B2335" },
 ];
+const PUSHTI_MARG_LEGEND = [
+  { label: "Ekadashi · grain-free seva", color: "#0E7490" },
+  { label: "Janmashtami · Chappan Bhog", color: "#0E7490" },
+  { label: "Annakut · Govardhan Puja", color: "#0E7490" },
+  { label: "Hindola Utsav · Phoolon wali Holi", color: "#0E7490" },
+];
 
 export default function Calendar() {
   const { t } = useLanguage();
@@ -503,6 +510,7 @@ export default function Calendar() {
     if (trad === "Swaminarayan")  return "swaminarayan";
     if (trad === "ISKCON")        return "iskcon";
     if (trad === "Lingayat")      return "lingayat";
+    if (trad === "PushtiMarg")    return "pushtimarg";
     return "all";
   });
   const [observedVrats] = useState<string[]>(() => getObservedVrats());
@@ -521,7 +529,8 @@ export default function Calendar() {
           (filter === "sikh"         && v.tradition === "Sikh") ||
           (filter === "swaminarayan" && v.tradition === "Swaminarayan") ||
           (filter === "iskcon"       && v.tradition === "ISKCON") ||
-          (filter === "lingayat"     && v.tradition === "Lingayat");
+          (filter === "lingayat"     && v.tradition === "Lingayat") ||
+          (filter === "pushtimarg"  && v.tradition === "PushtiMarg");
         const regionOk = !v.region || userRegion === "all" || v.region === userRegion;
         return traditionOk && regionOk;
       }),
@@ -640,7 +649,7 @@ export default function Calendar() {
               />
               <span className="text-xs font-medium text-foreground">Your observed vrats (gold)</span>
             </div>
-            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "lingayat" ? LINGAYAT_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
+            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "lingayat" ? LINGAYAT_LEGEND : filter === "pushtimarg" ? PUSHTI_MARG_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
               <div key={item.label} className="flex items-center gap-2" data-testid={`legend-${item.label}`}>
                 <span
                   className="w-3 h-3 rounded-full flex-shrink-0"
@@ -688,6 +697,13 @@ export default function Calendar() {
               return (
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Dates follow Drik Panchang IST. Shravan Somavar dates are for the holy month of Shravan. Basava Jayanti falls on Vaishakha Shukla Tritiya — please verify with your local Lingayat community or mathadipati.
+                </p>
+              );
+            }
+            if (trad === "PushtiMarg") {
+              return (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dates follow Vikram Samvat (Drik Panchang IST). Pushti Marg is a seva-based tradition — consult your local haveli or Vaishnava Panchang for exact Utsav dates, as the Hindola Utsav dates and specific Chappan Bhog timing may vary by haveli tradition.
                 </p>
               );
             }

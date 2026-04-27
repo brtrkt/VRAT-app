@@ -25,7 +25,7 @@ export function setSubscribed(): void {
   localStorage.setItem(SUBSCRIBED_KEY, "1");
 }
 
-export type Tradition = "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "Both";
+export type Tradition = "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Both";
 export type UserLocation = "india" | "uk" | "usa" | "australia";
 export type UserRegion =
   | "all"

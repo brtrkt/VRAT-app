@@ -20,7 +20,7 @@ interface Props {
 }
 
 // ─── Vrat catalogue for Screen 3 ────────────────────────────────────────────
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" }[] = [
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" }[] = [
   { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                      tradition: "Hindu" },
   { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",          tradition: "Hindu" },
   { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",     tradition: "Hindu" },
@@ -74,6 +74,11 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "maha-shivaratri-lingayat", label: "Maha Shivaratri",  subtitle: "Nirjala fast · all-night Ishtalinga worship",             tradition: "Lingayat" },
   { id: "somavara-lingayat",        label: "Shravan Somavar",   subtitle: "Mondays of Shravan month · fruit fast",                  tradition: "Lingayat" },
   { id: "basava-jayanti",           label: "Basava Jayanti",    subtitle: "Vaishakha Shukla Tritiya · Basavanna's birth",           tradition: "Lingayat" },
+  { id: "ekadashi-pushti-marg",  label: "Ekadashi",              subtitle: "Grain-free seva · offer bhog to Shrinathji first",     tradition: "PushtiMarg" },
+  { id: "janmashtami-pushti-marg",label: "Janmashtami",          subtitle: "Most sacred · Chappan Bhog at midnight · Nandotsav next day", tradition: "PushtiMarg" },
+  { id: "annakut-pushti-marg",   label: "Annakut & Govardhan Puja", subtitle: "Day after Diwali · Chappan Bhog seva",             tradition: "PushtiMarg" },
+  { id: "phoolon-wali-holi",     label: "Phoolon wali Holi",    subtitle: "Falgun Purnima · flower Holi at Shrinathji's haveli",   tradition: "PushtiMarg" },
+  { id: "hindola-utsav",         label: "Hindola Utsav",         subtitle: "Ashadha–Shravan · 40-day swing festival begins",        tradition: "PushtiMarg" },
 ];
 
 const HINDU_DEFAULTS        = ["ekadashi", "purnima", "pradosh"];
@@ -83,6 +88,7 @@ const BOTH_DEFAULTS         = ["ekadashi", "purnima", "pradosh", "paryushana", "
 const SWAMINARAYAN_DEFAULTS = ["swaminarayan-jayanti", "fuldol-swaminarayan", "ekadashi-swaminarayan-jan-1"];
 const ISKCON_DEFAULTS       = ["iskcon-ekadashi", "janmashtami-iskcon", "gaura-purnima", "radhashtami"];
 const LINGAYAT_DEFAULTS     = ["maha-shivaratri-lingayat", "somavara-lingayat", "basava-jayanti"];
+const PUSHTI_MARG_DEFAULTS  = ["ekadashi-pushti-marg", "janmashtami-pushti-marg", "annakut-pushti-marg", "phoolon-wali-holi"];
 
 function defaultsForTradition(t: Tradition): string[] {
   if (t === "Hindu")        return HINDU_DEFAULTS;
@@ -91,6 +97,7 @@ function defaultsForTradition(t: Tradition): string[] {
   if (t === "Swaminarayan") return SWAMINARAYAN_DEFAULTS;
   if (t === "ISKCON")       return ISKCON_DEFAULTS;
   if (t === "Lingayat")     return LINGAYAT_DEFAULTS;
+  if (t === "PushtiMarg")   return PUSHTI_MARG_DEFAULTS;
   return BOTH_DEFAULTS;
 }
 
@@ -136,6 +143,18 @@ function TrisulaSvg({ className = "", style }: { className?: string; style?: CSS
       <path d="M11 8 C9 13 9 20 13 23 L18 23 L18 18 C14 18 12 14 13 10Z"/>
       <path d="M37 8 C39 13 39 20 35 23 L30 23 L30 18 C34 18 36 14 35 10Z"/>
       <rect x="11" y="20" width="26" height="4" rx="2"/>
+    </svg>
+  );
+}
+
+function PeacockFeatherSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 48 72" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <rect x="22" y="34" width="4" height="36" rx="2"/>
+      <ellipse cx="24" cy="18" rx="14" ry="20" opacity="0.2"/>
+      <ellipse cx="24" cy="18" rx="10" ry="14"/>
+      <ellipse cx="24" cy="18" rx="5" ry="7" fill="white" opacity="0.85"/>
+      <ellipse cx="24" cy="18" rx="2.5" ry="3.5"/>
     </svg>
   );
 }
@@ -295,6 +314,7 @@ export default function Onboarding({ onComplete }: Props) {
     tradition === "Swaminarayan" ? VRAT_OPTIONS.filter((v) => v.tradition === "Swaminarayan") :
     tradition === "ISKCON"       ? VRAT_OPTIONS.filter((v) => v.tradition === "ISKCON") :
     tradition === "Lingayat"     ? VRAT_OPTIONS.filter((v) => v.tradition === "Lingayat") :
+    tradition === "PushtiMarg"   ? VRAT_OPTIONS.filter((v) => v.tradition === "PushtiMarg") :
     VRAT_OPTIONS.filter((v) => v.tradition === "Hindu" || v.tradition === "Jain");
 
   return (
@@ -389,6 +409,19 @@ export default function Onboarding({ onComplete }: Props) {
                   <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>ಓಂ ನಮಃ ಶಿವಾಯ · Shivaratri · Basava Jayanti</span>
                 </div>
               </button>
+
+              {/* Pushti Marg — full-width */}
+              <button
+                onClick={() => { chooseTradition("PushtiMarg"); setStep(2); }}
+                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <PeacockFeatherSvg className="w-7 h-11" style={{ color: "#A5F3FC" }} />
+                <div className="text-left">
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Pushti Marg / Vallabha Sampraday</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>श्री नाथजी · Janmashtami · Annakut · Hindola Utsav</span>
+                </div>
+              </button>
             </div>
 
             {/* Both / Hindu+Jain option */}
@@ -467,6 +500,13 @@ export default function Onboarding({ onComplete }: Props) {
                     subtitle: "Maha Shivaratri, Shravan Somavar, Basava Jayanti",
                     icon: <TrisulaSvg className="w-10 h-12" style={{ color: "#9B2335" }} />,
                     accent: "#9B2335",
+                  },
+                  {
+                    value: "PushtiMarg" as Tradition,
+                    label: "Pushti Marg / Vallabha Sampraday",
+                    subtitle: "Ekadashi (seva-based), Janmashtami, Annakut, Hindola Utsav",
+                    icon: <PeacockFeatherSvg className="w-10 h-14" style={{ color: "#0E7490" }} />,
+                    accent: "#0E7490",
                   },
                 ] as const
               ).map((opt) => {

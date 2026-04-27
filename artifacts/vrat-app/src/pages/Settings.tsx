@@ -37,7 +37,7 @@ const PRICES = {
   lifetime: { usd: "$49.99",       inr: "₹3,999"      },
 } as const;
 
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" }[] = [
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" }[] = [
   { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                           tradition: "Hindu" },
   { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",               tradition: "Hindu" },
   { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",          tradition: "Hindu" },
@@ -91,6 +91,11 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "maha-shivaratri-lingayat", label: "Maha Shivaratri",  subtitle: "Nirjala fast · all-night Ishtalinga worship",                tradition: "Lingayat" },
   { id: "somavara-lingayat",        label: "Shravan Somavar",   subtitle: "Mondays of Shravan month · fruit fast",                     tradition: "Lingayat" },
   { id: "basava-jayanti",           label: "Basava Jayanti",    subtitle: "Vaishakha Shukla Tritiya · Basavanna's birth anniversary",  tradition: "Lingayat" },
+  { id: "ekadashi-pushti-marg",    label: "Ekadashi",                subtitle: "Grain-free bhog · 26 days a year",                    tradition: "PushtiMarg" },
+  { id: "janmashtami-pushti-marg", label: "Janmashtami",             subtitle: "Most sacred · Chappan Bhog at midnight",              tradition: "PushtiMarg" },
+  { id: "annakut-pushti-marg",     label: "Annakut & Govardhan Puja",subtitle: "Day after Diwali · Chappan Bhog seva",                tradition: "PushtiMarg" },
+  { id: "phoolon-wali-holi",       label: "Phoolon wali Holi",       subtitle: "Falgun Purnima · flower Holi at Shrinathji's haveli", tradition: "PushtiMarg" },
+  { id: "hindola-utsav",           label: "Hindola Utsav",           subtitle: "Ashadha Shukla 2 · 40-day swing festival",            tradition: "PushtiMarg" },
 ];
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
@@ -367,6 +372,7 @@ export default function Settings() {
       { value: "Swaminarayan", label: "Swaminarayan", subtitle: "Jayanti, Fuldol, Annakut and strict Ekadashi" },
       { value: "ISKCON",       label: "ISKCON / Vaishnava", subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik" },
       { value: "Lingayat",     label: "Lingayat / Veerashaiva", subtitle: "Maha Shivaratri, Shravan Somavar, Basava Jayanti" },
+      { value: "PushtiMarg",   label: "Pushti Marg / Vallabha Sampraday", subtitle: "Ekadashi (seva-based), Janmashtami, Annakut, Hindola Utsav" },
     ];
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
@@ -416,12 +422,14 @@ export default function Settings() {
     const swaminarayanVrats = VRAT_OPTIONS.filter((v) => v.tradition === "Swaminarayan");
     const iskconVrats       = VRAT_OPTIONS.filter((v) => v.tradition === "ISKCON");
     const lingayatVrats     = VRAT_OPTIONS.filter((v) => v.tradition === "Lingayat");
+    const pushtiMargVrats   = VRAT_OPTIONS.filter((v) => v.tradition === "PushtiMarg");
     const showHindu        = tradition === "Hindu" || tradition === "Both";
     const showJain         = tradition === "Jain"  || tradition === "Both";
     const showSikh         = tradition === "Sikh";
     const showSwaminarayan = tradition === "Swaminarayan";
     const showISKCON       = tradition === "ISKCON";
     const showLingayat     = tradition === "Lingayat";
+    const showPushtiMarg   = tradition === "PushtiMarg";
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
         <div className="max-w-md mx-auto px-5 pt-6 pb-8">
@@ -502,6 +510,19 @@ export default function Settings() {
           {showLingayat && (
             <>
               {lingayatVrats.map((opt) => (
+                <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm font-medium text-foreground">{opt.label}</p>
+                    <p className="text-xs text-muted-foreground">{opt.subtitle}</p>
+                  </div>
+                  <Toggle on={isVratObserved(opt.id, observed)} onToggle={() => toggleVrat(opt.id)} />
+                </div>
+              ))}
+            </>
+          )}
+          {showPushtiMarg && (
+            <>
+              {pushtiMargVrats.map((opt) => (
                 <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
                   <div className="flex-1 mr-4">
                     <p className="text-sm font-medium text-foreground">{opt.label}</p>

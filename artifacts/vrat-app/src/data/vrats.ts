@@ -3,7 +3,7 @@ export interface Vrat {
   name: string;
   dates: string[];
   deity: string;
-  tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "Both";
+  tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Both";
   foodsAllowed: string[];
   foodsAvoided: string[];
   jainFastRestrictions?: string[];
@@ -5499,6 +5499,156 @@ export const vrats: Vrat[] = [
     description: "Basava Jayanti celebrates the birth of Basavanna (Basaveshwara), the 12th-century Kannada saint, philosopher, and social reformer who founded the Lingayat tradition. He introduced the Ishtalinga initiation, the Anubhava Mantapa (Hall of Spiritual Experience — perhaps the world's first parliament of spiritual equality), and composed hundreds of Vacanas (prose-poems) in Kannada that remain central to Lingayat spiritual life",
     specialNote: "Basava Jayanti falls on Vaishakha Shukla Tritiya — the same tithi as Akshaya Tritiya in the Hindu calendar. It is a day of community celebration, Vachana recitation, and reaffirmation of Basavanna's ideals of social equality and devotion. This is not a strict fast day — it is a day of joy, service, and sharing.",
   },
+
+  // ── Pushti Marg / Vallabha Sampraday ────────────────────────────────────────
+  {
+    id: "ekadashi-pushti-marg",
+    name: "Ekadashi",
+    dates: ["2026-01-10", "2026-01-25", "2026-02-09", "2026-02-23", "2026-03-11", "2026-03-25", "2026-04-10", "2026-04-24", "2026-05-10", "2026-05-24", "2026-06-08", "2026-06-23", "2026-07-08", "2026-07-23", "2026-08-07", "2026-08-21", "2026-09-05", "2026-09-20", "2026-10-05", "2026-10-20", "2026-11-04", "2026-11-18", "2026-12-04", "2026-12-18", "2027-01-07", "2027-01-22"],
+    deity: "Shrinathji (Balamukundan — child Krishna lifting Mount Govardhan)",
+    tradition: "PushtiMarg",
+    foodsAllowed: [
+      "Fruits of all kinds — banana, mango, apple, grapes, pomegranate, chikoo",
+      "Dairy — milk, yogurt, butter, ghee, paneer, khoya, mishri, cream",
+      "Sabudana (tapioca pearls) — khichdi or kheer cooked in ghee",
+      "Nuts and dry fruits — almonds, cashews, raisins, dates, pistachios",
+      "Sendha namak (rock salt) — the only permitted salt on fast days",
+      "Coconut — fresh coconut water and coconut pieces",
+      "All bhog first offered to Shrinathji, then received as prasad",
+    ],
+    foodsAvoided: [
+      "Grains — wheat, rice, dal, lentils on Ekadashi days",
+      "Onion and garlic — never used in Pushti Marg seva or bhog",
+      "Meat, fish, eggs",
+      "Unoffered food — all food must be presented to Shrinathji before eating",
+      "Table salt or sea salt — only sendha namak on fast days",
+    ],
+    mantra: "Shri Krishnah Sharanam Mama",
+    mantraTransliteration: "The Ashtakshara — the 8-word Pushti Marg initiation mantra of surrender",
+    mantraTranslation: "Shri Krishna is my one true refuge — I surrender entirely to him",
+    mantraHow: "On Ekadashi, perform Shrinathji's morning seva before your first meal. Arrange grain-free bhog of fruits, milk, nuts, and sweets on a clean thali and offer it to Shrinathji with the Ashtakshara mantra. Only after this seva may you eat — receiving the food as prasad. Read from the Bhagavata Purana or Vallabhacharya's Subodhini. Chant the Ashtakshara 108 times on a tulsi mala.",
+    mantraBenefits: "Vallabhacharya (1479–1531 CE) founded Pushti Marg — the 'Path of Divine Grace' — teaching that Krishna sustains (pushti) his devotees through his own boundless grace, not through the devotee's austerity. The Ashtakshara mantra, received through the Brahma-sambandha initiation, establishes the devotee's complete surrender to Shrinathji.",
+    mealIdea: "Sabudana khichdi cooked in ghee with sendha namak and roasted peanuts, a fresh fruit thali with ripe banana and pomegranate seeds, and warm saffron milk with mishri — each item arranged lovingly on a clean thali and first offered to Shrinathji before serving",
+    color: "#0E7490",
+    description: "Ekadashi in Pushti Marg is not primarily a day of austerity — it is a day of deepened seva (devotional service) to Shrinathji. The grain-free discipline clears the mind for focused bhog and darshan. Every item of food is prepared with devotion, offered to Shrinathji first, and received back as prasad. Ekadashi comes twice each lunar month — on the 11th tithi of the waxing and waning moon. Vikram Samvat 2082–2083",
+    specialNote: "In Pushti Marg, Vallabhacharya taught 'Seva is the path' — not fasting, renunciation, or ascetic practice. On Ekadashi, prepare grain-free bhog with love: fruits, dairy, nuts, and sweets. Lay it before Shrinathji's svarupa, offer it with the Ashtakshara mantra, and then eat it as prasad. Never eat before offering. This is the essence of Pushti Marg — transforming every meal into an act of loving devotion.",
+  },
+  {
+    id: "janmashtami-pushti-marg",
+    name: "Janmashtami",
+    dates: ["2026-08-16", "2027-08-05"],
+    deity: "Shrinathji / Balamukundan — Krishna as the divine child who lifted Govardhan",
+    tradition: "PushtiMarg",
+    foodsAllowed: [
+      "Fruit fast until midnight — all fruits permitted",
+      "Milk, yogurt, butter, ghee — Krishna's most beloved foods",
+      "Panchamrit — milk, yogurt, honey, ghee, and mishri",
+      "Dry fruits and nuts",
+      "After midnight: items from the Chappan Bhog received as prasad",
+      "Gopalkala — beaten rice with yogurt and cucumber (traditional post-midnight prasad)",
+    ],
+    foodsAvoided: [
+      "Grains — complete grain fast until midnight",
+      "Onion and garlic — never in Pushti Marg bhog, ever",
+      "Meat, fish, eggs",
+      "Unoffered food — eat only what has first been offered to Shrinathji",
+    ],
+    mantra: "Shri Krishnah Sharanam Mama",
+    mantraTransliteration: "The Pushti Marg Ashtakshara — eight words of complete surrender",
+    mantraTranslation: "Shri Krishna alone is my shelter and refuge",
+    mantraHow: "Fast completely (or on fruits and water) from sunrise until midnight. At the midnight hour, celebrate the birth of Krishna with devotional kirtan, the Janmashtami seva, and abhishek (bathing the svarupa). Prepare the Chappan Bhog — 56 food items — and offer them to Shrinathji. Receive one item as prasad. The next day, Nandotsav (Nanda's joy), is a day of pure celebration — no fasting.",
+    mantraBenefits: "Janmashtami is the most sacred day in the Pushti Marg calendar. Shrinathji embodies the child Krishna at the moment of lifting Govardhan with his little finger — Balamukundan. The Chappan Bhog offered at midnight represents complete, abundant nourishment of the divine child with 56 varieties of food and drink.",
+    mealIdea: "A fruit-and-dairy fast through the day — fresh fruit with mishri, panchamrit, and cool buttermilk. At midnight, break the fast with Gopalkala (beaten rice, yogurt, and cucumber, or fresh butter and mishri) received from the Chappan Bhog offering to Shrinathji",
+    color: "#0E7490",
+    description: "Janmashtami is the supreme celebration of the Pushti Marg year — the appearance of Krishna himself, who is Shrinathji. Devotees fast until midnight, then celebrate with elaborate seva: bathing the svarupa, dressing it in new clothes, and offering the Chappan Bhog (56 food items). The next day, Nandotsav, celebrates the joy of Nanda Maharaj — a day of festivity, prasad distribution, and communal rejoicing",
+    specialNote: "In Pushti Marg havelis, Janmashtami night is the most spectacular of the year. Shrinathji's svarupa is dressed in a midnight-blue pitambar and jewels. The Chappan Bhog is prepared in 56 separate offerings. At the midnight birth moment, bells ring, conch shells blow, and devotees sing 'Aaj Anand Bhayo Jai Kanhaiya Lal Ki'. The next morning is Nandotsav — pure celebration, no fasting. Nandotsav (Aug 17, 2026 / Aug 6, 2027).",
+  },
+  {
+    id: "annakut-pushti-marg",
+    name: "Annakut & Govardhan Puja",
+    dates: ["2026-11-09", "2027-10-21"],
+    deity: "Shrinathji — Govardhan Puja · Chappan Bhog seva · day after Diwali",
+    tradition: "PushtiMarg",
+    foodsAllowed: [
+      "All vegetarian foods — Annakut is a day of maximum bhog, not fasting",
+      "The Chappan Bhog (56-item offering) covers all categories of food",
+      "Rice dishes — pulao, khichdi, kheer, puffed rice",
+      "Flatbreads — puri, thepla, shira",
+      "Sweets — halwa, barfi, ladoo, mathri, mohanthal",
+      "Savouries, chutneys, pickles, curd, raita, papad, dal, sabzi",
+      "All items first offered as bhog to Shrinathji before eating",
+    ],
+    foodsAvoided: [
+      "Onion and garlic — never in Pushti Marg bhog, ever",
+      "Meat, fish, eggs",
+      "Unoffered food — every item must be presented to Shrinathji first",
+    ],
+    mantra: "Shri Nathji Sharanam Mama",
+    mantraTransliteration: "Shrinathji is my refuge — addressing Shrinathji directly",
+    mantraTranslation: "Shrinathji alone is my one true shelter",
+    mantraHow: "Wake before sunrise and prepare the Chappan Bhog — 56 food items representing every category of taste and nutrition. Arrange all items beautifully before Shrinathji's svarupa and offer them with love, singing the Govardhan Puja kirtan. The entire day is dedicated to this seva. Only after all food has been offered to Shrinathji may you eat — receiving it as prasad. Share generously.",
+    mantraBenefits: "Annakut commemorates the day Krishna lifted Mount Govardhan on his little finger to shelter the Braj community from Indra's flood. Govardhan itself is worshipped as the embodiment of Shrinathji. The 56 food items represent the universe of sustenance surrendered to Krishna. Pushti Marg's principal haveli in Nathdwara, Rajasthan prepares hundreds of varieties of food on this day.",
+    mealIdea: "Annakut is the one day in the year when the seva goal is abundance, not restraint — cook as many varieties as you can manage, offer them all to Shrinathji, and share the prasad with family and community. Even 5–6 items offered with full devotion is a beautiful Chappan Bhog",
+    color: "#0E7490",
+    description: "Annakut ('mountain of food') is the pinnacle seva day of the Pushti Marg calendar — falling on Kartik Shukla 1, the day after Diwali. Govardhan Puja honours Krishna's lifting of Mount Govardhan. In Pushti Marg, this is not a fast day at all: it is the day of maximum bhog, maximum seva, and maximum joyful offering. Nathdwara temple creates a literal 'mountain of food' before Shrinathji's svarupa",
+    specialNote: "In Pushti Marg, Annakut IS the great seva. Thousands of varieties of food are arranged before Shrinathji's svarupa at Nathdwara each year. In Pushti Marg households, the tradition is to cook as many items as possible — rice, dal, bread, sweets, pickles, chutneys, snacks — and offer them as a mountain of food. Share all prasad generously. Annakut is a day of abundance, gratitude, and communal joy. Vikram Samvat 2083.",
+  },
+  {
+    id: "phoolon-wali-holi",
+    name: "Phoolon wali Holi",
+    dates: ["2026-03-13", "2027-03-03"],
+    deity: "Shrinathji — Falgun Purnima · spring Holi with fragrant flowers",
+    tradition: "PushtiMarg",
+    foodsAllowed: [
+      "All vegetarian foods — this is a joyful celebration, not a fast",
+      "Thandai — spiced cold milk with saffron, rose, cardamom, and pistachios",
+      "Gujiya — sweet dumplings filled with mawa and dry fruits",
+      "Malpua, dahi bhalle, puranpoli, mohanthal",
+      "All bhog offered to Shrinathji and received as prasad",
+    ],
+    foodsAvoided: [
+      "Onion and garlic — never in Pushti Marg bhog",
+      "Meat, fish, eggs",
+      "Unoffered food — present all items to Shrinathji first",
+    ],
+    mantra: "Shri Krishnah Sharanam Mama",
+    mantraTransliteration: "The Pushti Marg Ashtakshara",
+    mantraTranslation: "Shri Krishna is my one refuge — I surrender entirely",
+    mantraHow: "On Phoolon wali Holi, gather fragrant flowers — roses, marigolds, chameli, and whatever blooms are available. Offer a flower bhog to Shrinathji before playing Holi. Shower each other with flowers rather than chemical colours. Sing the Holi Dhrupad compositions and Holi songs of Pushti Marg saints. Share thandai and prasad. The day is a pure expression of Braj bhakti.",
+    mantraBenefits: "Holi in Pushti Marg is rooted in the Braj tradition of Krishna's divine play. Falgun Purnima is celebrated at Shrinathji's haveli with fragrant flowers rather than synthetic colours — honouring the ancient Braj tradition. Vallabhacharya described Holi as 'the festival of divine spring love' (Madhura Bhakti). The Phoolon wali Holi is the most visually beautiful seva in the Pushti Marg spring calendar.",
+    mealIdea: "Thandai (cold saffron-rose milk with cardamom and pistachios), gujiya filled with mawa and dry fruits, and malpua drizzled with rose syrup — all offered to Shrinathji and shared as prasad with family and community",
+    color: "#0E7490",
+    description: "Phoolon wali Holi (Holi with flowers) is the Pushti Marg tradition of celebrating Holi on Falgun Purnima with fragrant flowers rather than synthetic colours. Shrinathji's svarupa is showered with roses, marigolds, and spring blossoms. Devotees gather at the haveli to sing Holi songs, play with flowers, and share thandai and prasad — re-enacting the Braj Holi of Krishna's time",
+    specialNote: "Nathdwara's Phoolon wali Holi is one of the most beautiful traditions in all of Hinduism. In Pushti Marg havelis worldwide, Holi is first celebrated as a seva to Shrinathji — a flower shower for the divine child — before the community celebrates together. This is a day of pure Madhura Bhakti joy. Vikram Samvat 2082.",
+  },
+  {
+    id: "hindola-utsav",
+    name: "Hindola Utsav",
+    dates: ["2026-06-27", "2027-06-18"],
+    deity: "Shrinathji on the Hindola (swing) — Ashadha–Shravan seva festival",
+    tradition: "PushtiMarg",
+    foodsAllowed: [
+      "All vegetarian foods — Hindola Utsav is a 40-day seva celebration, not a fast",
+      "Seasonal monsoon produce — fresh corn (bhutta), mangoes, lychee, jamun",
+      "Jhola — spiced buttermilk, the traditional drink of Ashadha and Shravan",
+      "Seasonal sweets — gatte, moong dal halwa, saag",
+      "All bhog offered to Shrinathji on the Hindola before eating",
+    ],
+    foodsAvoided: [
+      "Onion and garlic — never in Pushti Marg bhog",
+      "Meat, fish, eggs",
+      "Unoffered food — present all items to Shrinathji first",
+    ],
+    mantra: "Shri Krishnah Sharanam Mama",
+    mantraTransliteration: "The Pushti Marg Ashtakshara",
+    mantraTranslation: "Shri Krishna is my one refuge and shelter",
+    mantraHow: "The Hindola Utsav runs for approximately 40 days from Ashadha Shukla 2 through Shravan Shukla 11. Each day, place Shrinathji's svarupa or photo on a small decorated swing. Adorn it with fresh flowers, leaves, or fruits appropriate to the season. Gently swing the Hindola while singing 'Jhulan Jhulo Shyam Jhulan Jhulo' or another Hindola kirtan. Offer seasonal bhog before your first meal.",
+    mantraBenefits: "The Hindola Utsav is one of the most joyful sevas in Pushti Marg — expressing the playfulness of Krishna as a beloved divine child. The 40-day festival through the monsoon months corresponds to when young Krishna would play on swings in the Braj forests. Pushti Marg havelis prepare a completely new decorative theme for the swing each day of the festival.",
+    mealIdea: "Fresh corn (bhutta) roasted with ghee and sendha namak, spiced buttermilk (chhaach) with cumin and ginger, fresh mango with cardamom and mishri, and monsoon sweets — all offered to Shrinathji on the Hindola and received as prasad",
+    color: "#0E7490",
+    description: "Hindola Utsav is the beloved 40-day swing festival (jhoola seva) of Pushti Marg, beginning on Ashadha Shukla 2. Each day Shrinathji's svarupa is placed on a beautifully decorated swing — adorned with flowers, fruit garlands, gemstones, and seasonal materials. Devotees swing the Hindola gently while singing traditional Hindola kirtans. This calendar date marks the start of the Utsav (2026: Jun 27 · 2027: Jun 18)",
+    specialNote: "At Nathdwara and all principal Pushti Marg havelis, each day of the 40-day Hindola festival sees a completely new swing design — floral, textile, gold, silver, seasonal fruit, monsoon leaves, and more. At home, place a small svarupa or framed image of Shrinathji on a simple swing or cradle and decorate it freshly each morning with whatever flowers and leaves are available. Sing the Hindola kirtans and offer seasonal bhog. Vikram Samvat 2083.",
+  },
 ];
 
 export function getVratsForDate(dateStr: string): Vrat[] {
@@ -5567,7 +5717,8 @@ export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] 
   if (tradition === "Sikh")  return list.filter((v) => v.tradition === "Sikh");
   if (tradition === "Swaminarayan") return list.filter((v) => v.tradition === "Swaminarayan");
   if (tradition === "ISKCON") return list.filter((v) => v.tradition === "ISKCON");
-  if (tradition === "Lingayat") return list.filter((v) => v.tradition === "Lingayat");
+  if (tradition === "Lingayat")    return list.filter((v) => v.tradition === "Lingayat");
+  if (tradition === "PushtiMarg")  return list.filter((v) => v.tradition === "PushtiMarg");
   return list;
 }
 
