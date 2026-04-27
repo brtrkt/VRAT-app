@@ -58,6 +58,10 @@ pnpm workspace monorepo using TypeScript. Contains the VRAT app — a sacred fas
 - Webhook endpoint: `https://<your-domain>/api/stripe/webhook` — register this in Stripe Dashboard → Webhooks
 - NOTE: Replit Stripe integration was dismissed; using env secrets directly instead
 
+**Vrat interface fields (vrats.ts):**
+- `hinduEquivalent?: string` — optional cross-tradition label shown on Sikh entries (e.g. "Holi", "Diwali", "Purnima / Purnmasi"). Display-only; does not affect date logic. Rendered as italic subtitle in Home next-vrat card, WhatToEat header, and Calendar detail sheet.
+- Tagged entries: `hola-mohalla` → "Holi", `sangrand` → "Purnima / Purnmasi", `bandi-chhor-divas` → "Diwali"
+
 **New features (April 2026):**
 - WhatsApp sharing: tap "Share on WhatsApp" on TodayCard (fast days) → pre-filled message with vrat name
 - Panchang card on Home: shows today's tithi, paksha (Shukla/Krishna), nakshatra. Computed from lunar calendar reference (Amavasya Jan 29, 2026). Component: `src/components/PanchangCard.tsx`

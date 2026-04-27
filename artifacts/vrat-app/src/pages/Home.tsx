@@ -376,6 +376,11 @@ function NextVratCard({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | n
           <h3 className="font-serif text-lg font-semibold text-foreground" data-testid="next-vrat-name">
             {nextVrat.vrat.name}
           </h3>
+          {nextVrat.vrat.hinduEquivalent && (
+            <p className="text-xs text-muted-foreground mt-0.5 italic">
+              Also observed as {nextVrat.vrat.hinduEquivalent}
+            </p>
+          )}
           <p className="text-sm text-muted-foreground mt-0.5">{dateFormatted}</p>
           <p className="text-sm text-muted-foreground">{nextVrat.vrat.deity}</p>
         </div>

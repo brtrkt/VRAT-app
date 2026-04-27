@@ -89,6 +89,11 @@ function VratDetailSheet({
               <h2 className="font-serif text-2xl font-bold text-white">
                 {activeVrat.name}
               </h2>
+              {activeVrat.hinduEquivalent && (
+                <p className="text-xs text-white/60 mt-0.5 italic">
+                  Also observed as {activeVrat.hinduEquivalent}
+                </p>
+              )}
               {activeVrat.nirjala && (
                 <div className="mt-1.5 mb-1">
                   <NirjalaWarning variant="light" />

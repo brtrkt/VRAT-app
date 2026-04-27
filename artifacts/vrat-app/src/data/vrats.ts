@@ -21,6 +21,7 @@ export interface Vrat {
   regionLabel?: string;
   punjabiName?: string;
   nanakshahiDate?: string;
+  hinduEquivalent?: string;
 }
 
 export const JAIN_ALWAYS_ALLOWED: string[] = [
@@ -4749,6 +4750,7 @@ export const vrats: Vrat[] = [
     name: "Hola Mohalla",
     punjabiName: "ਹੋਲਾ ਮਹੱਲਾ",
     nanakshahiDate: "Phagan 19, Nanakshahi Samvat 558",
+    hinduEquivalent: "Holi",
     dates: ["2026-03-04"],
     deity: "Waheguru (The Divine)",
     tradition: "Sikh",
@@ -4899,6 +4901,7 @@ export const vrats: Vrat[] = [
     name: "Sangrand",
     punjabiName: "ਸੰਗਰਾਂਦ",
     nanakshahiDate: "1st of each Nanakshahi month, NS 558",
+    hinduEquivalent: "Purnima / Purnmasi",
     dates: [
       "2026-01-13", "2026-02-12", "2026-03-14", "2026-04-14",
       "2026-05-15", "2026-06-15", "2026-07-16", "2026-08-16",
@@ -4993,6 +4996,7 @@ export const vrats: Vrat[] = [
     name: "Bandi Chhor Divas",
     punjabiName: "ਬੰਦੀ ਛੋੜ ਦਿਵਸ",
     nanakshahiDate: "Katik 5, Nanakshahi Samvat 558",
+    hinduEquivalent: "Diwali",
     dates: ["2026-10-20"],
     deity: "Guru Hargobind Ji",
     tradition: "Sikh",

@@ -431,6 +431,11 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
             {vrat.punjabiName}
           </p>
         )}
+        {isSikh && vrat.hinduEquivalent && (
+          <p className="text-xs mt-1 font-medium" style={{ color: "rgba(255,255,255,0.65)" }}>
+            Also observed as <span style={{ color: "#F4A900" }}>{vrat.hinduEquivalent}</span> in Hindu tradition
+          </p>
+        )}
         {vrat.nirjala && (
           <div className="mt-1.5 mb-1">
             <NirjalaWarning variant="light" />
