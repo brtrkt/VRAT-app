@@ -61,10 +61,10 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "bandi-chhor-divas",           label: "Bandi Chhor Divas",                  subtitle: "Katik 5 (Oct 20) · Day of Liberation",             tradition: "Sikh" },
   { id: "guru-nanak-gurpurab",         label: "Guru Nanak Dev Ji Gurpurab",          subtitle: "Katik 21 (Nov 5) · Founder of Sikhism",            tradition: "Sikh" },
   { id: "guru-tegh-bahadur-shaheedi", label: "Guru Tegh Bahadur Ji Shaheedi Divas", subtitle: "Maghar 10 (Nov 24) · 9th Guru's Martyrdom Day",    tradition: "Sikh" },
-  { id: "swaminarayan-jayanti",  label: "Swaminarayan Jayanti",  subtitle: "Chaitra Shukla Navami · Lord Swaminarayan's birth",    tradition: "Swaminarayan" },
-  { id: "fuldol",                label: "Fuldol",                subtitle: "Phalgun Purnima · flower festival before Holi",        tradition: "Swaminarayan" },
-  { id: "annakut",               label: "Annakut",               subtitle: "Day after Diwali · Swaminarayan New Year offering",    tradition: "Swaminarayan" },
-  { id: "swaminarayan-ekadashi", label: "Swaminarayan Ekadashi", subtitle: "Ekadashi with strict satvik fast · no onion, garlic", tradition: "Swaminarayan" },
+  { id: "swaminarayan-jayanti",        label: "Swaminarayan Jayanti",  subtitle: "Chaitra Shukla Navami · Lord Swaminarayan's birth",    tradition: "Swaminarayan" },
+  { id: "fuldol-swaminarayan",         label: "Fuldol",                subtitle: "Phalgun Purnima · flower festival before Holi",        tradition: "Swaminarayan" },
+  { id: "annakut-swaminarayan",        label: "Annakut",               subtitle: "Day after Diwali · Swaminarayan New Year offering",    tradition: "Swaminarayan" },
+  { id: "ekadashi-swaminarayan-jan-1", label: "Swaminarayan Ekadashi", subtitle: "Ekadashi with strict satvik fast · no onion, garlic", tradition: "Swaminarayan" },
   { id: "iskcon-ekadashi",       label: "Ekadashi (Vaishnava)",  subtitle: "No grains · 24 days a year · Parana next morning",    tradition: "ISKCON" },
   { id: "janmashtami-iskcon",    label: "Janmashtami",           subtitle: "Midnight fast · Lord Krishna's appearance day",        tradition: "ISKCON" },
   { id: "gaura-purnima",         label: "Gaura Purnima",         subtitle: "Sri Chaitanya Mahaprabhu's appearance day",            tradition: "ISKCON" },
@@ -77,7 +77,7 @@ const HINDU_DEFAULTS        = ["ekadashi", "purnima", "pradosh"];
 const JAIN_DEFAULTS         = ["paryushana", "navpad-oli", "samvatsari"];
 const SIKH_DEFAULTS         = ["guru-nanak-gurpurab", "baisakhi-sikh", "sangrand"];
 const BOTH_DEFAULTS         = ["ekadashi", "purnima", "pradosh", "paryushana", "navpad-oli"];
-const SWAMINARAYAN_DEFAULTS = ["swaminarayan-jayanti", "fuldol", "swaminarayan-ekadashi"];
+const SWAMINARAYAN_DEFAULTS = ["swaminarayan-jayanti", "fuldol-swaminarayan", "ekadashi-swaminarayan-jan-1"];
 const ISKCON_DEFAULTS       = ["iskcon-ekadashi", "janmashtami-iskcon", "gaura-purnima", "radhashtami"];
 
 function defaultsForTradition(t: Tradition): string[] {
