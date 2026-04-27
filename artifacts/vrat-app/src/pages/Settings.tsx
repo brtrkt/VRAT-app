@@ -372,7 +372,11 @@ export default function Settings() {
               return (
                 <button
                   key={opt.value}
-                  onClick={() => setTradition(opt.value)}
+                  onClick={() => {
+                    setTradition(opt.value);
+                    localStorage.setItem(TRADITION_KEY, opt.value);
+                    setSection("main");
+                  }}
                   className="w-full flex items-center gap-4 p-4 rounded-2xl text-left transition-all"
                   style={{ border: `2px solid ${selected ? ACCENT : "#E5E7EB"}`, background: selected ? `${ACCENT}12` : "white" }}
                 >
@@ -389,9 +393,6 @@ export default function Settings() {
               );
             })}
           </div>
-          <button onClick={save} className="mt-6 w-full py-4 rounded-2xl font-semibold text-base text-white tracking-wide transition-opacity active:opacity-80" style={{ background: `linear-gradient(135deg, ${ACCENT} 0%, #C86B1A 100%)` }}>
-            Save
-          </button>
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import NavratriCard from "@/components/NavratriCard";
 import HydrationTracker from "@/components/HydrationTracker";
-import { getDaysRemaining, getUserTradition } from "@/hooks/useUserPrefs";
+import { getDaysRemaining, getUserTradition, TRADITION_KEY, type Tradition } from "@/hooks/useUserPrefs";
 import {
   getTopStreaks,
   checkBadges,
@@ -563,6 +563,60 @@ function MyStreaks() {
   );
 }
 
+const TRADITION_OPTIONS: { value: Tradition; label: string }[] = [
+  { value: "Hindu",        label: "Hindu" },
+  { value: "Jain",         label: "Jain" },
+  { value: "Sikh",         label: "Sikh" },
+  { value: "Swaminarayan", label: "Swaminarayan" },
+  { value: "Both",         label: "Hindu + Jain" },
+];
+
+function TraditionSwitcher() {
+  const [open, setOpen] = useState(false);
+  const current = getUserTradition();
+  const currentLabel = TRADITION_OPTIONS.find((o) => o.value === current)?.label ?? current;
+
+  function select(t: Tradition) {
+    localStorage.setItem(TRADITION_KEY, t);
+    setOpen(false);
+    window.location.reload();
+  }
+
+  return (
+    <div className="relative flex justify-center mt-1 mb-3">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-all active:opacity-70"
+        style={{ background: "rgba(255,255,255,0.65)", borderColor: "#E5E7EB", color: "#78716C" }}
+        aria-label="Switch tradition"
+      >
+        {currentLabel}
+        <svg viewBox="0 0 10 10" className="w-2.5 h-2.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d={open ? "M1 7l4-4 4 4" : "M1 3l4 4 4-4"} />
+        </svg>
+      </button>
+
+      {open && (
+        <>
+          <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
+          <div className="absolute top-9 left-1/2 -translate-x-1/2 z-20 bg-white rounded-2xl shadow-xl border border-stone-100 overflow-hidden" style={{ minWidth: 170 }}>
+            {TRADITION_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => select(opt.value)}
+                className="w-full text-left px-4 py-2.5 text-sm font-medium transition-colors active:bg-amber-50"
+                style={{ color: opt.value === current ? "#E07B2A" : "#374151", background: opt.value === current ? "#FFF7ED" : "transparent" }}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 export default function Home() {
   const [today] = useState(new Date());
   const todayStr = today.toISOString().split("T")[0];
@@ -599,6 +653,7 @@ export default function Home() {
           </div>
           <h1 className="font-serif text-3xl font-bold text-foreground">VRAT</h1>
           <p className="text-muted-foreground text-sm mt-1 tracking-wide">Your Fast, Your Way</p>
+          <TraditionSwitcher />
         </div>
         <BadgeCelebration />
 
