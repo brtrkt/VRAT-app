@@ -488,9 +488,11 @@ const ISKCON_LEGEND = [
   { label: "Janmashtami · Kartik month", color: "#0284C7" },
 ];
 const LINGAYAT_LEGEND = [
+  { label: "Ugadi · Kannada New Year", color: "#2563EB" },
   { label: "Maha Shivaratri · nirjala fast", color: "#2563EB" },
   { label: "Shravan Somavar (Mondays)", color: "#2563EB" },
   { label: "Basava Jayanti", color: "#2563EB" },
+  { label: "Varalakshmi Vratam", color: "#2563EB" },
 ];
 const PUSHTI_MARG_LEGEND = [
   { label: "Ekadashi · grain-free seva", color: "#0E7490" },
