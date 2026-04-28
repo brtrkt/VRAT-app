@@ -87,7 +87,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jan-1",
     name: "Ekadashi",
-    dates: ["2026-01-07", "2027-01-14"],
+    dates: ["2026-01-14"], // Shattila Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-01-13"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -120,7 +121,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jan-2",
     name: "Ekadashi",
-    dates: ["2026-01-22", "2027-01-29"],
+    dates: ["2026-01-29"], // Jaya Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-01-28"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -153,7 +155,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-feb-1",
     name: "Ekadashi",
-    dates: ["2026-02-05", "2027-02-13"],
+    dates: ["2026-02-13"], // Vijaya Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-02-12"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -186,7 +189,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-feb-2",
     name: "Ekadashi",
-    dates: ["2026-02-21", "2027-02-27"],
+    dates: ["2026-02-27"], // Amalaki Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-02-27"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -219,7 +223,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-mar-1",
     name: "Ekadashi",
-    dates: ["2026-03-07", "2027-03-15"],
+    dates: ["2026-03-15"], // Papamochani Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-03-14"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -252,7 +257,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-mar-2",
     name: "Ekadashi",
-    dates: ["2026-03-22", "2027-03-30"],
+    dates: ["2026-03-29"], // Kamada Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-03-28"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -285,7 +291,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-apr-1",
     name: "Ekadashi",
-    dates: ["2026-04-05", "2027-04-14"],
+    dates: ["2026-04-13"], // Varuthini Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-04-13"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -318,7 +325,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-apr-2",
     name: "Ekadashi",
-    dates: ["2026-04-27", "2027-04-28"],
+    dates: ["2026-04-27"], // Mohini Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-04-27"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -351,7 +359,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-may-1",
     name: "Ekadashi",
-    dates: ["2026-05-12", "2027-05-13"],
+    dates: ["2026-05-13"], // Apara Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-05-12"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -384,7 +393,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-may-2",
     name: "Ekadashi",
-    dates: ["2026-05-26", "2027-05-27"],
+    dates: ["2026-05-27"], // Padmini (Adhika Mas) Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-05-26"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -417,7 +427,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jun-1",
     name: "Nirjala Ekadashi",
-    dates: ["2026-06-03", "2027-06-12"],
+    dates: ["2026-06-11"], // Parama (Adhika Mas) Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-06-11"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -451,7 +462,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jun-2",
     name: "Ekadashi",
-    dates: ["2026-06-17", "2027-06-26"],
+    dates: ["2026-06-25"], // Nirjala Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-06-25"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -484,7 +496,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jul-1",
     name: "Ekadashi",
-    dates: ["2026-07-03"],
+    dates: ["2026-07-10"], // Yogini Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-07-10"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -517,7 +530,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-jul-2",
     name: "Ekadashi",
-    dates: ["2026-07-17"],
+    dates: ["2026-07-25"], // Devshayani Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-07-24"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -550,7 +564,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-aug-1",
     name: "Ekadashi",
-    dates: ["2026-08-01"],
+    dates: ["2026-08-09"], // Kamika Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-08-08"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -583,7 +598,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-aug-2",
     name: "Ekadashi",
-    dates: ["2026-08-16"],
+    dates: ["2026-08-23"], // Shravana Putrada Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-08-23"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -616,7 +632,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-sep-1",
     name: "Ekadashi",
-    dates: ["2026-08-31"],
+    dates: ["2026-09-07"], // Aja Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-09-06"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -649,7 +666,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-sep-2",
     name: "Ekadashi",
-    dates: ["2026-09-15"],
+    dates: ["2026-09-22"], // Parsva Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-09-22"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -682,7 +700,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-oct-1",
     name: "Ekadashi",
-    dates: ["2026-09-29"],
+    dates: ["2026-10-06"], // Indira Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-10-06"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -715,7 +734,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-oct-2",
     name: "Ekadashi",
-    dates: ["2026-10-14"],
+    dates: ["2026-10-22"], // Papankusha Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-10-21"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -748,7 +768,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-nov-1",
     name: "Ekadashi",
-    dates: ["2026-10-29"],
+    dates: ["2026-11-05"], // Rama Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-11-04"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -781,7 +802,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-nov-2",
     name: "Ekadashi",
-    dates: ["2026-11-13"],
+    dates: ["2026-11-20"], // Devutthana Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-11-20"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -814,7 +836,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-dec-1",
     name: "Ekadashi",
-    dates: ["2026-11-28"],
+    dates: ["2026-12-04"], // Utpanna Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-12-04"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
@@ -847,7 +870,8 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-dec-2",
     name: "Ekadashi",
-    dates: ["2026-12-12"],
+    dates: ["2026-12-20"], // Vaikuntha (Mokshada) Ekadashi (Delhi / India baseline, per Drik Panchang)
+    datesByRegion: { "usa-central": ["2026-12-19"] }, // Dallas/Houston/Chicago — per Drik Panchang Dallas
     deity: "Lord Vishnu",
     tradition: "Hindu",
     foodsAllowed: [
