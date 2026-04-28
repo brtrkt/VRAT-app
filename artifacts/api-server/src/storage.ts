@@ -43,6 +43,12 @@ export class Storage {
         updated_at            TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
 
+      ALTER TABLE vrat_subscriptions
+        ADD COLUMN IF NOT EXISTS cancel_at_period_end BOOLEAN NOT NULL DEFAULT FALSE;
+
+      ALTER TABLE vrat_subscriptions
+        ADD COLUMN IF NOT EXISTS current_period_end TIMESTAMPTZ;
+
       CREATE TABLE IF NOT EXISTS vrat_prices (
         id       TEXT PRIMARY KEY,
         plan     TEXT NOT NULL,
@@ -97,21 +103,38 @@ export class Storage {
   async upsertSubscription(
     stripeCustomerId: string,
     stripeSubscriptionId: string,
-    status: string
+    status: string,
+    options: {
+      cancelAtPeriodEnd?: boolean;
+      currentPeriodEnd?: Date | null;
+    } = {}
   ): Promise<void> {
     const db = getPool();
+    const cancelAtPeriodEnd = options.cancelAtPeriodEnd ?? false;
+    const currentPeriodEnd = options.currentPeriodEnd ?? null;
     await db.query(
-      `INSERT INTO vrat_subscriptions (stripe_customer_id, stripe_subscription_id, status, updated_at)
-       VALUES ($1, $2, $3, NOW())
+      `INSERT INTO vrat_subscriptions
+         (stripe_customer_id, stripe_subscription_id, status,
+          cancel_at_period_end, current_period_end, updated_at)
+       VALUES ($1, $2, $3, $4, $5, NOW())
        ON CONFLICT (stripe_customer_id) DO UPDATE
-         SET stripe_subscription_id = EXCLUDED.stripe_subscription_id,
-             status = EXCLUDED.status,
-             updated_at = NOW()`,
-      [stripeCustomerId, stripeSubscriptionId, status]
+         SET stripe_subscription_id  = EXCLUDED.stripe_subscription_id,
+             status                  = EXCLUDED.status,
+             cancel_at_period_end    = EXCLUDED.cancel_at_period_end,
+             current_period_end      = EXCLUDED.current_period_end,
+             updated_at              = NOW()`,
+      [stripeCustomerId, stripeSubscriptionId, status, cancelAtPeriodEnd, currentPeriodEnd]
     );
   }
 
-  async getActiveSubscriptionForCustomer(stripeCustomerId: string): Promise<any | null> {
+  async getActiveSubscriptionForCustomer(stripeCustomerId: string): Promise<{
+    stripe_customer_id: string;
+    stripe_subscription_id: string;
+    status: string;
+    cancel_at_period_end: boolean;
+    current_period_end: Date | null;
+    updated_at: Date;
+  } | null> {
     const db = getPool();
     const result = await db.query(
       `SELECT * FROM vrat_subscriptions

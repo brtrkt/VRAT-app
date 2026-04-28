@@ -48,12 +48,34 @@ app.post(
         case 'customer.subscription.created':
         case 'customer.subscription.updated': {
           const sub = event.data.object as any;
-          await storage.upsertSubscription(sub.customer, sub.id, sub.status);
+          const cancelAtPeriodEnd = Boolean(sub.cancel_at_period_end);
+          const periodEndUnix: number | null =
+            typeof sub.current_period_end === 'number' ? sub.current_period_end : null;
+          const currentPeriodEnd = periodEndUnix ? new Date(periodEndUnix * 1000) : null;
+
+          await storage.upsertSubscription(sub.customer, sub.id, sub.status, {
+            cancelAtPeriodEnd,
+            currentPeriodEnd,
+          });
+
+          if (cancelAtPeriodEnd) {
+            logger.info(
+              { customerId: sub.customer, subscriptionId: sub.id, currentPeriodEnd },
+              'Subscription scheduled to cancel at period end',
+            );
+          }
           break;
         }
         case 'customer.subscription.deleted': {
           const sub = event.data.object as any;
-          await storage.upsertSubscription(sub.customer, sub.id, 'canceled');
+          await storage.upsertSubscription(sub.customer, sub.id, 'canceled', {
+            cancelAtPeriodEnd: false,
+            currentPeriodEnd: null,
+          });
+          logger.info(
+            { customerId: sub.customer, subscriptionId: sub.id },
+            'Subscription deleted — premium access revoked',
+          );
           break;
         }
         case 'checkout.session.completed': {

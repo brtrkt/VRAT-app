@@ -111,7 +111,14 @@ router.get('/stripe/verify', async (req, res) => {
       }
 
       const sub = await storage.getActiveSubscriptionForCustomer(user.stripe_customer_id);
-      return res.json({ subscribed: !!sub });
+      if (!sub) return res.json({ subscribed: false });
+
+      return res.json({
+        subscribed: true,
+        status: sub.status,
+        cancel_at_period_end: sub.cancel_at_period_end,
+        current_period_end: sub.current_period_end ? sub.current_period_end.toISOString() : null,
+      });
     }
 
     return res.status(400).json({ error: 'session_id or email is required' });
