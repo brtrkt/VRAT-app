@@ -5405,6 +5405,66 @@ export const vrats: Vrat[] = [
     specialNote: "Annakut coincides with Govardhan Puja in the Hindu calendar. In Swaminarayan mandirs, this is the most elaborate display of the year — rows of food arranged in the shape of Govardhan hill, all offered first to Swaminarayan Bhagwan and then distributed as prasad. Visit the mandir early for darshan of the Annakut.",
   },
   {
+    id: "ekadashi-iskcon",
+    name: "Ekadashi",
+    dates: [
+      "2026-01-14", // Sat-tila Ekadashi (Pausha Krishna)
+      "2026-01-29", // Bhaimi (Jaya) Ekadashi (Magha Shukla)
+      "2026-02-13", // Vijaya Ekadashi (Magha Krishna)
+      "2026-02-27", // Amalaki Vrata Ekadashi (Phalguna Shukla)
+      "2026-03-15", // Papamochani Ekadashi (Phalguna Krishna)
+      "2026-03-29", // Kamada Ekadashi (Chaitra Shukla)
+      "2026-04-13", // Varuthini Ekadashi (Chaitra Krishna)
+      "2026-04-27", // Mohini Ekadashi (Vaishakha Shukla)
+      "2026-05-13", // Apara Ekadashi (Vaishakha Krishna)
+      "2026-05-27", // Padmini Mahadvadashi (Adhika Mas Shukla) — extra-month Ekadashi
+      "2026-06-11", // Parama Ekadashi (Adhika Mas Krishna) — extra-month Ekadashi
+      "2026-06-24", // Pandava Nirjala Ekadashi (Jyeshtha Shukla)
+      "2026-07-10", // Yogini Ekadashi (Jyeshtha Krishna)
+      "2026-07-25", // Sayana (Devshayani) Ekadashi (Ashadha Shukla) — Chaturmas begins
+      "2026-08-09", // Kamika Ekadashi (Ashadha Krishna)
+      "2026-08-23", // Pavitropana (Putrada) Ekadashi (Shravana Shukla)
+      "2026-09-07", // Annada (Aja) Ekadashi (Shravana Krishna)
+      "2026-09-22", // Parsva (Parivartini) Ekadashi (Bhadrapada Shukla)
+      "2026-10-06", // Indira Ekadashi (Bhadrapada Krishna) — Pitru Paksha
+      "2026-10-22", // Pasankusa Ekadashi (Ashvina Shukla)
+      "2026-11-05", // Rama Ekadashi (Ashvina Krishna) — pre-Diwali
+      "2026-11-21", // Utthana (Devotthani / Prabodhini) Ekadashi (Kartik Shukla) — Chaturmas ends
+      "2026-12-04", // Utpanna Ekadashi (Kartik Krishna)
+      "2026-12-20", // Moksada Ekadashi (Margashirsha Shukla) — Gita Jayanti
+    ],
+    deity: "Lord Krishna",
+    tradition: "ISKCON",
+    foodsAllowed: [
+      "Fruits of all kinds",
+      "Milk, curd, ghee",
+      "Sabudana (tapioca)",
+      "Kuttu atta (buckwheat flour)",
+      "Singhara atta (water chestnut flour)",
+      "Potatoes and sweet potatoes",
+      "Rock salt (sendha namak)",
+      "Nuts and dry fruits",
+      "Amaranth (rajgira)",
+      "Vaishnava prasadam offered to Krishna",
+    ],
+    foodsAvoided: [
+      "All grains (rice, wheat, oats, corn, etc.)",
+      "All beans and lentils (dal, chickpeas, peanuts, etc.)",
+      "Onion and garlic",
+      "Mushrooms",
+      "Regular table salt",
+      "Meat, fish, eggs",
+      "Alcohol, caffeine",
+    ],
+    mantra: "हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे । हरे राम हरे राम राम राम हरे हरे ।।",
+    mantraTransliteration: "Hare Krishna Hare Krishna, Krishna Krishna Hare Hare; Hare Rama Hare Rama, Rama Rama Hare Hare",
+    mantraTranslation: "The Maha-Mantra — calling upon the names of Lord Krishna and His divine energy Radha, the prescribed chant for liberation in the age of Kali",
+    mealIdea: "Vaishnava-style ekadashi prasadam: fresh fruit, milk, sabudana khichdi with rock salt and roasted peanuts, kuttu pakoras, and rajgira halwa — all offered to Krishna first",
+    color: "#3B82C4",
+    description: "The eleventh day of each lunar fortnight, observed strictly by ISKCON devotees with abstention from grains and beans, dedicated to the remembrance and devotional service of Lord Krishna",
+    specialNote: "ISKCON follows the Gaudiya Vaishnava Ekadashi reckoning. Dates per the official ISKCON Vaishnava Calendar 2026 (Hare Krishna Calendar / Desire Tree). 2026 is an Adhika Mas year — there are two extra Ekadashis in the leap month (Purushottama Mas): Padmini Mahadvadashi (May 27) and Parama Ekadashi (June 11). Break the fast (parana) the next morning during the prescribed window — check your local ISKCON temple for the exact parana time, which varies by city.",
+  },
+  {
     id: "ekadashi-swaminarayan-jan-1",
     name: "Ekadashi",
     dates: ["2026-01-10", "2026-01-25", "2026-02-09", "2026-02-23", "2026-03-11", "2026-03-25", "2026-04-10", "2026-04-27", "2026-05-12", "2026-05-26", "2026-06-08", "2026-06-23", "2026-07-08", "2026-07-23", "2026-08-07", "2026-08-21", "2026-09-05", "2026-09-20", "2026-10-05", "2026-10-20", "2026-11-04", "2026-11-18", "2026-12-04", "2026-12-18", "2027-01-07", "2027-01-22"],
