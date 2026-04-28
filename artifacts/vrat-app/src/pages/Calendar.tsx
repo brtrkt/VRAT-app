@@ -490,10 +490,10 @@ const ISKCON_LEGEND = [
 const LINGAYAT_LEGEND = [
   { label: "Ugadi · Kannada New Year", color: "#2563EB" },
   { label: "Maha Shivaratri · nirjala fast", color: "#2563EB" },
-  { label: "Shravan Somavar (Mondays)", color: "#2563EB" },
+  { label: "Shravana Somavara (Mondays)", color: "#2563EB" },
   { label: "Basava Jayanti", color: "#2563EB" },
-  { label: "Varalakshmi Vratam", color: "#2563EB" },
-  { label: "Lakshmi Puja — Diwali", color: "#2563EB" },
+  { label: "Varamahalakshmi Vratam", color: "#2563EB" },
+  { label: "Lakshmi Puja — Deepawali", color: "#2563EB" },
 ];
 const PUSHTI_MARG_LEGEND = [
   { label: "Ekadashi · grain-free seva", color: "#0E7490" },
@@ -704,7 +704,7 @@ export default function Calendar() {
             if (trad === "Lingayat") {
               return (
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Dates follow Drik Panchang IST. Shravan Somavar dates are for the holy month of Shravan. Basava Jayanti falls on Vaishakha Shukla Tritiya — please verify with your local Lingayat community or mathadipati.
+                  Dates follow Drik Panchang IST. Shravana Somavara dates are for the holy month of Shravana. Basava Jayanti falls on Vaishakha Shukla Tritiya — please verify with your local Lingayat community or mathadipati.
                 </p>
               );
             }
