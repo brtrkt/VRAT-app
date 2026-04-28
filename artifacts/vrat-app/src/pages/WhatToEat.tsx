@@ -1,8 +1,8 @@
 import { useState, useEffect, type CSSProperties } from "react";
 import { useLocation } from "wouter";
-import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED } from "@/data/vrats";
+import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED, getIskconRegionBucket } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
-import { getUserTradition } from "@/hooks/useUserPrefs";
+import { getUserTradition, getUserLocation, getUserRegion } from "@/hooks/useUserPrefs";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
@@ -671,8 +671,9 @@ export default function WhatToEat() {
   const [today] = useState(new Date());
   const todayStr = today.toISOString().split("T")[0];
   const userTradition = getUserTradition();
-  const vratsToday = filterVratsByTradition(getVratsForDate(todayStr), userTradition);
-  const nextVrat = getNextVratForTradition(today, userTradition);
+  const iskconBucket = getIskconRegionBucket(getUserLocation(), getUserRegion());
+  const vratsToday = filterVratsByTradition(getVratsForDate(todayStr, iskconBucket), userTradition);
+  const nextVrat = getNextVratForTradition(today, userTradition, iskconBucket);
 
   const primaryVrat = vratsToday[0];
 

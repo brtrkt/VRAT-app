@@ -1,4 +1,5 @@
-import { getVratsForDate, getNextVratForTradition, getDaysUntil, formatDateStr, filterVratsByTradition } from "@/data/vrats";
+import { getVratsForDate, getNextVratForTradition, getDaysUntil, formatDateStr, filterVratsByTradition, getIskconRegionBucket } from "@/data/vrats";
+import { getUserLocation, getUserRegion } from "@/hooks/useUserPrefs";
 
 // ─── Nanakshahi month definitions ─────────────────────────────────────────────
 // Each entry = the Gregorian start date of that Nanakshahi month.
@@ -65,10 +66,11 @@ export default function NanakshahiCard() {
   const nsDate = getNanakshahiDate(now);
 
   // Today's Sikh observances (if any)
-  const sikhToday = filterVratsByTradition(getVratsForDate(todayStr), "Sikh");
+  const iskconBucket = getIskconRegionBucket(getUserLocation(), getUserRegion());
+  const sikhToday = filterVratsByTradition(getVratsForDate(todayStr, iskconBucket), "Sikh");
 
   // Next upcoming Sikh observance/Gurpurab
-  const nextSikh = getNextVratForTradition(now, "Sikh");
+  const nextSikh = getNextVratForTradition(now, "Sikh", iskconBucket);
 
   return (
     <div

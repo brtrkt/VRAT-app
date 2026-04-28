@@ -2,6 +2,14 @@ export interface Vrat {
   id: string;
   name: string;
   dates: string[];
+  /**
+   * Optional per-ISKCON-region date overrides. Keys are bucket ids returned by
+   * getIskconRegionBucket() (e.g. "usa-east", "usa-pacific", "australia-east").
+   * Used for vrats like Ekadashi whose observance date can shift by ±1 day
+   * depending on the local sunrise tithi. If a bucket is not present in this
+   * map, the default `dates` array is used as a fallback.
+   */
+  datesByRegion?: Record<string, string[]>;
   deity: string;
   tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Both";
   foodsAllowed: string[];
@@ -5808,8 +5816,107 @@ export const vrats: Vrat[] = [
   },
 ];
 
-export function getVratsForDate(dateStr: string): Vrat[] {
-  return vrats.filter((v) => v.dates.includes(dateStr));
+/**
+ * ISKCON region buckets used to look up location-specific vrat dates.
+ * Ekadashi observance can shift by ±1 day depending on which lunar tithi is
+ * present at local sunrise — so e.g. NYC and LA sometimes observe Ekadashi
+ * on different calendar days. ISKCON GBC publishes per-region calendars that
+ * we mirror via these buckets.
+ */
+export type IskconRegionBucket =
+  | "india"
+  | "uk"
+  | "usa-east"
+  | "usa-central"
+  | "usa-mountain"
+  | "usa-pacific"
+  | "usa-alaska"
+  | "usa-hawaii"
+  | "australia-east"
+  | "australia-central"
+  | "australia-west";
+
+/**
+ * Map of US/Canadian state/province ids → ISKCON timezone bucket.
+ * Bucket ids match the keys consumers should use in `Vrat.datesByRegion`.
+ * State ids match those defined in useUserPrefs.ts USA_REGION_OPTIONS.
+ */
+const US_STATE_TO_BUCKET: Record<string, IskconRegionBucket> = {
+  // Eastern Time
+  ct: "usa-east", de: "usa-east", fl: "usa-east", ga: "usa-east",
+  me: "usa-east", md: "usa-east", ma: "usa-east", mi: "usa-east",
+  nh: "usa-east", nj: "usa-east", ny: "usa-east", nc: "usa-east",
+  oh: "usa-east", pa: "usa-east", ri: "usa-east", sc: "usa-east",
+  vt: "usa-east", va: "usa-east", wv: "usa-east", dc: "usa-east",
+  in: "usa-east",
+  // Central Time
+  al: "usa-central", ar: "usa-central", il: "usa-central", ia: "usa-central",
+  ks: "usa-central", ky: "usa-central", la: "usa-central", mn: "usa-central",
+  ms: "usa-central", mo: "usa-central", ok: "usa-central", tn: "usa-central",
+  tx: "usa-central", wi: "usa-central",
+  // Mountain Time
+  az: "usa-mountain", co: "usa-mountain", id: "usa-mountain", mt: "usa-mountain",
+  ne: "usa-mountain", nm: "usa-mountain", nd: "usa-mountain", sd: "usa-mountain",
+  ut: "usa-mountain", wy: "usa-mountain",
+  // Pacific Time
+  ca: "usa-pacific", nv: "usa-pacific", or: "usa-pacific", wa: "usa-pacific",
+  // Alaska / Hawaii
+  ak: "usa-alaska", hi: "usa-hawaii",
+  // Canadian provinces (USA / Canada location)
+  "ca-on": "usa-east", "ca-qc": "usa-east", "ca-nb": "usa-east",
+  "ca-ns": "usa-east", "ca-pe": "usa-east", "ca-nl": "usa-east",
+  "ca-mb": "usa-central", "ca-sk": "usa-central",
+  "ca-ab": "usa-mountain",
+  "ca-bc": "usa-pacific",
+  "ca-yt": "usa-pacific", "ca-nt": "usa-mountain", "ca-nu": "usa-east",
+};
+
+/**
+ * Map of Australian state/territory ids → ISKCON timezone bucket.
+ * State ids match AUSTRALIA_REGION_OPTIONS in useUserPrefs.ts.
+ */
+const AU_STATE_TO_BUCKET: Record<string, IskconRegionBucket> = {
+  nsw: "australia-east", vic: "australia-east", qld: "australia-east",
+  tas: "australia-east", act: "australia-east",
+  sa: "australia-central", nt: "australia-central",
+  wa: "australia-west",
+};
+
+/**
+ * Resolve a user's (location, region) pair to an ISKCON region bucket.
+ * Defaults to "india" when the location is India or unknown, since the
+ * authoritative ISKCON Indian calendar is computed for India. Falls back
+ * gracefully when the user hasn't picked a state yet.
+ */
+export function getIskconRegionBucket(
+  location: string,
+  region?: string,
+): IskconRegionBucket {
+  if (location === "uk") return "uk";
+  if (location === "usa") {
+    if (!region || region === "all") return "usa-east";
+    return US_STATE_TO_BUCKET[region] ?? "usa-east";
+  }
+  if (location === "australia") {
+    if (!region || region === "all") return "australia-east";
+    return AU_STATE_TO_BUCKET[region] ?? "australia-east";
+  }
+  return "india";
+}
+
+/**
+ * Pick the right `dates` array for a given vrat and ISKCON region bucket.
+ * Returns the bucket-specific override if present, otherwise the default.
+ */
+function pickDates(vrat: Vrat, bucket?: IskconRegionBucket): string[] {
+  if (bucket && vrat.datesByRegion?.[bucket]) {
+    return vrat.datesByRegion[bucket];
+  }
+  return vrat.dates;
+}
+
+export function getVratsForDate(dateStr: string, bucket?: IskconRegionBucket): Vrat[] {
+  return vrats.filter((v) => pickDates(v, bucket).includes(dateStr));
 }
 
 function localDateStr(d: Date): string {
@@ -5820,13 +5927,13 @@ function localDateStr(d: Date): string {
   ].join("-");
 }
 
-export function getNextVrat(fromDate: Date): { vrat: Vrat; date: string } | null {
+export function getNextVrat(fromDate: Date, bucket?: IskconRegionBucket): { vrat: Vrat; date: string } | null {
   const today = localDateStr(fromDate);
 
   const allDateVratPairs: { date: string; vrat: Vrat }[] = [];
 
   for (const vrat of vrats) {
-    for (const date of vrat.dates) {
+    for (const date of pickDates(vrat, bucket)) {
       if (date >= today) {
         allDateVratPairs.push({ date, vrat });
       }
@@ -5839,11 +5946,11 @@ export function getNextVrat(fromDate: Date): { vrat: Vrat; date: string } | null
   return next ? { vrat: next.vrat, date: next.date } : null;
 }
 
-export function getAllVratDates(): { date: string; vrats: Vrat[] }[] {
+export function getAllVratDates(bucket?: IskconRegionBucket): { date: string; vrats: Vrat[] }[] {
   const dateMap: Record<string, Vrat[]> = {};
 
   for (const vrat of vrats) {
-    for (const date of vrat.dates) {
+    for (const date of pickDates(vrat, bucket)) {
       if (!dateMap[date]) dateMap[date] = [];
       dateMap[date].push(vrat);
     }
@@ -5887,13 +5994,13 @@ export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] 
   return list;
 }
 
-export function getNextVratForTradition(fromDate: Date, tradition: string): { vrat: Vrat; date: string } | null {
+export function getNextVratForTradition(fromDate: Date, tradition: string, bucket?: IskconRegionBucket): { vrat: Vrat; date: string } | null {
   const today = localDateStr(fromDate);
   const pairs: { date: string; vrat: Vrat }[] = [];
   for (const vrat of vrats) {
     const filtered = filterVratsByTradition([vrat], tradition);
     if (filtered.length === 0) continue;
-    for (const date of vrat.dates) {
+    for (const date of pickDates(vrat, bucket)) {
       if (date >= today) pairs.push({ date, vrat });
     }
   }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, X, CheckCircle2, Circle } from "lucide-react";
-import { getAllVratDates, formatDateStr, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED } from "@/data/vrats";
+import { getAllVratDates, formatDateStr, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED, getIskconRegionBucket } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
@@ -523,9 +523,10 @@ export default function Calendar() {
   });
   const [observedVrats] = useState<string[]>(() => getObservedVrats());
 
-  const allVratDates = getAllVratDates();
   const userRegion = getUserRegion();
   const userLocation = getUserLocation();
+  const iskconBucket = getIskconRegionBucket(userLocation, userRegion);
+  const allVratDates = getAllVratDates(iskconBucket);
   // Indian-region tags on vrats (maharashtra, gujarat, etc.) are only meaningful
   // when the user is in India. For US/UK/AU users, show all regional vrats so
   // diaspora users see vrats from every Indian region by default.

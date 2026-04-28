@@ -1,13 +1,13 @@
 import { useState, useEffect, type CSSProperties } from "react";
 import { useLocation } from "wouter";
-import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, getDaysUntil, formatDateStr, getAllVrats } from "@/data/vrats";
+import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, getDaysUntil, formatDateStr, getAllVrats, getIskconRegionBucket } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import NavratriCard from "@/components/NavratriCard";
 import HydrationTracker from "@/components/HydrationTracker";
-import { getDaysRemaining, getUserTradition, TRADITION_KEY, type Tradition } from "@/hooks/useUserPrefs";
+import { getDaysRemaining, getUserTradition, getUserLocation, getUserRegion, TRADITION_KEY, type Tradition } from "@/hooks/useUserPrefs";
 import {
   getTopStreaks,
   checkBadges,
@@ -453,8 +453,9 @@ function MantraCard({ vrats }: { vrats: Vrat[] }) {
 
   const todayStr = today.toISOString().split("T")[0];
   const tradition = getUserTradition();
-  const currentVrats = filterVratsByTradition(getVratsForDate(todayStr), tradition);
-  const nextVratData = getNextVratForTradition(today, tradition);
+  const iskconBucket = getIskconRegionBucket(getUserLocation(), getUserRegion());
+  const currentVrats = filterVratsByTradition(getVratsForDate(todayStr, iskconBucket), tradition);
+  const nextVratData = getNextVratForTradition(today, tradition, iskconBucket);
   const displayVrat = currentVrats[0] || nextVratData?.vrat;
 
   if (!displayVrat) return null;
@@ -656,8 +657,9 @@ export default function Home() {
   const [today] = useState(new Date());
   const todayStr = today.toISOString().split("T")[0];
   const userTradition = getUserTradition();
-  const vratsToday = filterVratsByTradition(getVratsForDate(todayStr), userTradition);
-  const nextVrat = getNextVratForTradition(today, userTradition);
+  const iskconBucket = getIskconRegionBucket(getUserLocation(), getUserRegion());
+  const vratsToday = filterVratsByTradition(getVratsForDate(todayStr, iskconBucket), userTradition);
+  const nextVrat = getNextVratForTradition(today, userTradition, iskconBucket);
 
   const allVrats = vratsToday.length > 0 ? vratsToday : [];
   const nirjalaVrat = vratsToday.find(isNirjalaTimerVrat) ?? null;
