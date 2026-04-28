@@ -64,24 +64,41 @@ async function findOrCreatePrice(
 }
 
 export async function ensurePricesSeeded(pool: Pool): Promise<void> {
-  const { rows } = await pool.query<{ count: string }>(
-    'SELECT COUNT(*)::text AS count FROM vrat_prices',
-  );
-  const existingCount = Number(rows[0]?.count ?? '0');
-
-  if (existingCount >= PRICE_SPECS.length) {
-    logger.info({ existingCount }, 'vrat_prices already populated, skipping seed');
-    return;
-  }
-
   if (!process.env.STRIPE_SECRET_KEY) {
     logger.warn('STRIPE_SECRET_KEY not set, skipping price seed');
     return;
   }
 
-  logger.info({ existingCount, target: PRICE_SPECS.length }, 'Seeding Stripe products and prices...');
-
   const stripe = getStripeClient();
+
+  const { rows } = await pool.query<{ id: string; count: string }>(
+    `SELECT id, (SELECT COUNT(*)::text FROM vrat_prices) AS count
+     FROM vrat_prices LIMIT 1`,
+  );
+  const existingCount = Number(rows[0]?.count ?? '0');
+  const sampleId = rows[0]?.id;
+
+  if (existingCount >= PRICE_SPECS.length && sampleId) {
+    try {
+      await stripe.prices.retrieve(sampleId);
+      logger.info({ existingCount }, 'vrat_prices already populated and valid for current Stripe key, skipping seed');
+      return;
+    } catch (err: any) {
+      if (err?.code === 'resource_missing' || err?.statusCode === 404) {
+        logger.warn(
+          { sampleId },
+          'Cached Stripe price not found — Stripe key likely switched modes (test↔live). Wiping and re-seeding.',
+        );
+        await pool.query('DELETE FROM vrat_prices');
+      } else {
+        logger.warn({ err: err?.message }, 'Could not validate cached Stripe price; re-seeding anyway');
+        await pool.query('DELETE FROM vrat_prices');
+      }
+    }
+  }
+
+  logger.info({ target: PRICE_SPECS.length }, 'Seeding Stripe products and prices...');
+
   const productIds = new Map<PriceSpec['plan'], string>();
 
   for (const spec of PRICE_SPECS) {
