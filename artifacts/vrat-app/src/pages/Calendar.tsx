@@ -36,6 +36,7 @@ function VratDetailSheet({
 }) {
   const [activeVrat, setActiveVrat] = useState(vrats[0]);
   const isJain = activeVrat.tradition === "Jain";
+  const isLingayat = activeVrat.tradition === "Lingayat";
   const todayStr = new Date().toISOString().split("T")[0];
   const canObserve = dateStr <= todayStr;
   const [observed, setObserved] = useState(() => isObservedDate(activeVrat.id, dateStr));
@@ -64,10 +65,14 @@ function VratDetailSheet({
         aria-hidden="true"
       />
       <div className="relative z-10 w-full max-h-[85vh] bg-background rounded-t-3xl overflow-hidden shadow-2xl flex flex-col">
-        {/* Header — green for Jain, saffron for Hindu */}
+        {/* Header — green for Jain, blue for Lingayat, saffron for others */}
         <div
-          className={isJain ? "px-6 pt-6 pb-5" : "saffron-gradient px-6 pt-6 pb-5"}
-          style={isJain ? { background: "linear-gradient(135deg, #15803D 0%, #22C55E 100%)" } : undefined}
+          className={(isJain || isLingayat) ? "px-6 pt-6 pb-5" : "saffron-gradient px-6 pt-6 pb-5"}
+          style={
+            isJain ? { background: "linear-gradient(135deg, #15803D 0%, #22C55E 100%)" } :
+            isLingayat ? { background: "linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)" } :
+            undefined
+          }
         >
           <div className="flex items-start justify-between">
             <div className="flex-1">
@@ -483,9 +488,9 @@ const ISKCON_LEGEND = [
   { label: "Janmashtami · Kartik month", color: "#0284C7" },
 ];
 const LINGAYAT_LEGEND = [
-  { label: "Maha Shivaratri · nirjala fast", color: "#9B2335" },
-  { label: "Shravan Somavar (Mondays)", color: "#9B2335" },
-  { label: "Basava Jayanti", color: "#9B2335" },
+  { label: "Maha Shivaratri · nirjala fast", color: "#2563EB" },
+  { label: "Shravan Somavar (Mondays)", color: "#2563EB" },
+  { label: "Basava Jayanti", color: "#2563EB" },
 ];
 const PUSHTI_MARG_LEGEND = [
   { label: "Ekadashi · grain-free seva", color: "#0E7490" },

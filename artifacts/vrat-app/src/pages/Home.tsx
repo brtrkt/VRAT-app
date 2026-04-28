@@ -323,15 +323,17 @@ function TodayCard({ todayStr, vratsToday }: { todayStr: string; vratsToday: Vra
   const weekday = today.toLocaleDateString("en-IN", { weekday: "long" });
   const dateFormatted = today.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
   const isFastDay = vratsToday.length > 0;
+  const isLingayat = getUserTradition() === "Lingayat";
 
   return (
     <div
       data-testid="today-card"
       className={`relative overflow-hidden rounded-3xl p-6 mb-4 shadow-lg ${
         isFastDay
-          ? "saffron-gradient text-white"
+          ? isLingayat ? "text-white" : "saffron-gradient text-white"
           : "bg-card border border-card-border"
       }`}
+      style={isFastDay && isLingayat ? { background: "linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)" } : undefined}
     >
       {isFastDay && (
         <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
@@ -410,6 +412,7 @@ function NextVratCard({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | n
 
   const daysLeft = getDaysUntil(nextVrat.date, new Date());
   const dateFormatted = formatDateStr(nextVrat.date);
+  const isLingayat = getUserTradition() === "Lingayat";
 
   return (
     <div data-testid="next-vrat-card" className="vrat-card p-5 mb-4">
@@ -431,7 +434,8 @@ function NextVratCard({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | n
         </div>
         <div className="text-center flex-shrink-0">
           <div
-            className="w-14 h-14 rounded-2xl saffron-gradient flex flex-col items-center justify-center"
+            className={`w-14 h-14 rounded-2xl flex flex-col items-center justify-center ${isLingayat ? "" : "saffron-gradient"}`}
+            style={isLingayat ? { background: "linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)" } : undefined}
             data-testid="countdown-days"
           >
             <span className="text-white font-bold text-xl leading-none">{daysLeft}</span>
