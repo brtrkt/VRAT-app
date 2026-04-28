@@ -1,6 +1,8 @@
+import { Pool } from "pg";
 import app from "./app";
 import { logger } from "./lib/logger";
 import { storage } from "./storage";
+import { ensurePricesSeeded } from "./seedPrices";
 
 async function initSchema() {
   try {
@@ -9,6 +11,21 @@ async function initSchema() {
     logger.info('Database schema ready');
   } catch (err: any) {
     logger.warn({ err: err.message }, 'Database schema init failed');
+  }
+}
+
+async function seedPricesIfNeeded() {
+  if (!process.env.DATABASE_URL) {
+    logger.warn('DATABASE_URL not set, skipping price seed check');
+    return;
+  }
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  try {
+    await ensurePricesSeeded(pool);
+  } catch (err: any) {
+    logger.warn({ err: err.message }, 'Price seed check failed (non-fatal)');
+  } finally {
+    await pool.end().catch(() => {});
   }
 }
 
@@ -25,6 +42,7 @@ if (Number.isNaN(port) || port <= 0) {
 }
 
 await initSchema();
+await seedPricesIfNeeded();
 
 app.listen(port, (err) => {
   if (err) {
