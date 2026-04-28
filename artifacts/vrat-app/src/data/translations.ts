@@ -14,7 +14,7 @@ export const LANGUAGE_META: Record<LangCode, { name: string; native: string }> =
 
 export const LANGUAGE_ORDER: LangCode[] = ["en", "hi", "gu", "pa", "mr", "ta", "te", "kn", "ne"];
 
-type T = Record<string, string>;
+type T = Record<string, string | string[]>;
 
 const en: T = {
   "nav.home":        "Home",
