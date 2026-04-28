@@ -5588,6 +5588,36 @@ export const vrats: Vrat[] = [
     description: "Varalakshmi Vratam is observed on the second Friday before Shravan Purnima (Shravana Shukla Purnima), and is one of the most important festivals for women across South Indian communities — including Lingayats in Karnataka, Andhra Pradesh, and Telangana. Goddess Varalakshmi is worshipped as the supreme bestower of boons — she who grants all four purusharthas (dharma, artha, kama, moksha). The kalash adorned as the goddess is the centrepiece of the elaborate home puja.",
     specialNote: "Varalakshmi Vratam is especially observed by married women for the health, long life, and prosperity of their husbands and families. After puja, sundal is distributed as prasad to neighbours. The sacred Varalakshmi thread tied on the wrist is considered her direct blessing and is worn until it naturally falls off. In the Lingayat tradition, Ishtalinga puja is performed first before the Varalakshmi puja begins.",
   },
+  {
+    id: "lakshmi-puja-lingayat",
+    name: "Lakshmi Puja — Diwali",
+    dates: ["2026-11-08"],
+    deity: "Goddess Lakshmi / Lord Shiva (Ishtalinga puja first)",
+    tradition: "Lingayat",
+    foodsAllowed: [
+      "Traditional Karnataka sweets — holige (obbattu), kadubu, mysore pak, besan ladoo",
+      "Dry fruits and nuts — almonds, cashews, pistachios, raisins",
+      "Milk, kheer, and dairy",
+      "Seasonal fruits — banana, apple, pomegranate, grapes",
+      "Poha (flattened rice) and pori (puffed rice) — traditional Diwali prasad",
+      "Vegetarian home-cooked festive meal",
+    ],
+    foodsAvoided: [
+      "Non-vegetarian food — Lingayat tradition is strictly vegetarian",
+      "Onion and garlic",
+      "Alcohol",
+    ],
+    fastingType: "Optional day fast or light eating until evening Lakshmi puja; most observe a full festive celebration",
+    mantra: "ॐ श्री महालक्ष्म्यै नमः",
+    mantraTransliteration: "Om Shri Mahalakshmyai Namah",
+    mantraTranslation: "Salutation to Goddess Mahalakshmi — the goddess of prosperity, grace, and abundance",
+    mantraHow: "Begin Diwali with Ishtalinga puja at sunrise — offer bilva leaves, flowers, and incense to Shiva as the Ishtalinga. In the evening, perform Lakshmi puja: clean and decorate the home, light rows of diyas (lamps), draw rangoli at the entrance, and offer flowers, kumkum, turmeric, and sweets to Goddess Lakshmi. Invite her in with an open door and lit lamps.",
+    mantraBenefits: "Diwali Lakshmi Puja invites the goddess of prosperity, light, and auspiciousness into the home. For Lingayats, the day begins with Shiva (Ishtalinga puja) and is filled with light, community, and gratitude. Lighting diyas symbolises the triumph of light over darkness — a universal truth at the heart of Basavanna's teaching.",
+    mealIdea: "Holige (obbattu) with ghee — Karnataka's beloved festive sweet flatbread filled with chana dal and jaggery — shared with family and neighbours as the quintessential Diwali treat across Karnataka",
+    color: "#2563EB",
+    description: "Diwali — the Festival of Lights — falls on Kartika Amavasya (the new moon of Kartika month). For the Lingayat community of Karnataka, Diwali is a joyful celebration of light, prosperity, and community. The day begins with Ishtalinga puja (honouring Shiva within), followed by home cleaning, rangoli, lighting rows of earthen diyas, and performing Lakshmi puja in the evening. Traditional Karnataka sweets — especially holige — are prepared and shared with neighbours and family.",
+    specialNote: "In the Lingayat tradition, Ishtalinga puja is performed first thing in the morning before any other activity. Diwali is a day of joy, not strict fasting — the emphasis is on light, gratitude, and sharing. Light as many earthen diyas as possible around the home — Basavanna taught that the divine light is within every soul, and Diwali is a reminder of that inner light.",
+  },
 
   // ── Pushti Marg / Vallabha Sampraday ────────────────────────────────────────
   {

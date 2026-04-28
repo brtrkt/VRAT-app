@@ -493,6 +493,7 @@ const LINGAYAT_LEGEND = [
   { label: "Shravan Somavar (Mondays)", color: "#2563EB" },
   { label: "Basava Jayanti", color: "#2563EB" },
   { label: "Varalakshmi Vratam", color: "#2563EB" },
+  { label: "Lakshmi Puja — Diwali", color: "#2563EB" },
 ];
 const PUSHTI_MARG_LEGEND = [
   { label: "Ekadashi · grain-free seva", color: "#0E7490" },

@@ -94,6 +94,7 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "somavara-lingayat",        label: "Shravan Somavar",   subtitle: "Mondays of Shravan month · fruit fast",                     tradition: "Lingayat" },
   { id: "basava-jayanti",           label: "Basava Jayanti",    subtitle: "Apr 20 · Basavanna's birth anniversary",                    tradition: "Lingayat" },
   { id: "varalakshmi-vratam-lingayat", label: "Varalakshmi Vratam", subtitle: "Aug 28 · Goddess Varalakshmi · women's vrat",          tradition: "Lingayat" },
+  { id: "lakshmi-puja-lingayat",       label: "Lakshmi Puja — Diwali", subtitle: "Nov 8 · Festival of lights · Ishtalinga puja first",  tradition: "Lingayat" },
   { id: "ekadashi-pushti-marg",    label: "Ekadashi",                subtitle: "Grain-free bhog · 26 days a year",                    tradition: "PushtiMarg" },
   { id: "janmashtami-pushti-marg", label: "Janmashtami",             subtitle: "Most sacred · Chappan Bhog at midnight",              tradition: "PushtiMarg" },
   { id: "annakut-pushti-marg",     label: "Annakut & Govardhan Puja",subtitle: "Day after Diwali · Chappan Bhog seva",                tradition: "PushtiMarg" },
