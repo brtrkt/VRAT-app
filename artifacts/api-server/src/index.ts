@@ -42,7 +42,6 @@ if (Number.isNaN(port) || port <= 0) {
 }
 
 await initSchema();
-await seedPricesIfNeeded();
 
 app.listen(port, (err) => {
   if (err) {
@@ -50,4 +49,8 @@ app.listen(port, (err) => {
     process.exit(1);
   }
   logger.info({ port }, "Server listening");
+
+  seedPricesIfNeeded().catch((err) => {
+    logger.warn({ err: err?.message }, "Background price seed failed (non-fatal)");
+  });
 });

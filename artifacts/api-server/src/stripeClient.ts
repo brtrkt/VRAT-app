@@ -5,7 +5,10 @@ export function getStripeClient(): Stripe {
   if (!secretKey) {
     throw new Error('STRIPE_SECRET_KEY environment variable is not set.');
   }
-  return new Stripe(secretKey);
+  return new Stripe(secretKey, {
+    timeout: 15000,
+    maxNetworkRetries: 2,
+  });
 }
 
 export function getWebhookSecret(): string {
