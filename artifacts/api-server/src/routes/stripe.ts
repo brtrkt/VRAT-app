@@ -29,6 +29,24 @@ router.post('/stripe/checkout', async (req, res) => {
     const stripe = getStripeClient();
 
     let customerId = user.stripe_customer_id;
+    if (customerId) {
+      try {
+        const existing = await stripe.customers.retrieve(customerId);
+        if ((existing as any).deleted) {
+          customerId = null;
+        }
+      } catch (err: any) {
+        if (err?.code === 'resource_missing' || err?.statusCode === 404) {
+          logger.warn(
+            { email: user.email, staleCustomerId: customerId },
+            'Cached Stripe customer not found — likely from previous Stripe mode (test↔live). Creating a fresh customer.',
+          );
+          customerId = null;
+        } else {
+          throw err;
+        }
+      }
+    }
     if (!customerId) {
       const customer = await stripe.customers.create({
         email: user.email,
@@ -114,6 +132,23 @@ router.post('/stripe/portal', async (req, res) => {
     }
 
     const stripe = getStripeClient();
+
+    try {
+      const existing = await stripe.customers.retrieve(user.stripe_customer_id);
+      if ((existing as any).deleted) {
+        return res.status(404).json({ error: 'No active subscription found for this email' });
+      }
+    } catch (err: any) {
+      if (err?.code === 'resource_missing' || err?.statusCode === 404) {
+        logger.warn(
+          { email, staleCustomerId: user.stripe_customer_id },
+          'Portal: cached Stripe customer not found in current Stripe mode',
+        );
+        return res.status(404).json({ error: 'No active subscription found for this email' });
+      }
+      throw err;
+    }
+
     const origin = req.headers.origin || `https://${req.headers.host}`;
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: user.stripe_customer_id,
