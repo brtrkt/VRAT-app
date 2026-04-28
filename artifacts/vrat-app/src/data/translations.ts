@@ -1,4 +1,4 @@
-export type LangCode = "en" | "hi" | "gu" | "pa" | "mr" | "ta" | "te" | "kn";
+export type LangCode = "en" | "hi" | "gu" | "pa" | "mr" | "ta" | "te" | "kn" | "ne";
 
 export const LANGUAGE_META: Record<LangCode, { name: string; native: string }> = {
   en: { name: "English",  native: "English" },
@@ -9,9 +9,10 @@ export const LANGUAGE_META: Record<LangCode, { name: string; native: string }> =
   ta: { name: "Tamil",    native: "தமிழ்" },
   te: { name: "Telugu",   native: "తెలుగు" },
   kn: { name: "Kannada",  native: "ಕನ್ನಡ" },
+  ne: { name: "Nepali",   native: "नेपाली" },
 };
 
-export const LANGUAGE_ORDER: LangCode[] = ["en", "hi", "gu", "pa", "mr", "ta", "te", "kn"];
+export const LANGUAGE_ORDER: LangCode[] = ["en", "hi", "gu", "pa", "mr", "ta", "te", "kn", "ne"];
 
 type T = Record<string, string>;
 
@@ -769,7 +770,101 @@ const kn: T = {
   "hist.back":   "ಹಿಂದೆ",
 };
 
-export const TRANSLATIONS: Record<LangCode, T> = { en, hi, gu, pa, mr, ta, te, kn };
+const ne: T = {
+  "nav.home":        "गृह",
+  "nav.eat":         "के खाने",
+  "nav.calendar":    "पात्रो",
+  "nav.settings":    "सेटिङ",
+  "nav.history":     "इतिहास",
+
+  "home.fastDay":        "व्रत दिन",
+  "home.noFastToday":    "आज व्रत छैन",
+  "home.upcomingVrats":  "आउँदै गरेका व्रत",
+  "home.nextFast":       "अर्को व्रत",
+  "home.daysAway":       "दिन बाँकी",
+  "home.dayAway":        "दिन बाँकी",
+  "home.today":          "आज",
+  "home.fastCountdown":  "व्रत काउन्टडाउन",
+  "home.remaining":      "व्रतमा बाँकी",
+  "home.fastDone":       "तपाईंको व्रत पूरा भयो — धेरै राम्रो",
+  "home.noFastTimer":    "आज व्रत छैन",
+  "home.parana":         "पारण",
+  "home.tomorrow":       "(भोलि)",
+  "home.markObserved":   "व्रत बस्यो",
+  "home.observed":       "व्रत बस्यो ✓",
+  "home.freeTrial":      "निःशुल्क परीक्षण",
+  "home.days":           "दिन",
+  "home.day":            "दिन",
+  "home.topStreaks":      "उत्कृष्ट व्रत स्ट्रिक",
+  "home.noStreaks":       "स्ट्रिक सुरु गर्न पहिलो व्रत पूरा गर्नुहोस्",
+  "home.badgeEarned":    "ब्याज पाइयो",
+  "home.brahmaTitle":    "ब्रह्म मुहूर्त",
+  "home.brahmaDesc":     "— प्रार्थना र ध्यानको सबैभन्दा शुभ समय।",
+  "home.brahmaAlarm":    "अलार्म राख्नुहोस्",
+  "home.brahmaAlarmIos": "बिहान ३:३० बजे अलार्म राख्नुहोस्",
+  "home.brahmaNote":     "ठ्याक्कै समय मौसम र स्थान अनुसार फरक हुन्छ — सूर्योदय भन्दा करिब ९६ मिनेट अघि।",
+
+  "food.allowed":     "खान सक्नुहुन्छ",
+  "food.avoid":       "नखानु",
+  "food.mealIdea":    "खाना सुझाव",
+  "food.readKatha":   "📖 व्रत कथा पढ्नुहोस्",
+  "food.light":       "हलुका",
+  "food.medium":      "मध्यम",
+  "food.heavy":       "गहु्रङ्गो",
+  "food.logHeader":   "आज के खाएँ-पिएँ",
+  "food.logEmpty":    "अहिलेसम्म केही दर्ज गरिएको छैन",
+  "food.jainAllowed": "सधैं अनुमति (जैन)",
+  "food.jainAvoided": "सधैं नखाने (जैन)",
+  "food.noFastToday": "आज उपवास छैन",
+  "food.nextFastIs":  "तपाईंको अर्को व्रत हो",
+
+  "sankalp.take":     "🙏 सङ्कल्प लिनुहोस्",
+  "sankalp.taken":    "आज सङ्कल्प लिएँ",
+  "sankalp.confirm":  "मैले सङ्कल्प लिएँ 🙏",
+  "sankalp.howTo":    "सङ्कल्प कसरी लिने",
+
+  "katha.read":    "📖 व्रत कथा पढ्नुहोस्",
+  "katha.markRead":"पढिसकेँ",
+  "katha.alreadyRead": "✓ पढियो",
+  "katha.share":   "WhatsApp मा सेयर गर्नुहोस्",
+  "katha.close":   "बन्द गर्नुहोस्",
+
+  "cal.title":     "व्रत पात्रो",
+  "cal.yourVrats": "यो महिनाका तपाईंका व्रत",
+  "cal.noVrats":   "यो महिना कुनै व्रत छैन",
+  "cal.observed":  "बसियो",
+  "cal.missed":    "छुट्यो",
+  "cal.upcoming":  "आउँदै",
+  "cal.today":     "आज",
+  "cal.legend":    "सङ्केत",
+  "cal.days":      ["आइत","सोम","मङ्गल","बुध","बिही","शुक्र","शनि"],
+  "cal.months":    "जनवरी,फेब्रुअरी,मार्च,अप्रिल,मे,जुन,जुलाई,अगस्ट,सेप्टेम्बर,अक्टोबर,नोभेम्बर,डिसेम्बर",
+
+  "set.title":       "सेटिङ",
+  "set.profile":     "तपाईंको प्रोफाइल",
+  "set.tradition":   "परम्परा",
+  "set.hindu":       "हिन्दू",
+  "set.jain":        "जैन",
+  "set.myVrats":     "मेरा व्रत",
+  "set.save":        "परिवर्तन सुरक्षित गर्नुहोस्",
+  "set.install":     "इन्स्टल",
+  "set.howToInstall":"VRAT कसरी इन्स्टल गर्ने",
+  "set.installSub":  "होम स्क्रिनमा थप्नुहोस्",
+  "set.about":       "बारेमा",
+  "set.privacy":     "गोपनीयता नीति",
+  "set.terms":       "प्रयोगका सर्तहरू",
+  "set.region":      "मेरो क्षेत्र",
+  "set.cityLabel":   "मेरो सहर",
+  "set.cityPlaceholder": "तपाईंको सहर लेख्नुहोस्",
+
+  "hist.title":  "व्रत इतिहास",
+  "hist.badge":  "पाइयो",
+  "hist.streak": "स्ट्रिक",
+  "hist.empty":  "कुनै व्रत दर्ज गरिएको छैन",
+  "hist.back":   "फर्किनुहोस्",
+};
+
+export const TRANSLATIONS: Record<LangCode, T> = { en, hi, gu, pa, mr, ta, te, kn, ne };
 
 export const FOOD_TRANSLATIONS: Record<string, Partial<Record<LangCode, string>>> = {
   "Rock salt (sendha namak)": {
