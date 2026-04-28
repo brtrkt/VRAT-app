@@ -5513,6 +5513,7 @@ export const vrats: Vrat[] = [
     tradition: "Lingayat",
     foodsAllowed: [
       "All vegetarian food — Basava Jayanti is a celebration, not a strict fast",
+      "Bisi bele bath (hot lentil rice with vegetables and spices) — ideal for partial or light fasting days",
       "Akki roti (rice flour flatbread) with coconut chutney or shenga chutney",
       "Jolada roti (sorghum/jowar flatbread) with hulli (lentil curry)",
       "Shenga roti (peanut flatbread) — Karnataka specialty",
@@ -5548,6 +5549,7 @@ export const vrats: Vrat[] = [
     tradition: "Lingayat",
     foodsAllowed: [
       "Ugadi Pachadi — six-taste chutney of neem, jaggery, tamarind, raw mango, salt, and green chili",
+      "Bisi bele bath (hot lentil rice with vegetables and spices) — ideal for partial or light fasting days",
       "Akki roti (rice flour flatbread) with coconut chutney or shenga chutney",
       "Jolada roti (sorghum/jowar flatbread) with hulli (lentil curry)",
       "Shenga roti (peanut flatbread) — Karnataka specialty",
@@ -5584,6 +5586,7 @@ export const vrats: Vrat[] = [
     tradition: "Lingayat",
     foodsAllowed: [
       "Sundal (boiled chickpeas or black-eyed peas with coconut and mustard — the traditional prasad)",
+      "Bisi bele bath (hot lentil rice with vegetables and spices) — ideal for partial or light fasting days",
       "Akki roti (rice flour flatbread) with coconut chutney or shenga chutney",
       "Jolada roti (sorghum/jowar flatbread)",
       "Shenga roti (peanut flatbread) — Karnataka specialty",
@@ -5621,6 +5624,7 @@ export const vrats: Vrat[] = [
     deity: "Goddess Lakshmi / Lord Shiva (Ishtalinga puja first)",
     tradition: "Lingayat",
     foodsAllowed: [
+      "Bisi bele bath (hot lentil rice with vegetables and spices) — ideal for partial or light fasting days",
       "Akki roti (rice flour flatbread) with coconut chutney or shenga chutney",
       "Jolada roti (sorghum/jowar flatbread)",
       "Shenga roti (peanut flatbread) — Karnataka specialty",
