@@ -7,7 +7,9 @@ import {
   LOCATION_KEY,
   REGION_KEY,
   LOCATION_OPTIONS,
-  REGION_OPTIONS,
+  getRegionOptionsForLocation,
+  getRegionScreenCopy,
+  isValidRegionForLocation,
   type Tradition,
   type UserLocation,
   type UserRegion,
@@ -279,9 +281,21 @@ export default function Onboarding({ onComplete }: Props) {
   const [step, setStep] = useState(0);
   const [tradition, setTradition] = useState<Tradition>("Hindu");
   const [observed, setObserved] = useState<string[]>(HINDU_DEFAULTS);
-  const [location, setLocation] = useState<UserLocation>("india");
+  const [location, setLocationState] = useState<UserLocation>("india");
   const [region, setRegion] = useState<UserRegion>("all");
   const [city, setCity] = useState("");
+
+  // When the user changes country, reset region to "All" so we never carry
+  // an Indian region into a US/UK/AU context (or vice versa).
+  function setLocation(next: UserLocation) {
+    setLocationState(next);
+    if (!isValidRegionForLocation(region, next)) {
+      setRegion("all");
+    }
+  }
+
+  const regionOptions = getRegionOptionsForLocation(location);
+  const regionCopy = getRegionScreenCopy(location);
 
   const TOTAL_STEPS = 7;
 
@@ -639,13 +653,13 @@ export default function Onboarding({ onComplete }: Props) {
         >
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
             <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 4 of 5</p>
-            <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Which region do you follow?</h2>
+            <h2 className="font-serif text-3xl font-bold text-foreground mb-2">{regionCopy.title}</h2>
             <p className="text-sm text-muted-foreground mb-6">
-              We'll add regional vrats for your area alongside the pan-Indian calendar.
+              {regionCopy.body}
             </p>
 
             <div className="space-y-2">
-              {REGION_OPTIONS.map((opt) => {
+              {regionOptions.map((opt) => {
                 const selected = region === opt.id;
                 return (
                   <button

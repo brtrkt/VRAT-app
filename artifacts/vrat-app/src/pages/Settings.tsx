@@ -9,7 +9,9 @@ import {
   REGION_KEY,
   ONBOARDING_KEY,
   LOCATION_OPTIONS,
-  REGION_OPTIONS,
+  getRegionOptionsForLocation,
+  getRegionScreenCopy,
+  isValidRegionForLocation,
   type Tradition,
   type UserLocation,
   type UserRegion,
@@ -139,8 +141,16 @@ export default function Settings() {
   const [tradition, setTradition] = useState<Tradition>(getUserTradition);
   const [observed, setObserved] = useState<string[]>(getObservedVrats);
   const [city, setCity] = useState(getUserCity);
-  const [location, setLocation] = useState<UserLocation>(getUserLocation);
+  const [location, setLocationState] = useState<UserLocation>(getUserLocation);
   const [region, setRegion] = useState<UserRegion>(getUserRegion);
+
+  // When the user changes country in Settings, reset region to "All" if the
+  // currently-selected region doesn't exist in the new country's list.
+  // Prevents an Indian region (e.g. maharashtra) being kept after switching to USA.
+  const setLocation = useCallback((next: UserLocation) => {
+    setLocationState(next);
+    setRegion((prev) => (isValidRegionForLocation(prev, next) ? prev : "all"));
+  }, []);
 
   const subscribed = isSubscribed();
   const daysRemaining = getDaysRemaining();
@@ -281,7 +291,9 @@ export default function Settings() {
   }
 
   const currentLocationInfo = LOCATION_OPTIONS.find((l) => l.id === location) ?? LOCATION_OPTIONS[0];
-  const currentRegionInfo = REGION_OPTIONS.find((r) => r.id === region) ?? REGION_OPTIONS[0];
+  const regionOptions = getRegionOptionsForLocation(location);
+  const regionCopy = getRegionScreenCopy(location);
+  const currentRegionInfo = regionOptions.find((r) => r.id === region) ?? regionOptions[0];
   const ACCENT = "#E07B2A";
 
   if (section === "location") {
@@ -364,13 +376,13 @@ export default function Settings() {
             Back
           </button>
 
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-1">My region</h2>
+          <h2 className="font-serif text-2xl font-bold text-foreground mb-1">{regionCopy.title}</h2>
           <p className="text-sm text-muted-foreground mb-6">
-            Regional vrats specific to your area will appear alongside the pan-Indian calendar.
+            {regionCopy.body}
           </p>
 
           <div className="space-y-2">
-            {REGION_OPTIONS.map((opt) => {
+            {regionOptions.map((opt) => {
               const selected = region === opt.id;
               return (
                 <button
