@@ -489,7 +489,7 @@ function MantraCard({ vrats }: { vrats: Vrat[] }) {
 
 function BadgeCelebration() {
   const { t } = useLanguage();
-  const allVrats = getAllVrats();
+  const allVrats = filterVratsByTradition(getAllVrats(), getUserTradition());
   const [newBadges] = useState<BadgeResult[]>(() => {
     const badges = checkBadges(allVrats);
     return badges.filter((b) => b.newlyEarned);
@@ -537,7 +537,7 @@ function BadgeCelebration() {
 
 function MyStreaks() {
   const { t } = useLanguage();
-  const allVrats = getAllVrats();
+  const allVrats = filterVratsByTradition(getAllVrats(), getUserTradition());
   const [, setLocation] = useLocation();
   const [streaks, setStreaks] = useState<StreakItem[]>(() => getTopStreaks(allVrats, 3));
 
