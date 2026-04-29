@@ -98,6 +98,21 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "vivah-panchami",             label: "Vivah Panchami",                     subtitle: "Sita-Ram divine wedding day",                              tradition: "Ramanandi" },
   { id: "purnima-ramanandi",          label: "Purnima Vrat (Ramanandi)",           subtitle: "Monthly full-moon Sita-Ram fast · Vikram Samvat",          tradition: "Ramanandi" },
   { id: "tulsi-vivah-ramanandi",      label: "Tulsi Vivah (Ramanandi)",            subtitle: "Tulsi-Vrinda married to Shaligram-Ram",                   tradition: "Ramanandi" },
+  { id: "ekadashi-ramanandi",            label: "Ekadashi Vrat (Ramanandi)",        subtitle: "24/yr · strict no-grain Vaishnava fast",                  tradition: "Ramanandi" },
+  { id: "sankashti-chaturthi-ramanandi", label: "Sankashti Chaturthi (Ramanandi)",  subtitle: "12/yr · monthly Ganesh fast before Ram seva",             tradition: "Ramanandi" },
+  { id: "amavasya-ramanandi",            label: "Amavasya · Pitru Tarpan",          subtitle: "12/yr · monthly Sarayu snan & ancestor offerings",        tradition: "Ramanandi" },
+  { id: "akshaya-tritiya-ramanandi",     label: "Akshaya Tritiya",                  subtitle: "Vaishakha Shukla 3 · Chandan Yatra begins at Ayodhya",    tradition: "Ramanandi" },
+  { id: "ganga-dussehra-ramanandi",      label: "Ganga Dussehra",                   subtitle: "Jyeshtha Shukla 10 · Sarayu-avataran day at Ayodhya",     tradition: "Ramanandi" },
+  { id: "ratha-yatra-ramanandi",         label: "Ratha Yatra (Ramanandi)",          subtitle: "Ashadha Shukla 2 · Sri Ram chariot procession",           tradition: "Ramanandi" },
+  { id: "devshayani-ekadashi-ramanandi", label: "Devshayani Ekadashi · Chaturmas begins", subtitle: "Ashadha Shukla 11 · Sri Ram enters Yoga-nidra",     tradition: "Ramanandi" },
+  { id: "jhulan-yatra-ramanandi",        label: "Jhulan Yatra",                     subtitle: "5-day monsoon swing-festival for Sita-Ram",               tradition: "Ramanandi" },
+  { id: "krishna-janmashtami-ramanandi", label: "Krishna Janmashtami (Ramanandi)",  subtitle: "Bhadrapada Krishna 8 · midnight bal-Krishna abhishekam",  tradition: "Ramanandi" },
+  { id: "annakut-ramanandi",             label: "Govardhan Puja · Annakut",         subtitle: "Kartik Shukla 1 · 56-item bhog for Ram darbar",           tradition: "Ramanandi" },
+  { id: "prabodhini-ekadashi-ramanandi", label: "Prabodhini Ekadashi · Chaturmas ends",   subtitle: "Kartik Shukla 11 · Sri Ram awakens",                tradition: "Ramanandi" },
+  { id: "makar-sankranti-ramanandi",     label: "Makar Sankranti · Sarayu Snan",    subtitle: "Jan 14 · Surya kuladevata of Sri Ram's Suryavansha",      tradition: "Ramanandi" },
+  { id: "magha-mela-ramanandi",          label: "Magha Mela · Prayagraj Snan",      subtitle: "Magha Purnima · Triveni Sangam kalpvas",                  tradition: "Ramanandi" },
+  { id: "vasant-panchami-ramanandi",     label: "Vasant Panchami (Ramanandi)",      subtitle: "Magha Shukla 5 · Saraswati + Sita vani-shakti",           tradition: "Ramanandi" },
+  { id: "holi-ramanandi",                label: "Holi · Phalguna Purnima",          subtitle: "Sita-Ram colour-festival at Ayodhya · alcohol-free",      tradition: "Ramanandi" },
 
   { id: "vaikuntha-ekadashi",         label: "Vaikuntha Ekadashi (Mukkoti)",       subtitle: "Northern Gate of Vaikuntha opens · Margazhi",            tradition: "SriVaishnava" },
   { id: "adhyayana-utsavam",          label: "Adhyayana Utsavam",                  subtitle: "22-day Tiruvaymozhi recitation at Srirangam",            tradition: "SriVaishnava" },
@@ -127,7 +142,17 @@ const ISKCON_DEFAULTS       = ["iskcon-ekadashi", "janmashtami-iskcon", "gaura-p
 const LINGAYAT_DEFAULTS     = ["maha-shivaratri-lingayat", "somavara-lingayat", "basava-jayanti"];
 const PUSHTI_MARG_DEFAULTS  = ["ekadashi-pushti-marg", "janmashtami-pushti-marg", "annakut-pushti-marg", "phoolon-wali-holi"];
 const WARKARI_DEFAULTS         = ["ashadhi-ekadashi-warkari", "kartiki-ekadashi-warkari", "tukaram-beej", "dnyaneshwar-punyatithi"];
-const RAMANANDI_DEFAULTS       = ["ram-navami-ramanandi", "hanuman-jayanti-ramanandi", "sita-navami", "purnima-ramanandi", "tulsi-vivah-ramanandi"];
+const RAMANANDI_DEFAULTS       = [
+  // Existing one-off Ramanandi festivals
+  "ram-navami-ramanandi", "hanuman-jayanti-ramanandi", "sita-navami", "vivah-panchami", "tulsi-vivah-ramanandi",
+  // Recurring fortnightly / monthly tithis
+  "purnima-ramanandi", "ekadashi-ramanandi", "sankashti-chaturthi-ramanandi", "amavasya-ramanandi",
+  // Major one-off festivals across the Vikram Samvat year (lunar order)
+  "akshaya-tritiya-ramanandi", "ganga-dussehra-ramanandi", "ratha-yatra-ramanandi",
+  "devshayani-ekadashi-ramanandi", "jhulan-yatra-ramanandi", "krishna-janmashtami-ramanandi",
+  "annakut-ramanandi", "prabodhini-ekadashi-ramanandi",
+  "makar-sankranti-ramanandi", "magha-mela-ramanandi", "vasant-panchami-ramanandi", "holi-ramanandi",
+];
 const SRIVAISHNAVA_DEFAULTS    = ["vaikuntha-ekadashi", "adhyayana-utsavam", "ramanuja-jayanti", "brahmotsavam-srivaishnava"];
 const SHAKTA_DEFAULTS          = ["sharadiya-navaratri-shakta", "maha-ashtami-shakta", "kali-puja-shakta", "chaitra-navaratri-shakta"];
 const SHAIVA_SIDDHANTA_DEFAULTS = ["maha-shivaratri-shaiva", "aarudra-darshan", "karthigai-deepam-shaiva", "skanda-shashti-shaiva"];
