@@ -136,9 +136,9 @@ Per `attached_assets/VRAT_Master_Calendar_Sources_*.pdf` (Dr. Rachna Tiwari, las
 | Pushti Marg | Official Tippni VS 2083 (Vidya Vibhag, Mandir Mandal, Nathdwara) | pushtimarg.net/wp-content/uploads/2026/03/Tippni-2083-Final.pdf — covers Mar 20 2026 → Mar 19 2027; Drik Panchang fallback for pre/post window |
 | Lingayat | Drik Panchang (Kannada) | drikpanchang.com (Kannada) |
 | Ramanandi / Ram Bhakti | Drik Panchang (Hindi) | drikpanchang.com (Hindi) |
-| Sri Vaishnava | Sri Vaishnava Calendar | srivaishnava.org |
+| Sri Vaishnava | Vakya Panchangam (Srirangam / Tirumala traditional) — fallback for now, to be updated later | srirangaminfo.com/vakya-panchangam-srirangam.php |
 | Shakta | Drik Panchang + Shakta Panchang | drikpanchang.com |
-| Shaiva Siddhanta | Tamil Hindu Calendar | tamilhinducalendar.com |
+| Shaiva Siddhanta | Tamil Drik Panchang (Chennai) — fallback for now, to be updated later | drikpanchang.com (Tamil, geoname-id 1264527) |
 
 ### Regional Festival Layer (shows for ALL users in that state, regardless of sampradaya)
 

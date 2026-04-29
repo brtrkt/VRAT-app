@@ -6325,10 +6325,16 @@ export const vrats: Vrat[] = [
   },
 
   // ─── Sri Vaishnava (Tamil/Andhra — Ramanujacharya, Pancharatra agama) ──────
+  // Source: [Vakya Panchangam — traditional Sri Vaishnava system] used by
+  // Srirangam Sri Ranganathaswamy Temple and Tirumala Tirupati Devasthanam.
+  // Reference: srirangaminfo.com/vakya-panchangam-srirangam.php (Srirangam
+  // Vakya Tamil Panchangam 2026 + 2027). Where TTD has not yet released
+  // 2027 dates (Pavithrotsavam, Brahmotsavam), 2027 values are best-estimate
+  // projections and will be updated when TTD publishes its 2027 calendar.
   {
     id: "vaikuntha-ekadashi",
     name: "Vaikuntha Ekadashi (Mukkoti Ekadashi)",
-    dates: ["2026-12-30", "2027-12-19"],
+    dates: ["2026-12-20", "2027-12-09"],
     deity: "Sri Vaikuntha-natha (Lord Narayana)",
     tradition: "SriVaishnava",
     foodsAllowed: [
@@ -6364,7 +6370,7 @@ export const vrats: Vrat[] = [
   {
     id: "adhyayana-utsavam",
     name: "Adhyayana Utsavam (Pagal Pathu / Ra Pathu)",
-    dates: ["2026-12-20", "2027-12-09"],
+    dates: ["2026-12-10", "2027-11-29"],
     deity: "Sri Ranganatha as Namperumal",
     tradition: "SriVaishnava",
     foodsAllowed: [
@@ -6398,7 +6404,7 @@ export const vrats: Vrat[] = [
   {
     id: "ramanuja-jayanti",
     name: "Ramanuja Jayanti (Sri Ramanujacharya Tirunakshatram)",
-    dates: ["2026-04-24", "2027-05-13"],
+    dates: ["2026-04-22", "2027-05-13"],
     deity: "Sri Ramanujacharya",
     tradition: "SriVaishnava",
     foodsAllowed: [
@@ -6433,7 +6439,7 @@ export const vrats: Vrat[] = [
   {
     id: "pavitrotsavam",
     name: "Pavitrotsavam (Pavitra Aarohanam)",
-    dates: ["2026-08-08", "2027-07-28"],
+    dates: ["2026-08-05", "2027-07-26"],
     deity: "Sri Venkateswara at Tirumala (and the divya-desam deity at each temple)",
     tradition: "SriVaishnava",
     foodsAllowed: [
@@ -6467,7 +6473,7 @@ export const vrats: Vrat[] = [
   {
     id: "brahmotsavam-srivaishnava",
     name: "Brahmotsavam (Tirumala / Srirangam)",
-    dates: ["2026-09-19", "2027-09-08"],
+    dates: ["2026-09-15", "2027-09-08"],
     deity: "Sri Venkateswara (Tirumala) and Sri Ranganatha (Srirangam)",
     tradition: "SriVaishnava",
     foodsAllowed: [
@@ -6667,10 +6673,15 @@ export const vrats: Vrat[] = [
   },
 
   // ─── Shaiva Siddhanta (Tamil Shaiva — Tirumular, 63 Nayanmars) ────────────
+  // Source: Tamil Drik Panchang (drikpanchang.com — Chennai geoname-id 1264527)
+  // — used as fallback until a Shaiva-Siddhanta-specific authoritative source
+  // (e.g., a Tamil Shaiva matha panchangam) is wired in. Pradosha dates are
+  // observed when Trayodashi tithi prevails after sunset; values below are
+  // for Chennai and may shift ±1 day for other Tamil sunset locations.
   {
     id: "maha-shivaratri-shaiva",
     name: "Maha Shivaratri (Shaiva Siddhanta)",
-    dates: ["2027-02-17", "2028-02-06"],
+    dates: ["2027-03-06", "2028-02-23"],
     deity: "Lord Shiva (Sadashiva, Nataraja, Dakshinamurti)",
     tradition: "ShaivaSiddhanta",
     foodsAllowed: [
@@ -6707,7 +6718,7 @@ export const vrats: Vrat[] = [
   {
     id: "pradosha-shaiva",
     name: "Pradosha (Shaiva Siddhanta)",
-    dates: ["2026-05-13", "2026-05-28", "2026-06-11", "2026-06-27", "2026-07-10", "2026-07-26", "2026-08-09", "2026-08-24", "2026-09-08", "2026-09-23", "2026-10-07", "2026-10-22", "2026-11-06", "2026-11-22", "2026-12-06", "2026-12-22", "2027-01-04", "2027-01-20", "2027-02-03", "2027-02-19", "2027-03-04", "2027-03-20", "2027-04-03", "2027-04-19"],
+    dates: ["2026-05-13", "2026-05-28", "2026-06-12", "2026-06-27", "2026-07-09", "2026-07-24", "2026-08-08", "2026-08-22", "2026-09-06", "2026-09-21", "2026-10-05", "2026-10-21", "2026-11-04", "2026-11-19", "2026-12-04", "2026-12-21", "2027-01-11", "2027-01-26", "2027-02-10", "2027-02-25", "2027-03-11", "2027-03-27", "2027-04-10", "2027-04-25"],
     deity: "Lord Shiva (Pradoshanatha) and Devi Parvati",
     tradition: "ShaivaSiddhanta",
     foodsAllowed: [
@@ -6742,7 +6753,7 @@ export const vrats: Vrat[] = [
   {
     id: "aarudra-darshan",
     name: "Aarudra Darshan (Margazhi Tiruvathirai)",
-    dates: ["2026-12-23", "2028-01-12"],
+    dates: ["2026-12-24", "2028-01-12"],
     deity: "Lord Nataraja (Shiva as the cosmic dancer)",
     tradition: "ShaivaSiddhanta",
     foodsAllowed: [
@@ -6775,7 +6786,7 @@ export const vrats: Vrat[] = [
   {
     id: "karthigai-deepam-shaiva",
     name: "Karthigai Deepam (Thiruvannamalai Maha Deepam)",
-    dates: ["2026-11-23", "2027-12-13"],
+    dates: ["2026-11-24", "2027-12-12"],
     deity: "Lord Shiva as the column of fire (Arunachala Jyoti)",
     tradition: "ShaivaSiddhanta",
     foodsAllowed: [
@@ -6809,7 +6820,7 @@ export const vrats: Vrat[] = [
   {
     id: "skanda-shashti-shaiva",
     name: "Skanda Shashti (Soorasamharam)",
-    dates: ["2026-10-23", "2026-10-24", "2026-10-25", "2026-10-26", "2026-10-27", "2026-10-28", "2027-11-11", "2027-11-12", "2027-11-13", "2027-11-14", "2027-11-15", "2027-11-16"],
+    dates: ["2026-11-10", "2026-11-11", "2026-11-12", "2026-11-13", "2026-11-14", "2026-11-15", "2027-10-30", "2027-10-31", "2027-11-01", "2027-11-02", "2027-11-03", "2027-11-04"],
     deity: "Lord Murugan (Subramanya, Skanda, Karttikeya)",
     tradition: "ShaivaSiddhanta",
     foodsAllowed: [
