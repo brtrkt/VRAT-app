@@ -73,6 +73,32 @@ export const UNIVERSAL_VRAT_ALLOWED: string[] = [
   "Mishri (rock candy) — for natural sweetness",
 ];
 
+/**
+ * LINGAYAT_KARNATAKA_FOODS — regional fasting-safe traditional foods
+ * served by the Lingayat / Veerashaiva community in Karnataka.
+ * Shown ONLY when the user's tradition is "Lingayat", as a separate
+ * section beneath the Universal Fasting Foods list. Strictly satvik:
+ * no onion, no garlic, no cumin-based items.
+ *
+ * Format: Kannada name first, English transliteration + short description
+ * in brackets (matches the "Name — description" style of the universal
+ * list while leading with the native script).
+ */
+export const LINGAYAT_KARNATAKA_FOODS: string[] = [
+  "ಜೋಳದ ರೊಟ್ಟಿ (Jolada roti) — jowar flatbread",
+  "ರಾಗಿ ಮುದ್ದೆ (Ragi mudde) — finger millet balls",
+  "ರಾಗಿ ರೊಟ್ಟಿ (Ragi roti) — finger millet flatbread",
+  "ಶೇಂಗಾ ರೊಟ್ಟಿ (Shenga roti) — peanut roti",
+  "ಹುಗ್ಗಿ (Huggi) — moong dal & rice porridge with ghee",
+  "ಶೇಂಗಾ ಚಟ್ನಿ (Shenga chutney) — dry peanut chutney",
+  "ಕೋಸಂಬರಿ (Kosambari) — moong dal & cucumber salad",
+  "ಕಾಯಿ ಚಟ್ನಿ (Kayi chutney) — Karnataka coconut chutney",
+  "ಎಳ್ಳು ಬೆಲ್ಲ (Ellu bella) — sesame & jaggery mix",
+  "ಶೇಂಗದ ಲಾಡು (Shengdana ladoo) — peanut & jaggery ladoo",
+  "ಮಜ್ಜಿಗೆ (Majjige) — buttermilk with curry leaves",
+  "ರಾಗಿ ಅಂಬಲಿ (Ragi ambali) — ragi porridge with buttermilk",
+];
+
 const UNIVERSAL_VRAT_KEYWORDS: string[] = [
   "fruit", "banana", "apple", "mango", "papaya", "pomegranate", "grape", "pear", "guava", "chikoo", "watermelon", "orange",
   "milk", "curd", "ghee", "paneer", "dahi", "yogurt", "dairy",

@@ -1,6 +1,6 @@
 import { useState, useEffect, type CSSProperties } from "react";
 import { useLocation } from "wouter";
-import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED, UNIVERSAL_VRAT_ALLOWED, getTraditionSpecificFoods, getIskconRegionBucket } from "@/data/vrats";
+import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED, UNIVERSAL_VRAT_ALLOWED, LINGAYAT_KARNATAKA_FOODS, getTraditionSpecificFoods, getIskconRegionBucket } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import { getUserTradition, getUserLocation, getUserRegion } from "@/hooks/useUserPrefs";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
@@ -442,6 +442,20 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
         items={UNIVERSAL_VRAT_ALLOWED}
         type="allowed"
       />
+      {/* Lingayat-only regional Karnataka traditional foods.
+          Sits between the universal list and the per-vrat special foods,
+          so it reads as a regional layer that always applies for Lingayat
+          users — independent of which specific Lingayat vrat is shown. */}
+      {vrat.tradition === "Lingayat" && (
+        <>
+          <div className="h-px bg-border my-4" />
+          <FoodList
+            title="Lingayat Traditional Foods (Karnataka)"
+            items={LINGAYAT_KARNATAKA_FOODS}
+            type="allowed"
+          />
+        </>
+      )}
       {traditionSpecific.length > 0 && (
         <>
           <div className="h-px bg-border my-4" />
