@@ -48,6 +48,68 @@ export const JAIN_YEAR_ROUND_AVOIDED: string[] = [
   "Cold, iced, or unboiled water — all water must be boiled",
 ];
 
+/**
+ * Universal Hindu fasting foods that apply across ALL non-Jain, non-Sikh
+ * traditions (Hindu, Lingayat, PushtiMarg, Swaminarayan, ISKCON, etc.).
+ * Used by WhatToEat as the first layer ("Universal Fasting Foods") shown
+ * for every non-Jain, non-Sikh observance. Each vrat may then add its own
+ * tradition-specific foods as a second layer via getTraditionSpecificFoods().
+ */
+export const UNIVERSAL_VRAT_ALLOWED: string[] = [
+  "All fresh fruits — banana, apple, mango, papaya, pomegranate, grapes, pear, chikoo, guava, watermelon, orange, and seasonal",
+  "Milk, curd (dahi), ghee, paneer, and other dairy",
+  "Sabudana (tapioca pearls) — khichdi, kheer, vada",
+  "Makhana (fox nuts) — roasted in ghee",
+  "Kuttu atta (buckwheat flour) — for puri or paratha",
+  "Singhara atta (water chestnut flour)",
+  "Rajgira (amaranth) — ladoo, paratha, puri",
+  "Sama rice / Samvat (barnyard millet) — pulao or kheer",
+  "Potatoes and sweet potatoes — boiled, roasted, or fried in ghee",
+  "Coconut and coconut water",
+  "Almonds, cashews, walnuts, raisins, pistachios — dry fruits",
+  "Peanuts (groundnuts) — roasted or in chutney",
+  "Rock salt (sendha namak) — never regular table salt",
+  "Lassi, buttermilk (chaas)",
+  "Mishri (rock candy) — for natural sweetness",
+];
+
+const UNIVERSAL_VRAT_KEYWORDS: string[] = [
+  "fruit", "banana", "apple", "mango", "papaya", "pomegranate", "grape", "pear", "guava", "chikoo", "watermelon", "orange",
+  "milk", "curd", "ghee", "paneer", "dahi", "yogurt", "dairy",
+  "sabudana", "tapioca",
+  "makhana", "fox nut",
+  "kuttu", "buckwheat",
+  "singhara", "water chestnut",
+  "rajgira", "amaranth",
+  "sama rice", "samvat", "samak", "barnyard",
+  "potato", "sweet potato", "shakarkand", "aloo",
+  "coconut", "nariyal",
+  "almond", "cashew", "walnut", "raisin", "kaju", "badam", "pista", "dry fruit", "nuts",
+  "peanut", "groundnut",
+  "sendha", "rock salt",
+  "lassi", "buttermilk", "chaas",
+  "mishri", "rock candy",
+];
+
+/**
+ * Returns items from vrat.foodsAllowed that are NOT already covered by
+ * UNIVERSAL_VRAT_ALLOWED — i.e. the tradition-specific or vrat-specific
+ * additions for this particular observance. Used to render the second
+ * layer of foods beneath the universal list in WhatToEat.
+ *
+ * The dedupe matches keywords ONLY against the item's "head" — the text
+ * before the first parenthesis or em-dash/hyphen. This prevents tradition
+ * dishes like "Shenga roti (peanut flatbread)" or "Akki roti — rice flour
+ * flatbread" from being filtered out just because their parenthetical
+ * description happens to mention a universal ingredient.
+ */
+export function getTraditionSpecificFoods(vrat: Vrat): string[] {
+  return vrat.foodsAllowed.filter((item) => {
+    const head = item.split(/[(—–\-]/)[0].toLowerCase().trim();
+    return !UNIVERSAL_VRAT_KEYWORDS.some((kw) => head.includes(kw));
+  });
+}
+
 export const vrats: Vrat[] = [
   {
     id: "maha-shivratri",

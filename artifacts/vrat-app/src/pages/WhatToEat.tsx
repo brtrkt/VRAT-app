@@ -1,6 +1,6 @@
 import { useState, useEffect, type CSSProperties } from "react";
 import { useLocation } from "wouter";
-import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED, getIskconRegionBucket } from "@/data/vrats";
+import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED, UNIVERSAL_VRAT_ALLOWED, getTraditionSpecificFoods, getIskconRegionBucket } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import { getUserTradition, getUserLocation, getUserRegion } from "@/hooks/useUserPrefs";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
@@ -417,6 +417,46 @@ function MealIdeasSection({ vrat }: { vrat: Vrat }) {
   );
 }
 
+function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
+  const { t } = useLanguage();
+  const traditionSpecific = getTraditionSpecificFoods(vrat);
+  const tradLabel =
+    vrat.tradition === "Lingayat"     ? "Lingayat Tradition" :
+    vrat.tradition === "PushtiMarg"   ? "Pushti Marg Tradition" :
+    vrat.tradition === "Swaminarayan" ? "Swaminarayan Tradition" :
+    vrat.tradition === "ISKCON"       ? "ISKCON / Vaishnava Tradition" :
+    null;
+  const layer2Title = tradLabel
+    ? `${tradLabel} — Special Foods for this Vrat`
+    : "Special Foods for this Vrat";
+
+  return (
+    <>
+      <FoodList
+        title="Universal Fasting Foods"
+        items={UNIVERSAL_VRAT_ALLOWED}
+        type="allowed"
+      />
+      {traditionSpecific.length > 0 && (
+        <>
+          <div className="h-px bg-border my-4" />
+          <FoodList
+            title={layer2Title}
+            items={traditionSpecific}
+            type="allowed"
+          />
+        </>
+      )}
+      <div className="h-px bg-border my-4" />
+      <FoodList
+        title={t("food.avoid")}
+        items={vrat.foodsAvoided}
+        type="avoided"
+      />
+    </>
+  );
+}
+
 function VratFoodCard({ vrat }: { vrat: Vrat }) {
   const { t } = useLanguage();
   const [showSankalp, setShowSankalp] = useState(false);
@@ -564,7 +604,7 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
               </>
             )}
           </>
-        ) : (
+        ) : vrat.tradition === "Sikh" ? (
           <>
             <FoodList
               title={t("food.allowed")}
@@ -578,6 +618,8 @@ function VratFoodCard({ vrat }: { vrat: Vrat }) {
               type="avoided"
             />
           </>
+        ) : (
+          <NonJainNonSikhFoodSection vrat={vrat} />
         )}
       </div>
 
