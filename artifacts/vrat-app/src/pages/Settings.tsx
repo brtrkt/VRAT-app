@@ -451,19 +451,21 @@ export default function Settings() {
   }
 
   if (section === "tradition") {
+    // Order: Hindu / Jain / Sikh first (umbrella categories),
+    // then the remaining 9 sub-traditions alphabetically.
     const OPTIONS: { value: Tradition; label: string; subtitle: string }[] = [
-      { value: "Hindu",        label: "Hindu",        subtitle: "Ekadashi, Navratri, Karva Chauth and more" },
-      { value: "Jain",         label: "Jain",         subtitle: "Paryushana, Navpad Oli, Samvatsari and more" },
-      { value: "Sikh",         label: "Sikh",         subtitle: "Gurpurabs, Baisakhi, Sangrand and more" },
-      { value: "Swaminarayan", label: "Swaminarayan", subtitle: "Jayanti, Fuldol, Annakut and strict Ekadashi" },
-      { value: "ISKCON",       label: "ISKCON / Vaishnava", subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik" },
-      { value: "Lingayat",     label: "Lingayat / Veerashaiva", subtitle: "Maha Shivaratri, Shravana Somavara, Basava Jayanti" },
-      { value: "PushtiMarg",   label: "Pushti Marg / Vallabha Sampraday", subtitle: "Ekadashi (seva-based), Janmashtami, Annakut, Hindola Utsav" },
-      { value: "Warkari",          label: "Warkari (Vitthal-Vithoba)",          subtitle: "Pandharpur Wari, Tukaram Beej, Dnyaneshwar Punyatithi" },
+      { value: "Hindu",            label: "Hindu",                              subtitle: "Ekadashi, Navratri, Karva Chauth and more" },
+      { value: "Jain",             label: "Jain",                               subtitle: "Paryushana, Navpad Oli, Samvatsari and more" },
+      { value: "Sikh",             label: "Sikh",                               subtitle: "Gurpurabs, Baisakhi, Sangrand and more" },
+      { value: "ISKCON",           label: "ISKCON / Vaishnava",                 subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik" },
+      { value: "Lingayat",         label: "Lingayat / Veerashaiva",             subtitle: "Maha Shivaratri, Shravana Somavara, Basava Jayanti" },
+      { value: "PushtiMarg",       label: "Pushti Marg / Vallabha Sampraday",   subtitle: "Ekadashi (seva-based), Janmashtami, Annakut, Hindola Utsav" },
       { value: "Ramanandi",        label: "Ramanandi Sampraday",                subtitle: "Ram Navami, Hanuman Jayanti, Sita Navami, Tulsi Vivah" },
-      { value: "SriVaishnava",     label: "Sri Vaishnava (Iyengar)",            subtitle: "Vaikuntha Ekadashi, Ramanuja Jayanti, Brahmotsavam" },
-      { value: "Shakta",           label: "Shakta (Devi worship)",              subtitle: "Sharadiya & Chaitra Navaratri, Durga Ashtami, Kali Puja" },
       { value: "ShaivaSiddhanta",  label: "Shaiva Siddhanta (Tamil Shaiva)",    subtitle: "Maha Shivaratri, Pradosha, Aarudra Darshan, Karthigai Deepam" },
+      { value: "Shakta",           label: "Shakta (Devi worship)",              subtitle: "Sharadiya & Chaitra Navaratri, Durga Ashtami, Kali Puja" },
+      { value: "SriVaishnava",     label: "Sri Vaishnava (Iyengar)",            subtitle: "Vaikuntha Ekadashi, Ramanuja Jayanti, Brahmotsavam" },
+      { value: "Swaminarayan",     label: "Swaminarayan",                       subtitle: "Jayanti, Fuldol, Annakut and strict Ekadashi" },
+      { value: "Warkari",          label: "Warkari (Vitthal-Vithoba)",          subtitle: "Pandharpur Wari, Tukaram Beej, Dnyaneshwar Punyatithi" },
     ];
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>

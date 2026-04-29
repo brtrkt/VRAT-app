@@ -685,19 +685,21 @@ function MyStreaks() {
   );
 }
 
+// Order: Hindu / Jain / Sikh first (umbrella categories),
+// then the remaining 9 sub-traditions alphabetically.
 const TRADITION_OPTIONS: { value: Tradition; label: string }[] = [
-  { value: "Hindu",        label: "Hindu" },
-  { value: "Jain",         label: "Jain" },
-  { value: "Sikh",         label: "Sikh" },
-  { value: "Swaminarayan", label: "Swaminarayan" },
-  { value: "ISKCON",       label: "ISKCON" },
-  { value: "Lingayat",        label: "Lingayat" },
-  { value: "PushtiMarg",      label: "Pushti Marg" },
-  { value: "Warkari",         label: "Warkari" },
-  { value: "Ramanandi",       label: "Ramanandi" },
-  { value: "SriVaishnava",    label: "Sri Vaishnava" },
-  { value: "Shakta",          label: "Shakta" },
-  { value: "ShaivaSiddhanta", label: "Shaiva Siddhanta" },
+  { value: "Hindu",            label: "Hindu" },
+  { value: "Jain",             label: "Jain" },
+  { value: "Sikh",             label: "Sikh" },
+  { value: "ISKCON",           label: "ISKCON" },
+  { value: "Lingayat",         label: "Lingayat" },
+  { value: "PushtiMarg",       label: "Pushti Marg" },
+  { value: "Ramanandi",        label: "Ramanandi" },
+  { value: "ShaivaSiddhanta",  label: "Shaiva Siddhanta" },
+  { value: "Shakta",           label: "Shakta" },
+  { value: "SriVaishnava",     label: "Sri Vaishnava" },
+  { value: "Swaminarayan",     label: "Swaminarayan" },
+  { value: "Warkari",          label: "Warkari" },
 ];
 
 function TraditionSwitcher() {

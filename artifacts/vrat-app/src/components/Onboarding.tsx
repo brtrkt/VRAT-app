@@ -516,52 +516,44 @@ export default function Onboarding({ onComplete }: Props) {
               Tap your tradition to begin
             </p>
 
-            {/* ── Tradition selector cards ── */}
-            <div className="grid grid-cols-2 gap-3 w-full">
-              {/* Hindu */}
-              <button
-                onClick={() => { chooseTradition("Hindu"); setStep(2); }}
-                className="flex flex-col items-center justify-center gap-2 rounded-2xl py-5 px-2 transition-all active:scale-95"
-                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
-              >
-                <OmSvg className="w-14 h-14 text-amber-100" />
-                <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Hindu</span>
-              </button>
+            {/* ── Tradition selector cards ──
+                Order: Hindu/Jain/Sikh on top (the three umbrella categories),
+                then the remaining 9 sub-traditions alphabetically. ── */}
+            <div className="flex flex-col gap-3 w-full">
+              {/* Top row: Hindu, Jain, Sikh — compact icon buttons */}
+              <div className="grid grid-cols-3 gap-3">
+                <button
+                  onClick={() => { chooseTradition("Hindu"); setStep(2); }}
+                  className="flex flex-col items-center justify-center gap-2 rounded-2xl py-5 px-2 transition-all active:scale-95"
+                  style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+                >
+                  <OmSvg className="w-12 h-12 text-amber-100" />
+                  <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Hindu</span>
+                </button>
 
-              {/* Jain */}
-              <button
-                onClick={() => { chooseTradition("Jain"); setStep(2); }}
-                className="flex flex-col items-center justify-center gap-2 rounded-2xl py-5 px-2 transition-all active:scale-95"
-                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
-              >
-                <JainHandSvg className="w-10 h-14 text-amber-100" />
-                <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Jain</span>
-              </button>
+                <button
+                  onClick={() => { chooseTradition("Jain"); setStep(2); }}
+                  className="flex flex-col items-center justify-center gap-2 rounded-2xl py-5 px-2 transition-all active:scale-95"
+                  style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+                >
+                  <JainHandSvg className="w-9 h-12 text-amber-100" />
+                  <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Jain</span>
+                </button>
 
-              {/* Sikh */}
-              <button
-                onClick={() => { chooseTradition("Sikh"); setStep(2); }}
-                className="flex flex-col items-center justify-center gap-2 rounded-2xl py-5 px-2 transition-all active:scale-95"
-                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
-              >
-                <KhandaSvg className="w-14 h-14" style={{ color: "#7EC8F0" }} />
-                <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Sikh</span>
-              </button>
+                <button
+                  onClick={() => { chooseTradition("Sikh"); setStep(2); }}
+                  className="flex flex-col items-center justify-center gap-2 rounded-2xl py-5 px-2 transition-all active:scale-95"
+                  style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+                >
+                  <KhandaSvg className="w-12 h-12" style={{ color: "#7EC8F0" }} />
+                  <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Sikh</span>
+                </button>
+              </div>
 
-              {/* Swaminarayan */}
-              <button
-                onClick={() => { chooseTradition("Swaminarayan"); setStep(2); }}
-                className="flex flex-col items-center justify-center gap-2 rounded-2xl py-5 px-2 transition-all active:scale-95"
-                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
-              >
-                <LotusSvg className="w-14 h-14" style={{ color: "#F4D58D" }} />
-                <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Swaminarayan</span>
-              </button>
-
-              {/* ISKCON — full-width */}
+              {/* ISKCON */}
               <button
                 onClick={() => { chooseTradition("ISKCON"); setStep(2); }}
-                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                className="flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
                 <IskconLogoSvg className="w-7 h-10" />
@@ -571,10 +563,10 @@ export default function Onboarding({ onComplete }: Props) {
                 </div>
               </button>
 
-              {/* Lingayat — full-width */}
+              {/* Lingayat */}
               <button
                 onClick={() => { chooseTradition("Lingayat"); setStep(2); }}
-                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                className="flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
                 <IshtalingaSvg className="w-10 h-10" style={{ color: "#FECDD3" }} />
@@ -584,10 +576,10 @@ export default function Onboarding({ onComplete }: Props) {
                 </div>
               </button>
 
-              {/* Pushti Marg — full-width */}
+              {/* Pushti Marg */}
               <button
                 onClick={() => { chooseTradition("PushtiMarg"); setStep(2); }}
-                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                className="flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
                 <ShrinathjiSvg className="w-8 h-11" style={{ color: "#A5F3FC" }} />
@@ -597,23 +589,10 @@ export default function Onboarding({ onComplete }: Props) {
                 </div>
               </button>
 
-              {/* Warkari — full-width */}
-              <button
-                onClick={() => { chooseTradition("Warkari"); setStep(2); }}
-                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
-                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
-              >
-                <VitthalSvg className="w-8 h-11" style={{ color: "#FED7AA" }} />
-                <div className="text-left">
-                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Warkari (Vitthal-Vithoba)</span>
-                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>विठ्ठल · Pandharpur Wari · Tukaram Beej · Dnyaneshwar</span>
-                </div>
-              </button>
-
-              {/* Ramanandi — full-width */}
+              {/* Ramanandi */}
               <button
                 onClick={() => { chooseTradition("Ramanandi"); setStep(2); }}
-                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                className="flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
                 <CharanPadukaSvg className="w-10 h-10" style={{ color: "#FECACA" }} />
@@ -623,23 +602,23 @@ export default function Onboarding({ onComplete }: Props) {
                 </div>
               </button>
 
-              {/* Sri Vaishnava — full-width */}
+              {/* Shaiva Siddhanta */}
               <button
-                onClick={() => { chooseTradition("SriVaishnava"); setStep(2); }}
-                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                onClick={() => { chooseTradition("ShaivaSiddhanta"); setStep(2); }}
+                className="flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
-                <NaamamSvg className="w-8 h-11" style={{ color: "#FDE68A" }} />
+                <TripundraSvg className="w-10 h-10" style={{ color: "#E5E7EB" }} />
                 <div className="text-left">
-                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Sri Vaishnava (Iyengar)</span>
-                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>ஓம் நமோ நாராயணாய · Vaikuntha Ekadashi · Ramanuja · Srirangam</span>
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Shaiva Siddhanta (Tamil Shaiva)</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>ஓம் நமச்சிவாய · Nataraja · Aarudra · Karthigai · Skanda Shashti</span>
                 </div>
               </button>
 
-              {/* Shakta — full-width */}
+              {/* Shakta */}
               <button
                 onClick={() => { chooseTradition("Shakta"); setStep(2); }}
-                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                className="flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
                 <SriYantraSvg className="w-10 h-10" style={{ color: "#FBCFE8" }} />
@@ -649,16 +628,42 @@ export default function Onboarding({ onComplete }: Props) {
                 </div>
               </button>
 
-              {/* Shaiva Siddhanta — full-width */}
+              {/* Sri Vaishnava */}
               <button
-                onClick={() => { chooseTradition("ShaivaSiddhanta"); setStep(2); }}
-                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                onClick={() => { chooseTradition("SriVaishnava"); setStep(2); }}
+                className="flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
-                <TripundraSvg className="w-10 h-10" style={{ color: "#E5E7EB" }} />
+                <NaamamSvg className="w-8 h-11" style={{ color: "#FDE68A" }} />
                 <div className="text-left">
-                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Shaiva Siddhanta (Tamil Shaiva)</span>
-                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>ஓம் நமச்சிவாய · Nataraja · Aarudra · Karthigai · Skanda Shashti</span>
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Sri Vaishnava (Iyengar)</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>ஓம் நமோ நாராயணாய · Vaikuntha Ekadashi · Ramanuja · Srirangam</span>
+                </div>
+              </button>
+
+              {/* Swaminarayan */}
+              <button
+                onClick={() => { chooseTradition("Swaminarayan"); setStep(2); }}
+                className="flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <LotusSvg className="w-10 h-10" style={{ color: "#F4D58D" }} />
+                <div className="text-left">
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Swaminarayan</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>स्वामिनारायण · Jayanti · Fuldol · Annakut · strict Ekadashi</span>
+                </div>
+              </button>
+
+              {/* Warkari */}
+              <button
+                onClick={() => { chooseTradition("Warkari"); setStep(2); }}
+                className="flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <VitthalSvg className="w-8 h-11" style={{ color: "#FED7AA" }} />
+                <div className="text-left">
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Warkari (Vitthal-Vithoba)</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>विठ्ठल · Pandharpur Wari · Tukaram Beej · Dnyaneshwar</span>
                 </div>
               </button>
             </div>
@@ -682,6 +687,8 @@ export default function Onboarding({ onComplete }: Props) {
 
             <div className="space-y-3">
               {(
+                // Order: Hindu / Jain / Sikh first (umbrella categories),
+                // then the remaining 9 sub-traditions alphabetically.
                 [
                   {
                     value: "Hindu" as Tradition,
@@ -705,13 +712,6 @@ export default function Onboarding({ onComplete }: Props) {
                     accent: "#003DA5",
                   },
                   {
-                    value: "Swaminarayan" as Tradition,
-                    label: "Swaminarayan",
-                    subtitle: "Jayanti, Fuldol, Annakut and strict Ekadashi",
-                    icon: <LotusSvg className="w-12 h-12" style={{ color: "#C4972A" }} />,
-                    accent: "#C4972A",
-                  },
-                  {
                     value: "ISKCON" as Tradition,
                     label: "ISKCON / Vaishnava",
                     subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik",
@@ -722,50 +722,57 @@ export default function Onboarding({ onComplete }: Props) {
                     value: "Lingayat" as Tradition,
                     label: "Lingayat / Veerashaiva",
                     subtitle: "Maha Shivaratri, Shravana Somavara, Basava Jayanti",
-                    icon: <TrisulaSvg className="w-10 h-12" style={{ color: "#9B2335" }} />,
+                    icon: <IshtalingaSvg className="w-12 h-12" style={{ color: "#9B2335" }} />,
                     accent: "#9B2335",
                   },
                   {
                     value: "PushtiMarg" as Tradition,
                     label: "Pushti Marg / Vallabha Sampraday",
                     subtitle: "Ekadashi (seva-based), Janmashtami, Annakut, Hindola Utsav",
-                    icon: <PeacockFeatherSvg className="w-10 h-14" style={{ color: "#0E7490" }} />,
+                    icon: <ShrinathjiSvg className="w-9 h-12" style={{ color: "#0E7490" }} />,
                     accent: "#0E7490",
-                  },
-                  {
-                    value: "Warkari" as Tradition,
-                    label: "Warkari (Vitthal-Vithoba)",
-                    subtitle: "Pandharpur Wari, Tukaram Beej, Dnyaneshwar Punyatithi",
-                    icon: <LotusSvg className="w-12 h-12" style={{ color: "#DC6803" }} />,
-                    accent: "#DC6803",
                   },
                   {
                     value: "Ramanandi" as Tradition,
                     label: "Ramanandi Sampraday",
                     subtitle: "Ram Navami, Hanuman Jayanti, Sita Navami, Tulsi Vivah",
-                    icon: <BowArrowSvg className="w-12 h-12" style={{ color: "#B91C1C" }} />,
+                    icon: <CharanPadukaSvg className="w-12 h-12" style={{ color: "#B91C1C" }} />,
                     accent: "#B91C1C",
-                  },
-                  {
-                    value: "SriVaishnava" as Tradition,
-                    label: "Sri Vaishnava (Iyengar)",
-                    subtitle: "Vaikuntha Ekadashi, Ramanuja Jayanti, Brahmotsavam, Adhyayana Utsavam",
-                    icon: <LotusSvg className="w-12 h-12" style={{ color: "#B45309" }} />,
-                    accent: "#B45309",
-                  },
-                  {
-                    value: "Shakta" as Tradition,
-                    label: "Shakta (Devi worship)",
-                    subtitle: "Sharadiya & Chaitra Navaratri, Durga Ashtami, Kali Puja, Lakshmi Puja",
-                    icon: <TrisulaSvg className="w-10 h-12" style={{ color: "#BE185D" }} />,
-                    accent: "#BE185D",
                   },
                   {
                     value: "ShaivaSiddhanta" as Tradition,
                     label: "Shaiva Siddhanta (Tamil Shaiva)",
                     subtitle: "Maha Shivaratri, Pradosha, Aarudra Darshan, Karthigai Deepam, Skanda Shashti",
-                    icon: <TrisulaSvg className="w-10 h-12" style={{ color: "#475569" }} />,
+                    icon: <TripundraSvg className="w-12 h-12" style={{ color: "#475569" }} />,
                     accent: "#475569",
+                  },
+                  {
+                    value: "Shakta" as Tradition,
+                    label: "Shakta (Devi worship)",
+                    subtitle: "Sharadiya & Chaitra Navaratri, Durga Ashtami, Kali Puja, Lakshmi Puja",
+                    icon: <SriYantraSvg className="w-12 h-12" style={{ color: "#BE185D" }} />,
+                    accent: "#BE185D",
+                  },
+                  {
+                    value: "SriVaishnava" as Tradition,
+                    label: "Sri Vaishnava (Iyengar)",
+                    subtitle: "Vaikuntha Ekadashi, Ramanuja Jayanti, Brahmotsavam, Adhyayana Utsavam",
+                    icon: <NaamamSvg className="w-9 h-12" style={{ color: "#B45309" }} />,
+                    accent: "#B45309",
+                  },
+                  {
+                    value: "Swaminarayan" as Tradition,
+                    label: "Swaminarayan",
+                    subtitle: "Jayanti, Fuldol, Annakut and strict Ekadashi",
+                    icon: <LotusSvg className="w-12 h-12" style={{ color: "#C4972A" }} />,
+                    accent: "#C4972A",
+                  },
+                  {
+                    value: "Warkari" as Tradition,
+                    label: "Warkari (Vitthal-Vithoba)",
+                    subtitle: "Pandharpur Wari, Tukaram Beej, Dnyaneshwar Punyatithi",
+                    icon: <VitthalSvg className="w-9 h-12" style={{ color: "#DC6803" }} />,
+                    accent: "#DC6803",
                   },
                 ] as const
               ).map((opt) => {
