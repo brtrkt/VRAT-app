@@ -1,6 +1,6 @@
 import { useState, useEffect, type CSSProperties } from "react";
 import { useLocation } from "wouter";
-import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED, UNIVERSAL_VRAT_ALLOWED, LINGAYAT_KARNATAKA_FOODS, WARKARI_MAHARASHTRA_FOODS, SRI_VAISHNAVA_TAMIL_FOODS, SHAIVA_SIDDHANTA_TAMIL_FOODS, SHAKTA_BENGAL_FOODS, getTraditionSpecificFoods, getIskconRegionBucket } from "@/data/vrats";
+import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED, UNIVERSAL_VRAT_ALLOWED, LINGAYAT_KARNATAKA_FOODS, WARKARI_MAHARASHTRA_FOODS, SRI_VAISHNAVA_TAMIL_FOODS, SHAIVA_SIDDHANTA_TAMIL_FOODS, SHAKTA_BENGAL_FOODS, ISKCON_REGIONAL_BHOG, PUSHTI_MARG_GUJARATI_FOODS, getTraditionSpecificFoods, getIskconRegionBucket } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import { getUserTradition, getUserLocation, getUserRegion } from "@/hooks/useUserPrefs";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
@@ -494,6 +494,26 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
           <FoodList
             title="Shakta Traditional Foods (Bengal)"
             items={SHAKTA_BENGAL_FOODS}
+            type="allowed"
+          />
+        </>
+      )}
+      {vrat.tradition === "ISKCON" && (
+        <>
+          <div className="h-px bg-border my-4" />
+          <FoodList
+            title="ISKCON Regional Bhog (Mayapur · Vrindavan · South India)"
+            items={ISKCON_REGIONAL_BHOG}
+            type="allowed"
+          />
+        </>
+      )}
+      {vrat.tradition === "PushtiMarg" && (
+        <>
+          <div className="h-px bg-border my-4" />
+          <FoodList
+            title="Pushti Marg Haveli Bhog (Gujarati Vaishnav)"
+            items={PUSHTI_MARG_GUJARATI_FOODS}
             type="allowed"
           />
         </>

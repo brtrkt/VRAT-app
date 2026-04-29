@@ -185,6 +185,57 @@ export const SHAKTA_BENGAL_FOODS: string[] = [
   "ফলহার (Phalahar) — fresh fruit & nut platter for Navaratri fasting",
 ];
 
+/**
+ * ISKCON_REGIONAL_BHOG — iconic prasadams from the three main regional
+ * centres of the Gaudiya / ISKCON tradition: Mayapur (Bengal — birthplace
+ * of Sri Chaitanya Mahaprabhu), Vrindavan / Mathura (Braj — Krishna's
+ * homeland), and South India (Tirupati & Bangalore temples). Shown ONLY
+ * when the user's tradition is "ISKCON". Strictly satvik — no onion, no
+ * garlic, no cumin — and never tasted before being offered to Krishna.
+ * Region tag in [brackets] precedes the dish name; native script is used
+ * where it is the dominant temple-script for that region.
+ */
+export const ISKCON_REGIONAL_BHOG: string[] = [
+  "[Mayapur] খিচুড়ি (Khichuri) — Mayapur-style moong dal & rice khichdi in ghee",
+  "[Mayapur] শুক্তো (Sukto) — bittergourd & mixed vegetable curry, Bengali Vaishnav style",
+  "[Mayapur] পায়েস (Payesh) — Gaura Purnima rice kheer with nolen gur",
+  "[Mayapur] সন্দেশ (Sandesh) — chenna & sugar sweet offered to Sri Chaitanya",
+  "[Mayapur] মিষ্টি দই (Mishti doi) — sweetened set yogurt prasad",
+  "[Vrindavan] माखन-मिश्री (Makhan-mishri) — fresh white butter & rock candy, Krishna's favourite",
+  "[Vrindavan] पेड़ा (Mathura peda) — milk-khoya peda, signature Braj sweet",
+  "[Vrindavan] रबड़ी (Rabri) — slow-thickened sweetened milk with kesar",
+  "[Vrindavan] मालपुआ (Malpua) — Janmashtami fritters in sugar syrup",
+  "[Vrindavan] अन्नकूट (Annakut bhog) — Govardhan Puja mountain of 56 vegetarian dishes",
+  "[South India] சர்க்கரை பொங்கல் (Sakkarai pongal) — sweet rice pongal with jaggery & ghee",
+  "[South India] அக்காரவடிசல் (Akkaravadisal) — rice, milk & jaggery sweet pongal",
+  "[South India] பால் பாயசம் (Paal payasam) — Tirupati-style milk kheer offering",
+];
+
+/**
+ * PUSHTI_MARG_GUJARATI_FOODS — Gujarati Vaishnav haveli seva specialties
+ * offered to Shrinathji in the Pushti Marg (Vallabh Sampraday) tradition.
+ * Shown ONLY when the user's tradition is "PushtiMarg". Strictly satvik —
+ * no onion, no garlic, no cumin — and always offered to Shrinathji first
+ * as bhog before being received as prasad. Gujarati script first, then
+ * English transliteration and a short description.
+ */
+export const PUSHTI_MARG_GUJARATI_FOODS: string[] = [
+  "ઠાકોરજી નો થાળ (Thakorji no thal) — full satvik thali offered to Shrinathji",
+  "મઠ્ઠો (Mattho) — Pushti Marg classic: thick sweet yogurt with kesar, elaichi & dry fruits",
+  "શ્રીખંડ (Shrikhand) — strained sweetened yogurt with kesar & elaichi",
+  "બાસૂંદી (Basundi) — slow-thickened sweetened milk",
+  "મોહનથાળ (Mohanthal) — gram flour & ghee fudge, Krishna's favourite",
+  "સૂખડી / ગોળ-પાપડી (Sukhdi) — wheat flour, jaggery & ghee fudge",
+  "લાપસી (Lapsi) — broken-wheat porridge with jaggery & ghee",
+  "ચૂરમા લાડુ (Churma ladoo) — wheat, ghee & jaggery festival ladoo",
+  "પેંડા (Penda) — Gujarati khoya pedas",
+  "પુરણપોળી (Puranpoli) — sweet stuffed flatbread (Janmashtami bhog)",
+  "દૂધ-ઘર (Doodh-ghar) — saffron milk with mishri, daily morning seva",
+  "ધાણી-પતાશા પ્રસાદ (Dhani-patasha prasad) — puffed rice & sugar-puff prasad",
+  "પંચામૃત (Panchamrit) — milk, curd, ghee, honey & sugar abhishek offering",
+  "ચપ્પન ભોગ (Chappan bhog) — Annakut day's grand 56-item offering to Shrinathji",
+];
+
 const UNIVERSAL_VRAT_KEYWORDS: string[] = [
   "fruit", "banana", "apple", "mango", "papaya", "pomegranate", "grape", "pear", "guava", "chikoo", "watermelon", "orange",
   "milk", "curd", "ghee", "paneer", "dahi", "yogurt", "dairy",
