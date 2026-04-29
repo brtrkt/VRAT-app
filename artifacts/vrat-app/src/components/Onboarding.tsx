@@ -352,11 +352,11 @@ function _CharanPadukaSvg_DEPRECATED({ className = "", style }: { className?: st
 // Srirangam, Tirumala, Ahobila Math, and Iyengar communities.
 function NaamamSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
-    <svg viewBox="0 0 60 80" className={className} style={style} fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" aria-hidden="true">
-      <line x1="18" y1="8" x2="18" y2="55" />
-      <line x1="42" y1="8" x2="42" y2="55" />
-      <path d="M18 55 C18 70 42 70 42 55" />
-      <line x1="30" y1="12" x2="30" y2="62" strokeWidth="3.5" />
+    <svg viewBox="0 0 60 80" className={className} style={style} fill="none" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="17" y1="6" x2="17" y2="55" stroke="currentColor" strokeWidth="6.5" />
+      <line x1="43" y1="6" x2="43" y2="55" stroke="currentColor" strokeWidth="6.5" />
+      <path d="M14 55 C14 74 46 74 46 55" stroke="currentColor" strokeWidth="6.5" />
+      <line x1="30" y1="10" x2="30" y2="62" stroke="#DC2626" strokeWidth="6.5" />
     </svg>
   );
 }
