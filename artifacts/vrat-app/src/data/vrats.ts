@@ -99,6 +99,92 @@ export const LINGAYAT_KARNATAKA_FOODS: string[] = [
   "ರಾಗಿ ಅಂಬಲಿ (Ragi ambali) — ragi porridge with buttermilk",
 ];
 
+/**
+ * WARKARI_MAHARASHTRA_FOODS — Maharashtrian Warkari fasting & vrat-day
+ * foods. Shown ONLY when the user's tradition is "Warkari". Strictly
+ * satvik — no onion, no garlic, no cumin. Devanagari first, then
+ * English transliteration + a short description.
+ */
+export const WARKARI_MAHARASHTRA_FOODS: string[] = [
+  "साबुदाण्याची खिचडी (Sabudanyachi khichdi) — tapioca pearl khichdi with peanuts",
+  "दाण्याची आमटी (Danyachi amti) — peanut curry with sendha namak",
+  "दाण्याची चटणी (Danyachi chutney) — dry roasted peanut chutney",
+  "राजगिऱ्याची भाकरी (Rajgiryachi bhakri) — amaranth flatbread",
+  "भगरीची खिचडी (Bhagrichi khichdi) — barnyard millet khichdi with ghee",
+  "बटाट्याची भाजी (Batatyachi bhaji) — potato sabzi with sendha namak & green chili",
+  "साबुदाण्याचे थालीपीठ (Sabudane thalipith) — sago, potato & peanut flatbread",
+  "खजूर-शेंगदाणा लाडू (Khajur-shengdana ladoo) — date & peanut ladoo",
+  "नारळाची वडी (Naralachi vadi) — coconut & jaggery barfi",
+  "काकडीची कोशिंबीर (Kakdichi koshimbir) — cucumber, curd & peanut salad",
+  "पंचामृत (Panchamrit) — milk, curd, ghee, honey & sugar offering to Vitthal",
+  "तुळशीचा प्रसाद (Tulsicha prasad) — tulsi-infused jaggery offering",
+];
+
+/**
+ * SRI_VAISHNAVA_TAMIL_FOODS — Iyengar / Sri Vaishnava temple prasadams
+ * and vrat-day foods from Tamil Nadu. Shown ONLY when the user's
+ * tradition is "SriVaishnava". Strictly satvik — no onion, no garlic,
+ * no cumin. Tamil script first, then English transliteration.
+ */
+export const SRI_VAISHNAVA_TAMIL_FOODS: string[] = [
+  "பால் பாயசம் (Paal payasam) — milk kheer with sago or vermicelli",
+  "பஞ்சாமிர்தம் (Panchamirtham) — banana, jaggery, ghee, honey & dates mix",
+  "சர்க்கரை பொங்கல் (Sakkarai pongal) — sweet rice pongal with jaggery & ghee",
+  "வென்பொங்கல் (Ven pongal) — savoury rice-moong pongal with ghee & pepper",
+  "தயிர் சாதம் (Thayir sadam) — curd rice with ginger & curry leaves",
+  "அக்காரவடிசல் (Akkaravadisal) — rice, milk & jaggery sweet pongal",
+  "கதம்பம் (Kadambam) — mixed vegetable rice, fully satvik",
+  "மோர் குழம்பு (Mor kuzhambu) — yogurt-coconut curry with vegetables",
+  "கீரை மசியல் (Keerai masiyal) — mashed greens with sendha namak",
+  "தேங்காய் சட்னி (Thengai chutney) — Tamil coconut chutney",
+  "மோர் (Mor) — buttermilk with curry leaves & ginger",
+  "பால் & நெய் (Paal & Nei) — fresh milk & pure cow's ghee for Perumal",
+];
+
+/**
+ * SHAIVA_SIDDHANTA_TAMIL_FOODS — Tamil Shaiva temple prasadams tied to
+ * Shivaratri, Pradosha, Aarudra Darshan, Karthigai Deepam, and Skanda
+ * Shashti. Shown ONLY when the user's tradition is "ShaivaSiddhanta".
+ * Strictly satvik — no onion, no garlic, no cumin. Tamil script first,
+ * then English transliteration.
+ */
+export const SHAIVA_SIDDHANTA_TAMIL_FOODS: string[] = [
+  "கல்கண்டு சாதம் (Kalkandu sadam) — rock-candy rice, Aarudra Darshan signature",
+  "வெண்ணெய் (Vennai) — fresh white butter offering to Nataraja",
+  "திருக்கண்ணமுது (Thirukannamudhu) — temple prasad of rice, jaggery & ghee",
+  "பொரி உருண்டை (Pori urundai) — puffed rice & jaggery balls (Karthigai)",
+  "அதிரசம் (Adhirasam) — jaggery & rice flour sweet (Karthigai)",
+  "நெய்யப்பம் (Neyyappam) — rice flour & jaggery fritters fried in ghee",
+  "அப்பம் (Appam) — sweet rice flour cake (Karthigai Deepam)",
+  "சர்க்கரை பொங்கல் (Sakkarai pongal) — sweet rice pongal with jaggery & ghee",
+  "கல்கண்டு பாகு (Kalkandu paagu) — rock candy syrup, Shivaratri prasad",
+  "பழம் & பால் (Pazham & paal) — banana with milk for Shivaratri night",
+  "கேசரி (Kesari) — semolina, ghee & saffron sweet",
+  "தேனும் பாலும் (Thenum paalum) — honey & milk for Shiva abhishekam",
+];
+
+/**
+ * SHAKTA_BENGAL_FOODS — Bengali Shakta temple bhog and Devi-puja foods
+ * for Sharadiya & Chaitra Navaratri, Durga Ashtami, Kali Puja, and
+ * Lakshmi Puja. Shown ONLY when the user's tradition is "Shakta".
+ * Strictly satvik — no onion, no garlic, no cumin. Bengali script
+ * first, then English transliteration.
+ */
+export const SHAKTA_BENGAL_FOODS: string[] = [
+  "খিচুড়ি (Khichuri) — Durga Puja bhog: moong dal & rice khichdi with ghee",
+  "লাবড়া (Labra) — mixed vegetable curry, Durga Puja bhog",
+  "ছোলার ডাল (Cholar dal) — sweet bengal gram dal with coconut & ghee",
+  "পায়েস (Payesh) — Bengali rice kheer with nolen gur (date-palm jaggery)",
+  "সুজির পায়েস (Sujir payesh) — semolina kheer with ghee & raisins",
+  "লুচি (Luchi) — Bengali puffed puri served with cholar dal",
+  "সন্দেশ (Sandesh) — chenna & jaggery sweet, offered to Devi",
+  "মিষ্টি দই (Mishti doi) — sweetened set yogurt",
+  "নাড়ু (Naru) — coconut & jaggery balls (Lakshmi Puja signature)",
+  "মুড়ি ও বাতাসা (Muri & Batasha) — puffed rice & sugar-puff prasad",
+  "পঞ্চামৃত (Panchamrit) — milk, curd, ghee, honey & sugar offering",
+  "ফলহার (Phalahar) — fresh fruit & nut platter for Navaratri fasting",
+];
+
 const UNIVERSAL_VRAT_KEYWORDS: string[] = [
   "fruit", "banana", "apple", "mango", "papaya", "pomegranate", "grape", "pear", "guava", "chikoo", "watermelon", "orange",
   "milk", "curd", "ghee", "paneer", "dahi", "yogurt", "dairy",

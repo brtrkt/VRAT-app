@@ -1,6 +1,6 @@
 import { useState, useEffect, type CSSProperties } from "react";
 import { useLocation } from "wouter";
-import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED, UNIVERSAL_VRAT_ALLOWED, LINGAYAT_KARNATAKA_FOODS, getTraditionSpecificFoods, getIskconRegionBucket } from "@/data/vrats";
+import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, JAIN_ALWAYS_ALLOWED, JAIN_YEAR_ROUND_AVOIDED, UNIVERSAL_VRAT_ALLOWED, LINGAYAT_KARNATAKA_FOODS, WARKARI_MAHARASHTRA_FOODS, SRI_VAISHNAVA_TAMIL_FOODS, SHAIVA_SIDDHANTA_TAMIL_FOODS, SHAKTA_BENGAL_FOODS, getTraditionSpecificFoods, getIskconRegionBucket } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import { getUserTradition, getUserLocation, getUserRegion } from "@/hooks/useUserPrefs";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
@@ -442,16 +442,58 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
         items={UNIVERSAL_VRAT_ALLOWED}
         type="allowed"
       />
-      {/* Lingayat-only regional Karnataka traditional foods.
+      {/* Tradition-specific regional foods.
           Sits between the universal list and the per-vrat special foods,
-          so it reads as a regional layer that always applies for Lingayat
-          users — independent of which specific Lingayat vrat is shown. */}
+          so each section reads as a regional layer that always applies
+          for that tradition — independent of which specific vrat is
+          showing. Each section is gated on a single tradition value, so
+          at most one regional list ever renders for a given user. */}
       {vrat.tradition === "Lingayat" && (
         <>
           <div className="h-px bg-border my-4" />
           <FoodList
             title="Lingayat Traditional Foods (Karnataka)"
             items={LINGAYAT_KARNATAKA_FOODS}
+            type="allowed"
+          />
+        </>
+      )}
+      {vrat.tradition === "Warkari" && (
+        <>
+          <div className="h-px bg-border my-4" />
+          <FoodList
+            title="Warkari Traditional Foods (Maharashtra)"
+            items={WARKARI_MAHARASHTRA_FOODS}
+            type="allowed"
+          />
+        </>
+      )}
+      {vrat.tradition === "SriVaishnava" && (
+        <>
+          <div className="h-px bg-border my-4" />
+          <FoodList
+            title="Sri Vaishnava Traditional Foods (Tamil Nadu)"
+            items={SRI_VAISHNAVA_TAMIL_FOODS}
+            type="allowed"
+          />
+        </>
+      )}
+      {vrat.tradition === "ShaivaSiddhanta" && (
+        <>
+          <div className="h-px bg-border my-4" />
+          <FoodList
+            title="Shaiva Siddhanta Traditional Foods (Tamil Nadu)"
+            items={SHAIVA_SIDDHANTA_TAMIL_FOODS}
+            type="allowed"
+          />
+        </>
+      )}
+      {vrat.tradition === "Shakta" && (
+        <>
+          <div className="h-px bg-border my-4" />
+          <FoodList
+            title="Shakta Traditional Foods (Bengal)"
+            items={SHAKTA_BENGAL_FOODS}
             type="allowed"
           />
         </>
