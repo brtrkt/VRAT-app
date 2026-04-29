@@ -290,15 +290,23 @@ function VitthalSvg({ className = "", style }: { className?: string; style?: CSS
   );
 }
 
-function CharanPadukaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+// Urdhva Pundra — the canonical Vaishnav tilak worn by Ramanandi sadhus
+// across Ayodhya, Chitrakoot, and Janakpur. The white "U" represents the
+// lotus feet of Vishnu / Sri Ram; the central red vertical line (shrivatsa
+// flame) represents Devi Sita / Lakshmi; the red bindu at the base
+// represents the devotee's surrendered head at the Lord's feet.
+function UrdhvaPundraSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
-    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <ellipse cx="18" cy="32" rx="9" ry="20"/>
-      <circle cx="18" cy="20" r="2.5" fill="white"/>
-      <circle cx="18" cy="20" r="1.2"/>
-      <ellipse cx="42" cy="32" rx="9" ry="20"/>
-      <circle cx="42" cy="20" r="2.5" fill="white"/>
-      <circle cx="42" cy="20" r="1.2"/>
+    <svg viewBox="0 0 48 64" className={className} style={style} aria-hidden="true">
+      <path
+        d="M5 4 H17 V40 Q17 44 21 44 H27 Q31 44 31 40 V4 H43 V42 Q43 56 31 56 H17 Q5 56 5 42 Z"
+        fill="white"
+      />
+      <path
+        d="M24 3 Q19 18 21 32 Q22 40 24 46 Q26 40 27 32 Q29 18 24 3 Z"
+        fill="#DC2626"
+      />
+      <circle cx="24" cy="60" r="3.4" fill="#DC2626" />
     </svg>
   );
 }
@@ -778,7 +786,7 @@ export default function Home() {
               if (t === "Lingayat")        return <IshtalingaSvg className="w-11 h-11" style={{ color: "#9B2335" }} />;
               if (t === "PushtiMarg")      return <ShrinathjiSvg className="w-9 h-12" style={{ color: "#0E7490" }} />;
               if (t === "Warkari")         return <VitthalSvg className="w-9 h-12" style={{ color: "#DC6803" }} />;
-              if (t === "Ramanandi")       return <CharanPadukaSvg className="w-11 h-11" style={{ color: "#B91C1C" }} />;
+              if (t === "Ramanandi")       return <UrdhvaPundraSvg className="w-11 h-11" />;
               if (t === "SriVaishnava")    return <NaamamSvg className="w-9 h-12" style={{ color: "#B45309" }} />;
               if (t === "Shakta")          return <SriYantraSvg className="w-11 h-11" style={{ color: "#BE185D" }} />;
               if (t === "ShaivaSiddhanta") return <TripundraSvg className="w-11 h-11" style={{ color: "#475569" }} />;

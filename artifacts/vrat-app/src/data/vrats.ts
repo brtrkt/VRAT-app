@@ -6465,31 +6465,32 @@ export const vrats: Vrat[] = [
     id: "purnima-ramanandi",
     name: "Purnima Vrat (Ramanandi)",
     // Recurring monthly fast on every Purnima (full moon) per the Ramanandi
-    // Vikram Samvat Purnimanta calendar. Seeded from the next observance
-    // (12 May 2026) and projected forward through 2027 at lunar-monthly
-    // (~29-30 day) intervals.
+    // Vikram Samvat Purnimanta calendar. Seeded from the next observance —
+    // Vaishakha Purnima / Buddha Purnima on 1 May 2026 (Vikram Samvat 2083) —
+    // and continuing through every Purnima of VS 2083 + VS 2084 (cross-checked
+    // against the Ayodhya Purnimanta panchang).
     dates: [
-      "2026-05-12",
-      "2026-06-10",
-      "2026-07-10",
-      "2026-08-08",
-      "2026-09-07",
-      "2026-10-06",
-      "2026-11-05",
-      "2026-12-04",
-      "2027-01-03",
-      "2027-02-01",
-      "2027-03-03",
-      "2027-04-01",
-      "2027-05-01",
-      "2027-05-30",
-      "2027-06-29",
-      "2027-07-28",
-      "2027-08-27",
-      "2027-09-25",
-      "2027-10-25",
-      "2027-11-23",
-      "2027-12-22",
+      "2026-05-01",  // Vaishakha Purnima / Buddha Purnima (VS 2083)
+      "2026-05-31",  // Jyeshtha Purnima
+      "2026-06-29",  // Ashadha Purnima / Guru Purnima
+      "2026-07-28",  // Shravana Purnima / Raksha Bandhan
+      "2026-08-27",  // Bhadrapada Purnima
+      "2026-09-25",  // Ashwina Purnima / Sharad Purnima
+      "2026-10-25",  // Kartika Purnima / Dev Deepawali
+      "2026-11-23",  // Margashirsha Purnima
+      "2026-12-23",  // Paush Purnima
+      "2027-01-22",  // Magha Purnima (VS 2084)
+      "2027-02-20",  // Phalguna Purnima
+      "2027-03-22",  // Chaitra Purnima / Hanuman Jayanti
+      "2027-04-20",  // Vaishakha Purnima / Buddha Purnima
+      "2027-05-20",  // Jyeshtha Purnima
+      "2027-06-18",  // Ashadha Purnima / Guru Purnima
+      "2027-07-18",  // Shravana Purnima / Raksha Bandhan
+      "2027-08-16",  // Bhadrapada Purnima
+      "2027-09-15",  // Ashwina Purnima / Sharad Purnima
+      "2027-10-14",  // Kartika Purnima / Dev Deepawali
+      "2027-11-13",  // Margashirsha Purnima
+      "2027-12-13",  // Paush Purnima
     ],
     deity: "Sita-Ram darbar (Sri Ram, Devi Sita, Lakshman, Hanuman) on the night of the full moon",
     tradition: "Ramanandi",

@@ -250,9 +250,28 @@ function VitthalSvg({ className = "", style }: { className?: string; style?: CSS
   );
 }
 
-// Ramanandi: Charan Paduka — Lord Ram's sandals, the central seva object of
-// Ramanandi mathas (Hanuman Garhi, Kanak Bhawan, Ayodhya).
-function CharanPadukaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+// Ramanandi: Urdhva Pundra — the canonical Vaishnav tilak worn by Ramanandi sadhus
+// across Ayodhya, Chitrakoot, and Janakpur. The white "U" represents the
+// lotus feet of Vishnu / Sri Ram; the central red vertical line (shrivatsa
+// flame) represents Devi Sita / Lakshmi; the red bindu at the base
+// represents the devotee's surrendered head at the Lord's feet.
+function UrdhvaPundraSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 48 64" className={className} style={style} aria-hidden="true">
+      <path
+        d="M5 4 H17 V40 Q17 44 21 44 H27 Q31 44 31 40 V4 H43 V42 Q43 56 31 56 H17 Q5 56 5 42 Z"
+        fill="white"
+      />
+      <path
+        d="M24 3 Q19 18 21 32 Q22 40 24 46 Q26 40 27 32 Q29 18 24 3 Z"
+        fill="#DC2626"
+      />
+      <circle cx="24" cy="60" r="3.4" fill="#DC2626" />
+    </svg>
+  );
+}
+
+function _CharanPadukaSvg_DEPRECATED({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
     <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
       <ellipse cx="18" cy="32" rx="9" ry="20" />
@@ -596,7 +615,7 @@ export default function Onboarding({ onComplete }: Props) {
                 className="flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
-                <CharanPadukaSvg className="w-10 h-10" style={{ color: "#FECACA" }} />
+                <UrdhvaPundraSvg className="w-10 h-10" />
                 <div className="text-left">
                   <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Ramanandi Sampraday</span>
                   <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>सीताराम · Ram Navami · Hanuman Jayanti · Ayodhya</span>
@@ -737,7 +756,7 @@ export default function Onboarding({ onComplete }: Props) {
                     value: "Ramanandi" as Tradition,
                     label: "Ramanandi Sampraday",
                     subtitle: "Ram Navami, Hanuman Jayanti, Sita Navami, Tulsi Vivah",
-                    icon: <CharanPadukaSvg className="w-12 h-12" style={{ color: "#B91C1C" }} />,
+                    icon: <UrdhvaPundraSvg className="w-12 h-12" />,
                     accent: "#B91C1C",
                   },
                   {
