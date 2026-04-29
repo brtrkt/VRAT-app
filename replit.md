@@ -118,3 +118,64 @@ Or in one line in the Shell:
 ```
 git remote set-url origin https://brtrkt:$GITHUB_TOKEN@github.com/brtrkt/VRAT-app.git && git push origin main
 ```
+
+## Master Calendar Sources (Authoritative — DO NOT DEVIATE)
+
+Per `attached_assets/VRAT_Master_Calendar_Sources_*.pdf` (Dr. Rachna Tiwari, last updated April 29, 2026). All vrat dates must be sourced from these references. Never guess. Cross-check with two sources when in doubt.
+
+### Tradition → Source Mapping
+
+| Tradition | Authoritative Source | URL |
+|---|---|---|
+| Hindu (general) | Drik Panchang | drikpanchang.com |
+| Warkari | Marathi Drik Panchang | drikpanchang.com (Marathi) |
+| Swaminarayan / BAPS | BAPS Official Calendar | baps.org |
+| ISKCON / Gaudiya Vaishnava | ISKCON Vaishnava Calendar | vaisnavacalendar.com |
+| Jain | Jain Samvat Calendar | jainsamvat.com |
+| Sikh | Nanakshahi Calendar (SGPC) | sgpc.net |
+| Pushti Marg | Pushti Marg Panchang | pushtimarg.net |
+| Lingayat | Drik Panchang (Kannada) | drikpanchang.com (Kannada) |
+| Ramanandi / Ram Bhakti | Drik Panchang (Hindi) | drikpanchang.com (Hindi) |
+| Sri Vaishnava | Sri Vaishnava Calendar | srivaishnava.org |
+| Shakta | Drik Panchang + Shakta Panchang | drikpanchang.com |
+| Shaiva Siddhanta | Tamil Hindu Calendar | tamilhinducalendar.com |
+
+### Regional Festival Layer (shows for ALL users in that state, regardless of sampradaya)
+
+| State | Key Dates | Source |
+|---|---|---|
+| Maharashtra | Ashadhi Ekadashi, Ganesh Chaturthi fast | Marathi Drik Panchang |
+| Tamil Nadu | Skanda Sashti, Karthigai Deepam, Thaipusam | Tamil Hindu Calendar |
+| Telangana | Bathukamma, Bonalu, Karthika Masam | Telugu Panchang |
+| Andhra Pradesh | Karthika Masam, Ugadi | Telugu Panchang |
+| West Bengal | Durga Puja fast, Kali Puja, Saraswati Puja | Bengali Panchang |
+| Rajasthan | Gangaur, Teej | Drik Panchang (Hindi) |
+| Karnataka | Ugadi, Shivaratri | Kannada Panchang |
+| Gujarat | Diwali fast, Uttarayan | Gujarati Panchang |
+
+### Date Extraction Rules
+
+1. Always use the authoritative source above — never guess
+2. Extract dates annually, before Diwali for the next year
+3. Timezone-adjust all dates for diaspora users based on device location
+4. Regional festival dates show for ALL users in that state — not sampradaya-filtered
+5. Jain and Sikh data — DO NOT modify; use sources above only
+6. When in doubt — cross-check with TWO sources before publishing
+
+### Location & Timezone Rules (global)
+
+- All vrat start/end times based on user's device location (GPS or manually set city)
+- Ekadashi, Pradosham, Shivaratri etc. start at local sunrise — varies by city
+- Mumbai vs Kolkata = ~1.5 hour difference — cannot use one fixed time for all India
+- Tithis (lunar dates) can shift by a day depending on location
+- Use user's local sunrise/sunset for all vrat timing calculations
+- If location permission denied — ask user to manually select their city
+- Default fallback: New Delhi time (never use a fixed UTC time)
+
+### Diaspora Timezones
+
+US East (EST/EDT), US West (PST/PDT), UK (GMT/BST), Canada (multiple — use device tz), Singapore/Malaysia (SGT — Thaipusam critical), UAE (GST — Tamil/Hindi diaspora), Australia (AEST).
+
+### Operational Reminder
+
+Stripe API key rotation cadence: every 7 days. Next due per master file: May 6, 2026.
