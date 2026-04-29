@@ -5813,10 +5813,15 @@ export const vrats: Vrat[] = [
   },
 
   // ── Pushti Marg / Vallabha Sampraday ────────────────────────────────────────
+  // Source: Official Pushti Marg Tippni VS 2083 (Vidya Vibhag, Mandir Mandal, Nathdwara) —
+  // pushtimarg.net/wp-content/uploads/2026/03/Tippni-2083-Final.pdf
+  // Coverage Mar 20, 2026 (Chaitra Sud 1, VS 2083) – Mar 19, 2027.
+  // Pre-Mar 20, 2026 + post-Mar 19, 2027: Drik Panchang fallback per Tippni preface.
+  // Pushti Marg uses Vaishnava sunrise reckoning — Krishna paksha ekadashis often shift +1 day vs Drik Smarta.
   {
     id: "ekadashi-pushti-marg",
     name: "Ekadashi",
-    dates: ["2026-01-10", "2026-01-25", "2026-02-09", "2026-02-23", "2026-03-11", "2026-03-25", "2026-04-10", "2026-04-27", "2026-05-12", "2026-05-26", "2026-06-08", "2026-06-23", "2026-07-08", "2026-07-23", "2026-08-07", "2026-08-21", "2026-09-05", "2026-09-20", "2026-10-05", "2026-10-20", "2026-11-04", "2026-11-18", "2026-12-04", "2026-12-18", "2027-01-07", "2027-01-22"],
+    dates: ["2026-01-13", "2026-01-28", "2026-02-12", "2026-02-27", "2026-03-14", "2026-03-29", "2026-04-13", "2026-04-27", "2026-05-13", "2026-05-27", "2026-06-11", "2026-06-25", "2026-07-10", "2026-07-25", "2026-08-09", "2026-08-23", "2026-09-07", "2026-09-22", "2026-10-07", "2026-10-22", "2026-11-05", "2026-11-20", "2026-12-04", "2026-12-20", "2027-01-03", "2027-01-19"],
     deity: "Shrinathji (Balamukundan — child Krishna lifting Mount Govardhan)",
     tradition: "PushtiMarg",
     foodsAllowed: [
@@ -5848,7 +5853,8 @@ export const vrats: Vrat[] = [
   {
     id: "janmashtami-pushti-marg",
     name: "Janmashtami",
-    dates: ["2026-08-16", "2027-08-05"],
+    // 2026: Tippni VS 2083 (Bhadrapad Krishna Ashtami, Fri Sep 4) · 2027: Drik Panchang fallback
+    dates: ["2026-09-04", "2027-08-25"],
     deity: "Shrinathji / Balamukundan — Krishna as the divine child who lifted Govardhan",
     tradition: "PushtiMarg",
     foodsAllowed: [
@@ -5878,7 +5884,8 @@ export const vrats: Vrat[] = [
   {
     id: "annakut-pushti-marg",
     name: "Annakut & Govardhan Puja",
-    dates: ["2026-11-09", "2027-10-21"],
+    // 2026: Tippni VS 2083 (Karthik Sud 1, Mon Nov 9) · 2027: Drik Panchang fallback (day after Diwali)
+    dates: ["2026-11-09", "2027-10-30"],
     deity: "Shrinathji — Govardhan Puja · Chappan Bhog seva · day after Deepawali",
     tradition: "PushtiMarg",
     foodsAllowed: [
@@ -5908,7 +5915,8 @@ export const vrats: Vrat[] = [
   {
     id: "phoolon-wali-holi",
     name: "Phoolon wali Holi",
-    dates: ["2026-03-13", "2027-03-03"],
+    // Falgun Sud 11 (Amalaki Ekadashi). 2026: Drik fallback (Fri Feb 27, in VS 2082) · 2027: Tippni VS 2083 (Thu Mar 18)
+    dates: ["2026-02-27", "2027-03-18"],
     deity: "Shrinathji — Falgun Purnima · spring Holi with fragrant flowers",
     tradition: "PushtiMarg",
     foodsAllowed: [
@@ -5936,7 +5944,8 @@ export const vrats: Vrat[] = [
   {
     id: "hindola-utsav",
     name: "Hindola Utsav",
-    dates: ["2026-06-27", "2027-06-18"],
+    // Hindolarambha = Shravan Krishna 1 (day after Guru Purnima). 2026: Tippni VS 2083 (Thu Jul 30) · 2027: Drik fallback (Mon Jul 19)
+    dates: ["2026-07-30", "2027-07-19"],
     deity: "Shrinathji on the Hindola (swing) — Ashadha–Shravana seva festival",
     tradition: "PushtiMarg",
     foodsAllowed: [
@@ -5954,11 +5963,11 @@ export const vrats: Vrat[] = [
     mantra: "Shri Krishnah Sharanam Mama",
     mantraTransliteration: "The Pushti Marg Ashtakshara",
     mantraTranslation: "Shri Krishna is my one refuge and shelter",
-    mantraHow: "The Hindola Utsav runs for approximately 40 days from Ashadha Shukla 2 through Shravana Shukla 11. Each day, place Shrinathji's svarupa or photo on a small decorated swing. Adorn it with fresh flowers, leaves, or fruits appropriate to the season. Gently swing the Hindola while singing 'Jhulan Jhulo Shyam Jhulan Jhulo' or another Hindola kirtan. Offer seasonal bhog before your first meal.",
+    mantraHow: "The Hindola Utsav runs through the monsoon — beginning Shravan Krishna 1 (the day after Guru Purnima) and continuing for the festive weeks of Shravan and Bhadrapad. Each day, place Shrinathji's svarupa or photo on a small decorated swing. Adorn it with fresh flowers, leaves, or fruits appropriate to the season. Gently swing the Hindola while singing 'Jhulan Jhulo Shyam Jhulan Jhulo' or another Hindola kirtan. Offer seasonal bhog before your first meal.",
     mantraBenefits: "The Hindola Utsav is one of the most joyful sevas in Pushti Marg — expressing the playfulness of Krishna as a beloved divine child. The 40-day festival through the monsoon months corresponds to when young Krishna would play on swings in the Braj forests. Pushti Marg havelis prepare a completely new decorative theme for the swing each day of the festival.",
     mealIdea: "Fresh corn (bhutta) roasted with ghee and sendha namak, spiced buttermilk (chhaach) with cumin and ginger, fresh mango with cardamom and mishri, and monsoon sweets — all offered to Shrinathji on the Hindola and received as prasad",
     color: "#0E7490",
-    description: "Hindola Utsav is the beloved 40-day swing festival (jhoola seva) of Pushti Marg, beginning on Ashadha Shukla 2. Each day Shrinathji's svarupa is placed on a beautifully decorated swing — adorned with flowers, fruit garlands, gemstones, and seasonal materials. Devotees swing the Hindola gently while singing traditional Hindola kirtans. This calendar date marks the start of the Utsav (2026: Jun 27 · 2027: Jun 18)",
+    description: "Hindola Utsav is the beloved swing festival (jhoola seva) of Pushti Marg, beginning on Shravan Krishna 1 — the day after Guru Purnima — and continuing through the monsoon. Each day Shrinathji's svarupa is placed on a beautifully decorated swing, adorned with flowers, fruit garlands, gemstones, and seasonal materials. Devotees swing the Hindola gently while singing traditional Hindola kirtans. This calendar date marks the start of the Utsav (2026: Jul 30 · 2027: Jul 19)",
     specialNote: "At Nathdwara and all principal Pushti Marg havelis, each day of the 40-day Hindola festival sees a completely new swing design — floral, textile, gold, silver, seasonal fruit, monsoon leaves, and more. At home, place a small svarupa or framed image of Shrinathji on a simple swing or cradle and decorate it freshly each morning with whatever flowers and leaves are available. Sing the Hindola kirtans and offer seasonal bhog. Vikram Samvat 2083.",
   },
 
