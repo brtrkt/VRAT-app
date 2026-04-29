@@ -231,6 +231,109 @@ function BowArrowSvg({ className = "", style }: { className?: string; style?: CS
   );
 }
 
+// ─── Tradition-specific silhouette icons (Warkari, Ramanandi, SriVaishnava,
+//     Shakta, ShaivaSiddhanta, PushtiMarg, Lingayat) ───────────────────────────
+
+// Warkari: Vitthal standing on a brick at Pandharpur, hands on hips (akimbo).
+function VitthalSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 80" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <path d="M22 4 L26 1 L30 4 L34 1 L38 4 L37 10 L23 10 Z" />
+      <circle cx="30" cy="15" r="5" />
+      <path d="M27 19 L33 19 L37 22 L44 26 L44 30 L40 31 L36 28 L36 40 L24 40 L24 28 L20 31 L16 30 L16 26 L23 22 Z" />
+      <path d="M24 40 L36 40 L38 58 L22 58 Z" />
+      <rect x="25" y="58" width="4" height="14" />
+      <rect x="31" y="58" width="4" height="14" />
+      <rect x="14" y="72" width="32" height="6" rx="1" />
+    </svg>
+  );
+}
+
+// Ramanandi: Charan Paduka — Lord Ram's sandals, the central seva object of
+// Ramanandi mathas (Hanuman Garhi, Kanak Bhawan, Ayodhya).
+function CharanPadukaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <ellipse cx="18" cy="32" rx="9" ry="20" />
+      <circle cx="18" cy="20" r="2.5" fill="white" />
+      <circle cx="18" cy="20" r="1.2" />
+      <ellipse cx="42" cy="32" rx="9" ry="20" />
+      <circle cx="42" cy="20" r="2.5" fill="white" />
+      <circle cx="42" cy="20" r="1.2" />
+    </svg>
+  );
+}
+
+// Sri Vaishnava: Naamam (Thiruman + Srichurnam) — the U-shape with central
+// vertical stripe worn by Sri Vaishnavas. The defining sectarian mark of
+// Srirangam, Tirumala, Ahobila Math, and Iyengar communities.
+function NaamamSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 80" className={className} style={style} fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" aria-hidden="true">
+      <line x1="18" y1="8" x2="18" y2="55" />
+      <line x1="42" y1="8" x2="42" y2="55" />
+      <path d="M18 55 C18 70 42 70 42 55" />
+      <line x1="30" y1="12" x2="30" y2="62" strokeWidth="3.5" />
+    </svg>
+  );
+}
+
+// Shakta: Sri Yantra — interlocking upward and downward triangles with the
+// central bindu, the universal Shakta / Devi yantra.
+function SriYantraSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <circle cx="30" cy="30" r="27" strokeWidth="1.5" />
+      <polygon points="30,8 8,46 52,46" />
+      <polygon points="30,52 8,14 52,14" />
+      <polygon points="30,15 14,40 46,40" />
+      <polygon points="30,45 14,20 46,20" />
+      <circle cx="30" cy="30" r="2.5" fill="currentColor" />
+    </svg>
+  );
+}
+
+// Shaiva Siddhanta: Tripundra — three horizontal vibhuti stripes with the
+// central bindi, the traditional Tamil Shaiva forehead mark.
+function TripundraSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <rect x="6" y="18" width="48" height="4" rx="2" />
+      <rect x="6" y="28" width="48" height="4" rx="2" />
+      <rect x="6" y="38" width="48" height="4" rx="2" />
+      <circle cx="30" cy="30" r="3" />
+    </svg>
+  );
+}
+
+// Pushti Marg: Shrinathji — small Krishna figure with left arm raised
+// straight up to lift Govardhan hill. The presiding deity at Nathdwara.
+function ShrinathjiSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 80" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <path d="M14 8 Q22 2 28 5 Q34 1 40 5 Q48 2 50 9 Q49 13 44 13 L18 13 Q12 13 14 8 Z" />
+      <rect x="22" y="12" width="4" height="22" rx="2" />
+      <path d="M28 26 L30 22 L32 25 L34 21 L36 25 L38 22 L40 26 Z" />
+      <ellipse cx="34" cy="32" rx="5" ry="6" />
+      <path d="M27 38 L41 38 L41 60 L27 60 Z" />
+      <rect x="41" y="38" width="3.5" height="20" rx="1.5" />
+      <path d="M25 60 L43 60 L46 76 L22 76 Z" />
+    </svg>
+  );
+}
+
+// Lingayat: Ishtalinga in a cupped palm — every Lingayat wears a personal
+// spherical linga, and the cupped-palm worship gesture is iconic.
+function IshtalingaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <circle cx="30" cy="28" r="14" />
+      <ellipse cx="25" cy="22" rx="3.5" ry="2.5" fill="white" opacity="0.4" />
+      <path d="M6 38 C6 50 16 56 30 56 C44 56 54 50 54 38 L50 38 C50 47 41 52 30 52 C19 52 10 47 10 38 Z" />
+    </svg>
+  );
+}
+
 function BothSymbol({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center justify-center gap-1 ${className}`}>
@@ -474,7 +577,7 @@ export default function Onboarding({ onComplete }: Props) {
                 className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
-                <TrisulaSvg className="w-7 h-10" style={{ color: "#FECDD3" }} />
+                <IshtalingaSvg className="w-10 h-10" style={{ color: "#FECDD3" }} />
                 <div className="text-left">
                   <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Lingayat / Veerashaiva</span>
                   <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>ಓಂ ನಮಃ ಶಿವಾಯ · Shivaratri · Basava Jayanti</span>
@@ -487,7 +590,7 @@ export default function Onboarding({ onComplete }: Props) {
                 className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
-                <PeacockFeatherSvg className="w-7 h-11" style={{ color: "#A5F3FC" }} />
+                <ShrinathjiSvg className="w-8 h-11" style={{ color: "#A5F3FC" }} />
                 <div className="text-left">
                   <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Pushti Marg / Vallabha Sampraday</span>
                   <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>श्री नाथजी · Janmashtami · Annakut · Hindola Utsav</span>
@@ -500,7 +603,7 @@ export default function Onboarding({ onComplete }: Props) {
                 className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
-                <LotusSvg className="w-9 h-10" style={{ color: "#FED7AA" }} />
+                <VitthalSvg className="w-8 h-11" style={{ color: "#FED7AA" }} />
                 <div className="text-left">
                   <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Warkari (Vitthal-Vithoba)</span>
                   <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>विठ्ठल · Pandharpur Wari · Tukaram Beej · Dnyaneshwar</span>
@@ -513,7 +616,7 @@ export default function Onboarding({ onComplete }: Props) {
                 className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
-                <BowArrowSvg className="w-10 h-10" style={{ color: "#FECACA" }} />
+                <CharanPadukaSvg className="w-10 h-10" style={{ color: "#FECACA" }} />
                 <div className="text-left">
                   <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Ramanandi Sampraday</span>
                   <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>सीताराम · Ram Navami · Hanuman Jayanti · Ayodhya</span>
@@ -526,7 +629,7 @@ export default function Onboarding({ onComplete }: Props) {
                 className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
-                <LotusSvg className="w-9 h-10" style={{ color: "#FDE68A" }} />
+                <NaamamSvg className="w-8 h-11" style={{ color: "#FDE68A" }} />
                 <div className="text-left">
                   <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Sri Vaishnava (Iyengar)</span>
                   <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>ஓம் நமோ நாராயணாய · Vaikuntha Ekadashi · Ramanuja · Srirangam</span>
@@ -539,7 +642,7 @@ export default function Onboarding({ onComplete }: Props) {
                 className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
-                <TrisulaSvg className="w-7 h-10" style={{ color: "#FBCFE8" }} />
+                <SriYantraSvg className="w-10 h-10" style={{ color: "#FBCFE8" }} />
                 <div className="text-left">
                   <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Shakta (Devi worship)</span>
                   <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>दुर्गा काली · Bengali Durga Puja · Kali Puja · Navaratri</span>
@@ -552,7 +655,7 @@ export default function Onboarding({ onComplete }: Props) {
                 className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
                 style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
               >
-                <TrisulaSvg className="w-7 h-10" style={{ color: "#E5E7EB" }} />
+                <TripundraSvg className="w-10 h-10" style={{ color: "#E5E7EB" }} />
                 <div className="text-left">
                   <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Shaiva Siddhanta (Tamil Shaiva)</span>
                   <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>ஓம் நமச்சிவாய · Nataraja · Aarudra · Karthigai · Skanda Shashti</span>

@@ -274,6 +274,94 @@ function PeacockFeatherSvg({ className = "", style }: { className?: string; styl
   );
 }
 
+// ─── Tradition-specific silhouette icons (Warkari, Ramanandi, SriVaishnava,
+//     Shakta, ShaivaSiddhanta, PushtiMarg, Lingayat) ───────────────────────────
+function VitthalSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 80" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <path d="M22 4 L26 1 L30 4 L34 1 L38 4 L37 10 L23 10 Z"/>
+      <circle cx="30" cy="15" r="5"/>
+      <path d="M27 19 L33 19 L37 22 L44 26 L44 30 L40 31 L36 28 L36 40 L24 40 L24 28 L20 31 L16 30 L16 26 L23 22 Z"/>
+      <path d="M24 40 L36 40 L38 58 L22 58 Z"/>
+      <rect x="25" y="58" width="4" height="14"/>
+      <rect x="31" y="58" width="4" height="14"/>
+      <rect x="14" y="72" width="32" height="6" rx="1"/>
+    </svg>
+  );
+}
+
+function CharanPadukaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <ellipse cx="18" cy="32" rx="9" ry="20"/>
+      <circle cx="18" cy="20" r="2.5" fill="white"/>
+      <circle cx="18" cy="20" r="1.2"/>
+      <ellipse cx="42" cy="32" rx="9" ry="20"/>
+      <circle cx="42" cy="20" r="2.5" fill="white"/>
+      <circle cx="42" cy="20" r="1.2"/>
+    </svg>
+  );
+}
+
+function NaamamSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 80" className={className} style={style} fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" aria-hidden="true">
+      <line x1="18" y1="8" x2="18" y2="55"/>
+      <line x1="42" y1="8" x2="42" y2="55"/>
+      <path d="M18 55 C18 70 42 70 42 55"/>
+      <line x1="30" y1="12" x2="30" y2="62" strokeWidth="3.5"/>
+    </svg>
+  );
+}
+
+function SriYantraSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <circle cx="30" cy="30" r="27" strokeWidth="1.5"/>
+      <polygon points="30,8 8,46 52,46"/>
+      <polygon points="30,52 8,14 52,14"/>
+      <polygon points="30,15 14,40 46,40"/>
+      <polygon points="30,45 14,20 46,20"/>
+      <circle cx="30" cy="30" r="2.5" fill="currentColor"/>
+    </svg>
+  );
+}
+
+function TripundraSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <rect x="6" y="18" width="48" height="4" rx="2"/>
+      <rect x="6" y="28" width="48" height="4" rx="2"/>
+      <rect x="6" y="38" width="48" height="4" rx="2"/>
+      <circle cx="30" cy="30" r="3"/>
+    </svg>
+  );
+}
+
+function ShrinathjiSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 80" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <path d="M14 8 Q22 2 28 5 Q34 1 40 5 Q48 2 50 9 Q49 13 44 13 L18 13 Q12 13 14 8 Z"/>
+      <rect x="22" y="12" width="4" height="22" rx="2"/>
+      <path d="M28 26 L30 22 L32 25 L34 21 L36 25 L38 22 L40 26 Z"/>
+      <ellipse cx="34" cy="32" rx="5" ry="6"/>
+      <path d="M27 38 L41 38 L41 60 L27 60 Z"/>
+      <rect x="41" y="38" width="3.5" height="20" rx="1.5"/>
+      <path d="M25 60 L43 60 L46 76 L22 76 Z"/>
+    </svg>
+  );
+}
+
+function IshtalingaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <circle cx="30" cy="28" r="14"/>
+      <ellipse cx="25" cy="22" rx="3.5" ry="2.5" fill="white" opacity="0.4"/>
+      <path d="M6 38 C6 50 16 56 30 56 C44 56 54 50 54 38 L50 38 C50 47 41 52 30 52 C19 52 10 47 10 38 Z"/>
+    </svg>
+  );
+}
+
 function FloralDivider() {
   return (
     <div className="decorative-divider my-4">
@@ -685,13 +773,13 @@ export default function Home() {
               if (t === "Hindu")         return <OmSymbol className="text-primary text-3xl" />;
               if (t === "Swaminarayan") return <LotusSvg className="w-10 h-10" style={{ color: "#C4972A" }} />;
               if (t === "ISKCON")        return <IskconLogoSvg className="w-8 h-12" />;
-              if (t === "Lingayat")        return <TrisulaSvg className="w-8 h-11" style={{ color: "#9B2335" }} />;
-              if (t === "PushtiMarg")      return <PeacockFeatherSvg className="w-9 h-12" style={{ color: "#0E7490" }} />;
-              if (t === "Warkari")         return <LotusSvg className="w-10 h-10" style={{ color: "#DC6803" }} />;
-              if (t === "Ramanandi")       return <span className="font-serif text-3xl" style={{ color: "#B91C1C" }} aria-hidden="true">ॐ</span>;
-              if (t === "SriVaishnava")    return <LotusSvg className="w-10 h-10" style={{ color: "#B45309" }} />;
-              if (t === "Shakta")          return <TrisulaSvg className="w-8 h-11" style={{ color: "#BE185D" }} />;
-              if (t === "ShaivaSiddhanta") return <TrisulaSvg className="w-8 h-11" style={{ color: "#475569" }} />;
+              if (t === "Lingayat")        return <IshtalingaSvg className="w-11 h-11" style={{ color: "#9B2335" }} />;
+              if (t === "PushtiMarg")      return <ShrinathjiSvg className="w-9 h-12" style={{ color: "#0E7490" }} />;
+              if (t === "Warkari")         return <VitthalSvg className="w-9 h-12" style={{ color: "#DC6803" }} />;
+              if (t === "Ramanandi")       return <CharanPadukaSvg className="w-11 h-11" style={{ color: "#B91C1C" }} />;
+              if (t === "SriVaishnava")    return <NaamamSvg className="w-9 h-12" style={{ color: "#B45309" }} />;
+              if (t === "Shakta")          return <SriYantraSvg className="w-11 h-11" style={{ color: "#BE185D" }} />;
+              if (t === "ShaivaSiddhanta") return <TripundraSvg className="w-11 h-11" style={{ color: "#475569" }} />;
               return (
                 <>
                   <OmSymbol className="text-primary text-3xl" />
