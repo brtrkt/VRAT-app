@@ -5399,7 +5399,7 @@ export const vrats: Vrat[] = [
   {
     id: "swaminarayan-jayanti",
     name: "Swaminarayan Jayanti",
-    dates: ["2026-03-26", "2027-03-28"],
+    dates: ["2026-03-26"],
     deity: "Swaminarayan Bhagwan (Sahajanand Swami)",
     tradition: "Swaminarayan",
     foodsAllowed: [
@@ -5436,7 +5436,7 @@ export const vrats: Vrat[] = [
   {
     id: "fuldol-swaminarayan",
     name: "Fuldol",
-    dates: ["2026-03-13", "2027-03-03"],
+    dates: ["2026-03-03"],
     deity: "Swaminarayan Bhagwan / Lord Krishna",
     tradition: "Swaminarayan",
     foodsAllowed: [
@@ -5465,7 +5465,7 @@ export const vrats: Vrat[] = [
   {
     id: "annakut-swaminarayan",
     name: "Annakut (New Year)",
-    dates: ["2026-11-09", "2027-10-21"],
+    dates: ["2026-11-10"],
     deity: "Swaminarayan Bhagwan / Lord Krishna",
     tradition: "Swaminarayan",
     foodsAllowed: [
@@ -5554,7 +5554,7 @@ export const vrats: Vrat[] = [
   {
     id: "ekadashi-swaminarayan-jan-1",
     name: "Ekadashi",
-    dates: ["2026-01-10", "2026-01-25", "2026-02-09", "2026-02-23", "2026-03-11", "2026-03-25", "2026-04-10", "2026-04-27", "2026-05-12", "2026-05-26", "2026-06-08", "2026-06-23", "2026-07-08", "2026-07-23", "2026-08-07", "2026-08-21", "2026-09-05", "2026-09-20", "2026-10-05", "2026-10-20", "2026-11-04", "2026-11-18", "2026-12-04", "2026-12-18", "2027-01-07", "2027-01-22"],
+    dates: ["2026-01-14", "2026-01-29", "2026-02-13", "2026-02-27", "2026-03-15", "2026-03-29", "2026-04-13", "2026-04-27", "2026-05-13", "2026-05-27", "2026-06-11", "2026-06-25", "2026-07-11", "2026-07-25", "2026-08-09", "2026-08-23", "2026-09-07", "2026-09-22", "2026-10-06", "2026-10-22", "2026-11-05", "2026-11-21", "2026-12-04", "2026-12-20"],
     deity: "Swaminarayan Bhagwan / Lord Vishnu",
     tradition: "Swaminarayan",
     foodsAllowed: [
