@@ -136,7 +136,7 @@ Per `attached_assets/VRAT_Master_Calendar_Sources_*.pdf` (Dr. Rachna Tiwari, las
 | Pushti Marg | Official Tippni VS 2083 (Vidya Vibhag, Mandir Mandal, Nathdwara) | pushtimarg.net/wp-content/uploads/2026/03/Tippni-2083-Final.pdf — covers Mar 20 2026 → Mar 19 2027; Drik Panchang fallback for pre/post window |
 | Lingayat | Drik Panchang (Kannada) | drikpanchang.com (Kannada) |
 | Ramanandi / Ram Bhakti | Drik Panchang (Hindi) | drikpanchang.com (Hindi) |
-| Sri Vaishnava | Vakya Panchangam (Srirangam / Tirumala traditional) — fallback for now, to be updated later | srirangaminfo.com/vakya-panchangam-srirangam.php |
+| Sri Vaishnava | **Sri Vaishnava Vishesha Panchangam** — published by the SV mutts (Srirangam Sri Ranganathaswamy Devasthanam, Tirumala TTD, Ahobila Mutt, Andavan Ashramam, Parakala Mutt). NOT standard Tamil Vakya, NOT Vikram Samvat. Uses Bhagavata (shuddha) Ekadashi rules with Dashami-vedha shifts to Dwadashi parana. | srirangam.org · tirumala.org · ahobilamutt.org · srimadandavan.org · parakalamatham.org |
 | Shakta | Drik Panchang + Shakta Panchang | drikpanchang.com |
 | Shaiva Siddhanta | Thirukanthika Panchangam — Tamil Shaiva system (Chidambaram, Madurai, Thiruvannamalai) | Thirukanthika Panchangam (Tamil Shaiva matha publication) |
 
@@ -153,6 +153,25 @@ Per `attached_assets/VRAT_Master_Calendar_Sources_*.pdf` (Dr. Rachna Tiwari, las
 | Karnataka | Ugadi, Shivaratri | Kannada Panchang |
 | Gujarat | Diwali fast, Uttarayan | Gujarati Panchang |
 
+### Sri Vaishnava Date Methodology (special case — read before editing any SV entry)
+
+The Sri Vaishnava sampradaya is the only tradition in this app that does NOT use the standard Tamil solar (Vakya) panchangam OR the North Indian Vikram Samvat panchangam for fasting tithis. SV uses its own **Vishesha Panchangam** with sampradaya-specific shuddha-vs-viddha rules.
+
+**Bhagavata Ekadashi (the foundational SV recurring fast):** when Dashami-vedha is present at arunodaya (the 96-minute window before sunrise), the Ekadashi fast SHIFTS to Dwadashi (Suddha Dwadashi Vrat). This means SV Ekadashi can fall ONE DAY LATER than Smarta Ekadashi published on drikpanchang.com. Never copy Smarta Ekadashi dates directly into SV entries — always cross-check against the SV mutts' published panchangam.
+
+**Authoritative SV mutts (in descending order of decisive authority for borderline tithis):**
+1. Srirangam Sri Ranganathaswamy Devasthanam (Periya Koil) — final word on all Tenkalai tithis
+2. Tirumala Tirupati Devasthanams (TTD) — published Sapthagiri panchangam
+3. Ahobila Mutt — Vadakalai authoritative
+4. Andavan Ashramam (Srirangam + Poundarikapuram) — Vadakalai
+5. Parakala Mutt (Mysore) — Vadakalai
+
+**Tirunakshatra dates (Azhwar / Acharya birthdays):** use the Tamil solar month + nakshatra formula (e.g. Vaikasi Visakam = Visakha nakshatra falling within Tamil month Vaikasi). Account for adhik masas — e.g. Adhik Jyeshtha 2026 (17 May–14 Jun) shifts Vamana Jayanti to 24 Sep 2026. Cross-check at vaishnavacalendar.com (ISKCON's calendar shares many of the same nakshatras) and the relevant divya-desam temple's annual utsavam schedule.
+
+**SV-specific divya-desam festivals** (Panguni Uthiram, Garuda Sevai at Tirunangur, Brahmotsavam, Pavitrotsavam, Adhyayana Utsavam): each divya-desam temple publishes its own annual utsavam calendar — defer to the host temple's published date over any panchangam computation.
+
+**Mandatory disclaimer:** every SV entry's `specialNote` MUST include language reminding the user to verify with their local SV acharya or published mutt panchangam. The Sri Vaishnava section header in `vrats.ts` and the Onboarding/Settings picker subtitles also carry this disclaimer. Do not remove these disclaimers.
+
 ### Date Extraction Rules
 
 1. Always use the authoritative source above — never guess
@@ -161,6 +180,7 @@ Per `attached_assets/VRAT_Master_Calendar_Sources_*.pdf` (Dr. Rachna Tiwari, las
 4. Regional festival dates show for ALL users in that state — not sampradaya-filtered
 5. Jain and Sikh data — DO NOT modify; use sources above only
 6. When in doubt — cross-check with TWO sources before publishing
+7. Sri Vaishnava — see the dedicated subsection above; NEVER use drikpanchang.com Smarta Ekadashi dates as SV Ekadashi dates without cross-checking the SV mutt panchangam for Dashami-vedha shifts
 
 ### Location & Timezone Rules (global)
 
