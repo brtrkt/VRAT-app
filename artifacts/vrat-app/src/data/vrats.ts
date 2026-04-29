@@ -5879,7 +5879,7 @@ export const vrats: Vrat[] = [
     mealIdea: "A fruit-and-dairy fast through the day — fresh fruit with mishri, panchamrit, and cool buttermilk. At midnight, break the fast with Gopalkala (beaten rice, yogurt, and cucumber, or fresh butter and mishri) received from the Chappan Bhog offering to Shrinathji",
     color: "#0E7490",
     description: "Janmashtami is the supreme celebration of the Pushti Marg year — the appearance of Krishna himself, who is Shrinathji. Devotees fast until midnight, then celebrate with elaborate seva: bathing the svarupa, dressing it in new clothes, and offering the Chappan Bhog (56 food items). The next day, Nandotsav, celebrates the joy of Nanda Maharaj — a day of festivity, prasad distribution, and communal rejoicing",
-    specialNote: "In Pushti Marg havelis, Janmashtami night is the most spectacular of the year. Shrinathji's svarupa is dressed in a midnight-blue pitambar and jewels. The Chappan Bhog is prepared in 56 separate offerings. At the midnight birth moment, bells ring, conch shells blow, and devotees sing 'Aaj Anand Bhayo Jai Kanhaiya Lal Ki'. The next morning is Nandotsav — pure celebration, no fasting. Nandotsav (Aug 17, 2026 / Aug 6, 2027).",
+    specialNote: "In Pushti Marg havelis, Janmashtami night is the most spectacular of the year. Shrinathji's svarupa is dressed in a midnight-blue pitambar and jewels. The Chappan Bhog is prepared in 56 separate offerings. At the midnight birth moment, bells ring, conch shells blow, and devotees sing 'Aaj Anand Bhayo Jai Kanhaiya Lal Ki'. The next morning is Nandotsav — pure celebration, no fasting. Nandotsav (Sat Sep 5, 2026 / Thu Aug 26, 2027).",
   },
   {
     id: "annakut-pushti-marg",

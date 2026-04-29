@@ -133,7 +133,7 @@ Per `attached_assets/VRAT_Master_Calendar_Sources_*.pdf` (Dr. Rachna Tiwari, las
 | ISKCON / Gaudiya Vaishnava | ISKCON Vaishnava Calendar | vaisnavacalendar.com |
 | Jain | Jain Samvat Calendar | jainsamvat.com |
 | Sikh | Nanakshahi Calendar (SGPC) | sgpc.net |
-| Pushti Marg | Pushti Marg Panchang | pushtimarg.net |
+| Pushti Marg | Official Tippni VS 2083 (Vidya Vibhag, Mandir Mandal, Nathdwara) | pushtimarg.net/wp-content/uploads/2026/03/Tippni-2083-Final.pdf — covers Mar 20 2026 → Mar 19 2027; Drik Panchang fallback for pre/post window |
 | Lingayat | Drik Panchang (Kannada) | drikpanchang.com (Kannada) |
 | Ramanandi / Ram Bhakti | Drik Panchang (Hindi) | drikpanchang.com (Hindi) |
 | Sri Vaishnava | Sri Vaishnava Calendar | srivaishnava.org |
