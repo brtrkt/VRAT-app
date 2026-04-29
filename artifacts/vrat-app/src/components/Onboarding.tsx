@@ -114,11 +114,22 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "vasant-panchami-ramanandi",     label: "Vasant Panchami (Ramanandi)",      subtitle: "Magha Shukla 5 · Saraswati + Sita vani-shakti",           tradition: "Ramanandi" },
   { id: "holi-ramanandi",                label: "Holi · Phalguna Purnima",          subtitle: "Sita-Ram colour-festival at Ayodhya · alcohol-free",      tradition: "Ramanandi" },
 
-  { id: "vaikuntha-ekadashi",         label: "Vaikuntha Ekadashi (Mukkoti)",       subtitle: "Northern Gate of Vaikuntha opens · Margazhi",            tradition: "SriVaishnava" },
-  { id: "adhyayana-utsavam",          label: "Adhyayana Utsavam",                  subtitle: "22-day Tiruvaymozhi recitation at Srirangam",            tradition: "SriVaishnava" },
-  { id: "ramanuja-jayanti",           label: "Ramanuja Jayanti",                   subtitle: "Sri Ramanujacharya's Tirunakshatram",                     tradition: "SriVaishnava" },
-  { id: "pavitrotsavam",              label: "Pavitrotsavam",                      subtitle: "Annual Pancharatra purification festival",                tradition: "SriVaishnava" },
-  { id: "brahmotsavam-srivaishnava",  label: "Brahmotsavam (Tirumala)",            subtitle: "9-day vahana procession · Garuda Sevai peak",             tradition: "SriVaishnava" },
+  { id: "ekadashi-srivaishnava",                 label: "Ekadashi (Sri Vaishnava · Bhagavata)", subtitle: "Fortnightly Vishnu fast · verify with local SV panchangam",       tradition: "SriVaishnava" },
+  { id: "vaikuntha-ekadashi",                    label: "Vaikuntha Ekadashi (Mukkoti)",         subtitle: "Northern Gate of Vaikuntha opens · Margazhi",                     tradition: "SriVaishnava" },
+  { id: "adhyayana-utsavam",                     label: "Adhyayana Utsavam",                    subtitle: "22-day Tiruvaymozhi recitation at Srirangam",                     tradition: "SriVaishnava" },
+  { id: "andal-tirunakshatram-srivaishnava",     label: "Andal Tirunakshatram (Aadi Pooram)",   subtitle: "Andal Jayanti at Srivilliputhur · Tirukalyanam",                  tradition: "SriVaishnava" },
+  { id: "nammazhwar-tirunakshatram-srivaishnava",label: "Nammazhwar Tirunakshatram",            subtitle: "Vaikasi Visakam · chief of the 12 Azhwars",                       tradition: "SriVaishnava" },
+  { id: "ramanuja-jayanti",                      label: "Ramanuja Jayanti",                     subtitle: "Sri Ramanujacharya's Tirunakshatram",                             tradition: "SriVaishnava" },
+  { id: "vedanta-desika-tirunakshatram-srivaishnava", label: "Vedanta Desika Tirunakshatram",   subtitle: "Purattasi Sravanam · foremost Vadakalai poorvacharya",            tradition: "SriVaishnava" },
+  { id: "manavala-mamuni-tirunakshatram-srivaishnava", label: "Manavala Mamuni Tirunakshatram", subtitle: "Aippasi Tiruvadirai · foremost Tenkalai poorvacharya",            tradition: "SriVaishnava" },
+  { id: "nathamuni-tirunakshatram-srivaishnava", label: "Nathamuni Tirunakshatram",             subtitle: "Aani Anusham · first acharya of the Guru-Parampara",              tradition: "SriVaishnava" },
+  { id: "yamunacharya-tirunakshatram-srivaishnava", label: "Yamunacharya Tirunakshatram",       subtitle: "Aadi Uttiradam · Sri Alavandar, Stotra Ratna author",             tradition: "SriVaishnava" },
+  { id: "panguni-uthiram-srivaishnava",          label: "Panguni Uthiram (Tirukalyanam)",       subtitle: "Tirukalyana day across all 108 divya-desams",                     tradition: "SriVaishnava" },
+  { id: "garuda-sevai-srivaishnava",             label: "Garuda Sevai (Tirunangur 11 DD)",      subtitle: "Thai Amavasai · 11 Perumals on 11 Garuda vahanas",                tradition: "SriVaishnava" },
+  { id: "hayagriva-jayanti-srivaishnava",        label: "Sri Hayagriva Jayanti",                subtitle: "Sravana Purnima / Avani Avittam · Vedanta Desika's ishta",        tradition: "SriVaishnava" },
+  { id: "vamana-jayanti-srivaishnava",           label: "Sri Vamana Jayanti",                   subtitle: "Bhadrapada Shukla Dwadashi + Sravana · Trivikrama at Tirukoyilur", tradition: "SriVaishnava" },
+  { id: "pavitrotsavam",                         label: "Pavitrotsavam",                        subtitle: "Annual Pancharatra purification festival",                        tradition: "SriVaishnava" },
+  { id: "brahmotsavam-srivaishnava",             label: "Brahmotsavam (Tirumala)",              subtitle: "9-day vahana procession · Garuda Sevai peak",                     tradition: "SriVaishnava" },
 
   { id: "amavasya-shakta",            label: "Amavasya · Adya Kali Puja",          subtitle: "Monthly new-moon Kali fast · 21 dates (anchor)",          tradition: "Shakta" },
   { id: "sharadiya-navaratri-shakta", label: "Sharadiya Navaratri (Shakta)",       subtitle: "Bengali Durga Puja · 9 nights of Devi",                   tradition: "Shakta" },
@@ -163,7 +174,24 @@ const RAMANANDI_DEFAULTS       = [
   "annakut-ramanandi", "prabodhini-ekadashi-ramanandi",
   "makar-sankranti-ramanandi", "magha-mela-ramanandi", "vasant-panchami-ramanandi", "holi-ramanandi",
 ];
-const SRIVAISHNAVA_DEFAULTS    = ["vaikuntha-ekadashi", "adhyayana-utsavam", "ramanuja-jayanti", "brahmotsavam-srivaishnava"];
+const SRIVAISHNAVA_DEFAULTS    = [
+  "ekadashi-srivaishnava",
+  "vaikuntha-ekadashi",
+  "adhyayana-utsavam",
+  "andal-tirunakshatram-srivaishnava",
+  "nammazhwar-tirunakshatram-srivaishnava",
+  "ramanuja-jayanti",
+  "vedanta-desika-tirunakshatram-srivaishnava",
+  "manavala-mamuni-tirunakshatram-srivaishnava",
+  "nathamuni-tirunakshatram-srivaishnava",
+  "yamunacharya-tirunakshatram-srivaishnava",
+  "panguni-uthiram-srivaishnava",
+  "garuda-sevai-srivaishnava",
+  "hayagriva-jayanti-srivaishnava",
+  "vamana-jayanti-srivaishnava",
+  "pavitrotsavam",
+  "brahmotsavam-srivaishnava",
+];
 const SHAKTA_DEFAULTS          = ["amavasya-shakta", "sharadiya-navaratri-shakta", "maha-ashtami-shakta", "lakshmi-puja-shakta", "kali-puja-shakta", "chaitra-navaratri-shakta", "phalaharini-kali-puja-shakta", "mahalaya-amavasya-shakta", "shakambhari-purnima-shakta", "magha-gupta-navaratri-shakta", "saraswati-puja-shakta", "lalita-jayanti-shakta", "ashadha-gupta-navaratri-shakta", "jagaddhatri-puja-shakta", "annapurna-jayanti-shakta"];
 const SHAIVA_SIDDHANTA_DEFAULTS = ["maha-shivaratri-shaiva", "aarudra-darshan", "karthigai-deepam-shaiva", "skanda-shashti-shaiva"];
 
