@@ -120,11 +120,21 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "pavitrotsavam",              label: "Pavitrotsavam",                      subtitle: "Annual Pancharatra purification festival",                tradition: "SriVaishnava" },
   { id: "brahmotsavam-srivaishnava",  label: "Brahmotsavam (Tirumala)",            subtitle: "9-day vahana procession · Garuda Sevai peak",             tradition: "SriVaishnava" },
 
+  { id: "amavasya-shakta",            label: "Amavasya · Adya Kali Puja",          subtitle: "Monthly new-moon Kali fast · 21 dates (anchor)",          tradition: "Shakta" },
   { id: "sharadiya-navaratri-shakta", label: "Sharadiya Navaratri (Shakta)",       subtitle: "Bengali Durga Puja · 9 nights of Devi",                   tradition: "Shakta" },
   { id: "maha-ashtami-shakta",        label: "Maha Ashtami (Sandhi Puja)",         subtitle: "Day 8 of Navaratri · 48-min Sandhi window",               tradition: "Shakta" },
   { id: "lakshmi-puja-shakta",        label: "Lakshmi Puja (Kojagari)",            subtitle: "Sharad Purnima · all-night vigil for Maa Lakshmi",        tradition: "Shakta" },
   { id: "kali-puja-shakta",           label: "Kali Puja (Shyama Puja)",            subtitle: "Karthik Amavasya · midnight Kali worship",                tradition: "Shakta" },
   { id: "chaitra-navaratri-shakta",   label: "Chaitra Navaratri (Shakta)",         subtitle: "Spring Navaratri · ends with Ram Navami",                 tradition: "Shakta" },
+  { id: "phalaharini-kali-puja-shakta", label: "Phalaharini Kali Puja",            subtitle: "Jyeshtha Amavasya · Sri Ramakrishna's Shodashi puja",     tradition: "Shakta" },
+  { id: "mahalaya-amavasya-shakta",   label: "Mahalaya Amavasya",                  subtitle: "Bhadrapada Amavasya · Pitru Paksha closes, Devi Paksha begins", tradition: "Shakta" },
+  { id: "shakambhari-purnima-shakta", label: "Shakambhari Purnima",                subtitle: "Pausha Purnima · Devi as goddess of greens & grains",     tradition: "Shakta" },
+  { id: "magha-gupta-navaratri-shakta", label: "Magha Gupta Navaratri",            subtitle: "Hidden Tantric Navaratri · 10 Mahavidya sadhana",         tradition: "Shakta" },
+  { id: "saraswati-puja-shakta",      label: "Saraswati Puja (Vasant Panchami)",   subtitle: "Magha Shukla 5 · Bengal's 2nd-largest festival",          tradition: "Shakta" },
+  { id: "lalita-jayanti-shakta",      label: "Lalita Jayanti",                     subtitle: "Magha Purnima · Sri Yantra puja for Tripura Sundari",     tradition: "Shakta" },
+  { id: "ashadha-gupta-navaratri-shakta", label: "Ashadha Gupta Navaratri",        subtitle: "Monsoon Tantric Navaratri · 10 Mahavidya retreat",        tradition: "Shakta" },
+  { id: "jagaddhatri-puja-shakta",    label: "Jagaddhatri Puja",                   subtitle: "Karthik Shukla 9 · Krishnanagar/Chandannagar Devi festival", tradition: "Shakta" },
+  { id: "annapurna-jayanti-shakta",   label: "Annapurna Jayanti",                  subtitle: "Margashirsha Purnima · Kashi Annapurna · anna-dana day",  tradition: "Shakta" },
 
   { id: "maha-shivaratri-shaiva",     label: "Maha Shivaratri (Shaiva)",           subtitle: "All-night vigil · 4-prahar abhishekam at Chidambaram",   tradition: "ShaivaSiddhanta" },
   { id: "pradosha-shaiva",            label: "Pradosha (Shaiva)",                  subtitle: "Trayodashi sunset puja · 24 days a year",                 tradition: "ShaivaSiddhanta" },
@@ -154,7 +164,7 @@ const RAMANANDI_DEFAULTS       = [
   "makar-sankranti-ramanandi", "magha-mela-ramanandi", "vasant-panchami-ramanandi", "holi-ramanandi",
 ];
 const SRIVAISHNAVA_DEFAULTS    = ["vaikuntha-ekadashi", "adhyayana-utsavam", "ramanuja-jayanti", "brahmotsavam-srivaishnava"];
-const SHAKTA_DEFAULTS          = ["sharadiya-navaratri-shakta", "maha-ashtami-shakta", "kali-puja-shakta", "chaitra-navaratri-shakta"];
+const SHAKTA_DEFAULTS          = ["amavasya-shakta", "sharadiya-navaratri-shakta", "maha-ashtami-shakta", "lakshmi-puja-shakta", "kali-puja-shakta", "chaitra-navaratri-shakta", "phalaharini-kali-puja-shakta", "mahalaya-amavasya-shakta", "shakambhari-purnima-shakta", "magha-gupta-navaratri-shakta", "saraswati-puja-shakta", "lalita-jayanti-shakta", "ashadha-gupta-navaratri-shakta", "jagaddhatri-puja-shakta", "annapurna-jayanti-shakta"];
 const SHAIVA_SIDDHANTA_DEFAULTS = ["maha-shivaratri-shaiva", "aarudra-darshan", "karthigai-deepam-shaiva", "skanda-shashti-shaiva"];
 
 function defaultsForTradition(t: Tradition): string[] {

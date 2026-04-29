@@ -7263,6 +7263,77 @@ export const vrats: Vrat[] = [
   },
 
   // ─── Shakta (Devi worshippers — Bengali / Pan-Indian Devi tradition) ──────
+  // The Shakta sampradaya follows the Amavasyanta lunar calendar (months
+  // end on Amavasya rather than Purnima as in the Purnimanta system).
+  // Every Amavasya is sacred to Maa Kali (Adya Shakti); the major Devi
+  // tithis are Mahalaya (Bhadrapada Amavasya), Phalaharini Kali Puja
+  // (Jyeshtha Amavasya), Annapurna Jayanti (Margashirsha Purnima),
+  // Shakambhari Purnima (Pausha Purnima), Lalita Jayanti (Magha Purnima),
+  // Saraswati Puja / Vasant Panchami (Magha Shukla 5), Jagaddhatri Puja
+  // (Karthik Shukla 9), plus the two Gupta Navaratris (Magha Shukla
+  // 1-9 and Ashadha Shukla 1-9 — the esoteric Tantric Shakta Navaratris).
+  // 2026 dates account for Adhik Jyeshtha (the intercalary month from
+  // 17 May to 14 Jun 2026); 2027 dates are normal.
+  {
+    id: "amavasya-shakta",
+    name: "Amavasya · Adya Kali Puja (Shakta)",
+    // The monthly new-moon day, sacred to Maa Kali (Adya Shakti) in every
+    // Shakta lineage from Bengal to Vindhyachal to Tarapith. 21 dates from
+    // Vaishakha Amavasya (16 May 2026) through Margashirsha Amavasya
+    // (26 Dec 2027) — the seed observance after which the entire Shakta
+    // recurring calendar is anchored.
+    dates: [
+      "2026-05-16",  // Vaishakha Amavasya
+      "2026-06-14",  // Adhik Jyeshtha Amavasya
+      "2026-07-14",  // Nija Jyeshtha Amavasya · Phalaharini Kali Puja
+      "2026-08-12",  // Ashadha Amavasya
+      "2026-09-10",  // Shravana Amavasya
+      "2026-10-10",  // Bhadrapada Amavasya · Mahalaya (Pitru Paksha closes)
+      "2026-11-08",  // Asvina Amavasya · Diwali / Kali Puja
+      "2026-12-07",  // Karthik Amavasya
+      "2027-01-06",  // Margashirsha Amavasya
+      "2027-02-05",  // Pausha Amavasya · Mauni Amavasya
+      "2027-03-06",  // Magha Amavasya
+      "2027-04-05",  // Phalguna Amavasya
+      "2027-05-04",  // Chaitra Amavasya
+      "2027-06-03",  // Vaishakha Amavasya
+      "2027-07-02",  // Jyeshtha Amavasya · Phalaharini Kali Puja
+      "2027-08-01",  // Ashadha Amavasya
+      "2027-08-30",  // Shravana Amavasya
+      "2027-09-29",  // Bhadrapada Amavasya · Mahalaya
+      "2027-10-28",  // Asvina Amavasya · Diwali / Kali Puja
+      "2027-11-27",  // Karthik Amavasya
+      "2027-12-26",  // Margashirsha Amavasya
+    ],
+    deity: "Maa Kali (Adya Shakti) — the formless, fierce, liberating Mother",
+    tradition: "Shakta",
+    foodsAllowed: [
+      "Bengali niramish bhog: khichuri, labra, payesh, narikel-naru",
+      "Sweet kheer (rice or sabudana) offered to Maa first, then taken as prasad",
+      "Coconut, sandesh, mishti doi (sweet curd)",
+      "Hibiscus flowers and red lotus offered to Devi (not eaten)",
+      "Black urad daal — ritual bhog only",
+      "Fresh fruits — pomegranate (Devi's favourite), banana, papaya, mango",
+      "Til (sesame) for tarpan offerings to ancestors via Maa's grace",
+      "Charanamrita and tulsi from the Devi altar",
+      "Sendha namak preferred for fasting members",
+    ],
+    foodsAvoided: [
+      "Onion, garlic, brinjal — strictly avoided on Devi-puja days",
+      "Meat, fish, eggs, alcohol — never on Amavasya",
+      "Heavy or rajasic food — keep the day satvik for Devi",
+      "Cutting hair / nails or starting new ventures on Amavasya",
+    ],
+    mantra: "ॐ क्रीं कालिकायै नमः · आद्या शक्ति नमो नमः",
+    mantraTransliteration: "Om Kreem Kalikayai Namah · Adya Shakti Namo Namah",
+    mantraTranslation: "Salutations to Maa Kali — the primal Adya Shakti who manifests as every form of the Mother. Kreem is her bija mantra.",
+    mantraHow: "On Amavasya night, set up the Devi altar facing south (or east). Light a single ghee diya and offer red hibiscus flowers, raw black urad gram, coconut, sandesh, and a small sweet kheer. Recite the Devi Mahatmyam Chapter 7 (Kali appears) or the Karpuradi Stotram of Mahakavi (the most powerful short Kali stotra). At midnight (Brahma-muhurta of Devi), offer pranam in pure silence — Maa Kali is held to descend most accessibly on Amavasya night. Light til-til lamps for ancestors during the early evening, offering pitru-tarpan through Maa's grace.",
+    mantraBenefits: "Every Amavasya is a Kali night in the Shakta tradition — the dark moon mirrors Maa Kali's formless absorption of all maya. Worshipping Adya Shakti monthly on Amavasya is held to: clear the karmic debt of the previous lunar month, dissolve fear of death (Kali is the destroyer of yama itself), and grant moksha-marga in this lifetime — the path of Sri Ramakrishna Paramahamsa, who took Maa Kali as his only ishta-devata.",
+    mealIdea: "Light niramish khichuri-labra-payesh as the day's main meal (offered to Maa first); sandesh and naru as prasad; black-urad bhog and red hibiscus offered ritually at the altar; til-lamps lit at sunset for pitru-tarpan.",
+    color: "#BE185D",
+    description: "Amavasya — the monthly new moon — is the most sacred recurring observance in the Shakta sampradaya. Every dark-moon night belongs to Maa Kali (Adya Shakti); the 12 (or 13 in an Adhik year) Amavasyas of the year form the spiritual heartbeat of every Bengali Shakta home, every Tantric akhada, and every Shakti peeth. Special Amavasyas — Mauni (Magha), Phalaharini (Jyeshtha), Mahalaya (Bhadrapada), Diwali (Asvina) — have their own dedicated entries.",
+    specialNote: "In Adhik Maas years (like 2026, with Adhik Jyeshtha), there are 13 Amavasyas in the year. Both the Adhik-month and Nija-month Amavasyas are observed equally for Devi worship — though special Devi festivals like Phalaharini Kali Puja are observed on the Nija (proper) month's Amavasya only.",
+  },
   {
     id: "sharadiya-navaratri-shakta",
     name: "Sharadiya Navaratri (Bengali Durga Puja)",
@@ -7427,6 +7498,317 @@ export const vrats: Vrat[] = [
     color: "#BE185D",
     description: "Chaitra Navaratri — the spring nine nights of Devi worship. Chaitra Shukla Pratipada to Navami. Begins on the Hindu lunar new year (Gudi Padwa in Maharashtra, Ugadi in Andhra/Karnataka). Held in equal reverence to Sharadiya Navaratri in the Shakta tradition. Concludes on Ram Navami (Day 9).",
     specialNote: "The Mata Vaishno Devi yatra (Katra, J&K) sees a peak during Chaitra Navaratri. Vindhyavasini at Vindhyachal is the most sacred Chaitra Navaratri darshan.",
+  },
+
+  {
+    id: "phalaharini-kali-puja-shakta",
+    name: "Phalaharini Kali Puja",
+    // Jyeshtha Amavasya — the night Sri Ramakrishna Paramahamsa worshipped
+    // Sri Sarada Devi as Shodashi (the living Devi) in 1872, formally
+    // recognising her as Maa Kali in human form.
+    dates: ["2026-07-14", "2027-07-02"],
+    deity: "Maa Kali as Phalaharini — devourer of the fruits of karma",
+    tradition: "Shakta",
+    foodsAllowed: [
+      "Strict phalahar — fruits, milk, water through the day",
+      "Sabudana khichdi (parana after midnight puja)",
+      "Bengali niramish bhog: khichuri, labra, payesh — offered to Maa first",
+      "Coconut, sandesh, narikel-naru as midnight prasad",
+      "Hibiscus and red lotus offered to Devi (not eaten)",
+      "Mango (in season at Jyeshtha) — Devi's special offering",
+      "Sendha namak only on fast portion",
+    ],
+    foodsAvoided: [
+      "All grains until parana after midnight",
+      "Onion, garlic, brinjal — strictly",
+      "Meat, fish, eggs, alcohol",
+      "Anything not first offered to Maa Kali",
+    ],
+    mantra: "ॐ क्रीं क्रीं क्रीं ह्रीं ह्रीं ह्रूं ह्रूं फलहारिण्यै नमः",
+    mantraTransliteration: "Om Kreem Kreem Kreem Hreem Hreem Hum Hum Phalaharinyai Namah",
+    mantraTranslation: "Salutations to Maa Phalaharini — Kali who consumes the fruits (phala) of all karma, leaving the devotee free.",
+    mantraHow: "On Jyeshtha Amavasya night, fast through the day on phalahar only. At midnight (the muhurta of Sri Ramakrishna's worship of Sarada Devi), set up the Devi altar with kalash, hibiscus garland, and Phalaharini Kali murti or photo. Offer 108 hibiscus flowers, 108 ghee diyas, mango, coconut, and bhog. Recite the Karpuradi Stotram and the Devi Mahatmyam Chapter 7. After arati, offer pranam and take prasad as parana.",
+    mantraBenefits: "Phalaharini Kali Puja is held in the Ramakrishna lineage as the most sacred Kali puja of the year — even more transformative than Diwali Kali Puja. Maa Phalaharini consumes the karma-phala (fruits of past actions) of the devotee, granting liberation from the cycle of action and consequence. The 1872 worship of Sri Sarada Devi by Sri Ramakrishna established this tithi as the Shodashi-puja day for the entire Ramakrishna sangha.",
+    mealIdea: "Phalahar (fruits, milk, mango) through the day; midnight bhog of khichuri-labra-payesh-naru offered to Maa first, then taken as parana with sandesh and coconut.",
+    color: "#BE185D",
+    description: "Phalaharini Kali Puja — the Jyeshtha Amavasya worship of Maa Kali as Phalaharini (consumer of karmic fruits). Observed at Dakshineshwar, Belur Math, every Ramakrishna Mission centre, and across Bengali Shakta homes. Sri Ramakrishna Paramahamsa worshipped Sri Sarada Devi as Shodashi-Tripura-Sundari on this night in 1872 — the founding moment of the Holy Mother's recognition as living Devi.",
+    specialNote: "Belur Math and Dakshineshwar perform the Shodashi puja with full Tantric ritual on this night. The 16-armed Phalaharini-Kali murti at Belur Math is the iconic Bengali Shakta darshan.",
+  },
+  {
+    id: "mahalaya-amavasya-shakta",
+    name: "Mahalaya Amavasya",
+    // Bhadrapada Amavasya — closing of Pitru Paksha and beginning of
+    // Devi Paksha. The day Birendra Krishna Bhadra's iconic Mahishasura
+    // Mardini broadcast plays on All India Radio at dawn across Bengal.
+    dates: ["2026-10-10", "2027-09-29"],
+    deity: "Devi as Mahishasuramardini — descending to slay Mahishasura",
+    tradition: "Shakta",
+    foodsAllowed: [
+      "Niramish bhog: khichuri, labra, payesh, sukto",
+      "Til (sesame) for tarpan and ancestor offerings",
+      "Bengali sweets: sandesh, naru, rasgulla, mishti doi",
+      "Coconut, fresh fruits — banana, pomegranate, mango",
+      "Milk, curd, ghee, panchamrit",
+      "White rice and fragrant gobindobhog rice for ancestor naivedya",
+      "Sendha namak for fasting members",
+    ],
+    foodsAvoided: [
+      "Onion, garlic, brinjal — strictly",
+      "Meat, fish, eggs, alcohol — pitru offerings are pure niramish",
+      "Bitter or sour foods on this day",
+      "Anything not first offered to ancestors and to Maa",
+    ],
+    mantra: "या देवी सर्वभूतेषु मातृरूपेण संस्थिता। नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥",
+    mantraTransliteration: "Ya devi sarva-bhuteshu matri-rupena samsthita | Namastasyai namastasyai namastasyai namo namah ||",
+    mantraTranslation: "To the Devi who abides in all beings as Mother — salutations, salutations, salutations to her, again and again. (Devi Mahatmyam — invoking Maa as the universal Mother on the day she descends.)",
+    mantraHow: "Wake before sunrise (Brahma-muhurta) and listen to the Mahishasura Mardini stotra recital. Perform the closing tarpan of Pitru Paksha — offer til, kusha grass, and water-libations to three generations of departed ancestors at a riverbank or at home. After tarpan, set up the Devi altar with kalash and red hibiscus to formally invite Maa Durga for the coming Sharadiya Navaratri (Devi Paksha begins). Recite the Devi Mahatmyam Chapter 1 (the appearance of Mahishasuramardini).",
+    mantraBenefits: "Mahalaya Amavasya is the spiritual hinge of the Bengali Shakta year — the closing of Pitru Paksha (15 days of ancestor worship) and the opening of Devi Paksha (15 days leading to Maha Shashti / Bodhon, the start of Durga Puja). Tarpan on this day is held to release ancestors to higher lokas through Maa's grace. Listening to Birendra Krishna Bhadra's 1931 broadcast of Mahishasura Mardini at dawn is a sacred ritual followed by every Bengali household.",
+    mealIdea: "Niramish khichuri-labra-payesh as the noon bhog (offered first to ancestors, then to Maa, then taken as prasad); til-laddu for evening; sandesh and coconut as Devi offerings.",
+    color: "#BE185D",
+    description: "Mahalaya — the most spiritually charged Amavasya in the Bengali Shakta calendar. Marks the closing of 15-day Pitru Paksha (ancestor worship) and the opening of Devi Paksha (the 15 days leading to Sharadiya Navaratri / Bengali Durga Puja). At dawn, every Bengali home tunes in to Birendra Krishna Bhadra's iconic Mahishasura Mardini stotra recital — broadcast unchanged on All India Radio since 1931.",
+    specialNote: "Tarpan at the Hooghly ghats in Kolkata, the Sangam at Prayagraj, and Sarayu at Ayodhya are the most sacred. The Sharadiya Navaratri begins the very next day with Pratipada (Day 1).",
+  },
+  {
+    id: "shakambhari-purnima-shakta",
+    name: "Shakambhari Purnima",
+    // Pausha Purnima — Devi as Shakambhari (Mother of Vegetables) appeared
+    // to feed humanity during a 100-year drought, manifesting all greens
+    // and grains from her body.
+    dates: ["2027-01-22"],
+    deity: "Devi Shakambhari — Mother of all vegetables, greens, and grains",
+    tradition: "Shakta",
+    foodsAllowed: [
+      "Bhog of every available green vegetable — palak, methi, sarson, bathua",
+      "Pakor and bhajis of seasonal greens offered to Devi first",
+      "Niramish khichuri with all fresh vegetables",
+      "Fruits of every kind in season — pomegranate, banana, guava, sugarcane",
+      "Sweet payesh and gur (jaggery) prasad",
+      "Coconut and tulsi from the home altar",
+      "Milk, curd, ghee, panchamrit",
+    ],
+    foodsAvoided: [
+      "Onion, garlic — strictly avoided on Devi-puja days",
+      "Meat, fish, eggs, alcohol",
+      "Wasting any vegetable or grain on this day — Shakambhari's gift",
+      "Rajasic / tamasic foods",
+    ],
+    mantra: "जगन्मातर्नमस्तेस्तु शाकम्भरि शिवप्रिये। तव पादांबुजं देवि नमामि सततं भक्त्या॥",
+    mantraTransliteration: "Jagan-matar namaste-stu Shakambhari Shiva-priye | Tava pada-ambujam Devi namami satatam bhaktya ||",
+    mantraTranslation: "Salutations to you, O Shakambhari — Mother of the universe, beloved of Shiva. With devotion I bow to your lotus feet always. (Devi Mahatmyam Chapter 11)",
+    mantraHow: "On Pausha Purnima (full moon of Pausha), prepare a Shakambhari altar laden with every fresh vegetable, fruit, grain, and green available — the pile is the puja. Light a single ghee diya. Recite the Devi Mahatmyam Chapter 11 (Narayani Stuti, where Shakambhari is named). Offer the entire spread to Devi, then distribute as prasad. The 8-day Shakambhari Navaratri (Pausha Shukla 8 to Pausha Purnima) culminates today.",
+    mantraBenefits: "Shakambhari Purnima commemorates the appearance of Devi as Shakambhari — when the world faced a 100-year drought, she manifested every green, grain, and fruit from her own body to feed humanity. Worship on this day is held to grant: never-ending food in the household, freedom from hunger across lifetimes, and Devi's protection over agriculture and harvest. Especially sacred at Shakambhari Devi Shaktipeeth (Sambhar, Rajasthan).",
+    mealIdea: "Niramish khichuri loaded with every winter green; payesh as the sweet bhog; vegetable pakoras and saag-bhaja for the evening; sugarcane-gur and seasonal fruits as Devi-prasad distributed to all.",
+    color: "#BE185D",
+    description: "Shakambhari Purnima — Pausha Purnima — the climax of the 8-day Shakambhari Navaratri. Devi as Shakambhari (literally 'she who is borne by greens') is worshipped with every vegetable, fruit, and grain piled on the altar. The Shakambhari Devi Shaktipeeth at Sambhar in Rajasthan, and the Banashankari peeth in Karnataka, see massive yatras on this night.",
+    specialNote: "The 8-day Shakambhari Navaratri runs from Pausha Shukla Ashtami to Pausha Purnima — a less-known fourth Shakta Navaratri (along with Chaitra, Sharadiya, and the two Gupta Navaratris). Pausha Purnima 2026 (3 Jan) has already passed; the next observance is 22 Jan 2027.",
+  },
+  {
+    id: "magha-gupta-navaratri-shakta",
+    name: "Magha Gupta Navaratri",
+    // Magha Shukla Pratipada to Navami — the hidden (gupta) Navaratri,
+    // observed by Tantric Shakta sadhakas for inner Devi sadhana. Nine
+    // forms of Devi worshipped: 10 Mahavidyas instead of the 9 Durgas.
+    dates: ["2027-02-06", "2027-02-07", "2027-02-08", "2027-02-09", "2027-02-10", "2027-02-11", "2027-02-12", "2027-02-13", "2027-02-14"],
+    deity: "The 10 Mahavidyas — Kali, Tara, Tripura Sundari, Bhuvaneshwari, Bhairavi, Chinnamasta, Dhumavati, Bagalamukhi, Matangi, Kamala",
+    tradition: "Shakta",
+    foodsAllowed: [
+      "Strict phalahar — fruits, milk, water on Pratipada, Ashtami, Navami",
+      "Sabudana khichdi and kheer on milder days",
+      "Kuttu puri with aloo sabzi (sendha namak) as parana",
+      "Singhara halwa and rajgira ladoo",
+      "Bengali niramish khichuri-labra for noon bhog",
+      "Coconut, narikel-naru, sandesh as Devi prasad",
+      "Sendha namak only — no regular salt",
+    ],
+    foodsAvoided: [
+      "Onion, garlic, brinjal — strictly through 9 days",
+      "All grains on Ashtami and Navami strict-fast",
+      "Regular salt",
+      "Meat, fish, eggs, alcohol",
+      "Tamasic / leftover food",
+    ],
+    mantra: "ॐ ऐं ह्रीं श्रीं क्लीं — दशमहाविद्या नमो नमः",
+    mantraTransliteration: "Om Aim Hreem Shreem Kleem — Dasha-Mahavidya namo namah",
+    mantraTranslation: "Salutations to the 10 Mahavidyas — the great wisdom-goddesses of Tantric Shakta. Aim is Saraswati, Hreem is Shakti, Shreem is Lakshmi, Kleem is Kama-bija. (The four root bijas of all Devi sadhana.)",
+    mantraHow: "Set up ghatasthapana on Pratipada with kalash and sown barley. Each of the 9 days is dedicated to one Mahavidya: Day 1 Kali, Day 2 Tara, Day 3 Tripura Sundari (Shodashi), Day 4 Bhuvaneshwari, Day 5 Bhairavi, Day 6 Chinnamasta, Day 7 Dhumavati, Day 8 Bagalamukhi, Day 9 Matangi (Kamala on closing). Recite the Mahavidya stotram for each. Maintain strict fast on Ashtami and Navami. Gupta Navaratri is observed silently — no public puja, only inner sadhana.",
+    mantraBenefits: "Magha Gupta Navaratri is one of the two hidden (gupta) Navaratris reserved for advanced Tantric sadhakas. Unlike the public Sharadiya and Chaitra Navaratris, these nine days are for esoteric Devi-worship of the 10 Mahavidyas — the great wisdom-goddesses who reveal the inner workings of consciousness. Sadhana during Gupta Navaratri is held to grant Mahavidya-siddhi.",
+    mealIdea: "Phalahar through the day on strict-fast days; bhog of khichuri-labra-payesh as the single noon meal on milder days; kuttu puri with sendha-aloo as parana; coconut and sandesh as evening Devi prasad.",
+    color: "#BE185D",
+    description: "Magha Gupta Navaratri — the hidden nine nights of Devi observed in Magha (mid-Jan to mid-Feb). Less-known publicly than Sharadiya / Chaitra Navaratri, but held in the Tantric Shakta tradition (Kashmir Shaivism cross-current, Bengal Tantric akhadas, Vindhyachal, Tarapith, Kamakhya) as the most powerful Navaratri for inner Devi sadhana. The 10 Mahavidyas are worshipped instead of the 9 Durgas.",
+    specialNote: "Magha 2026 Gupta Navaratri (19-27 Jan 2026) has already passed; the 2027 observance is 6-14 Feb. Kamakhya Devi temple in Assam and Tarapith in Birbhum are the most sacred Gupta Navaratri pilgrimage sites.",
+  },
+  {
+    id: "saraswati-puja-shakta",
+    name: "Saraswati Puja (Vasant Panchami)",
+    // Magha Shukla Panchami — Bengali Saraswati Puja, the second largest
+    // festival of Bengal after Durga Puja. Observed by every school,
+    // college, and home in Bengal.
+    dates: ["2027-02-10"],
+    deity: "Maa Saraswati — Devi of vidya, music, speech, and wisdom",
+    tradition: "Shakta",
+    foodsAllowed: [
+      "Bengali Saraswati bhog: khichuri, labra, payesh, gobindobhog rice",
+      "Boro (boondi) ladoo, narikel-naru, sandesh — Saraswati's favourite sweets",
+      "Yellow foods: kesari bhat (saffron rice), basanti pulao, pumpkin sabzi",
+      "Berry kul (jujube fruit) — first kul of the season offered to Saraswati",
+      "Khichuri-labra-payesh as the main pushpanjali bhog",
+      "White flowers (rajanigandha, jasmine) and yellow marigolds — offered, not eaten",
+      "Milk, curd, ghee, panchamrit",
+    ],
+    foodsAvoided: [
+      "Berry / kul fruit BEFORE Saraswati Puja morning — first kul of the season is Devi's offering",
+      "Onion, garlic, brinjal",
+      "Meat, fish, eggs, alcohol",
+      "Anything not first offered to Maa Saraswati",
+    ],
+    mantra: "या कुन्देन्दु तुषार हार धवला या शुभ्र वस्त्रावृता। या वीणा वर दण्ड मण्डित करा या श्वेत पद्मासना॥",
+    mantraTransliteration: "Ya kundendu tushara hara dhavala ya shubhra vastravrita | Ya vina vara danda mandita kara ya shveta padmasana ||",
+    mantraTranslation: "Salutations to Maa Saraswati — white as jasmine, the moon, and snow; clothed in pure white; holding the veena; seated on the white lotus. (The Saraswati dhyana shloka chanted in every Bengali home and school.)",
+    mantraHow: "On Magha Shukla Panchami, set up the Saraswati altar with white cloth, palasha flowers, sown barley, books, musical instruments, and pens (everything connected to vidya is placed at Devi's feet for blessing). At sunrise, perform pushpanjali (flower offering) — three rounds in chorus, the central ritual every Bengali child participates in. Bhog of khichuri-labra-payesh-boro is offered. Children are kept away from books for the day (Saraswati holds them — they should not be touched). Hate-khori (first-letter writing) is done for young children at the altar.",
+    mantraBenefits: "Saraswati Puja on Vasant Panchami marks the start of vasant ritu (spring) and the appearance of Devi Saraswati. In Bengal, this is the SECOND-largest festival after Durga Puja — every neighbourhood, school, university, and home erects a Saraswati altar. Worship on this day grants vidya (knowledge), wani-shakti (eloquence), and success in studies, music, and the arts.",
+    mealIdea: "Khichuri-labra-payesh as the pushpanjali bhog (offered to Devi at sunrise, then taken as prasad after pushpanjali); basanti pulao and pumpkin sabzi for noon; boro and sandesh as evening prasad; first kul of the season eaten only after Devi has been offered.",
+    color: "#BE185D",
+    description: "Saraswati Puja — the Bengali Shakta worship of Maa Saraswati on Magha Shukla Panchami (Vasant Panchami). The second-largest festival in Bengal after Durga Puja. Every neighbourhood, school, university, college, and home erects a Saraswati pandal or altar; children dress in yellow saris and dhotis; the day is filled with music, recitation, and pushpanjali. Belur Math, Dakshineshwar, and every Saraswati mandir see massive crowds.",
+    specialNote: "The 2026 Saraswati Puja (23 Jan 2026) has already passed; the next observance is 10 Feb 2027. The first kul (jujube) of the season is traditionally not eaten until offered to Saraswati on this day.",
+  },
+  {
+    id: "lalita-jayanti-shakta",
+    name: "Lalita Jayanti",
+    // Magha Purnima — appearance day of Maa Lalita Tripura Sundari, the
+    // supreme Devi of Sri Vidya. Sri Yantra puja performed at every
+    // Sri Vidya kuladharma centre.
+    dates: ["2027-02-20"],
+    deity: "Maa Lalita Tripura Sundari — supreme Devi of Sri Vidya, the Sri Yantra goddess",
+    tradition: "Shakta",
+    foodsAllowed: [
+      "Sweet kheer (rice or sabudana) — Maa Lalita's favourite offering",
+      "Coconut, sandesh, naru, modak, panchamrit",
+      "Red foods: pomegranate, watermelon, red apple, beetroot",
+      "Saffron-rice (kesari bhat), basanti pulao",
+      "Bengali niramish bhog: khichuri-labra-payesh",
+      "Red hibiscus, red lotus, red japa — offered to Devi (not eaten)",
+      "Milk, curd, ghee, panchamrit, mishri",
+    ],
+    foodsAvoided: [
+      "Onion, garlic, brinjal",
+      "Meat, fish, eggs, alcohol",
+      "Bitter or astringent foods on Lalita day",
+      "Anything not first offered to Maa Lalita",
+    ],
+    mantra: "ॐ ऐं ह्रीं श्रीं — श्री ललिता त्रिपुरसुन्दरी पादुकां पूजयामि नमः",
+    mantraTransliteration: "Om Aim Hreem Shreem — Sri Lalita Tripura Sundari Padukam Pujayami Namah",
+    mantraTranslation: "Salutations to the lotus feet of Sri Lalita Tripura Sundari — the supreme Devi of the three worlds, beautiful in all three (waking, dream, deep sleep). The closing mantra of the Sri Lalita Sahasranama.",
+    mantraHow: "On Magha Purnima night, set up the Sri Yantra altar (the geometric form of Maa Lalita herself). Light 16 ghee diyas around the Sri Yantra (one for each Nityasundari — the 16 lunar Devis). Offer red hibiscus, kumkum, saffron, kheer, modak, and panchamrit. Recite the Sri Lalita Sahasranama (1000 names of Lalita) — the central scripture of Sri Vidya. Read the Lalita Trishati (300 names) and the Saundarya Lahari of Adi Shankaracharya.",
+    mantraBenefits: "Lalita Jayanti commemorates the appearance of Maa Lalita Tripura Sundari — the supreme Devi worshipped in the Sri Vidya tradition through the Sri Yantra (held to be the geometric form of Devi herself). Sri Vidya is the most refined Tantric Shakta path. Worship on this day is held to grant: Sri Vidya diksha-grace, beauty (in body, speech, and inner being — Lalita is supreme Sundari), and the highest bhukti-mukti (worldly fulfilment plus liberation).",
+    mealIdea: "Sweet kheer with saffron and dried fruits as the central bhog; modak and naru as Devi prasad; basanti pulao with red beetroot sabzi for noon; pomegranate and red apple as the closing offering at moonrise.",
+    color: "#BE185D",
+    description: "Lalita Jayanti — the Magha Purnima appearance day of Maa Lalita Tripura Sundari, the supreme Devi of the Sri Vidya tradition. Worshipped through the Sri Yantra (the geometric form of Maa) at every Sri Vidya kuladharma centre — Kanchi Kamakoti, Sringeri, Devipuram in Andhra (the largest open Sri Yantra temple in the world), and the Bhandasura yantras of Tantric Bengal.",
+    specialNote: "Lalita Jayanti 2026 (1 Feb 2026) has already passed; the next observance is 20 Feb 2027. Devipuram (Andhra), Sringeri (Karnataka), and the Sri Vidya pithas of Kashmir are the most sacred for this night.",
+  },
+  {
+    id: "ashadha-gupta-navaratri-shakta",
+    name: "Ashadha Gupta Navaratri",
+    // Ashadha Shukla Pratipada to Navami — the second hidden Navaratri,
+    // observed by Tantric Shakta sadhakas during the monsoon. The 10
+    // Mahavidyas worshipped through inner sadhana, not public puja.
+    dates: ["2026-07-15", "2026-07-16", "2026-07-17", "2026-07-18", "2026-07-19", "2026-07-20", "2026-07-21", "2026-07-22", "2026-07-23",
+            "2027-07-03", "2027-07-04", "2027-07-05", "2027-07-06", "2027-07-07", "2027-07-08", "2027-07-09", "2027-07-10", "2027-07-11"],
+    deity: "The 10 Mahavidyas — worshipped in monsoon retreat",
+    tradition: "Shakta",
+    foodsAllowed: [
+      "Strict phalahar on Pratipada, Ashtami, Navami",
+      "Sabudana khichdi and kheer on milder days",
+      "Kuttu puri with aloo sabzi (sendha namak) as parana",
+      "Singhara halwa and rajgira ladoo",
+      "Bengali niramish khichuri-labra for noon bhog",
+      "Coconut, narikel-naru, sandesh as Devi prasad",
+      "Mango (peak in Ashadha) — Devi's special seasonal offering",
+      "Sendha namak only",
+    ],
+    foodsAvoided: [
+      "Onion, garlic, brinjal — strictly through 9 days",
+      "All grains on Ashtami and Navami strict-fast",
+      "Regular salt",
+      "Meat, fish, eggs, alcohol",
+      "Tamasic / leftover food",
+    ],
+    mantra: "ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे · दशमहाविद्या नमो नमः",
+    mantraTransliteration: "Om Aim Hreem Kleem Chamundayai Vichche · Dasha-Mahavidya namo namah",
+    mantraTranslation: "The Navakshari mantra of Devi (Aim Hreem Kleem Chamundayai Vichche) plus salutations to the 10 Mahavidyas. The central mantra of monsoon Tantric sadhana.",
+    mantraHow: "Set up ghatasthapana on Ashadha Shukla Pratipada with kalash and sown barley. The 9 days follow the same Mahavidya sequence as Magha Gupta Navaratri (Kali, Tara, Tripura Sundari, Bhuvaneshwari, Bhairavi, Chinnamasta, Dhumavati, Bagalamukhi, Matangi/Kamala). Maintain strict fast on Ashtami and Navami. Ashadha Gupta Navaratri is the monsoon retreat — silent inner sadhana through 9 days of Devi-meditation.",
+    mantraBenefits: "Ashadha Gupta Navaratri is the second hidden (gupta) Navaratri — held in the Tantric Shakta tradition as the most powerful Navaratri for monsoon-season Devi sadhana. The 10 Mahavidyas appear most accessibly during the rains. Sadhana during this Navaratri is held to grant: dissolution of past karma (the rains wash everything away), Mahavidya-siddhi, and the inner darshan of Devi.",
+    mealIdea: "Phalahar through the day on strict-fast days; bhog of khichuri-labra-payesh as the single noon meal on milder days; kuttu puri with sendha-aloo as parana; mango and coconut as evening Devi prasad.",
+    color: "#BE185D",
+    description: "Ashadha Gupta Navaratri — the second hidden nine nights of Devi, observed in Ashadha (the monsoon month, mid-June to mid-July). The companion to Magha Gupta Navaratri. Reserved for Tantric Shakta sadhakas at Kamakhya (Assam), Tarapith (Bengal), Vindhyachal (UP), and the Shakti peethas of Kashmir. Worshipping the 10 Mahavidyas during the monsoon retreat is held to be especially transformative.",
+    specialNote: "In 2026 (Adhik Jyeshtha year), Ashadha Gupta Navaratri is observed in Nija Ashadha (15-23 Jul 2026), not the Adhik month. The 2027 observance is 3-11 Jul 2027.",
+  },
+  {
+    id: "jagaddhatri-puja-shakta",
+    name: "Jagaddhatri Puja",
+    // Karthik Shukla Navami — Devi as Jagaddhatri (sustainer of the
+    // universe). The biggest festival of Krishnanagar, Chandannagar,
+    // and Hooghly in Bengal — second only to Durga Puja in scale.
+    dates: ["2026-11-17", "2027-11-06"],
+    deity: "Devi Jagaddhatri — sustainer of the universe, the four-armed lion-rider",
+    tradition: "Shakta",
+    foodsAllowed: [
+      "Bengali niramish bhog: khichuri, labra, payesh, gobindobhog rice",
+      "Sandesh, rasgulla, mishti doi, narikel-naru — Bengali sweets",
+      "Pumpkin and ash gourd — ritual offerings to Jagaddhatri",
+      "Coconut and tulsi from the Devi altar",
+      "Fresh fruits — pomegranate, banana, papaya",
+      "Milk, curd, ghee, panchamrit, mishri",
+      "Sendha namak for fasting members",
+    ],
+    foodsAvoided: [
+      "Onion, garlic, brinjal — strictly",
+      "Meat, fish, eggs, alcohol",
+      "Heavy or rajasic food",
+      "Anything not first offered to Maa Jagaddhatri",
+    ],
+    mantra: "जगद्धात्रि नमस्तुभ्यं सिद्धिदा कमलार्चिते। बुद्धिं देहि यशो देहि शत्रून् नाशय नाशय॥",
+    mantraTransliteration: "Jagaddhatri namastubhyam siddhi-da kamalarchite | Buddhim dehi yasho dehi shatrun nashaya nashaya ||",
+    mantraTranslation: "Salutations to Jagaddhatri — granter of siddhis, worshipped by Lakshmi. Grant me intellect, grant me fame, destroy my enemies, destroy them. (The classical Jagaddhatri stotram.)",
+    mantraHow: "On Karthik Shukla Navami, perform the three-fold puja (Saptami-Ashtami-Navami compressed into one day, mirroring Durga Puja but in a single day). Set up the Jagaddhatri altar with kalash, red hibiscus, and Devi murti (four-armed, riding a lion, holding chakra-shankha-bow-arrow). Recite the Jagaddhatri Stotram and the Devi Mahatmyam. Bhog of khichuri-labra-payesh-naru is offered three times through the day.",
+    mantraBenefits: "Jagaddhatri Puja commemorates Devi's appearance as Jagaddhatri (literally 'sustainer of the world') after Mahishasura's demons grew arrogant. Worship is held to grant: jagat-rakshana (cosmic protection over family and home), siddhi in worldly affairs, and Devi's grace as the sustainer-mother. The Krishnanagar Jagaddhatri Puja (founded by Maharaja Krishnachandra Roy in 1762) is the most iconic — a 250-year unbroken tradition of three-day pandals.",
+    mealIdea: "Khichuri-labra-payesh as the noon bhog (offered three times to mirror Saptami-Ashtami-Navami); sandesh and naru as Devi prasad; pumpkin sabzi and gobindobhog rice for evening; fresh pomegranate as the closing offering.",
+    color: "#BE185D",
+    description: "Jagaddhatri Puja — Karthik Shukla Navami worship of Devi as Jagaddhatri, sustainer of the universe. The biggest Devi festival in Bengal AFTER Durga Puja. Krishnanagar (Nadia district) and Chandannagar (Hooghly) host massive three-day pandals; Chandannagar's Jagaddhatri visarjan procession lights the Hooghly riverbank with thousands of torches and is broadcast live across Bengal.",
+    specialNote: "Krishnanagar's Jagaddhatri Puja (since 1762) is the oldest. Chandannagar's Jagaddhatri lighting (the most elaborate illuminated pandals in Bengal, surpassing even Durga Puja) is the most photographed.",
+  },
+  {
+    id: "annapurna-jayanti-shakta",
+    name: "Annapurna Jayanti",
+    // Margashirsha Purnima — appearance day of Devi Annapurna, the
+    // grain-giver of Kashi. Sri Adi Shankaracharya composed the
+    // Annapurna Stotram on this day at Kashi Vishwanath.
+    dates: ["2026-12-23", "2027-12-13"],
+    deity: "Devi Annapurna — Mother of all food and nourishment, the Kashi Devi",
+    tradition: "Shakta",
+    foodsAllowed: [
+      "Bhog of every available grain and pulse — chawal, daal, roti, paratha",
+      "Khichuri-labra-payesh as the central bhog",
+      "Sweet kheer (Annapurna's favourite) and pongal",
+      "Coconut, sandesh, narikel-naru, modak as Devi prasad",
+      "Fresh fruits — banana, pomegranate, guava, sugarcane",
+      "Milk, curd, ghee, panchamrit, mishri",
+      "Distribution of food to the poor — central to the day's vrat",
+    ],
+    foodsAvoided: [
+      "Onion, garlic, brinjal — strictly on Devi-puja days",
+      "Meat, fish, eggs, alcohol",
+      "Wasting any grain or food on this day — Annapurna's gift",
+      "Refusing food to anyone who comes to your door",
+    ],
+    mantra: "अन्नपूर्णे सदा पूर्णे शङ्करप्राणवल्लभे। ज्ञानवैराग्यसिद्ध्यर्थं भिक्षां देहि च पार्वति॥",
+    mantraTransliteration: "Annapurne sada purne Shankara-prana-vallabhe | Jnana-vairagya-siddhyartham bhiksham dehi cha Parvati ||",
+    mantraTranslation: "O Annapurna, ever-full, beloved of Shankara — for the sake of jnana and vairagya, grant me alms, O Parvati. (The Annapurna Stotram of Sri Adi Shankaracharya — composed at Kashi Vishwanath.)",
+    mantraHow: "On Margashirsha Purnima, prepare the Annapurna altar with grains piled high (rice, daal, wheat, all visible in vessels). Offer khichuri-labra-payesh and a complete meal as bhog. Recite the Annapurna Stotram (12 verses by Sri Adi Shankaracharya) — the central scripture of the day. Distribute food to the poor (anna-dana) — the most important act of the day. Sri Adi Shankara himself stood as a bhikshuk before Maa Annapurna at Kashi and received her grace; recreating his bhiksha-prarthana is the heart of the puja.",
+    mantraBenefits: "Annapurna Jayanti commemorates the appearance of Devi Annapurna at Kashi when Sri Shiva himself, as a sannyasi-bhikshuk, sought alms from her — establishing that even Maheshwara is dependent on Maa for food. Worship on this day is held to grant: never-ending food in the household, freedom from hunger across lifetimes, and the merit of feeding the universe through one act of anna-dana. The Annapurna mandir at Kashi (next to Kashi Vishwanath) is the central pilgrimage.",
+    mealIdea: "Complete bhog of khichuri-labra-payesh-bhaja as the noon meal (offered to Maa first); sandesh and modak as evening prasad; payesh-pongal at moonrise as the closing offering; food distribution to neighbours and beggars throughout the day.",
+    color: "#BE185D",
+    description: "Annapurna Jayanti — Margashirsha Purnima — the appearance day of Devi Annapurna, the grain-giving Mother of Kashi. The Annapurna mandir at Kashi (built next to Kashi Vishwanath) is the central peeth. Sri Adi Shankaracharya's Annapurna Stotram is recited in every Shakta home. Anna-dana (food distribution to the poor) is the central vrat — even one bowl of food given today is held to feed the entire family for a year.",
+    specialNote: "The Kashi Annapurna mandir distributes prasad to thousands on this day; the gold Annapurna murti (recovered from Canada in 2021 and reinstalled at Kashi) is darshanam. In Maharashtra and Karnataka, this day is also Dattatreya Jayanti (Datta-Annapurna are linked through the bhiksha-prarthana).",
   },
 
   // ─── Shaiva Siddhanta (Tamil Shaiva — Tirumular, 63 Nayanmars) ────────────
