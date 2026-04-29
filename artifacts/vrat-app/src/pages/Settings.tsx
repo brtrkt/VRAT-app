@@ -113,6 +113,7 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "hanuman-jayanti-ramanandi",  label: "Hanuman Jayanti (Ramanandi)",        subtitle: "Sankat Mochan · Sundara Kanda parayan",                   tradition: "Ramanandi" },
   { id: "sita-navami",                label: "Sita Navami (Janaki Jayanti)",       subtitle: "Devi Sita's appearance at Janakpur",                      tradition: "Ramanandi" },
   { id: "vivah-panchami",             label: "Vivah Panchami",                     subtitle: "Sita-Ram divine wedding day",                              tradition: "Ramanandi" },
+  { id: "purnima-ramanandi",          label: "Purnima Vrat (Ramanandi)",           subtitle: "Monthly full-moon Sita-Ram fast · Vikram Samvat",          tradition: "Ramanandi" },
   { id: "tulsi-vivah-ramanandi",      label: "Tulsi Vivah (Ramanandi)",            subtitle: "Tulsi-Vrinda married to Shaligram-Ram",                   tradition: "Ramanandi" },
 
   { id: "vaikuntha-ekadashi",         label: "Vaikuntha Ekadashi (Mukkoti)",       subtitle: "Northern Gate of Vaikuntha opens · Margazhi",            tradition: "SriVaishnava" },
@@ -460,7 +461,7 @@ export default function Settings() {
       { value: "ISKCON",           label: "ISKCON / Vaishnava",                 subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik" },
       { value: "Lingayat",         label: "Lingayat / Veerashaiva",             subtitle: "Maha Shivaratri, Shravana Somavara, Basava Jayanti" },
       { value: "PushtiMarg",       label: "Pushti Marg / Vallabha Sampraday",   subtitle: "Ekadashi (seva-based), Janmashtami, Annakut, Hindola Utsav" },
-      { value: "Ramanandi",        label: "Ramanandi Sampraday",                subtitle: "Ram Navami, Hanuman Jayanti, Sita Navami, Tulsi Vivah" },
+      { value: "Ramanandi",        label: "Ramanandi Sampraday",                subtitle: "Ram Navami, Hanuman Jayanti, Sita Navami, monthly Purnima, Tulsi Vivah" },
       { value: "ShaivaSiddhanta",  label: "Shaiva Siddhanta (Tamil Shaiva)",    subtitle: "Maha Shivaratri, Pradosha, Aarudra Darshan, Karthigai Deepam" },
       { value: "Shakta",           label: "Shakta (Devi worship)",              subtitle: "Sharadiya & Chaitra Navaratri, Durga Ashtami, Kali Puja" },
       { value: "SriVaishnava",     label: "Sri Vaishnava (Iyengar)",            subtitle: "Vaikuntha Ekadashi, Ramanuja Jayanti, Brahmotsavam" },

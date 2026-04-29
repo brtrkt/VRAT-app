@@ -6312,6 +6312,14 @@ export const vrats: Vrat[] = [
   },
 
   // ─── Ramanandi (North Indian Vaishnava — Ram bhakti, Ayodhya) ──────────────
+  // Source: Vikram Samvat — Purnimanta panchang as observed by the Ramanandi
+  // Sampradaya at Ayodhya, Chitrakoot, Janakpur, Hanuman Garhi, and the
+  // Ramanandi akhadas. The Ramanandi reckoning treats every lunar month as
+  // ending on Purnima (full moon), not Amavasya — hence festivals tied to
+  // Krishna-paksha tithis fall in a different Vikram Samvat month than under
+  // the Amanta system used in southern India. Tithi-to-date conversions
+  // cross-checked against the Ayodhya Vikram Samvat Purnimanta panchang for
+  // 2026 (Vikram Samvat 2083) and 2027 (Vikram Samvat 2084).
   {
     id: "ram-navami-ramanandi",
     name: "Ram Navami (Ramanandi)",
@@ -6450,6 +6458,69 @@ export const vrats: Vrat[] = [
     color: "#B91C1C",
     description: "Vivah Panchami — the day Bhagavan Ram and Devi Sita were wed at Janakpur after Ram broke the Pinaka-bow of Shiva. Margashirsha Shukla Panchami. Ayodhya, Janakpur, and every Ramanandi mandir reenacts the wedding through the night with full vivah-vidhi, wedding bhog, and continuous Siyaram-naam.",
     specialNote: "Janakpur (Sita's birth-place) and Ayodhya (Ram's birth-place) become one through the symbolic baraat (wedding procession) that travels between them in the Ramanandi reenactment.",
+    region: "rajasthan-up-bihar",
+    regionLabel: "North India",
+  },
+  {
+    id: "purnima-ramanandi",
+    name: "Purnima Vrat (Ramanandi)",
+    // Recurring monthly fast on every Purnima (full moon) per the Ramanandi
+    // Vikram Samvat Purnimanta calendar. Seeded from the next observance
+    // (12 May 2026) and projected forward through 2027 at lunar-monthly
+    // (~29-30 day) intervals.
+    dates: [
+      "2026-05-12",
+      "2026-06-10",
+      "2026-07-10",
+      "2026-08-08",
+      "2026-09-07",
+      "2026-10-06",
+      "2026-11-05",
+      "2026-12-04",
+      "2027-01-03",
+      "2027-02-01",
+      "2027-03-03",
+      "2027-04-01",
+      "2027-05-01",
+      "2027-05-30",
+      "2027-06-29",
+      "2027-07-28",
+      "2027-08-27",
+      "2027-09-25",
+      "2027-10-25",
+      "2027-11-23",
+      "2027-12-22",
+    ],
+    deity: "Sita-Ram darbar (Sri Ram, Devi Sita, Lakshman, Hanuman) on the night of the full moon",
+    tradition: "Ramanandi",
+    foodsAllowed: [
+      "Fresh fruits — banana, mango, pomegranate, sitaphal, chikoo, grapes",
+      "Milk, curd, ghee, panchamrit (milk + curd + honey + ghee + sugar)",
+      "Sabudana khichdi and kheer",
+      "Kuttu atta puri with aloo sabzi (sendha namak only)",
+      "Singhara atta halwa",
+      "Rajgira (amaranth) ladoo",
+      "Sama (samvat) rice kheer",
+      "Charanamrita with tulsi from the Ram darbar",
+      "Dry fruits — cashew, almond, raisins, mishri",
+      "Sendha namak only — never regular salt",
+    ],
+    foodsAvoided: [
+      "All grains — wheat, rice, daals (strict on the fast day)",
+      "Onion, garlic, brinjal — always in Ramanandi vaishnav tradition",
+      "Regular salt",
+      "Meat, fish, eggs, alcohol — never",
+      "Food not first offered to the Sita-Ram darbar",
+    ],
+    mantra: "श्री राम जय राम जय जय राम",
+    mantraTransliteration: "Shri Ram Jaya Ram Jaya Jaya Ram",
+    mantraTranslation: "Glory to Sri Ram, victory to Ram, victory victory to Ram — the foundational Ramanandi mantra, recited 108 times under the full moon.",
+    mantraHow: "Begin the fast at sunrise on Purnima with sankalpa before the Sita-Ram darbar. Read the Sundara Kanda of Tulsidas's Ramcharitmanas through the day. At moonrise, offer arghya (water with kusha grass) to the full moon facing east, then perform the evening abhishekam of the Ram darbar with panchamrit. Chant 'Shri Ram Jaya Ram Jaya Jaya Ram' 108 times on a tulsi mala. Break the fast after moonrise with phalahar prasad.",
+    mantraBenefits: "The Ramanandi Sampradaya holds Purnima as the most auspicious tithi for Ram-bhakti — the full moon represents Sri Ram's complete, unwaning grace. Observing every Purnima fast through the year is held to bring the punya of a full Chaturmas vrat and the unwavering grace of Hanuman ji.",
+    mealIdea: "Sabudana kheer for the morning naivedya; kuttu puri with aloo sabzi (sendha namak) and singhara halwa for the noon Ram darbar bhog; phalahar — fresh fruits, panchamrit, rajgira ladoo — after moonrise to break the fast.",
+    color: "#B91C1C",
+    description: "Purnima Vrat — the recurring monthly full-moon fast of the Ramanandi Sampradaya. Per the Vikram Samvat Purnimanta panchang followed at Ayodhya, every Purnima marks the close of a lunar month and is observed as a complete Sita-Ram seva day. Fasting from sunrise, Sundara Kanda parayan through the day, and abhishekam of the Ram darbar at moonrise are the three core practices.",
+    specialNote: "Dates follow the Ramanandi Vikram Samvat Purnimanta calendar as observed at Ayodhya, Chitrakoot, and Janakpur — these may vary by 1-2 days from generic Drik Panchang Purnima dates because of regional sunrise-tithi reckoning. When Purnima coincides with a major Ramanandi observance already in your calendar (e.g. Hanuman Jayanti on Chaitra Purnima, Buddha Purnima, Sharad Purnima, Kartik Purnima), follow the practice of that festival in addition to the regular Purnima fast.",
     region: "rajasthan-up-bihar",
     regionLabel: "North India",
   },
