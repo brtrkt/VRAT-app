@@ -6673,11 +6673,12 @@ export const vrats: Vrat[] = [
   },
 
   // ─── Shaiva Siddhanta (Tamil Shaiva — Tirumular, 63 Nayanmars) ────────────
-  // Source: Tamil Drik Panchang (drikpanchang.com — Chennai geoname-id 1264527)
-  // — used as fallback until a Shaiva-Siddhanta-specific authoritative source
-  // (e.g., a Tamil Shaiva matha panchangam) is wired in. Pradosha dates are
-  // observed when Trayodashi tithi prevails after sunset; values below are
-  // for Chennai and may shift ±1 day for other Tamil sunset locations.
+  // Source: [Thirukanthika Panchangam — Tamil Shaiva system] used by
+  // Chidambaram Nataraja Temple, Madurai Meenakshi-Sundareshwarar Temple,
+  // Thiruvannamalai Arunachaleswara Temple, and the major Tamil Shaiva
+  // mathas. Pradosha dates are observed when Trayodashi tithi prevails
+  // after sunset; values below are for Chennai/Tamil Nadu and may shift
+  // ±1 day for other Tamil sunset locations.
   {
     id: "maha-shivaratri-shaiva",
     name: "Maha Shivaratri (Shaiva Siddhanta)",

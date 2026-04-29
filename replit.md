@@ -138,7 +138,7 @@ Per `attached_assets/VRAT_Master_Calendar_Sources_*.pdf` (Dr. Rachna Tiwari, las
 | Ramanandi / Ram Bhakti | Drik Panchang (Hindi) | drikpanchang.com (Hindi) |
 | Sri Vaishnava | Vakya Panchangam (Srirangam / Tirumala traditional) — fallback for now, to be updated later | srirangaminfo.com/vakya-panchangam-srirangam.php |
 | Shakta | Drik Panchang + Shakta Panchang | drikpanchang.com |
-| Shaiva Siddhanta | Tamil Drik Panchang (Chennai) — fallback for now, to be updated later | drikpanchang.com (Tamil, geoname-id 1264527) |
+| Shaiva Siddhanta | Thirukanthika Panchangam — Tamil Shaiva system (Chidambaram, Madurai, Thiruvannamalai) | Thirukanthika Panchangam (Tamil Shaiva matha publication) |
 
 ### Regional Festival Layer (shows for ALL users in that state, regardless of sampradaya)
 
