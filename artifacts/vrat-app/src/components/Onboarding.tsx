@@ -22,7 +22,7 @@ interface Props {
 }
 
 // ─── Vrat catalogue for Screen 3 ────────────────────────────────────────────
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" }[] = [
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Warkari" | "Ramanandi" | "SriVaishnava" | "Shakta" | "ShaivaSiddhanta" }[] = [
   { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                      tradition: "Hindu" },
   { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",          tradition: "Hindu" },
   { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",     tradition: "Hindu" },
@@ -85,6 +85,36 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "annakut-pushti-marg",   label: "Annakut & Govardhan Puja", subtitle: "Day after Deepawali · Chappan Bhog seva",             tradition: "PushtiMarg" },
   { id: "phoolon-wali-holi",     label: "Phoolon wali Holi",    subtitle: "Falgun Purnima · flower Holi at Shrinathji's haveli",   tradition: "PushtiMarg" },
   { id: "hindola-utsav",         label: "Hindola Utsav",         subtitle: "Ashadha–Shravana · 40-day swing festival begins",        tradition: "PushtiMarg" },
+
+  { id: "ashadhi-ekadashi-warkari",   label: "Ashadhi Ekadashi (Devshayani)",      subtitle: "Pandharpur Wari · Vitthal yoga-nidra begins",            tradition: "Warkari" },
+  { id: "kartiki-ekadashi-warkari",   label: "Kartiki Ekadashi (Prabodhini)",      subtitle: "Vitthal awakens · second Pandharpur Wari",               tradition: "Warkari" },
+  { id: "maghi-ekadashi-warkari",     label: "Maghi Ekadashi (Jaya)",              subtitle: "Jaya Ekadashi · prelude to Tukaram Beej",                 tradition: "Warkari" },
+  { id: "tukaram-beej",               label: "Tukaram Beej",                       subtitle: "Sant Tukaram's vaikuntha-gaman at Dehu",                  tradition: "Warkari" },
+  { id: "dnyaneshwar-punyatithi",     label: "Dnyaneshwar Punyatithi",             subtitle: "Mauli's Sanjeevan Samadhi at Alandi",                     tradition: "Warkari" },
+
+  { id: "ram-navami-ramanandi",       label: "Ram Navami (Ramanandi)",             subtitle: "Sri Ram's appearance · Ayodhya darshan",                  tradition: "Ramanandi" },
+  { id: "hanuman-jayanti-ramanandi",  label: "Hanuman Jayanti (Ramanandi)",        subtitle: "Sankat Mochan · Sundara Kanda parayan",                   tradition: "Ramanandi" },
+  { id: "sita-navami",                label: "Sita Navami (Janaki Jayanti)",       subtitle: "Devi Sita's appearance at Janakpur",                      tradition: "Ramanandi" },
+  { id: "vivah-panchami",             label: "Vivah Panchami",                     subtitle: "Sita-Ram divine wedding day",                              tradition: "Ramanandi" },
+  { id: "tulsi-vivah-ramanandi",      label: "Tulsi Vivah (Ramanandi)",            subtitle: "Tulsi-Vrinda married to Shaligram-Ram",                   tradition: "Ramanandi" },
+
+  { id: "vaikuntha-ekadashi",         label: "Vaikuntha Ekadashi (Mukkoti)",       subtitle: "Northern Gate of Vaikuntha opens · Margazhi",            tradition: "SriVaishnava" },
+  { id: "adhyayana-utsavam",          label: "Adhyayana Utsavam",                  subtitle: "22-day Tiruvaymozhi recitation at Srirangam",            tradition: "SriVaishnava" },
+  { id: "ramanuja-jayanti",           label: "Ramanuja Jayanti",                   subtitle: "Sri Ramanujacharya's Tirunakshatram",                     tradition: "SriVaishnava" },
+  { id: "pavitrotsavam",              label: "Pavitrotsavam",                      subtitle: "Annual Pancharatra purification festival",                tradition: "SriVaishnava" },
+  { id: "brahmotsavam-srivaishnava",  label: "Brahmotsavam (Tirumala)",            subtitle: "9-day vahana procession · Garuda Sevai peak",             tradition: "SriVaishnava" },
+
+  { id: "sharadiya-navaratri-shakta", label: "Sharadiya Navaratri (Shakta)",       subtitle: "Bengali Durga Puja · 9 nights of Devi",                   tradition: "Shakta" },
+  { id: "maha-ashtami-shakta",        label: "Maha Ashtami (Sandhi Puja)",         subtitle: "Day 8 of Navaratri · 48-min Sandhi window",               tradition: "Shakta" },
+  { id: "lakshmi-puja-shakta",        label: "Lakshmi Puja (Kojagari)",            subtitle: "Sharad Purnima · all-night vigil for Maa Lakshmi",        tradition: "Shakta" },
+  { id: "kali-puja-shakta",           label: "Kali Puja (Shyama Puja)",            subtitle: "Karthik Amavasya · midnight Kali worship",                tradition: "Shakta" },
+  { id: "chaitra-navaratri-shakta",   label: "Chaitra Navaratri (Shakta)",         subtitle: "Spring Navaratri · ends with Ram Navami",                 tradition: "Shakta" },
+
+  { id: "maha-shivaratri-shaiva",     label: "Maha Shivaratri (Shaiva)",           subtitle: "All-night vigil · 4-prahar abhishekam at Chidambaram",   tradition: "ShaivaSiddhanta" },
+  { id: "pradosha-shaiva",            label: "Pradosha (Shaiva)",                  subtitle: "Trayodashi sunset puja · 24 days a year",                 tradition: "ShaivaSiddhanta" },
+  { id: "aarudra-darshan",            label: "Aarudra Darshan",                    subtitle: "Nataraja's Ananda Tandava · Margazhi Tiruvathirai",       tradition: "ShaivaSiddhanta" },
+  { id: "karthigai-deepam-shaiva",    label: "Karthigai Deepam",                   subtitle: "Thiruvannamalai Maha Deepam · Tamil festival of lights",  tradition: "ShaivaSiddhanta" },
+  { id: "skanda-shashti-shaiva",      label: "Skanda Shashti (Soorasamharam)",     subtitle: "6-day Murugan vrat · Tiruchendur Soorasamharam",          tradition: "ShaivaSiddhanta" },
 ];
 
 const HINDU_DEFAULTS        = ["ekadashi", "purnima", "pradosh"];
@@ -95,15 +125,25 @@ const SWAMINARAYAN_DEFAULTS = ["swaminarayan-jayanti", "fuldol-swaminarayan", "e
 const ISKCON_DEFAULTS       = ["iskcon-ekadashi", "janmashtami-iskcon", "gaura-purnima", "radhashtami"];
 const LINGAYAT_DEFAULTS     = ["maha-shivaratri-lingayat", "somavara-lingayat", "basava-jayanti"];
 const PUSHTI_MARG_DEFAULTS  = ["ekadashi-pushti-marg", "janmashtami-pushti-marg", "annakut-pushti-marg", "phoolon-wali-holi"];
+const WARKARI_DEFAULTS         = ["ashadhi-ekadashi-warkari", "kartiki-ekadashi-warkari", "tukaram-beej", "dnyaneshwar-punyatithi"];
+const RAMANANDI_DEFAULTS       = ["ram-navami-ramanandi", "hanuman-jayanti-ramanandi", "sita-navami", "tulsi-vivah-ramanandi"];
+const SRIVAISHNAVA_DEFAULTS    = ["vaikuntha-ekadashi", "adhyayana-utsavam", "ramanuja-jayanti", "brahmotsavam-srivaishnava"];
+const SHAKTA_DEFAULTS          = ["sharadiya-navaratri-shakta", "maha-ashtami-shakta", "kali-puja-shakta", "chaitra-navaratri-shakta"];
+const SHAIVA_SIDDHANTA_DEFAULTS = ["maha-shivaratri-shaiva", "aarudra-darshan", "karthigai-deepam-shaiva", "skanda-shashti-shaiva"];
 
 function defaultsForTradition(t: Tradition): string[] {
-  if (t === "Hindu")        return HINDU_DEFAULTS;
-  if (t === "Jain")         return JAIN_DEFAULTS;
-  if (t === "Sikh")         return SIKH_DEFAULTS;
-  if (t === "Swaminarayan") return SWAMINARAYAN_DEFAULTS;
-  if (t === "ISKCON")       return ISKCON_DEFAULTS;
-  if (t === "Lingayat")     return LINGAYAT_DEFAULTS;
-  if (t === "PushtiMarg")   return PUSHTI_MARG_DEFAULTS;
+  if (t === "Hindu")            return HINDU_DEFAULTS;
+  if (t === "Jain")             return JAIN_DEFAULTS;
+  if (t === "Sikh")             return SIKH_DEFAULTS;
+  if (t === "Swaminarayan")     return SWAMINARAYAN_DEFAULTS;
+  if (t === "ISKCON")           return ISKCON_DEFAULTS;
+  if (t === "Lingayat")         return LINGAYAT_DEFAULTS;
+  if (t === "PushtiMarg")       return PUSHTI_MARG_DEFAULTS;
+  if (t === "Warkari")          return WARKARI_DEFAULTS;
+  if (t === "Ramanandi")        return RAMANANDI_DEFAULTS;
+  if (t === "SriVaishnava")     return SRIVAISHNAVA_DEFAULTS;
+  if (t === "Shakta")           return SHAKTA_DEFAULTS;
+  if (t === "ShaivaSiddhanta")  return SHAIVA_SIDDHANTA_DEFAULTS;
   return BOTH_DEFAULTS;
 }
 
@@ -175,6 +215,18 @@ function KhandaSvg({ className = "", style }: { className?: string; style?: CSSP
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 838" className={className} style={style} aria-hidden="true">
       <path d="M 382.877 20.123 C 369.559 30.822, 345.376 45.962, 330.750 52.758 L 324 55.895 324 60.716 C 324 63.367, 325.121 70.478, 326.491 76.518 C 330.918 96.036, 331.246 95.385, 314.461 100.337 C 256.870 117.327, 191.500 172.746, 164.465 227.500 C 128.787 299.759, 133.953 392.025, 177.399 458.500 C 205.721 501.836, 258.627 543.384, 305.275 558.925 C 319.415 563.636, 319.789 564.487, 315.501 582.186 C 311.341 599.359, 309.421 597.713, 335.145 599.034 C 362.888 600.459, 359.904 596.918, 363.140 632.263 C 364.614 648.366, 366.925 648.221, 339.819 633.723 C 252.035 586.770, 204.974 549.771, 163.695 495.259 C 67.338 368.009, 85.097 234.198, 213 123.764 C 234.742 104.992, 234.667 103.873, 212.041 109.559 C 110.139 135.170, 38.463 217.919, 19.001 332.424 C -3.183 462.948, 77.786 612.592, 213.874 692.578 C 223.306 698.122, 229.221 704.156, 231.270 710.324 C 233.906 718.262, 236.150 716.989, 261 693.454 C 278.715 676.677, 287.385 669.523, 297.935 662.980 L 306.023 657.964 315.262 664.154 C 330.925 674.649, 347.391 686.178, 349.711 688.277 C 352.765 691.038, 351.984 692.143, 339.263 703.039 C 313.054 725.490, 308.858 729.378, 303.067 736.577 C 282.832 761.731, 290.623 784.971, 319.300 784.994 C 330.385 785.004, 333.416 782.872, 342.754 768.500 C 346.597 762.584, 352.819 754.927, 357.990 749.750 C 373.817 733.904, 377.458 740.437, 362.850 758.470 C 333.229 795.033, 383.820 841.515, 416.786 808.026 C 431.330 793.250, 431.601 775.970, 417.578 757.500 C 411.168 749.057, 410 746.910, 410 743.566 C 410 734.605, 425.868 749.290, 441.223 772.463 C 451.449 787.894, 469.510 790.098, 482.357 777.483 C 498.744 761.393, 491.697 745.849, 452.882 712.466 C 432.026 694.528, 428.655 691.121, 430.072 689.413 C 430.659 688.706, 441.041 681.316, 453.142 672.992 L 475.144 657.858 482.035 661.952 C 491.830 667.771, 501.058 675.358, 520.523 693.600 C 544.940 716.481, 546.929 717.777, 549.146 712.250 C 553.075 702.455, 555.873 699.765, 573.512 688.823 C 660.606 634.799, 723.719 555.962, 752.815 464.849 C 802.830 308.231, 705.681 131.137, 556.250 106.524 C 547.729 105.121, 550.304 108.484, 571.500 126.448 C 654.376 196.686, 688.599 278.271, 674.504 372 C 661.836 456.236, 588.780 548.821, 488.500 607.724 C 467.194 620.239, 420.825 645, 418.695 645 C 417.216 645, 419.673 608.756, 421.553 602.832 C 422.335 600.370, 423.498 600.193, 446.302 599.048 C 471.150 597.801, 470.002 598.724, 466.055 583.167 C 461.173 563.920, 460.979 564.315, 478.486 557.960 C 610.741 509.951, 674.863 366.463, 621.629 237.646 C 598.393 181.420, 529.902 119.704, 470.500 101.468 C 453.923 96.379, 453.151 96.050, 452.427 93.771 C 452.076 92.664, 453.259 84.451, 455.056 75.521 C 458.967 56.086, 459.278 57.164, 448.152 51.576 C 432.526 43.728, 411.049 30.140, 398.803 20.352 C 390.615 13.808, 390.737 13.809, 382.877 20.123 M 329.723 164.487 C 173.505 220.082, 164.045 413.813, 313.840 489.732 C 335.376 500.647, 334.660 501.050, 339.953 475 C 353.029 410.637, 357.976 316.778, 352.180 243 C 345.822 162.064, 344.963 159.063, 329.723 164.487 M 438.720 164.138 C 433.355 172.743, 426.995 257.397, 427.010 320 C 427.027 389.999, 430.285 424.681, 441.616 475.500 C 447.333 501.142, 445.886 499.900, 461.500 492.567 C 615.210 420.383, 612.274 229.328, 456.490 166.524 C 444.255 161.592, 440.613 161.102, 438.720 164.138" fill="currentColor" fillRule="evenodd" stroke="none" />
+    </svg>
+  );
+}
+
+function BowArrowSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" aria-hidden="true">
+      <path d="M14 6 C 32 18, 32 42, 14 54" />
+      <line x1="14" y1="6" x2="14" y2="54" strokeWidth="1.5" strokeDasharray="2 2" />
+      <line x1="20" y1="30" x2="52" y2="30" />
+      <polyline points="44,22 52,30 44,38" fill="none" />
+      <polyline points="20,26 14,30 20,34" fill="none" strokeWidth="2" />
     </svg>
   );
 }
@@ -322,13 +374,18 @@ export default function Onboarding({ onComplete }: Props) {
   }
 
   const visibleVrats =
-    tradition === "Hindu"        ? VRAT_OPTIONS.filter((v) => v.tradition === "Hindu") :
-    tradition === "Jain"         ? VRAT_OPTIONS.filter((v) => v.tradition === "Jain") :
-    tradition === "Sikh"         ? VRAT_OPTIONS.filter((v) => v.tradition === "Sikh") :
-    tradition === "Swaminarayan" ? VRAT_OPTIONS.filter((v) => v.tradition === "Swaminarayan") :
-    tradition === "ISKCON"       ? VRAT_OPTIONS.filter((v) => v.tradition === "ISKCON") :
-    tradition === "Lingayat"     ? VRAT_OPTIONS.filter((v) => v.tradition === "Lingayat") :
-    tradition === "PushtiMarg"   ? VRAT_OPTIONS.filter((v) => v.tradition === "PushtiMarg") :
+    tradition === "Hindu"            ? VRAT_OPTIONS.filter((v) => v.tradition === "Hindu") :
+    tradition === "Jain"             ? VRAT_OPTIONS.filter((v) => v.tradition === "Jain") :
+    tradition === "Sikh"             ? VRAT_OPTIONS.filter((v) => v.tradition === "Sikh") :
+    tradition === "Swaminarayan"     ? VRAT_OPTIONS.filter((v) => v.tradition === "Swaminarayan") :
+    tradition === "ISKCON"           ? VRAT_OPTIONS.filter((v) => v.tradition === "ISKCON") :
+    tradition === "Lingayat"         ? VRAT_OPTIONS.filter((v) => v.tradition === "Lingayat") :
+    tradition === "PushtiMarg"       ? VRAT_OPTIONS.filter((v) => v.tradition === "PushtiMarg") :
+    tradition === "Warkari"          ? VRAT_OPTIONS.filter((v) => v.tradition === "Warkari") :
+    tradition === "Ramanandi"        ? VRAT_OPTIONS.filter((v) => v.tradition === "Ramanandi") :
+    tradition === "SriVaishnava"     ? VRAT_OPTIONS.filter((v) => v.tradition === "SriVaishnava") :
+    tradition === "Shakta"           ? VRAT_OPTIONS.filter((v) => v.tradition === "Shakta") :
+    tradition === "ShaivaSiddhanta"  ? VRAT_OPTIONS.filter((v) => v.tradition === "ShaivaSiddhanta") :
     VRAT_OPTIONS.filter((v) => v.tradition === "Hindu" || v.tradition === "Jain");
 
   return (
@@ -436,6 +493,71 @@ export default function Onboarding({ onComplete }: Props) {
                   <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>श्री नाथजी · Janmashtami · Annakut · Hindola Utsav</span>
                 </div>
               </button>
+
+              {/* Warkari — full-width */}
+              <button
+                onClick={() => { chooseTradition("Warkari"); setStep(2); }}
+                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <LotusSvg className="w-9 h-10" style={{ color: "#FED7AA" }} />
+                <div className="text-left">
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Warkari (Vitthal-Vithoba)</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>विठ्ठल · Pandharpur Wari · Tukaram Beej · Dnyaneshwar</span>
+                </div>
+              </button>
+
+              {/* Ramanandi — full-width */}
+              <button
+                onClick={() => { chooseTradition("Ramanandi"); setStep(2); }}
+                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <BowArrowSvg className="w-10 h-10" style={{ color: "#FECACA" }} />
+                <div className="text-left">
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Ramanandi Sampraday</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>सीताराम · Ram Navami · Hanuman Jayanti · Ayodhya</span>
+                </div>
+              </button>
+
+              {/* Sri Vaishnava — full-width */}
+              <button
+                onClick={() => { chooseTradition("SriVaishnava"); setStep(2); }}
+                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <LotusSvg className="w-9 h-10" style={{ color: "#FDE68A" }} />
+                <div className="text-left">
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Sri Vaishnava (Iyengar)</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>ஓம் நமோ நாராயணாய · Vaikuntha Ekadashi · Ramanuja · Srirangam</span>
+                </div>
+              </button>
+
+              {/* Shakta — full-width */}
+              <button
+                onClick={() => { chooseTradition("Shakta"); setStep(2); }}
+                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <TrisulaSvg className="w-7 h-10" style={{ color: "#FBCFE8" }} />
+                <div className="text-left">
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Shakta (Devi worship)</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>दुर्गा काली · Bengali Durga Puja · Kali Puja · Navaratri</span>
+                </div>
+              </button>
+
+              {/* Shaiva Siddhanta — full-width */}
+              <button
+                onClick={() => { chooseTradition("ShaivaSiddhanta"); setStep(2); }}
+                className="col-span-2 flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <TrisulaSvg className="w-7 h-10" style={{ color: "#E5E7EB" }} />
+                <div className="text-left">
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Shaiva Siddhanta (Tamil Shaiva)</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>ஓம் நமச்சிவாய · Nataraja · Aarudra · Karthigai · Skanda Shashti</span>
+                </div>
+              </button>
             </div>
 
           </div>
@@ -506,6 +628,41 @@ export default function Onboarding({ onComplete }: Props) {
                     subtitle: "Ekadashi (seva-based), Janmashtami, Annakut, Hindola Utsav",
                     icon: <PeacockFeatherSvg className="w-10 h-14" style={{ color: "#0E7490" }} />,
                     accent: "#0E7490",
+                  },
+                  {
+                    value: "Warkari" as Tradition,
+                    label: "Warkari (Vitthal-Vithoba)",
+                    subtitle: "Pandharpur Wari, Tukaram Beej, Dnyaneshwar Punyatithi",
+                    icon: <LotusSvg className="w-12 h-12" style={{ color: "#DC6803" }} />,
+                    accent: "#DC6803",
+                  },
+                  {
+                    value: "Ramanandi" as Tradition,
+                    label: "Ramanandi Sampraday",
+                    subtitle: "Ram Navami, Hanuman Jayanti, Sita Navami, Tulsi Vivah",
+                    icon: <BowArrowSvg className="w-12 h-12" style={{ color: "#B91C1C" }} />,
+                    accent: "#B91C1C",
+                  },
+                  {
+                    value: "SriVaishnava" as Tradition,
+                    label: "Sri Vaishnava (Iyengar)",
+                    subtitle: "Vaikuntha Ekadashi, Ramanuja Jayanti, Brahmotsavam, Adhyayana Utsavam",
+                    icon: <LotusSvg className="w-12 h-12" style={{ color: "#B45309" }} />,
+                    accent: "#B45309",
+                  },
+                  {
+                    value: "Shakta" as Tradition,
+                    label: "Shakta (Devi worship)",
+                    subtitle: "Sharadiya & Chaitra Navaratri, Durga Ashtami, Kali Puja, Lakshmi Puja",
+                    icon: <TrisulaSvg className="w-10 h-12" style={{ color: "#BE185D" }} />,
+                    accent: "#BE185D",
+                  },
+                  {
+                    value: "ShaivaSiddhanta" as Tradition,
+                    label: "Shaiva Siddhanta (Tamil Shaiva)",
+                    subtitle: "Maha Shivaratri, Pradosha, Aarudra Darshan, Karthigai Deepam, Skanda Shashti",
+                    icon: <TrisulaSvg className="w-10 h-12" style={{ color: "#475569" }} />,
+                    accent: "#475569",
                   },
                 ] as const
               ).map((opt) => {

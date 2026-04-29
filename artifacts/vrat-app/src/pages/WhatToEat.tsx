@@ -421,10 +421,15 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
   const { t } = useLanguage();
   const traditionSpecific = getTraditionSpecificFoods(vrat);
   const tradLabel =
-    vrat.tradition === "Lingayat"     ? "Lingayat Tradition" :
-    vrat.tradition === "PushtiMarg"   ? "Pushti Marg Tradition" :
-    vrat.tradition === "Swaminarayan" ? "Swaminarayan Tradition" :
-    vrat.tradition === "ISKCON"       ? "ISKCON / Vaishnava Tradition" :
+    vrat.tradition === "Lingayat"        ? "Lingayat Tradition" :
+    vrat.tradition === "PushtiMarg"      ? "Pushti Marg Tradition" :
+    vrat.tradition === "Swaminarayan"    ? "Swaminarayan Tradition" :
+    vrat.tradition === "ISKCON"          ? "ISKCON / Vaishnava Tradition" :
+    vrat.tradition === "Warkari"         ? "Warkari Tradition" :
+    vrat.tradition === "Ramanandi"       ? "Ramanandi Tradition" :
+    vrat.tradition === "SriVaishnava"    ? "Sri Vaishnava Tradition" :
+    vrat.tradition === "Shakta"          ? "Shakta Tradition" :
+    vrat.tradition === "ShaivaSiddhanta" ? "Shaiva Siddhanta Tradition" :
     null;
   const layer2Title = tradLabel
     ? `${tradLabel} — Special Foods for this Vrat`

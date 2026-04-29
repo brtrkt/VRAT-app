@@ -445,17 +445,22 @@ function CalendarGrid({
   );
 }
 
-type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan" | "iskcon" | "lingayat" | "pushtimarg";
+type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan" | "iskcon" | "lingayat" | "pushtimarg" | "warkari" | "ramanandi" | "srivaishnava" | "shakta" | "shaivasiddhanta";
 
 const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
-  { value: "all",          label: "All" },
-  { value: "hindu",        label: "Hindu" },
-  { value: "jain",         label: "Jain" },
-  { value: "sikh",         label: "Sikh" },
-  { value: "swaminarayan", label: "Swaminarayan" },
-  { value: "iskcon",       label: "ISKCON" },
-  { value: "lingayat",     label: "Lingayat" },
-  { value: "pushtimarg",   label: "Pushti Marg" },
+  { value: "all",             label: "All" },
+  { value: "hindu",           label: "Hindu" },
+  { value: "jain",            label: "Jain" },
+  { value: "sikh",            label: "Sikh" },
+  { value: "swaminarayan",    label: "Swaminarayan" },
+  { value: "iskcon",          label: "ISKCON" },
+  { value: "lingayat",        label: "Lingayat" },
+  { value: "pushtimarg",      label: "Pushti Marg" },
+  { value: "warkari",         label: "Warkari" },
+  { value: "ramanandi",       label: "Ramanandi" },
+  { value: "srivaishnava",    label: "Sri Vaishnava" },
+  { value: "shakta",          label: "Shakta" },
+  { value: "shaivasiddhanta", label: "Shaiva Siddhanta" },
 ];
 
 const HINDU_LEGEND = [
@@ -501,6 +506,40 @@ const PUSHTI_MARG_LEGEND = [
   { label: "Annakut · Govardhan Puja", color: "#0E7490" },
   { label: "Hindola Utsav · Phoolon wali Holi", color: "#0E7490" },
 ];
+const WARKARI_LEGEND = [
+  { label: "Ashadhi & Kartiki Ekadashi · Pandharpur Wari", color: "#DC6803" },
+  { label: "Maghi Ekadashi (Jaya)", color: "#DC6803" },
+  { label: "Tukaram Beej · Dehu", color: "#DC6803" },
+  { label: "Dnyaneshwar Punyatithi · Alandi", color: "#DC6803" },
+];
+const RAMANANDI_LEGEND = [
+  { label: "Ram Navami · Sri Ram's appearance", color: "#B91C1C" },
+  { label: "Hanuman Jayanti · Sankat Mochan", color: "#B91C1C" },
+  { label: "Sita Navami · Janaki Jayanti", color: "#B91C1C" },
+  { label: "Vivah Panchami · Sita-Ram wedding", color: "#B91C1C" },
+  { label: "Tulsi Vivah · Tulsi-Shaligram", color: "#B91C1C" },
+];
+const SRIVAISHNAVA_LEGEND = [
+  { label: "Vaikuntha Ekadashi (Mukkoti)", color: "#B45309" },
+  { label: "Adhyayana Utsavam · Tiruvaymozhi", color: "#B45309" },
+  { label: "Ramanuja Jayanti · Tirunakshatram", color: "#B45309" },
+  { label: "Pavitrotsavam · purification", color: "#B45309" },
+  { label: "Brahmotsavam (Tirumala)", color: "#B45309" },
+];
+const SHAKTA_LEGEND = [
+  { label: "Sharadiya Navaratri · Bengali Durga Puja", color: "#BE185D" },
+  { label: "Maha Ashtami · Sandhi Puja", color: "#BE185D" },
+  { label: "Lakshmi Puja (Kojagari)", color: "#BE185D" },
+  { label: "Kali Puja · Karthik Amavasya", color: "#BE185D" },
+  { label: "Chaitra Navaratri · Spring", color: "#BE185D" },
+];
+const SHAIVA_SIDDHANTA_LEGEND = [
+  { label: "Maha Shivaratri · 4-prahar abhishekam", color: "#475569" },
+  { label: "Pradosha · Trayodashi sunset", color: "#475569" },
+  { label: "Aarudra Darshan · Nataraja", color: "#475569" },
+  { label: "Karthigai Deepam · Thiruvannamalai", color: "#475569" },
+  { label: "Skanda Shashti · Soorasamharam", color: "#475569" },
+];
 
 export default function Calendar() {
   const { t } = useLanguage();
@@ -512,13 +551,18 @@ export default function Calendar() {
   const [selected, setSelected] = useState<{ dateStr: string; vrats: Vrat[] } | null>(null);
   const [filter, setFilter] = useState<TraditionFilter>(() => {
     const trad = getUserTradition();
-    if (trad === "Hindu")         return "hindu";
-    if (trad === "Jain")          return "jain";
-    if (trad === "Sikh")          return "sikh";
-    if (trad === "Swaminarayan")  return "swaminarayan";
-    if (trad === "ISKCON")        return "iskcon";
-    if (trad === "Lingayat")      return "lingayat";
-    if (trad === "PushtiMarg")    return "pushtimarg";
+    if (trad === "Hindu")            return "hindu";
+    if (trad === "Jain")             return "jain";
+    if (trad === "Sikh")             return "sikh";
+    if (trad === "Swaminarayan")     return "swaminarayan";
+    if (trad === "ISKCON")           return "iskcon";
+    if (trad === "Lingayat")         return "lingayat";
+    if (trad === "PushtiMarg")       return "pushtimarg";
+    if (trad === "Warkari")          return "warkari";
+    if (trad === "Ramanandi")        return "ramanandi";
+    if (trad === "SriVaishnava")     return "srivaishnava";
+    if (trad === "Shakta")           return "shakta";
+    if (trad === "ShaivaSiddhanta")  return "shaivasiddhanta";
     return "all";
   });
   const [observedVrats] = useState<string[]>(() => getObservedVrats());
@@ -543,8 +587,13 @@ export default function Calendar() {
           (filter === "sikh"         && v.tradition === "Sikh") ||
           (filter === "swaminarayan" && v.tradition === "Swaminarayan") ||
           (filter === "iskcon"       && v.tradition === "ISKCON") ||
-          (filter === "lingayat"     && v.tradition === "Lingayat") ||
-          (filter === "pushtimarg"  && v.tradition === "PushtiMarg");
+          (filter === "lingayat"        && v.tradition === "Lingayat") ||
+          (filter === "pushtimarg"      && v.tradition === "PushtiMarg") ||
+          (filter === "warkari"         && v.tradition === "Warkari") ||
+          (filter === "ramanandi"       && v.tradition === "Ramanandi") ||
+          (filter === "srivaishnava"    && v.tradition === "SriVaishnava") ||
+          (filter === "shakta"          && v.tradition === "Shakta") ||
+          (filter === "shaivasiddhanta" && v.tradition === "ShaivaSiddhanta");
         const regionOk = !v.region || !regionFilterActive || v.region === userRegion;
         return traditionOk && regionOk;
       }),
@@ -663,7 +712,7 @@ export default function Calendar() {
               />
               <span className="text-xs font-medium text-foreground">Your observed vrats (gold)</span>
             </div>
-            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "lingayat" ? LINGAYAT_LEGEND : filter === "pushtimarg" ? PUSHTI_MARG_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
+            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "lingayat" ? LINGAYAT_LEGEND : filter === "pushtimarg" ? PUSHTI_MARG_LEGEND : filter === "warkari" ? WARKARI_LEGEND : filter === "ramanandi" ? RAMANANDI_LEGEND : filter === "srivaishnava" ? SRIVAISHNAVA_LEGEND : filter === "shakta" ? SHAKTA_LEGEND : filter === "shaivasiddhanta" ? SHAIVA_SIDDHANTA_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
               <div key={item.label} className="flex items-center gap-2" data-testid={`legend-${item.label}`}>
                 <span
                   className="w-3 h-3 rounded-full flex-shrink-0"
@@ -718,6 +767,41 @@ export default function Calendar() {
               return (
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Dates follow Vikram Samvat (Drik Panchang IST). Pushti Marg is a seva-based tradition — consult your local haveli or Vaishnava Panchang for exact Utsav dates, as the Hindola Utsav dates and specific Chappan Bhog timing may vary by haveli tradition.
+                </p>
+              );
+            }
+            if (trad === "Warkari") {
+              return (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dates follow Drik Panchang IST. Pandharpur Wari (Ashadhi & Kartiki Ekadashi) draws lakhs of warkaris on foot to Vitthal-Rakhumai. Verify Tukaram Beej and Dnyaneshwar Punyatithi with the Sansthan at Dehu/Alandi.
+                </p>
+              );
+            }
+            if (trad === "Ramanandi") {
+              return (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dates follow Drik Panchang IST. Ramanandi observances center on Ayodhya, Janakpur and Chitrakoot. Tulsi Vivah and Vivah Panchami timings can vary slightly by Akhara — verify with your local Mahant.
+                </p>
+              );
+            }
+            if (trad === "SriVaishnava") {
+              return (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dates follow Drik Panchang IST. Vaikuntha Ekadashi and Adhyayana Utsavam are observed at Srirangam and other Divya Desams. Brahmotsavam (Tirumala) and Pavitrotsavam dates depend on temple-specific Pancharatra/Vaikhanasa Agama — verify with TTD or your kshetram.
+                </p>
+              );
+            }
+            if (trad === "Shakta") {
+              return (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dates follow Drik Panchang IST. Bengali Shakta tradition observes Sandhi Puja in a precise 48-minute window between Ashtami and Navami tithis — verify exact muhurta with your local Purohit. Kali Puja is observed on Karthik Amavasya (same night as Diwali).
+                </p>
+              );
+            }
+            if (trad === "ShaivaSiddhanta") {
+              return (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dates follow Drik Panchang IST (Tamil calendar). Aarudra Darshan is the Tiruvathirai nakshatra in Margazhi (Dec–Jan) at Chidambaram. Karthigai Deepam is Krittika nakshatra in Karthikai. Verify Skanda Shashti with Tiruchendur or your local Murugan kovil.
                 </p>
               );
             }

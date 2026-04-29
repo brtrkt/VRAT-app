@@ -603,8 +603,13 @@ const TRADITION_OPTIONS: { value: Tradition; label: string }[] = [
   { value: "Sikh",         label: "Sikh" },
   { value: "Swaminarayan", label: "Swaminarayan" },
   { value: "ISKCON",       label: "ISKCON" },
-  { value: "Lingayat",     label: "Lingayat" },
-  { value: "PushtiMarg",   label: "Pushti Marg" },
+  { value: "Lingayat",        label: "Lingayat" },
+  { value: "PushtiMarg",      label: "Pushti Marg" },
+  { value: "Warkari",         label: "Warkari" },
+  { value: "Ramanandi",       label: "Ramanandi" },
+  { value: "SriVaishnava",    label: "Sri Vaishnava" },
+  { value: "Shakta",          label: "Shakta" },
+  { value: "ShaivaSiddhanta", label: "Shaiva Siddhanta" },
 ];
 
 function TraditionSwitcher() {
@@ -680,8 +685,13 @@ export default function Home() {
               if (t === "Hindu")         return <OmSymbol className="text-primary text-3xl" />;
               if (t === "Swaminarayan") return <LotusSvg className="w-10 h-10" style={{ color: "#C4972A" }} />;
               if (t === "ISKCON")        return <IskconLogoSvg className="w-8 h-12" />;
-              if (t === "Lingayat")      return <TrisulaSvg className="w-8 h-11" style={{ color: "#9B2335" }} />;
-              if (t === "PushtiMarg")    return <PeacockFeatherSvg className="w-9 h-12" style={{ color: "#0E7490" }} />;
+              if (t === "Lingayat")        return <TrisulaSvg className="w-8 h-11" style={{ color: "#9B2335" }} />;
+              if (t === "PushtiMarg")      return <PeacockFeatherSvg className="w-9 h-12" style={{ color: "#0E7490" }} />;
+              if (t === "Warkari")         return <LotusSvg className="w-10 h-10" style={{ color: "#DC6803" }} />;
+              if (t === "Ramanandi")       return <span className="font-serif text-3xl" style={{ color: "#B91C1C" }} aria-hidden="true">ॐ</span>;
+              if (t === "SriVaishnava")    return <LotusSvg className="w-10 h-10" style={{ color: "#B45309" }} />;
+              if (t === "Shakta")          return <TrisulaSvg className="w-8 h-11" style={{ color: "#BE185D" }} />;
+              if (t === "ShaivaSiddhanta") return <TrisulaSvg className="w-8 h-11" style={{ color: "#475569" }} />;
               return (
                 <>
                   <OmSymbol className="text-primary text-3xl" />

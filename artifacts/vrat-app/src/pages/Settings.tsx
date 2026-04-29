@@ -39,7 +39,7 @@ const PRICES = {
   lifetime: { usd: "$49.99",       inr: "₹3,999"      },
 } as const;
 
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" }[] = [
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Warkari" | "Ramanandi" | "SriVaishnava" | "Shakta" | "ShaivaSiddhanta" }[] = [
   { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                           tradition: "Hindu" },
   { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",               tradition: "Hindu" },
   { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",          tradition: "Hindu" },
@@ -102,6 +102,36 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "annakut-pushti-marg",     label: "Annakut & Govardhan Puja",subtitle: "Day after Deepawali · Chappan Bhog seva",                tradition: "PushtiMarg" },
   { id: "phoolon-wali-holi",       label: "Phoolon wali Holi",       subtitle: "Falgun Purnima · flower Holi at Shrinathji's haveli", tradition: "PushtiMarg" },
   { id: "hindola-utsav",           label: "Hindola Utsav",           subtitle: "Ashadha Shukla 2 · 40-day swing festival",            tradition: "PushtiMarg" },
+
+  { id: "ashadhi-ekadashi-warkari",   label: "Ashadhi Ekadashi (Devshayani)",      subtitle: "Pandharpur Wari · Vitthal yoga-nidra begins",            tradition: "Warkari" },
+  { id: "kartiki-ekadashi-warkari",   label: "Kartiki Ekadashi (Prabodhini)",      subtitle: "Vitthal awakens · second Pandharpur Wari",               tradition: "Warkari" },
+  { id: "maghi-ekadashi-warkari",     label: "Maghi Ekadashi (Jaya)",              subtitle: "Jaya Ekadashi · prelude to Tukaram Beej",                 tradition: "Warkari" },
+  { id: "tukaram-beej",               label: "Tukaram Beej",                       subtitle: "Sant Tukaram's vaikuntha-gaman at Dehu",                  tradition: "Warkari" },
+  { id: "dnyaneshwar-punyatithi",     label: "Dnyaneshwar Punyatithi",             subtitle: "Mauli's Sanjeevan Samadhi at Alandi",                     tradition: "Warkari" },
+
+  { id: "ram-navami-ramanandi",       label: "Ram Navami (Ramanandi)",             subtitle: "Sri Ram's appearance · Ayodhya darshan",                  tradition: "Ramanandi" },
+  { id: "hanuman-jayanti-ramanandi",  label: "Hanuman Jayanti (Ramanandi)",        subtitle: "Sankat Mochan · Sundara Kanda parayan",                   tradition: "Ramanandi" },
+  { id: "sita-navami",                label: "Sita Navami (Janaki Jayanti)",       subtitle: "Devi Sita's appearance at Janakpur",                      tradition: "Ramanandi" },
+  { id: "vivah-panchami",             label: "Vivah Panchami",                     subtitle: "Sita-Ram divine wedding day",                              tradition: "Ramanandi" },
+  { id: "tulsi-vivah-ramanandi",      label: "Tulsi Vivah (Ramanandi)",            subtitle: "Tulsi-Vrinda married to Shaligram-Ram",                   tradition: "Ramanandi" },
+
+  { id: "vaikuntha-ekadashi",         label: "Vaikuntha Ekadashi (Mukkoti)",       subtitle: "Northern Gate of Vaikuntha opens · Margazhi",            tradition: "SriVaishnava" },
+  { id: "adhyayana-utsavam",          label: "Adhyayana Utsavam",                  subtitle: "22-day Tiruvaymozhi recitation at Srirangam",            tradition: "SriVaishnava" },
+  { id: "ramanuja-jayanti",           label: "Ramanuja Jayanti",                   subtitle: "Sri Ramanujacharya's Tirunakshatram",                     tradition: "SriVaishnava" },
+  { id: "pavitrotsavam",              label: "Pavitrotsavam",                      subtitle: "Annual Pancharatra purification festival",                tradition: "SriVaishnava" },
+  { id: "brahmotsavam-srivaishnava",  label: "Brahmotsavam (Tirumala)",            subtitle: "9-day vahana procession · Garuda Sevai peak",             tradition: "SriVaishnava" },
+
+  { id: "sharadiya-navaratri-shakta", label: "Sharadiya Navaratri (Shakta)",       subtitle: "Bengali Durga Puja · 9 nights of Devi",                   tradition: "Shakta" },
+  { id: "maha-ashtami-shakta",        label: "Maha Ashtami (Sandhi Puja)",         subtitle: "Day 8 of Navaratri · 48-min Sandhi window",               tradition: "Shakta" },
+  { id: "lakshmi-puja-shakta",        label: "Lakshmi Puja (Kojagari)",            subtitle: "Sharad Purnima · all-night vigil for Maa Lakshmi",        tradition: "Shakta" },
+  { id: "kali-puja-shakta",           label: "Kali Puja (Shyama Puja)",            subtitle: "Karthik Amavasya · midnight Kali worship",                tradition: "Shakta" },
+  { id: "chaitra-navaratri-shakta",   label: "Chaitra Navaratri (Shakta)",         subtitle: "Spring Navaratri · ends with Ram Navami",                 tradition: "Shakta" },
+
+  { id: "maha-shivaratri-shaiva",     label: "Maha Shivaratri (Shaiva)",           subtitle: "All-night vigil · 4-prahar abhishekam at Chidambaram",   tradition: "ShaivaSiddhanta" },
+  { id: "pradosha-shaiva",            label: "Pradosha (Shaiva)",                  subtitle: "Trayodashi sunset puja · 24 days a year",                 tradition: "ShaivaSiddhanta" },
+  { id: "aarudra-darshan",            label: "Aarudra Darshan",                    subtitle: "Nataraja's Ananda Tandava · Margazhi Tiruvathirai",       tradition: "ShaivaSiddhanta" },
+  { id: "karthigai-deepam-shaiva",    label: "Karthigai Deepam",                   subtitle: "Thiruvannamalai Maha Deepam · Tamil festival of lights",  tradition: "ShaivaSiddhanta" },
+  { id: "skanda-shashti-shaiva",      label: "Skanda Shashti (Soorasamharam)",     subtitle: "6-day Murugan vrat · Tiruchendur Soorasamharam",          tradition: "ShaivaSiddhanta" },
 ];
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
@@ -429,6 +459,11 @@ export default function Settings() {
       { value: "ISKCON",       label: "ISKCON / Vaishnava", subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik" },
       { value: "Lingayat",     label: "Lingayat / Veerashaiva", subtitle: "Maha Shivaratri, Shravana Somavara, Basava Jayanti" },
       { value: "PushtiMarg",   label: "Pushti Marg / Vallabha Sampraday", subtitle: "Ekadashi (seva-based), Janmashtami, Annakut, Hindola Utsav" },
+      { value: "Warkari",          label: "Warkari (Vitthal-Vithoba)",          subtitle: "Pandharpur Wari, Tukaram Beej, Dnyaneshwar Punyatithi" },
+      { value: "Ramanandi",        label: "Ramanandi Sampraday",                subtitle: "Ram Navami, Hanuman Jayanti, Sita Navami, Tulsi Vivah" },
+      { value: "SriVaishnava",     label: "Sri Vaishnava (Iyengar)",            subtitle: "Vaikuntha Ekadashi, Ramanuja Jayanti, Brahmotsavam" },
+      { value: "Shakta",           label: "Shakta (Devi worship)",              subtitle: "Sharadiya & Chaitra Navaratri, Durga Ashtami, Kali Puja" },
+      { value: "ShaivaSiddhanta",  label: "Shaiva Siddhanta (Tamil Shaiva)",    subtitle: "Maha Shivaratri, Pradosha, Aarudra Darshan, Karthigai Deepam" },
     ];
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
@@ -479,13 +514,23 @@ export default function Settings() {
     const iskconVrats       = VRAT_OPTIONS.filter((v) => v.tradition === "ISKCON");
     const lingayatVrats     = VRAT_OPTIONS.filter((v) => v.tradition === "Lingayat");
     const pushtiMargVrats   = VRAT_OPTIONS.filter((v) => v.tradition === "PushtiMarg");
-    const showHindu        = tradition === "Hindu";
-    const showJain         = tradition === "Jain";
-    const showSikh         = tradition === "Sikh";
-    const showSwaminarayan = tradition === "Swaminarayan";
-    const showISKCON       = tradition === "ISKCON";
-    const showLingayat     = tradition === "Lingayat";
-    const showPushtiMarg   = tradition === "PushtiMarg";
+    const warkariVrats         = VRAT_OPTIONS.filter((v) => v.tradition === "Warkari");
+    const ramanandiVrats       = VRAT_OPTIONS.filter((v) => v.tradition === "Ramanandi");
+    const sriVaishnavaVrats    = VRAT_OPTIONS.filter((v) => v.tradition === "SriVaishnava");
+    const shaktaVrats          = VRAT_OPTIONS.filter((v) => v.tradition === "Shakta");
+    const shaivaSiddhantaVrats = VRAT_OPTIONS.filter((v) => v.tradition === "ShaivaSiddhanta");
+    const showHindu            = tradition === "Hindu";
+    const showJain             = tradition === "Jain";
+    const showSikh             = tradition === "Sikh";
+    const showSwaminarayan     = tradition === "Swaminarayan";
+    const showISKCON           = tradition === "ISKCON";
+    const showLingayat         = tradition === "Lingayat";
+    const showPushtiMarg       = tradition === "PushtiMarg";
+    const showWarkari          = tradition === "Warkari";
+    const showRamanandi        = tradition === "Ramanandi";
+    const showSriVaishnava     = tradition === "SriVaishnava";
+    const showShakta           = tradition === "Shakta";
+    const showShaivaSiddhanta  = tradition === "ShaivaSiddhanta";
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
         <div className="max-w-md mx-auto px-5 pt-6 pb-8">
@@ -577,6 +622,71 @@ export default function Settings() {
           {showPushtiMarg && (
             <>
               {pushtiMargVrats.map((opt) => (
+                <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm font-medium text-foreground">{opt.label}</p>
+                    <p className="text-xs text-muted-foreground">{opt.subtitle}</p>
+                  </div>
+                  <Toggle on={isVratObserved(opt.id, observed)} onToggle={() => toggleVrat(opt.id)} />
+                </div>
+              ))}
+            </>
+          )}
+          {showWarkari && (
+            <>
+              {warkariVrats.map((opt) => (
+                <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm font-medium text-foreground">{opt.label}</p>
+                    <p className="text-xs text-muted-foreground">{opt.subtitle}</p>
+                  </div>
+                  <Toggle on={isVratObserved(opt.id, observed)} onToggle={() => toggleVrat(opt.id)} />
+                </div>
+              ))}
+            </>
+          )}
+          {showRamanandi && (
+            <>
+              {ramanandiVrats.map((opt) => (
+                <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm font-medium text-foreground">{opt.label}</p>
+                    <p className="text-xs text-muted-foreground">{opt.subtitle}</p>
+                  </div>
+                  <Toggle on={isVratObserved(opt.id, observed)} onToggle={() => toggleVrat(opt.id)} />
+                </div>
+              ))}
+            </>
+          )}
+          {showSriVaishnava && (
+            <>
+              {sriVaishnavaVrats.map((opt) => (
+                <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm font-medium text-foreground">{opt.label}</p>
+                    <p className="text-xs text-muted-foreground">{opt.subtitle}</p>
+                  </div>
+                  <Toggle on={isVratObserved(opt.id, observed)} onToggle={() => toggleVrat(opt.id)} />
+                </div>
+              ))}
+            </>
+          )}
+          {showShakta && (
+            <>
+              {shaktaVrats.map((opt) => (
+                <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm font-medium text-foreground">{opt.label}</p>
+                    <p className="text-xs text-muted-foreground">{opt.subtitle}</p>
+                  </div>
+                  <Toggle on={isVratObserved(opt.id, observed)} onToggle={() => toggleVrat(opt.id)} />
+                </div>
+              ))}
+            </>
+          )}
+          {showShaivaSiddhanta && (
+            <>
+              {shaivaSiddhantaVrats.map((opt) => (
                 <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
                   <div className="flex-1 mr-4">
                     <p className="text-sm font-medium text-foreground">{opt.label}</p>
