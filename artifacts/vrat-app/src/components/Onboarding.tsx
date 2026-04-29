@@ -74,6 +74,38 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "kartik-damodara",          label: "Kartik Damodara Month", subtitle: "Month-long vow · daily ghee lamp offering",           tradition: "ISKCON" },
   { id: "nityananda-trayodashi",    label: "Nityananda Trayodashi", subtitle: "Sri Nityananda Prabhu's appearance day",              tradition: "ISKCON" },
   { id: "narasimha-chaturdashi",    label: "Narasimha Chaturdashi", subtitle: "Vaishakha Shukla 14 · fast until sunset · Lord Narasimha", tradition: "ISKCON" },
+  // Mayapur Vaishnava Calendar additions — major festivals
+  { id: "ramanavami-iskcon",                  label: "Sri Rama Navami",                          subtitle: "Caitra Shukla 9 · no grains till sunset · Lord Rama's appearance",        tradition: "ISKCON" },
+  { id: "akshaya-tritiya-iskcon",             label: "Akshaya Tritiya / Chandana Yatra",         subtitle: "21-day sandalwood-cooling vrata for the deities begins",                  tradition: "ISKCON" },
+  { id: "snana-yatra-iskcon",                 label: "Sri Snana Yatra",                          subtitle: "Jyestha Purnima · Jagannatha's public bathing festival",                  tradition: "ISKCON" },
+  { id: "ratha-yatra-iskcon",                 label: "Sri Jagannatha Ratha Yatra",               subtitle: "Asadha Shukla 2 · the worldwide chariot festival",                        tradition: "ISKCON" },
+  { id: "hera-pancami-iskcon",                label: "Hera Pancami",                             subtitle: "Lakshmi Devi's visit to Jagannatha at Gundicha",                          tradition: "ISKCON" },
+  { id: "ulta-ratha-iskcon",                  label: "Ulta Ratha / Bahuda Yatra",                subtitle: "Return chariot procession 9 days after Ratha Yatra",                      tradition: "ISKCON" },
+  { id: "caturmasya-begins-iskcon",           label: "Sayana Ekadashi (Caturmasya begins)",      subtitle: "4-month Vishnu yoga-nidra vrata begins",                                  tradition: "ISKCON" },
+  { id: "jhulan-yatra-iskcon",                label: "Jhulan Yatra",                             subtitle: "5-day Radha-Krishna swing festival",                                      tradition: "ISKCON" },
+  { id: "balarama-purnima-iskcon",            label: "Sri Balarama Avirbhava",                   subtitle: "Sravana Purnima · Lord Balarama's appearance",                            tradition: "ISKCON" },
+  { id: "vyasa-puja-iskcon",                  label: "Sri Vyasa Puja (Srila Prabhupada Avirbhava)", subtitle: "ISKCON Founder-Acharya's appearance day",                              tradition: "ISKCON" },
+  { id: "lalita-sasthi-iskcon",               label: "Sri Lalita Sasthi",                        subtitle: "Bhadra Shukla 6 · chief sakhi of Radharani",                              tradition: "ISKCON" },
+  { id: "vamana-dvadasi-iskcon",              label: "Sri Vamana Avirbhava",                     subtitle: "Bhadra Shukla 12 · the 5th Dashavatara",                                  tradition: "ISKCON" },
+  { id: "bahulastami-iskcon",                 label: "Sri Radha-kunda Avirbhava (Bahulastami)",  subtitle: "Kartika Krishna 8 · midnight snana at Radha-kunda",                       tradition: "ISKCON" },
+  { id: "govardhan-puja-iskcon",              label: "Sri Govardhan Puja / Annakuta",            subtitle: "Day after Diwali · mountain of food offered to Govardhan",                tradition: "ISKCON" },
+  { id: "srila-prabhupada-tirobhava-iskcon",  label: "Srila Prabhupada Tirobhava",               subtitle: "Kartik Shukla 4 · ISKCON's most solemn day",                              tradition: "ISKCON" },
+  { id: "utthana-ekadashi-iskcon",            label: "Probodhini / Utthana Ekadashi",            subtitle: "Caturmasya ends · Lord Vishnu awakens",                                   tradition: "ISKCON" },
+  { id: "bhishma-pancaka-iskcon",             label: "Bhishma Pancaka",                          subtitle: "Final 5 days of Kartika · spiritual climax",                              tradition: "ISKCON" },
+  { id: "tulasi-vivaha-iskcon",               label: "Sri Tulasi-Saligrama Vivaha",              subtitle: "Wedding of Tulasi Devi to Saligrama-sila",                                tradition: "ISKCON" },
+  { id: "krishna-pushya-abhishek-iskcon",     label: "Sri Krishna Pushya Abhishek",              subtitle: "Pausha Purnima · Krishna's annual coronation",                            tradition: "ISKCON" },
+  // Acharya appearance / disappearance days
+  { id: "ramanujacarya-tirobhava-iskcon",     label: "Sri Ramanujacharya Tirobhava",             subtitle: "Founder-acharya of Sri Vaishnavism (in our parampara)",                   tradition: "ISKCON" },
+  { id: "sanatana-goswami-tirobhava-iskcon",  label: "Sri Sanatana Goswami Tirobhava",           subtitle: "Eldest of Six Goswamis · Sri Madana-mohana",                              tradition: "ISKCON" },
+  { id: "rupa-goswami-tirobhava-iskcon",      label: "Sri Rupa Goswami Tirobhava",               subtitle: "Founder of bhakti-rasa shastra · Sri Govindaji",                          tradition: "ISKCON" },
+  { id: "jiva-goswami-tirobhava-iskcon",      label: "Sri Jiva Goswami Tirobhava",               subtitle: "Author of Sat-sandarbhas · Sri Radha-Damodara",                           tradition: "ISKCON" },
+  { id: "haridasa-thakura-tirobhava-iskcon",  label: "Sri Haridasa Thakura Tirobhava",           subtitle: "Namacharya — supreme exemplar of the holy name",                          tradition: "ISKCON" },
+  { id: "narottama-dasa-tirobhava-iskcon",    label: "Sri Narottama Das Thakura Tirobhava",      subtitle: "Bengali bhajan poet · Prarthana / Prema-bhakti-candrika",                 tradition: "ISKCON" },
+  { id: "advaita-acarya-avirbhava-iskcon",    label: "Sri Advaita Acarya Avirbhava",             subtitle: "Eldest of the Pancha Tattva · called Sri Caitanya to descend",            tradition: "ISKCON" },
+  { id: "madhvacarya-tirobhava-iskcon",       label: "Sri Madhvacharya Tirobhava",               subtitle: "Founder of the Brahma-Madhva sampradaya in our parampara",                tradition: "ISKCON" },
+  { id: "bhaktivinoda-thakura-avirbhava-iskcon", label: "Srila Bhaktivinoda Thakura Avirbhava",  subtitle: "The Seventh Goswami · Srila Prabhupada's parama-parama-guru",             tradition: "ISKCON" },
+  { id: "bhaktisiddhanta-tirobhava-iskcon",   label: "Srila Bhakti Siddhanta Tirobhava",         subtitle: "Srila Prabhupada's diksha-guru · Gaudiya Math founder",                   tradition: "ISKCON" },
+  { id: "gaurakishora-tirobhava-iskcon",      label: "Srila Gaurakishora Das Babaji Tirobhava",  subtitle: "Srila Bhakti Siddhanta's diksha-guru · renunciate babaji",                tradition: "ISKCON" },
   { id: "ugadi-lingayat",            label: "Ugadi (Kannada New Year)", subtitle: "Feb 15 · Ishtalinga puja · Ugadi Pachadi",         tradition: "Lingayat" },
   { id: "maha-shivaratri-lingayat", label: "Maha Shivaratri",  subtitle: "Nirjala fast · all-night Ishtalinga worship",             tradition: "Lingayat" },
   { id: "somavara-lingayat",        label: "Shravana Somavara",   subtitle: "Mondays of Shravana · fruit fast · Ishtalinga puja to Lord Shiva",     tradition: "Lingayat" },
@@ -159,7 +191,7 @@ const JAIN_DEFAULTS         = ["paryushana", "navpad-oli", "samvatsari"];
 const SIKH_DEFAULTS         = ["guru-nanak-gurpurab", "baisakhi-sikh", "sangrand"];
 const BOTH_DEFAULTS         = ["ekadashi", "purnima", "pradosh", "paryushana", "navpad-oli"];
 const SWAMINARAYAN_DEFAULTS = ["swaminarayan-jayanti", "fuldol-swaminarayan", "ekadashi-swaminarayan-jan-1"];
-const ISKCON_DEFAULTS       = ["iskcon-ekadashi", "janmashtami-iskcon", "gaura-purnima", "radhashtami"];
+const ISKCON_DEFAULTS       = ["iskcon-ekadashi", "janmashtami-iskcon", "gaura-purnima", "radhashtami", "narasimha-chaturdashi", "kartik-damodara", "nityananda-trayodashi", "ramanavami-iskcon", "ratha-yatra-iskcon", "balarama-purnima-iskcon", "vyasa-puja-iskcon", "govardhan-puja-iskcon", "srila-prabhupada-tirobhava-iskcon", "tulasi-vivaha-iskcon"];
 const LINGAYAT_DEFAULTS     = ["maha-shivaratri-lingayat", "somavara-lingayat", "basava-jayanti"];
 const PUSHTI_MARG_DEFAULTS  = ["ekadashi-pushti-marg", "janmashtami-pushti-marg", "annakut-pushti-marg", "phoolon-wali-holi"];
 const WARKARI_DEFAULTS         = ["ashadhi-ekadashi-warkari", "kartiki-ekadashi-warkari", "tukaram-beej", "dnyaneshwar-punyatithi"];
