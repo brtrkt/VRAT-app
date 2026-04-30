@@ -254,6 +254,20 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "bishnoi-akshay-tritiya",        label: "Akshay Tritiya (Bishnoi)",          subtitle: "Vraksh-ropan · gau-daan · anna-daan",                      tradition: "Bishnoi" },
   { id: "bishnoi-devshayani-ekadashi",   label: "Devshayani Ekadashi (Chaturmas)",   subtitle: "Ashadh Shukla Ekadashi · 4-month vrat begins",             tradition: "Bishnoi" },
   { id: "bishnoi-govardhan-puja",        label: "Govardhan Puja / Annakut",          subtitle: "Karthika Shukla Pratipada · gau-puja · niyam #19",         tradition: "Bishnoi" },
+  { id: "bishnoi-hariyali-amavasya"           , label: "Hariyali Amavasya (Tree-Planting)"          , subtitle: "Shravana amavasya · vraksh-ropan · niyams 16-17"                  , tradition: "Bishnoi" },
+  { id: "bishnoi-hariyali-teej"               , label: "Hariyali Teej"                              , subtitle: "Shravana Shukla Tritiya · Marwari women · monsoon"                , tradition: "Bishnoi" },
+  { id: "bishnoi-vat-savitri-amavasya"        , label: "Vat Savitri Amavasya"                       , subtitle: "Jyeshtha amavasya · banyan worship · married women"               , tradition: "Bishnoi" },
+  { id: "bishnoi-diwali-lakshmi-puja"         , label: "Diwali / Lakshmi Puja (No Crackers)"        , subtitle: "Karthika amavasya · ghee diyas · niyams 6-7"                      , tradition: "Bishnoi" },
+  { id: "bishnoi-devuthani-ekadashi"          , label: "Devuthani Ekadashi (Chaturmas Ends)"        , subtitle: "Karthika Shukla Ekadashi · Vishnu wakes"                          , tradition: "Bishnoi" },
+  { id: "bishnoi-tulsi-vivah"                 , label: "Tulsi Vivah"                                , subtitle: "Karthika Shukla Dwadashi · tulsi-shaligram wedding"               , tradition: "Bishnoi" },
+  { id: "bishnoi-karthika-purnima"            , label: "Karthika Purnima / Dev Diwali"              , subtitle: "Karthika Purnima · snan · ghee diyas"                             , tradition: "Bishnoi" },
+  { id: "bishnoi-nirjala-ekadashi"            , label: "Nirjala Ekadashi (Bhima Ekadashi)"          , subtitle: "Jyeshtha Shukla Ekadashi · 24-hr dry fast"                        , tradition: "Bishnoi" },
+  { id: "bishnoi-maha-shivaratri"             , label: "Maha Shivaratri (Bishnoi)"                  , subtitle: "Magha Krishna Chaturdashi · all-night jagran"                     , tradition: "Bishnoi" },
+  { id: "bishnoi-vasant-panchami"             , label: "Vasant Panchami / Saraswati Puja"           , subtitle: "Magha Shukla Panchami · akshar-abhyasam"                          , tradition: "Bishnoi" },
+  { id: "bishnoi-ram-navami"                  , label: "Ram Navami"                                 , subtitle: "Chaitra Shukla Navami · Sri Ram's appearance"                     , tradition: "Bishnoi" },
+  { id: "bishnoi-hanuman-jayanti"             , label: "Hanuman Jayanti"                            , subtitle: "Chaitra Purnima · Hanuman Chalisa · Sundara Kand"                 , tradition: "Bishnoi" },
+  { id: "bishnoi-makar-sankranti"             , label: "Makar Sankranti / Uttarayan"                , subtitle: "Jan 14 · Surya arghya · til-laddu · no manjha"                    , tradition: "Bishnoi" },
+  { id: "bishnoi-jajiwal-dham-mela"           , label: "Jajiwal Dham Mela"                          , subtitle: "Karthik Shukla Ashtami · Jodhpur · 14-mandir lineage"             , tradition: "Bishnoi" },
 ];
 
 const HINDU_DEFAULTS        = ["ekadashi", "purnima", "pradosh"];
@@ -296,7 +310,7 @@ const SRIVAISHNAVA_DEFAULTS    = [
 ];
 const SHAKTA_DEFAULTS          = ["amavasya-shakta", "sharadiya-navaratri-shakta", "maha-ashtami-shakta", "lakshmi-puja-shakta", "kali-puja-shakta", "chaitra-navaratri-shakta", "phalaharini-kali-puja-shakta", "mahalaya-amavasya-shakta", "shakambhari-purnima-shakta", "magha-gupta-navaratri-shakta", "saraswati-puja-shakta", "lalita-jayanti-shakta", "ashadha-gupta-navaratri-shakta", "jagaddhatri-puja-shakta", "annapurna-jayanti-shakta"];
 const SHAIVA_SIDDHANTA_DEFAULTS = ["maha-shivaratri-shaiva", "aarudra-darshan", "karthigai-deepam-shaiva", "skanda-shashti-shaiva"];
-const BISHNOI_DEFAULTS          = ["guru-jambheshwar-jayanti", "khejarli-shaheed-diwas", "jambhoji-mukti-diwas", "mukam-mela-asoj-amavasya", "mukam-mela-phalgun-amavasya", "bishnoi-holi", "bishnoi-mauni-amavasya", "bishnoi-guru-purnima", "bishnoi-akshay-tritiya", "bishnoi-devshayani-ekadashi", "bishnoi-govardhan-puja"];
+const BISHNOI_DEFAULTS          = ["guru-jambheshwar-jayanti", "khejarli-shaheed-diwas", "jambhoji-mukti-diwas", "mukam-mela-asoj-amavasya", "mukam-mela-phalgun-amavasya", "bishnoi-holi", "bishnoi-mauni-amavasya", "bishnoi-guru-purnima", "bishnoi-akshay-tritiya", "bishnoi-devshayani-ekadashi", "bishnoi-govardhan-puja", "bishnoi-hariyali-amavasya", "bishnoi-hariyali-teej", "bishnoi-vat-savitri-amavasya", "bishnoi-diwali-lakshmi-puja", "bishnoi-devuthani-ekadashi", "bishnoi-tulsi-vivah", "bishnoi-karthika-purnima", "bishnoi-nirjala-ekadashi", "bishnoi-maha-shivaratri", "bishnoi-vasant-panchami", "bishnoi-ram-navami", "bishnoi-hanuman-jayanti", "bishnoi-makar-sankranti", "bishnoi-jajiwal-dham-mela"];
 
 function defaultsForTradition(t: Tradition): string[] {
   if (t === "Hindu")            return HINDU_DEFAULTS;

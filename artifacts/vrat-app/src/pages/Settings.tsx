@@ -271,6 +271,20 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "bishnoi-akshay-tritiya",        label: "Akshay Tritiya (Bishnoi)",          subtitle: "Vraksh-ropan · gau-daan · anna-daan",                           tradition: "Bishnoi" },
   { id: "bishnoi-devshayani-ekadashi",   label: "Devshayani Ekadashi (Chaturmas)",   subtitle: "Ashadh Shukla Ekadashi · 4-month vrat begins",                  tradition: "Bishnoi" },
   { id: "bishnoi-govardhan-puja",        label: "Govardhan Puja / Annakut",          subtitle: "Karthika Shukla Pratipada · gau-puja · niyam #19",              tradition: "Bishnoi" },
+  { id: "bishnoi-hariyali-amavasya"           , label: "Hariyali Amavasya (Tree-Planting)"          , subtitle: "Shravana amavasya · vraksh-ropan · niyams 16-17"                       , tradition: "Bishnoi" },
+  { id: "bishnoi-hariyali-teej"               , label: "Hariyali Teej"                              , subtitle: "Shravana Shukla Tritiya · Marwari women · monsoon"                     , tradition: "Bishnoi" },
+  { id: "bishnoi-vat-savitri-amavasya"        , label: "Vat Savitri Amavasya"                       , subtitle: "Jyeshtha amavasya · banyan worship · married women"                    , tradition: "Bishnoi" },
+  { id: "bishnoi-diwali-lakshmi-puja"         , label: "Diwali / Lakshmi Puja (No Crackers)"        , subtitle: "Karthika amavasya · ghee diyas · niyams 6-7"                           , tradition: "Bishnoi" },
+  { id: "bishnoi-devuthani-ekadashi"          , label: "Devuthani Ekadashi (Chaturmas Ends)"        , subtitle: "Karthika Shukla Ekadashi · Vishnu wakes"                               , tradition: "Bishnoi" },
+  { id: "bishnoi-tulsi-vivah"                 , label: "Tulsi Vivah"                                , subtitle: "Karthika Shukla Dwadashi · tulsi-shaligram wedding"                    , tradition: "Bishnoi" },
+  { id: "bishnoi-karthika-purnima"            , label: "Karthika Purnima / Dev Diwali"              , subtitle: "Karthika Purnima · snan · ghee diyas"                                  , tradition: "Bishnoi" },
+  { id: "bishnoi-nirjala-ekadashi"            , label: "Nirjala Ekadashi (Bhima Ekadashi)"          , subtitle: "Jyeshtha Shukla Ekadashi · 24-hr dry fast"                             , tradition: "Bishnoi" },
+  { id: "bishnoi-maha-shivaratri"             , label: "Maha Shivaratri (Bishnoi)"                  , subtitle: "Magha Krishna Chaturdashi · all-night jagran"                          , tradition: "Bishnoi" },
+  { id: "bishnoi-vasant-panchami"             , label: "Vasant Panchami / Saraswati Puja"           , subtitle: "Magha Shukla Panchami · akshar-abhyasam"                               , tradition: "Bishnoi" },
+  { id: "bishnoi-ram-navami"                  , label: "Ram Navami"                                 , subtitle: "Chaitra Shukla Navami · Sri Ram's appearance"                          , tradition: "Bishnoi" },
+  { id: "bishnoi-hanuman-jayanti"             , label: "Hanuman Jayanti"                            , subtitle: "Chaitra Purnima · Hanuman Chalisa · Sundara Kand"                      , tradition: "Bishnoi" },
+  { id: "bishnoi-makar-sankranti"             , label: "Makar Sankranti / Uttarayan"                , subtitle: "Jan 14 · Surya arghya · til-laddu · no manjha"                         , tradition: "Bishnoi" },
+  { id: "bishnoi-jajiwal-dham-mela"           , label: "Jajiwal Dham Mela"                          , subtitle: "Karthik Shukla Ashtami · Jodhpur · 14-mandir lineage"                  , tradition: "Bishnoi" },
 ];
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
