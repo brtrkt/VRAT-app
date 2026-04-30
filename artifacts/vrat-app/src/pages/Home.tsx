@@ -725,12 +725,12 @@ function TraditionSwitcher() {
     <div className="relative flex justify-center mt-1 mb-3">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-all active:opacity-70"
-        style={{ background: "rgba(255,255,255,0.65)", borderColor: "#E5E7EB", color: "#78716C" }}
+        className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-full font-medium border transition-all active:opacity-70"
+        style={{ background: "rgba(255,255,255,0.65)", borderColor: "#E5E7EB", color: "#78716C", fontSize: "17px" }}
         aria-label="Switch tradition"
       >
         {currentLabel}
-        <svg viewBox="0 0 10 10" className="w-2.5 h-2.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg viewBox="0 0 10 10" className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d={open ? "M1 7l4-4 4 4" : "M1 3l4 4 4-4"} />
         </svg>
       </button>
@@ -738,13 +738,13 @@ function TraditionSwitcher() {
       {open && (
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
-          <div className="absolute top-9 left-1/2 -translate-x-1/2 z-20 bg-white rounded-2xl shadow-xl border border-stone-100 overflow-hidden" style={{ minWidth: 170 }}>
+          <div className="absolute top-[52px] left-1/2 -translate-x-1/2 z-20 bg-white rounded-2xl shadow-xl border border-stone-100 overflow-hidden" style={{ minWidth: 220 }}>
             {TRADITION_OPTIONS.map((opt) => (
               <button
                 key={opt.value}
                 onClick={() => select(opt.value)}
-                className="w-full text-left px-4 py-2.5 text-sm font-medium transition-colors active:bg-amber-50"
-                style={{ color: opt.value === current ? "#E07B2A" : "#374151", background: opt.value === current ? "#FFF7ED" : "transparent" }}
+                className="w-full text-left px-4 py-3 min-h-[44px] font-medium transition-colors active:bg-amber-50"
+                style={{ color: opt.value === current ? "#E07B2A" : "#374151", background: opt.value === current ? "#FFF7ED" : "transparent", fontSize: "17px" }}
               >
                 {opt.label}
               </button>
