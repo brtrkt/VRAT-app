@@ -67,6 +67,22 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "fuldol-swaminarayan",         label: "Fuldol",                subtitle: "Phalgun Purnima · flower festival before Holi",        tradition: "Swaminarayan" },
   { id: "annakut-swaminarayan",        label: "Annakut",               subtitle: "Day after Deepawali · Swaminarayan New Year offering",    tradition: "Swaminarayan" },
   { id: "ekadashi-swaminarayan-jan-1", label: "Swaminarayan Ekadashi", subtitle: "Ekadashi with strict satvik fast · no onion, garlic", tradition: "Swaminarayan" },
+  { id: "shastriji-maharaj-jayanti-baps",     label: "Shastriji Maharaj Jayanti",        subtitle: "Maha Sud 5 (Vasant Panchami) · BAPS founder appearance",       tradition: "Swaminarayan" },
+  { id: "yogiji-maharaj-jayanti-baps",        label: "Yogiji Maharaj Jayanti",           subtitle: "Vaishakh Vad 12 · 4th BAPS guru appearance",                    tradition: "Swaminarayan" },
+  { id: "pramukh-swami-jayanti-baps",         label: "Pramukh Swami Maharaj Jayanti",    subtitle: "Maha Vad 8 (Dec 7) · 5th BAPS guru appearance",                 tradition: "Swaminarayan" },
+  { id: "mahant-swami-jayanti-baps",          label: "Mahant Swami Maharaj Jayanti",     subtitle: "Bhadarva Sud 1 (Sept 13) · current BAPS pragat guru",           tradition: "Swaminarayan" },
+  { id: "gunatitanand-swami-jayanti-baps",    label: "Gunatitanand Swami Jayanti",       subtitle: "Aso Sud 15 (Sharad Purnima) · 1st Aksharbrahman guru",          tradition: "Swaminarayan" },
+  { id: "bhagatji-maharaj-jayanti-baps",      label: "Bhagatji Maharaj Jayanti",         subtitle: "Maha Vad 11 · 2nd Aksharbrahman guru appearance",               tradition: "Swaminarayan" },
+  { id: "pramukh-swami-punyatithi-baps",      label: "Pramukh Swami Maharaj Punyatithi", subtitle: "Aug 13 · akshar-vihar of 5th BAPS guru (2016)",                 tradition: "Swaminarayan" },
+  { id: "yogiji-maharaj-punyatithi-baps",     label: "Yogiji Maharaj Punyatithi",        subtitle: "Magh Vad 8 (Jan 23) · akshar-vihar of 4th BAPS guru (1971)",    tradition: "Swaminarayan" },
+  { id: "shastriji-maharaj-punyatithi-baps",  label: "Shastriji Maharaj Punyatithi",     subtitle: "Vaishakh Sud 5 · akshar-vihar of BAPS founder (1951)",          tradition: "Swaminarayan" },
+  { id: "gunatitanand-swami-punyatithi-baps", label: "Gunatitanand Swami Punyatithi",    subtitle: "Aso Vad 12 · akshar-vihar of 1st Aksharbrahman guru (1867)",    tradition: "Swaminarayan" },
+  { id: "baps-sthapana-din",                  label: "BAPS Sthapana Din",                subtitle: "June 5 · founding of BAPS at Bochasan (1907)",                  tradition: "Swaminarayan" },
+  { id: "akshardham-delhi-pratishtha-baps",   label: "Akshardham Delhi Pratishtha",      subtitle: "Nov 6 · Akshardham Delhi consecration (2005)",                  tradition: "Swaminarayan" },
+  { id: "akshardham-nj-pratishtha-baps",      label: "Akshardham New Jersey Pratishtha", subtitle: "Oct 8 · Akshardham NJ consecration (2023)",                     tradition: "Swaminarayan" },
+  { id: "abu-dhabi-mandir-pratishtha-baps",   label: "BAPS Hindu Mandir Abu Dhabi Pratishtha", subtitle: "Feb 14 · first Hindu stone temple in Middle East (2024)", tradition: "Swaminarayan" },
+  { id: "hindola-utsav-baps",                 label: "Hindola Utsav",                    subtitle: "Sravan · 5-day BAPS swing festival",                            tradition: "Swaminarayan" },
+  { id: "pushpadolotsav-baps",                label: "Pushpadolotsav",                   subtitle: "Phagan Sud 13 · BAPS flower-shower festival",                   tradition: "Swaminarayan" },
   { id: "iskcon-ekadashi",       label: "Ekadashi (Vaishnava)",  subtitle: "No grains · 24 days a year · Parana next morning",    tradition: "ISKCON" },
   { id: "janmashtami-iskcon",    label: "Janmashtami",           subtitle: "Midnight fast · Lord Krishna's appearance day",        tradition: "ISKCON" },
   { id: "gaura-purnima",         label: "Gaura Purnima",         subtitle: "Sri Chaitanya Mahaprabhu's appearance day",            tradition: "ISKCON" },
@@ -190,7 +206,7 @@ const HINDU_DEFAULTS        = ["ekadashi", "purnima", "pradosh"];
 const JAIN_DEFAULTS         = ["paryushana", "navpad-oli", "samvatsari"];
 const SIKH_DEFAULTS         = ["guru-nanak-gurpurab", "baisakhi-sikh", "sangrand"];
 const BOTH_DEFAULTS         = ["ekadashi", "purnima", "pradosh", "paryushana", "navpad-oli"];
-const SWAMINARAYAN_DEFAULTS = ["swaminarayan-jayanti", "fuldol-swaminarayan", "ekadashi-swaminarayan-jan-1"];
+const SWAMINARAYAN_DEFAULTS = ["swaminarayan-jayanti", "fuldol-swaminarayan", "ekadashi-swaminarayan-jan-1", "pramukh-swami-jayanti-baps", "mahant-swami-jayanti-baps", "gunatitanand-swami-jayanti-baps", "baps-sthapana-din"];
 const ISKCON_DEFAULTS       = ["iskcon-ekadashi", "janmashtami-iskcon", "gaura-purnima", "radhashtami", "narasimha-chaturdashi", "kartik-damodara", "nityananda-trayodashi", "ramanavami-iskcon", "ratha-yatra-iskcon", "balarama-purnima-iskcon", "vyasa-puja-iskcon", "govardhan-puja-iskcon", "srila-prabhupada-tirobhava-iskcon", "tulasi-vivaha-iskcon"];
 const LINGAYAT_DEFAULTS     = ["maha-shivaratri-lingayat", "somavara-lingayat", "basava-jayanti"];
 const PUSHTI_MARG_DEFAULTS  = ["ekadashi-pushti-marg", "janmashtami-pushti-marg", "annakut-pushti-marg", "phoolon-wali-holi"];
