@@ -17,6 +17,7 @@ import ReportErrorButton from "@/components/ReportErrorButton";
 import HowToInstall from "@/pages/HowToInstall";
 import Recipes from "@/pages/Recipes";
 import LangarRecipes from "@/pages/LangarRecipes";
+import AdminErrorReports from "@/pages/AdminErrorReports";
 import { ONBOARDING_KEY, TRADITION_KEY, initTrial, isTrialExpired, isSubscribed, setSubscribed } from "@/hooks/useUserPrefs";
 import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
 
@@ -228,6 +229,7 @@ function Router() {
         <Route path="/how-to-install" component={HowToInstall} />
         <Route path="/recipes" component={Recipes} />
         <Route path="/langar-recipes" component={LangarRecipes} />
+        <Route path="/admin/error-reports" component={AdminErrorReports} />
         <Route component={NotFound} />
       </Switch>
       <BottomNav />
@@ -308,18 +310,48 @@ function App() {
       <TooltipProvider>
         <LanguageProvider>
           <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            {!onboardingDone ? (
-              <Onboarding onComplete={handleOnboardingComplete} />
-            ) : showPaywall ? (
-              <Paywall showCancelled={checkoutCancelled} />
-            ) : (
-              <DisclaimerPopup />
-            )}
-            {!showPaywall && onboardingDone && <Router />}
+            <AppGate
+              onboardingDone={onboardingDone}
+              showPaywall={showPaywall}
+              checkoutCancelled={checkoutCancelled}
+              onOnboardingComplete={handleOnboardingComplete}
+            />
           </WouterRouter>
         </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>
+  );
+}
+
+function AppGate({
+  onboardingDone,
+  showPaywall,
+  checkoutCancelled,
+  onOnboardingComplete,
+}: {
+  onboardingDone: boolean;
+  showPaywall: boolean;
+  checkoutCancelled: boolean;
+  onOnboardingComplete: () => void;
+}) {
+  const [location] = useLocation();
+  const isAdminRoute = location.startsWith("/admin/");
+
+  if (isAdminRoute) {
+    return <Router />;
+  }
+
+  return (
+    <>
+      {!onboardingDone ? (
+        <Onboarding onComplete={onOnboardingComplete} />
+      ) : showPaywall ? (
+        <Paywall showCancelled={checkoutCancelled} />
+      ) : (
+        <DisclaimerPopup />
+      )}
+      {!showPaywall && onboardingDone && <Router />}
+    </>
   );
 }
 

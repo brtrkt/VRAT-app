@@ -56,7 +56,141 @@ export class Storage {
         amount   INTEGER NOT NULL,
         UNIQUE (plan, currency)
       );
+
+      CREATE TABLE IF NOT EXISTS vrat_error_reports (
+        id          BIGSERIAL PRIMARY KEY,
+        error_type  TEXT NOT NULL,
+        tradition   TEXT,
+        page        TEXT,
+        notes       TEXT,
+        user_agent  TEXT,
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_vrat_error_reports_created_at
+        ON vrat_error_reports (created_at DESC);
+      CREATE INDEX IF NOT EXISTS idx_vrat_error_reports_error_type
+        ON vrat_error_reports (error_type);
+      CREATE INDEX IF NOT EXISTS idx_vrat_error_reports_tradition
+        ON vrat_error_reports (tradition);
     `);
+  }
+
+  async insertErrorReport(input: {
+    errorType: string;
+    tradition: string | null;
+    page: string | null;
+    notes: string | null;
+    userAgent: string | null;
+  }): Promise<{ id: string; created_at: Date }> {
+    const db = getPool();
+    const result = await db.query<{ id: string; created_at: Date }>(
+      `INSERT INTO vrat_error_reports (error_type, tradition, page, notes, user_agent)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING id::text, created_at`,
+      [input.errorType, input.tradition, input.page, input.notes, input.userAgent]
+    );
+    return result.rows[0];
+  }
+
+  async listErrorReports(filters: {
+    errorType?: string;
+    tradition?: string;
+    q?: string;
+    limit: number;
+    offset: number;
+  }): Promise<{
+    rows: Array<{
+      id: string;
+      error_type: string;
+      tradition: string | null;
+      page: string | null;
+      notes: string | null;
+      user_agent: string | null;
+      created_at: Date;
+    }>;
+    total: number;
+  }> {
+    const db = getPool();
+    const conditions: string[] = [];
+    const params: unknown[] = [];
+
+    if (filters.errorType) {
+      params.push(filters.errorType);
+      conditions.push(`error_type = $${params.length}`);
+    }
+    if (filters.tradition) {
+      params.push(filters.tradition);
+      conditions.push(`tradition = $${params.length}`);
+    }
+    if (filters.q) {
+      params.push(`%${filters.q}%`);
+      conditions.push(`(notes ILIKE $${params.length} OR page ILIKE $${params.length})`);
+    }
+
+    const where = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+
+    const countResult = await db.query<{ count: string }>(
+      `SELECT COUNT(*)::text AS count FROM vrat_error_reports ${where}`,
+      params
+    );
+    const total = Number(countResult.rows[0]?.count ?? 0);
+
+    params.push(filters.limit);
+    const limitIdx = params.length;
+    params.push(filters.offset);
+    const offsetIdx = params.length;
+
+    const result = await db.query(
+      `SELECT id::text, error_type, tradition, page, notes, user_agent, created_at
+       FROM vrat_error_reports
+       ${where}
+       ORDER BY created_at DESC
+       LIMIT $${limitIdx} OFFSET $${offsetIdx}`,
+      params
+    );
+    return { rows: result.rows, total };
+  }
+
+  async getErrorReportStats(): Promise<{
+    total: number;
+    byErrorType: Array<{ error_type: string; count: number }>;
+    byTradition: Array<{ tradition: string | null; count: number }>;
+    last7Days: number;
+    last24Hours: number;
+  }> {
+    const db = getPool();
+    const [totalRes, byTypeRes, byTradRes, last7Res, last24Res] = await Promise.all([
+      db.query<{ count: string }>(`SELECT COUNT(*)::text AS count FROM vrat_error_reports`),
+      db.query<{ error_type: string; count: string }>(
+        `SELECT error_type, COUNT(*)::text AS count
+         FROM vrat_error_reports
+         GROUP BY error_type
+         ORDER BY count DESC`
+      ),
+      db.query<{ tradition: string | null; count: string }>(
+        `SELECT tradition, COUNT(*)::text AS count
+         FROM vrat_error_reports
+         GROUP BY tradition
+         ORDER BY count DESC
+         LIMIT 20`
+      ),
+      db.query<{ count: string }>(
+        `SELECT COUNT(*)::text AS count FROM vrat_error_reports
+         WHERE created_at >= NOW() - INTERVAL '7 days'`
+      ),
+      db.query<{ count: string }>(
+        `SELECT COUNT(*)::text AS count FROM vrat_error_reports
+         WHERE created_at >= NOW() - INTERVAL '24 hours'`
+      ),
+    ]);
+    return {
+      total: Number(totalRes.rows[0]?.count ?? 0),
+      byErrorType: byTypeRes.rows.map(r => ({ error_type: r.error_type, count: Number(r.count) })),
+      byTradition: byTradRes.rows.map(r => ({ tradition: r.tradition, count: Number(r.count) })),
+      last7Days: Number(last7Res.rows[0]?.count ?? 0),
+      last24Hours: Number(last24Res.rows[0]?.count ?? 0),
+    };
   }
 
   async getOrCreateUser(email: string): Promise<VratUser> {

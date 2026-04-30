@@ -1,4 +1,5 @@
 import { Router, type IRouter } from "express";
+import { storage } from "../storage";
 
 const router: IRouter = Router();
 
@@ -22,7 +23,7 @@ function cleanString(v: unknown, max: number): string | null {
   return trimmed.slice(0, max);
 }
 
-router.post("/error-reports", (req, res) => {
+router.post("/error-reports", async (req, res) => {
   const body = (req.body ?? {}) as Record<string, unknown>;
 
   if (!isErrorType(body.errorType)) {
@@ -37,6 +38,7 @@ router.post("/error-reports", (req, res) => {
   const tradition = cleanString(body.tradition, 64);
   const page = cleanString(body.page, 256);
   const notes = cleanString(body.notes, 2000);
+  const userAgent = cleanString(req.headers["user-agent"], 512);
 
   req.log.info(
     {
@@ -45,13 +47,71 @@ router.post("/error-reports", (req, res) => {
       tradition,
       page,
       notes,
-      userAgent: req.headers["user-agent"] ?? null,
+      userAgent,
       receivedAt: new Date().toISOString(),
     },
     `User error report: ${errorType}`,
   );
 
-  res.json({ ok: true });
+  try {
+    const inserted = await storage.insertErrorReport({
+      errorType,
+      tradition,
+      page,
+      notes,
+      userAgent,
+    });
+    res.json({ ok: true, id: inserted.id });
+  } catch (err) {
+    req.log.error({ err }, "Failed to persist error report");
+    // We've already logged the report; respond ok so the user isn't blocked.
+    res.json({ ok: true, persisted: false });
+  }
+});
+
+router.get("/error-reports", async (req, res) => {
+  const errorTypeRaw = typeof req.query.errorType === "string" ? req.query.errorType : "";
+  const traditionRaw = typeof req.query.tradition === "string" ? req.query.tradition : "";
+  const qRaw = typeof req.query.q === "string" ? req.query.q : "";
+
+  const errorType = isErrorType(errorTypeRaw) ? errorTypeRaw : undefined;
+  const tradition = traditionRaw.trim() || undefined;
+  const q = qRaw.trim() || undefined;
+
+  const limit = Math.min(
+    Math.max(parseInt(String(req.query.limit ?? "50"), 10) || 50, 1),
+    200,
+  );
+  const offset = Math.max(parseInt(String(req.query.offset ?? "0"), 10) || 0, 0);
+
+  try {
+    const { rows, total } = await storage.listErrorReports({
+      errorType,
+      tradition,
+      q,
+      limit,
+      offset,
+    });
+    res.json({
+      reports: rows,
+      total,
+      limit,
+      offset,
+      filters: { errorType: errorType ?? null, tradition: tradition ?? null, q: q ?? null },
+    });
+  } catch (err) {
+    req.log.error({ err }, "Failed to list error reports");
+    res.status(500).json({ error: "Failed to load error reports" });
+  }
+});
+
+router.get("/error-reports/stats", async (_req, res) => {
+  try {
+    const stats = await storage.getErrorReportStats();
+    res.json(stats);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to load stats" });
+  }
 });
 
 export default router;
