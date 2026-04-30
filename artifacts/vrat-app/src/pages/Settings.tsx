@@ -39,7 +39,7 @@ const PRICES = {
   lifetime: { usd: "$49.99",       inr: "₹3,999"      },
 } as const;
 
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Warkari" | "Ramanandi" | "SriVaishnava" | "Shakta" | "ShaivaSiddhanta" }[] = [
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Warkari" | "Ramanandi" | "SriVaishnava" | "Shakta" | "ShaivaSiddhanta" | "Bishnoi" }[] = [
   { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                           tradition: "Hindu" },
   { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",               tradition: "Hindu" },
   { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",          tradition: "Hindu" },
@@ -259,6 +259,12 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "aarudra-darshan",            label: "Aarudra Darshan",                    subtitle: "Nataraja's Ananda Tandava · Margazhi Tiruvathirai",       tradition: "ShaivaSiddhanta" },
   { id: "karthigai-deepam-shaiva",    label: "Karthigai Deepam",                   subtitle: "Thiruvannamalai Maha Deepam · Tamil festival of lights",  tradition: "ShaivaSiddhanta" },
   { id: "skanda-shashti-shaiva",      label: "Skanda Shashti (Soorasamharam)",     subtitle: "6-day Murugan vrat · Tiruchendur Soorasamharam",          tradition: "ShaivaSiddhanta" },
+
+  { id: "guru-jambheshwar-jayanti",      label: "Guru Jambheshwar Jayanti",          subtitle: "Bhadrapada Krishna Ashtami · Jambhoji's birth · Pipasar",       tradition: "Bishnoi" },
+  { id: "khejarli-shaheed-diwas",        label: "Khejarli Shaheed Diwas",            subtitle: "Amrita Devi & 363 martyrs (1730 CE) · Bhadrapada Sud 10",       tradition: "Bishnoi" },
+  { id: "jambhoji-mukti-diwas",          label: "Jambhoji Mukti Diwas",              subtitle: "Magh Krishna Navami · mahaprayan at Lalasar Sathari",           tradition: "Bishnoi" },
+  { id: "mukam-mela-asoj-amavasya",      label: "Mukam Mela (Asoj Amavasya)",        subtitle: "Autumn Bishnoi pilgrimage · Samrathal Dhora · Bikaner",         tradition: "Bishnoi" },
+  { id: "mukam-mela-phalgun-amavasya",   label: "Mukam Mela (Phalgun Amavasya)",     subtitle: "Spring Bishnoi pilgrimage · before Holi · Mukam",               tradition: "Bishnoi" },
 ];
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
@@ -584,6 +590,7 @@ export default function Settings() {
       { value: "Hindu",            label: "Hindu",                              subtitle: "Ekadashi, Navratri, Karva Chauth and more" },
       { value: "Jain",             label: "Jain",                               subtitle: "Paryushana, Navpad Oli, Samvatsari and more" },
       { value: "Sikh",             label: "Sikh",                               subtitle: "Gurpurabs, Baisakhi, Sangrand and more" },
+      { value: "Bishnoi",          label: "Bishnoi (Jambhoji panth)",           subtitle: "Guru Jambheshwar Jayanti, Khejarli Shaheed Diwas, Mukam Mela" },
       { value: "ISKCON",           label: "ISKCON / Vaishnava",                 subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik" },
       { value: "Lingayat",         label: "Lingayat / Veerashaiva",             subtitle: "Maha Shivaratri, Shravana Somavara, Basava Jayanti" },
       { value: "PushtiMarg",       label: "Pushti Marg / Vallabha Sampraday",   subtitle: "Ekadashi (seva-based), Janmashtami, Annakut, Hindola Utsav" },
@@ -648,6 +655,7 @@ export default function Settings() {
     const sriVaishnavaVrats    = VRAT_OPTIONS.filter((v) => v.tradition === "SriVaishnava");
     const shaktaVrats          = VRAT_OPTIONS.filter((v) => v.tradition === "Shakta");
     const shaivaSiddhantaVrats = VRAT_OPTIONS.filter((v) => v.tradition === "ShaivaSiddhanta");
+    const bishnoiVrats         = VRAT_OPTIONS.filter((v) => v.tradition === "Bishnoi");
     const showHindu            = tradition === "Hindu";
     const showJain             = tradition === "Jain";
     const showSikh             = tradition === "Sikh";
@@ -660,6 +668,7 @@ export default function Settings() {
     const showSriVaishnava     = tradition === "SriVaishnava";
     const showShakta           = tradition === "Shakta";
     const showShaivaSiddhanta  = tradition === "ShaivaSiddhanta";
+    const showBishnoi          = tradition === "Bishnoi";
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
         <div className="max-w-md mx-auto px-5 pt-6 pb-8">
@@ -816,6 +825,19 @@ export default function Settings() {
           {showShaivaSiddhanta && (
             <>
               {shaivaSiddhantaVrats.map((opt) => (
+                <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm font-medium text-foreground">{opt.label}</p>
+                    <p className="text-xs text-muted-foreground">{opt.subtitle}</p>
+                  </div>
+                  <Toggle on={isVratObserved(opt.id, observed)} onToggle={() => toggleVrat(opt.id)} />
+                </div>
+              ))}
+            </>
+          )}
+          {showBishnoi && (
+            <>
+              {bishnoiVrats.map((opt) => (
                 <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
                   <div className="flex-1 mr-4">
                     <p className="text-sm font-medium text-foreground">{opt.label}</p>

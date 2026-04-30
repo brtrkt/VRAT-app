@@ -22,7 +22,7 @@ interface Props {
 }
 
 // ─── Vrat catalogue for Screen 3 ────────────────────────────────────────────
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Warkari" | "Ramanandi" | "SriVaishnava" | "Shakta" | "ShaivaSiddhanta" }[] = [
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Warkari" | "Ramanandi" | "SriVaishnava" | "Shakta" | "ShaivaSiddhanta" | "Bishnoi" }[] = [
   { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                      tradition: "Hindu" },
   { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",          tradition: "Hindu" },
   { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",     tradition: "Hindu" },
@@ -242,6 +242,12 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "aarudra-darshan",            label: "Aarudra Darshan",                    subtitle: "Nataraja's Ananda Tandava · Margazhi Tiruvathirai",       tradition: "ShaivaSiddhanta" },
   { id: "karthigai-deepam-shaiva",    label: "Karthigai Deepam",                   subtitle: "Thiruvannamalai Maha Deepam · Tamil festival of lights",  tradition: "ShaivaSiddhanta" },
   { id: "skanda-shashti-shaiva",      label: "Skanda Shashti (Soorasamharam)",     subtitle: "6-day Murugan vrat · Tiruchendur Soorasamharam",          tradition: "ShaivaSiddhanta" },
+
+  { id: "guru-jambheshwar-jayanti",      label: "Guru Jambheshwar Jayanti",          subtitle: "Bhadrapada Krishna Ashtami · Jambhoji's birth · Pipasar",  tradition: "Bishnoi" },
+  { id: "khejarli-shaheed-diwas",        label: "Khejarli Shaheed Diwas",            subtitle: "Amrita Devi & 363 martyrs (1730 CE) · Bhadrapada Sud 10",  tradition: "Bishnoi" },
+  { id: "jambhoji-mukti-diwas",          label: "Jambhoji Mukti Diwas",              subtitle: "Magh Krishna Navami · mahaprayan at Lalasar Sathari",      tradition: "Bishnoi" },
+  { id: "mukam-mela-asoj-amavasya",      label: "Mukam Mela (Asoj Amavasya)",        subtitle: "Autumn Bishnoi pilgrimage · Samrathal Dhora · Bikaner",    tradition: "Bishnoi" },
+  { id: "mukam-mela-phalgun-amavasya",   label: "Mukam Mela (Phalgun Amavasya)",     subtitle: "Spring Bishnoi pilgrimage · before Holi · Mukam",          tradition: "Bishnoi" },
 ];
 
 const HINDU_DEFAULTS        = ["ekadashi", "purnima", "pradosh"];
@@ -284,6 +290,7 @@ const SRIVAISHNAVA_DEFAULTS    = [
 ];
 const SHAKTA_DEFAULTS          = ["amavasya-shakta", "sharadiya-navaratri-shakta", "maha-ashtami-shakta", "lakshmi-puja-shakta", "kali-puja-shakta", "chaitra-navaratri-shakta", "phalaharini-kali-puja-shakta", "mahalaya-amavasya-shakta", "shakambhari-purnima-shakta", "magha-gupta-navaratri-shakta", "saraswati-puja-shakta", "lalita-jayanti-shakta", "ashadha-gupta-navaratri-shakta", "jagaddhatri-puja-shakta", "annapurna-jayanti-shakta"];
 const SHAIVA_SIDDHANTA_DEFAULTS = ["maha-shivaratri-shaiva", "aarudra-darshan", "karthigai-deepam-shaiva", "skanda-shashti-shaiva"];
+const BISHNOI_DEFAULTS          = ["guru-jambheshwar-jayanti", "khejarli-shaheed-diwas", "jambhoji-mukti-diwas", "mukam-mela-asoj-amavasya", "mukam-mela-phalgun-amavasya"];
 
 function defaultsForTradition(t: Tradition): string[] {
   if (t === "Hindu")            return HINDU_DEFAULTS;
@@ -298,6 +305,7 @@ function defaultsForTradition(t: Tradition): string[] {
   if (t === "SriVaishnava")     return SRIVAISHNAVA_DEFAULTS;
   if (t === "Shakta")           return SHAKTA_DEFAULTS;
   if (t === "ShaivaSiddhanta")  return SHAIVA_SIDDHANTA_DEFAULTS;
+  if (t === "Bishnoi")          return BISHNOI_DEFAULTS;
   return BOTH_DEFAULTS;
 }
 
@@ -507,6 +515,27 @@ function IshtalingaSvg({ className = "", style }: { className?: string; style?: 
   );
 }
 
+// Bishnoi: Khejri tree (Prosopis cineraria) — the sacred desert tree of
+// Marwar that Amrita Devi Bishnoi and 363 Bishnois sacrificed their lives
+// to protect at Khejarli (1730 CE). Stylized desert tree with a sturdy
+// trunk and a leafy crown rising from the dunes.
+function KhejriTreeSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
+      {/* dunes */}
+      <path d="M0 50 Q15 44 30 48 Q45 52 60 46 L60 60 L0 60 Z" opacity="0.45" />
+      {/* trunk */}
+      <path d="M28 50 L28 28 Q27 22 30 20 Q33 22 32 28 L32 50 Z" />
+      {/* leafy crown — three rounded canopies */}
+      <circle cx="30" cy="16" r="9" />
+      <circle cx="20" cy="20" r="7" />
+      <circle cx="40" cy="20" r="7" />
+      <circle cx="24" cy="12" r="5" />
+      <circle cx="36" cy="12" r="5" />
+    </svg>
+  );
+}
+
 function BothSymbol({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center justify-center gap-1 ${className}`}>
@@ -662,6 +691,7 @@ export default function Onboarding({ onComplete }: Props) {
     tradition === "SriVaishnava"     ? VRAT_OPTIONS.filter((v) => v.tradition === "SriVaishnava") :
     tradition === "Shakta"           ? VRAT_OPTIONS.filter((v) => v.tradition === "Shakta") :
     tradition === "ShaivaSiddhanta"  ? VRAT_OPTIONS.filter((v) => v.tradition === "ShaivaSiddhanta") :
+    tradition === "Bishnoi"          ? VRAT_OPTIONS.filter((v) => v.tradition === "Bishnoi") :
     VRAT_OPTIONS.filter((v) => v.tradition === "Hindu" || v.tradition === "Jain");
 
   return (
@@ -722,6 +752,19 @@ export default function Onboarding({ onComplete }: Props) {
                   <span className="text-xs font-semibold tracking-wide" style={{ color: "#FEF9EC" }}>Sikh</span>
                 </button>
               </div>
+
+              {/* Bishnoi */}
+              <button
+                onClick={() => { chooseTradition("Bishnoi"); setStep(2); }}
+                className="flex flex-row items-center justify-center gap-3 rounded-2xl py-4 px-4 transition-all active:scale-95"
+                style={{ background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.35)" }}
+              >
+                <KhejriTreeSvg className="w-10 h-10" style={{ color: "#86EFAC" }} />
+                <div className="text-left">
+                  <span className="text-xs font-semibold tracking-wide block" style={{ color: "#FEF9EC" }}>Bishnoi (Jambhoji panth)</span>
+                  <span className="text-xs opacity-70" style={{ color: "#FDE68A" }}>विष्णो विष्णो · 29 niyams · Mukam · Khejarli</span>
+                </div>
+              </button>
 
               {/* ISKCON */}
               <button
@@ -883,6 +926,13 @@ export default function Onboarding({ onComplete }: Props) {
                     subtitle: "Gurpurabs, Baisakhi, Sangrand and more",
                     icon: <KhandaSvg className="w-12 h-12" style={{ color: "#003DA5" }} />,
                     accent: "#003DA5",
+                  },
+                  {
+                    value: "Bishnoi" as Tradition,
+                    label: "Bishnoi (Jambhoji panth)",
+                    subtitle: "Guru Jambheshwar Jayanti, Khejarli Shaheed Diwas, Mukam Mela",
+                    icon: <KhejriTreeSvg className="w-12 h-12" style={{ color: "#16A34A" }} />,
+                    accent: "#16A34A",
                   },
                   {
                     value: "ISKCON" as Tradition,

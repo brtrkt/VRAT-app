@@ -370,6 +370,20 @@ function IshtalingaSvg({ className = "", style }: { className?: string; style?: 
   );
 }
 
+function KhejriTreeSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
+      <path d="M0 50 Q15 44 30 48 Q45 52 60 46 L60 60 L0 60 Z" opacity="0.45"/>
+      <path d="M28 50 L28 28 Q27 22 30 20 Q33 22 32 28 L32 50 Z"/>
+      <circle cx="30" cy="16" r="9"/>
+      <circle cx="20" cy="20" r="7"/>
+      <circle cx="40" cy="20" r="7"/>
+      <circle cx="24" cy="12" r="5"/>
+      <circle cx="36" cy="12" r="5"/>
+    </svg>
+  );
+}
+
 function FloralDivider() {
   return (
     <div className="decorative-divider my-4">
@@ -699,6 +713,7 @@ const TRADITION_OPTIONS: { value: Tradition; label: string }[] = [
   { value: "Hindu",            label: "Hindu" },
   { value: "Jain",             label: "Jain" },
   { value: "Sikh",             label: "Sikh" },
+  { value: "Bishnoi",          label: "Bishnoi" },
   { value: "ISKCON",           label: "ISKCON" },
   { value: "Lingayat",         label: "Lingayat" },
   { value: "PushtiMarg",       label: "Pushti Marg" },
@@ -790,6 +805,7 @@ export default function Home() {
               if (t === "SriVaishnava")    return <NaamamSvg className="w-9 h-12" style={{ color: "#B45309" }} />;
               if (t === "Shakta")          return <SriYantraSvg className="w-11 h-11" style={{ color: "#BE185D" }} />;
               if (t === "ShaivaSiddhanta") return <TripundraSvg className="w-11 h-11" style={{ color: "#475569" }} />;
+              if (t === "Bishnoi")         return <KhejriTreeSvg className="w-11 h-11" style={{ color: "#16A34A" }} />;
               return (
                 <>
                   <OmSymbol className="text-primary text-3xl" />

@@ -445,7 +445,7 @@ function CalendarGrid({
   );
 }
 
-type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan" | "iskcon" | "lingayat" | "pushtimarg" | "warkari" | "ramanandi" | "srivaishnava" | "shakta" | "shaivasiddhanta";
+type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan" | "iskcon" | "lingayat" | "pushtimarg" | "warkari" | "ramanandi" | "srivaishnava" | "shakta" | "shaivasiddhanta" | "bishnoi";
 
 const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
   { value: "all",             label: "All" },
@@ -461,6 +461,7 @@ const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
   { value: "srivaishnava",    label: "Sri Vaishnava" },
   { value: "shakta",          label: "Shakta" },
   { value: "shaivasiddhanta", label: "Shaiva Siddhanta" },
+  { value: "bishnoi",         label: "Bishnoi" },
 ];
 
 const HINDU_LEGEND = [
@@ -540,6 +541,12 @@ const SHAIVA_SIDDHANTA_LEGEND = [
   { label: "Karthigai Deepam · Thiruvannamalai", color: "#475569" },
   { label: "Skanda Shashti · Soorasamharam", color: "#475569" },
 ];
+const BISHNOI_LEGEND = [
+  { label: "Guru Jambheshwar Jayanti · Jambhoji's birth", color: "#16A34A" },
+  { label: "Khejarli Shaheed Diwas · Amrita Devi & 363", color: "#16A34A" },
+  { label: "Jambhoji Mukti Diwas · Lalasar Sathari", color: "#16A34A" },
+  { label: "Mukam Mela · Asoj & Phalgun Amavasya", color: "#16A34A" },
+];
 
 export default function Calendar() {
   const { t } = useLanguage();
@@ -563,6 +570,7 @@ export default function Calendar() {
     if (trad === "SriVaishnava")     return "srivaishnava";
     if (trad === "Shakta")           return "shakta";
     if (trad === "ShaivaSiddhanta")  return "shaivasiddhanta";
+    if (trad === "Bishnoi")          return "bishnoi";
     return "all";
   });
   const [observedVrats] = useState<string[]>(() => getObservedVrats());
@@ -593,7 +601,8 @@ export default function Calendar() {
           (filter === "ramanandi"       && v.tradition === "Ramanandi") ||
           (filter === "srivaishnava"    && v.tradition === "SriVaishnava") ||
           (filter === "shakta"          && v.tradition === "Shakta") ||
-          (filter === "shaivasiddhanta" && v.tradition === "ShaivaSiddhanta");
+          (filter === "shaivasiddhanta" && v.tradition === "ShaivaSiddhanta") ||
+          (filter === "bishnoi"         && v.tradition === "Bishnoi");
         const regionOk = !v.region || !regionFilterActive || v.region === userRegion;
         return traditionOk && regionOk;
       }),
@@ -712,7 +721,7 @@ export default function Calendar() {
               />
               <span className="text-xs font-medium text-foreground">Your observed vrats (gold)</span>
             </div>
-            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "lingayat" ? LINGAYAT_LEGEND : filter === "pushtimarg" ? PUSHTI_MARG_LEGEND : filter === "warkari" ? WARKARI_LEGEND : filter === "ramanandi" ? RAMANANDI_LEGEND : filter === "srivaishnava" ? SRIVAISHNAVA_LEGEND : filter === "shakta" ? SHAKTA_LEGEND : filter === "shaivasiddhanta" ? SHAIVA_SIDDHANTA_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
+            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "lingayat" ? LINGAYAT_LEGEND : filter === "pushtimarg" ? PUSHTI_MARG_LEGEND : filter === "warkari" ? WARKARI_LEGEND : filter === "ramanandi" ? RAMANANDI_LEGEND : filter === "srivaishnava" ? SRIVAISHNAVA_LEGEND : filter === "shakta" ? SHAKTA_LEGEND : filter === "shaivasiddhanta" ? SHAIVA_SIDDHANTA_LEGEND : filter === "bishnoi" ? BISHNOI_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
               <div key={item.label} className="flex items-center gap-2" data-testid={`legend-${item.label}`}>
                 <span
                   className="w-3 h-3 rounded-full flex-shrink-0"
@@ -802,6 +811,13 @@ export default function Calendar() {
               return (
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Dates follow Drik Panchang IST (Tamil calendar). Aarudra Darshan is the Tiruvathirai nakshatra in Margazhi (Dec–Jan) at Chidambaram. Karthigai Deepam is Krittika nakshatra in Karthikai. Verify Skanda Shashti with Tiruchendur or your local Murugan kovil.
+                </p>
+              );
+            }
+            if (trad === "Bishnoi") {
+              return (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dates follow Drik Panchang IST (Marwari/Bishnoi reckoning). Guru Jambheshwar Jayanti falls on Bhadrapada Krishna Ashtami (the same tithi as Krishna Janmashtami). Khejarli Shaheed Diwas is Bhadrapada Shukla Dashami — the historical date by Gregorian was September 12, 1730. Two Mukam Melas are held annually — Asoj Amavasya (autumn, the larger) and Phalgun Amavasya (spring). Verify with the Akhil Bharatiya Bishnoi Mahasabha or your village Bishnoi sabha.
                 </p>
               );
             }

@@ -439,6 +439,7 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
     vrat.tradition === "SriVaishnava"    ? "Sri Vaishnava Tradition" :
     vrat.tradition === "Shakta"          ? "Shakta Tradition" :
     vrat.tradition === "ShaivaSiddhanta" ? "Shaiva Siddhanta Tradition" :
+    vrat.tradition === "Bishnoi"         ? "Bishnoi Tradition" :
     null;
   const layer2Title = tradLabel
     ? `${tradLabel} — Special Foods for this Vrat`

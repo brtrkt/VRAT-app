@@ -11,7 +11,7 @@ export interface Vrat {
    */
   datesByRegion?: Record<string, string[]>;
   deity: string;
-  tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Warkari" | "Ramanandi" | "SriVaishnava" | "Shakta" | "ShaivaSiddhanta" | "Both";
+  tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Warkari" | "Ramanandi" | "SriVaishnava" | "Shakta" | "ShaivaSiddhanta" | "Bishnoi" | "Both";
   foodsAllowed: string[];
   foodsAvoided: string[];
   jainFastRestrictions?: string[];
@@ -10594,6 +10594,176 @@ export const vrats: Vrat[] = [
     region: "south-india",
     regionLabel: "Tamil Nadu",
   },
+
+  // ── Bishnoi ──────────────────────────────────────────────────────────────
+  // Followers of Guru Jambheshwar Maharaj (Jambhoji), founded 1485 CE in
+  // Pipasar (Nagaur, Rajasthan). The 29 principles (bish=20 + noi=9) of the
+  // Bishnoi panth emphasize strict vegetarianism, protection of all life,
+  // and conservation of green trees — most famously commemorated by the
+  // Khejarli sacrifice of Amrita Devi Bishnoi and 363 others (1730 CE).
+  // Mool mantra: Vishno Vishno tu bhaje re prani. Sacred sites: Mukam
+  // (Bikaner — Jambhoji's samadhi), Lalasar Sathari (Phalodi), Pipasar
+  // (Nagaur — Jambhoji's birthplace), Samrathal Dhora (Mukam).
+  {
+    id: "guru-jambheshwar-jayanti",
+    name: "Guru Jambheshwar Jayanti (Jambhoji Janma)",
+    dates: ["2026-09-04", "2027-08-25"],
+    deity: "Guru Jambheshwar Maharaj (Jambhoji) — founder of the Bishnoi panth",
+    tradition: "Bishnoi",
+    foodsAllowed: [
+      "Strict satvik vegetarian — bajra (pearl millet) roti, the staple of Rajasthan and the Bishnoi heartland",
+      "Khejri seed (sangri) curry — the sacred tree the Bishnois sacrificed their lives to protect",
+      "Ker-sangri sabzi — the iconic Marwari Bishnoi dish (ker berries + khejri pods)",
+      "Kair, gum (gond), pearl millet kheech and bajra-rabri",
+      "Buttermilk (chaas) and pure cow's milk and ghee — central to Bishnoi diet",
+      "Jaggery (gud) and til (sesame) sweets",
+      "All seasonal vegetables — but never root vegetables on a vrat day",
+      "Fresh fruits — banana, orange, papaya, ber (jujube)",
+    ],
+    foodsAvoided: [
+      "Meat, fish, eggs — strictly forbidden under the 29 niyams (lifelong, not just on vrat)",
+      "Alcohol, tobacco, opium, all intoxicants — a core Bishnoi niyam",
+      "Onion and garlic — avoided in strict satvik Bishnoi practice",
+      "Anything cooked using firewood from green trees — only fallen wood permitted",
+      "Foods involving harm to animals, including products from animals harmed in production",
+      "Blue-coloured clothing dye (neel) — traditionally avoided as it requires destroying many plants to produce",
+    ],
+    mantra: "विष्णो विष्णो तू भजे रे प्राणी",
+    mantraTransliteration: "Vishno Vishno tu bhaje re prani",
+    mantraTranslation: "O living being, chant Vishnu, chant Vishnu — the mool mantra of Guru Jambheshwar, drawn from his Shabadvani (the 120 shabads).",
+    mantraHow: "Begin the day with a pre-dawn snan (cold-water bath — niyam #1 of the 29 principles), then perform sandhya (twilight worship — niyam #5) facing east. Chant the mool mantra 108 times on a tulsi mala. Read shabads from the Shabadvani — Jambhoji's 120 shabads in the Marwari-Hindi vernacular. Visit a local Bishnoi mandir; if possible, plan a darshan to Mukam (Bikaner) or to Pipasar (Jambhoji's birthplace in Nagaur).",
+    mantraBenefits: "Guru Jambheshwar (1451–1536 CE) was born at Pipasar village (Nagaur, Rajasthan) on Bhadrapada Krishna Ashtami — the same tithi as Krishna Janmashtami. After witnessing the great Marwar drought of 1485, he established the Bishnoi panth at Samrathal Dhora (near Mukam) on Kartik Krishna Ashtami 1485 CE, giving the 29 niyams that uniquely bind dharma, vegetarianism, and the protection of all green life. His Jayanti renews the Bishnoi vow to live as guardians of trees, animals, and water in the desert.",
+    mealIdea: "Bajra roti with ker-sangri sabzi, fresh chaas (buttermilk), and a small bowl of kheer made from pearl millet — the meal of Marwar that Jambhoji himself would have eaten in 15th-century Rajasthan.",
+    color: "#16A34A",
+    description: "Guru Jambheshwar Jayanti — the birth anniversary of Jambhoji Maharaj (1451 CE, Pipasar village, Nagaur), founder of the Bishnoi panth. Observed on Bhadrapada Krishna Ashtami (the same tithi as Krishna Janmashtami, of which Jambhoji is regarded as an avatar in Bishnoi tradition). The most important Bishnoi observance of the year, with grand celebrations at Mukam (Bikaner — his samadhi), Pipasar (his birthplace), and at every Bishnoi village across Rajasthan, Haryana, Punjab, Uttar Pradesh, and Madhya Pradesh.",
+    specialNote: "Per Drik Panchang IST. The 29 principles (bish=20 + noi=9) include daily snan, pranayama, sandhya, satya (truth), no animal sacrifice, no meat/eggs/alcohol/tobacco, no cutting of green trees, no felling on amavasya, protection of all life, and provision of safe haven for wildlife. Verify exact tithi and local mandir program with your village Bishnoi sabha or with the Akhil Bharatiya Bishnoi Mahasabha.",
+    region: "north-west-india",
+    regionLabel: "Rajasthan / Haryana / Punjab / Bishnoi Diaspora",
+  },
+  {
+    id: "khejarli-shaheed-diwas",
+    name: "Khejarli Shaheed Diwas (Amrita Devi & 363 Martyrs)",
+    dates: ["2026-09-21", "2027-09-10"],
+    deity: "Amrita Devi Bishnoi and 363 Bishnoi martyrs of Khejarli (1730 CE)",
+    tradition: "Bishnoi",
+    foodsAllowed: [
+      "Light satvik foods — bajra roti, dal, fresh chaas (buttermirk)",
+      "Ker-sangri sabzi — eaten in remembrance of the sacred khejri tree the martyrs gave their lives to protect",
+      "Fresh fruits and dry fruits (no cooking using wood from any tree)",
+      "Pure cow's milk and ghee",
+      "Boiled water, plain warm milk",
+    ],
+    foodsAvoided: [
+      "Meat, fish, eggs — strictly forbidden",
+      "Alcohol and all intoxicants",
+      "Onion, garlic on this solemn vrat day",
+      "Any food prepared using freshly-cut green wood — observe the sacrifice by burning only fallen wood or none at all",
+    ],
+    mantra: "सिर साठे रूख रहे, तो भी सस्तो जाण",
+    mantraTransliteration: "Sir saanthe rookh rahe, to bhi sasto jaan",
+    mantraTranslation: "If a tree can be saved at the cost of my head, even that bargain is cheap — the deathless words of Amrita Devi Bishnoi, spoken at Khejarli on Bhadrapada Shukla Dashami 1730 CE before her beheading.",
+    mantraHow: "Spend the day in remembrance and chinta-manan (reflection) on the Khejarli sacrifice. Read Amrita Devi's testimony aloud. If a khejri tree (Prosopis cineraria) grows nearby, visit it; offer water and a circumambulation. Plant a tree as your active commitment to her vow. Chant the Bishnoi mool mantra ('Vishno Vishno tu bhaje re prani') 363 times — once for each martyr. Visit the Khejarli Shaheed Smarak (memorial) near Jodhpur if you are in Marwar.",
+    mantraBenefits: "On Bhadrapada Shukla Dashami in 1730 CE (September 12 by the Julian calendar then in use), Maharaja Abhay Singh of Jodhpur sent his minister Giridhar Bhandari with woodcutters to fell khejri trees at Khejarli for a new palace. Amrita Devi Bishnoi resisted, embracing a khejri tree and uttering the deathless words 'Sir saanthe rookh rahe, to bhi sasto jaan'. She was beheaded; her three daughters Asu, Ratni, and Bhagu followed; ultimately 363 Bishnois — men, women, children — gave their lives embracing trees before the Maharaja revoked the order, granting Bishnoi villages permanent royal protection from tree-felling and animal hunting. Khejarli is regarded as the world's first organized environmental martyrdom and the inspiration for the modern Chipko Movement (1973). Observing this Diwas renews the Bishnoi vow as guardians of all green life.",
+    mealIdea: "A simple plate of bajra roti, ker-sangri sabzi, and chaas — eaten in silence after sunset, in remembrance of the 363 Bishnoi who gave their heads so the khejri could live.",
+    color: "#16A34A",
+    description: "Khejarli Shaheed Diwas — the annual remembrance of the 363 Bishnoi martyrs led by Amrita Devi Bishnoi, who on Bhadrapada Shukla Dashami 1730 CE laid down their lives at Khejarli village (Jodhpur, Rajasthan) to protect the sacred khejri trees from Maharaja Abhay Singh's woodcutters. Observed at the Khejarli Shaheed Smarak (memorial) and at every Bishnoi village. The world's first organized environmental sacrifice and the spiritual ancestor of the modern Chipko Movement.",
+    specialNote: "Per Drik Panchang IST. Bhadrapada Shukla Dashami varies by year; the historical date by the modern Gregorian calendar is September 12, 1730. The annual Khejarli Mela at the Shaheed Smarak (Khejarli, Jodhpur district) draws Bishnoi pilgrims from across India. Verify with the Akhil Bharatiya Bishnoi Mahasabha or the Khejarli Smarak Trust.",
+    region: "north-west-india",
+    regionLabel: "Khejarli (Jodhpur) / Rajasthan / Bishnoi Worldwide",
+  },
+  {
+    id: "jambhoji-mukti-diwas",
+    name: "Jambhoji Mukti Diwas (Mahaprayan)",
+    dates: ["2026-02-10", "2027-01-31"],
+    deity: "Guru Jambheshwar Maharaj (Jambhoji) — Mahaprayan at Lalasar",
+    tradition: "Bishnoi",
+    foodsAllowed: [
+      "Fruit and milk vrat — fresh fruits, banana, orange, papaya, ber",
+      "Pure cow's milk, plain chaas (buttermilk)",
+      "Bajra rabri (pearl millet porridge with milk)",
+      "Singhara atta and kuttu atta if a phalahar is needed",
+      "Sendha namak only on this fast day",
+    ],
+    foodsAvoided: [
+      "Meat, fish, eggs, alcohol — strictly (lifelong niyam)",
+      "All grains during the strict vrat — break with bajra after sandhya",
+      "Onion, garlic on this fast day",
+      "Regular table salt — only sendha namak",
+    ],
+    mantra: "ॐ विष्णु",
+    mantraTransliteration: "Om Vishnu",
+    mantraTranslation: "Om Vishnu — the bija mantra of Guru Jambheshwar's path. Jambhoji is regarded as an avatar of Vishnu in the Bishnoi tradition.",
+    mantraHow: "Observe phalahar (fruit and milk fast) from sunrise. Begin with cold-water snan and sandhya facing east. Read shabads from the Shabadvani — especially the shabads of Jambhoji's final teachings before his mahaprayan at Lalasar. Chant 'Om Vishnu' on a tulsi mala 108 times in the morning, again at noon, and at evening sandhya. Visit a Bishnoi mandir; if possible, plan a darshan to Lalasar Sathari (Phalodi).",
+    mantraBenefits: "Guru Jambheshwar attained mahaprayan on Magh Krishna Navami 1593 Vikram Samvat (1536 CE) at Lalasar Sathari (Phalodi, Jodhpur district), at the age of 85. He had spent his final years teaching the 29 niyams across Marwar, establishing dharma-sthals, and personally protecting blackbuck and chinkara from poachers. His mahaprayan day is observed as 'Mukti Diwas' — the day Jambhoji merged into the eternal — and is the most solemn Bishnoi day of the year alongside his Jayanti. The fast cleanses karma and renews the disciple's bond with the 29 niyams.",
+    mealIdea: "Phalahar through the day — fresh fruits, banana with milk, a bowl of bajra rabri at evening sandhya. Break the fast on day 2 with bajra roti, ker-sangri, and chaas.",
+    color: "#16A34A",
+    description: "Jambhoji Mukti Diwas — the mahaprayan anniversary of Guru Jambheshwar Maharaj, who left his earthly body on Magh Krishna Navami 1593 VS (1536 CE) at Lalasar Sathari (Phalodi, Jodhpur). The most solemn Bishnoi day after his Jayanti, observed with fasting and continuous chanting at every Bishnoi mandir, with the central observance at the Lalasar Sathari shrine.",
+    specialNote: "Per Drik Panchang IST. The Lalasar Sathari shrine (Phalodi, Jodhpur district) is one of the eight sacred Bishnoi dhams. Verify exact tithi with the Akhil Bharatiya Bishnoi Mahasabha or your village Bishnoi sabha.",
+    region: "north-west-india",
+    regionLabel: "Lalasar Sathari (Phalodi) / Rajasthan / Bishnoi Worldwide",
+  },
+  {
+    id: "mukam-mela-asoj-amavasya",
+    name: "Mukam Mela (Asoj Amavasya)",
+    dates: ["2026-09-20", "2027-10-09"],
+    deity: "Guru Jambheshwar Maharaj — pilgrimage to Mukam (Samrathal Dhora)",
+    tradition: "Bishnoi",
+    foodsAllowed: [
+      "Bajra roti and ker-sangri — the prasad of Mukam",
+      "Khichdi of bajra and moong dal",
+      "Pure cow's milk, chaas, ghee",
+      "All seasonal vegetables (no root vegetables on amavasya)",
+      "Fresh fruits — banana, orange, papaya",
+      "Jaggery and til (sesame) sweets",
+    ],
+    foodsAvoided: [
+      "Meat, fish, eggs, alcohol, tobacco — lifelong niyam",
+      "Onion and garlic on amavasya pilgrimage",
+      "Any tree-felling or harm to wildlife on amavasya — a core 29-niyam observance",
+    ],
+    mantra: "विष्णो विष्णो तू भजे रे प्राणी",
+    mantraTransliteration: "Vishno Vishno tu bhaje re prani",
+    mantraTranslation: "O living being, chant Vishnu, chant Vishnu — Jambhoji's mool mantra, recited continuously through the night of the Mukam Mela.",
+    mantraHow: "If able to travel: undertake the Mukam yatra (Bikaner district) for the all-night chanting and havan at Samrathal Dhora — the sacred dhora (sand dune) where Jambhoji established the Bishnoi panth in 1485 CE. If observing from home: keep a strict vrat from sunrise, perform sandhya morning and evening, and join the chanting through ratri-jagran (night vigil). Recite Jambhoji's Shabadvani.",
+    mantraBenefits: "Mukam (Bikaner district, Rajasthan) is the spiritual capital of the Bishnoi panth — the site of Jambhoji's samadhi and of Samrathal Dhora, the sand dune where he established the panth and gave the 29 niyams in 1485 CE. The Asoj Amavasya Mela (autumn — Ashwin Amavasya, coinciding with Mahalaya Amavasya / end of Pitru Paksha) is the larger of the two annual Mukam Melas and draws over a million Bishnoi pilgrims. The all-night havan at Samrathal Dhora and the dhokh (prostration) at Jambhoji's samadhi are the spiritual heart of the year.",
+    mealIdea: "Bajra roti with ker-sangri sabzi and chaas, eaten at the Mukam langar after dhokh at Jambhoji's samadhi. Anyone who has visited Mukam during the mela will say the bajra roti tastes different there.",
+    color: "#16A34A",
+    description: "Mukam Mela (Asoj Amavasya) — the larger of the two annual Bishnoi pilgrimages to Mukam (Bikaner district), the site of Guru Jambheshwar's samadhi and of Samrathal Dhora where he established the Bishnoi panth in 1485 CE. Observed on Ashwin Amavasya (the same amavasya as Mahalaya / end of Pitru Paksha), with all-night havan at Samrathal Dhora and dhokh at Jambhoji's samadhi. Draws over a million Bishnoi pilgrims annually from Rajasthan, Haryana, Punjab, MP, UP, and the diaspora.",
+    specialNote: "Per Drik Panchang IST. Two Mukam Melas are held annually — Asoj Amavasya (autumn, the larger) and Phalgun Amavasya (spring). Verify exact mela dates with the Akhil Bharatiya Bishnoi Mahasabha or the Mukam Mandir Sansthan.",
+    region: "north-west-india",
+    regionLabel: "Mukam (Bikaner) / Rajasthan / Bishnoi Worldwide",
+  },
+  {
+    id: "mukam-mela-phalgun-amavasya",
+    name: "Mukam Mela (Phalgun Amavasya)",
+    dates: ["2026-03-18", "2027-03-07"],
+    deity: "Guru Jambheshwar Maharaj — spring pilgrimage to Mukam",
+    tradition: "Bishnoi",
+    foodsAllowed: [
+      "Bajra roti and ker-sangri sabzi",
+      "Khichdi of bajra and moong dal",
+      "Pure cow's milk, chaas, ghee",
+      "Seasonal vegetables of the spring fields",
+      "Fresh fruits — banana, orange, papaya",
+      "Jaggery and til (sesame) sweets, gond ke laddu",
+    ],
+    foodsAvoided: [
+      "Meat, fish, eggs, alcohol, tobacco — lifelong niyam",
+      "Onion and garlic on amavasya pilgrimage",
+      "Any tree-felling or hunting on amavasya — a core 29-niyam observance",
+    ],
+    mantra: "विष्णो विष्णो तू भजे रे प्राणी",
+    mantraTransliteration: "Vishno Vishno tu bhaje re prani",
+    mantraTranslation: "O living being, chant Vishnu, chant Vishnu — Jambhoji's mool mantra, recited at the spring Mukam Mela.",
+    mantraHow: "If able to travel: undertake the spring Mukam yatra (Bikaner district) for the havan at Samrathal Dhora and dhokh at Jambhoji's samadhi. If observing from home: perform sandhya morning and evening, recite Jambhoji's Shabadvani, and chant 'Vishno Vishno tu bhaje re prani' on a tulsi mala. Many Bishnoi families visit Lalasar Sathari (Phalodi) during the spring season.",
+    mantraBenefits: "The Phalgun Amavasya Mukam Mela is the second of the two annual Bishnoi pilgrimages to Mukam (Bikaner). Held at the end of winter, this spring mela coincides with the agricultural rest before the summer harvest in Marwar. Pilgrims circumambulate Samrathal Dhora — the dune where Jambhoji established the panth in 1485 CE — and seek his blessings for the year's harvest, family welfare, and continued strength to uphold the 29 niyams.",
+    mealIdea: "Bajra roti with ker-sangri sabzi and chaas at the Mukam langar after dhokh; gond ke laddu prasad to take home and share with the village.",
+    color: "#16A34A",
+    description: "Mukam Mela (Phalgun Amavasya) — the spring Bishnoi pilgrimage to Mukam (Bikaner district), the second of the two annual Mukam Melas. Observed on Phalgun Amavasya (the amavasya before Holi), with havan at Samrathal Dhora and dhokh at Jambhoji's samadhi. Smaller than the autumn (Asoj) Mukam Mela but still draws lakhs of Bishnoi pilgrims.",
+    specialNote: "Per Drik Panchang IST. The spring Mukam Mela falls on Phalgun Amavasya — the new-moon day immediately before Holi (Phalgun Purnima). Verify exact mela dates with the Akhil Bharatiya Bishnoi Mahasabha or the Mukam Mandir Sansthan.",
+    region: "north-west-india",
+    regionLabel: "Mukam (Bikaner) / Rajasthan / Bishnoi Worldwide",
+  },
 ];
 
 /**
@@ -10776,6 +10946,7 @@ export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] 
   if (tradition === "SriVaishnava")    return list.filter((v) => v.tradition === "SriVaishnava");
   if (tradition === "Shakta")          return list.filter((v) => v.tradition === "Shakta");
   if (tradition === "ShaivaSiddhanta") return list.filter((v) => v.tradition === "ShaivaSiddhanta");
+  if (tradition === "Bishnoi")         return list.filter((v) => v.tradition === "Bishnoi");
   return list;
 }
 
