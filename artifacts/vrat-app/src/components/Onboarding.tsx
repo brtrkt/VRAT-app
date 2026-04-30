@@ -164,6 +164,7 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "holi-dol-utsav-pushti-marg",         label: "Holi Dahan & Dol Utsav",                 subtitle: "Phalgun Purnima + Dhulendi · haveli phag-rasa kirtan & gulal",         tradition: "PushtiMarg" },
   { id: "khichdi-utsav-pushti-marg",          label: "Khichdi Utsav (Makar Sankranti)",        subtitle: "Jan 14 · winter khichdi-seva · Uttarayana-arambh",                     tradition: "PushtiMarg" },
 
+  { id: "hari-path-warkari",          label: "Hari Path (हरि पाठ)",                subtitle: "Daily morning & evening · 28 abhangs of Sant Dnyaneshwar in praise of Vitthal · हरि पाठ — विठोबाचे नाम घ्या, सर्व पापे जळतील", tradition: "Warkari" },
   { id: "ashadhi-ekadashi-warkari",   label: "Ashadhi Ekadashi (Devshayani)",      subtitle: "Pandharpur Wari · Vitthal yoga-nidra begins",            tradition: "Warkari" },
   { id: "kartiki-ekadashi-warkari",   label: "Kartiki Ekadashi (Prabodhini)",      subtitle: "Vitthal awakens · second Pandharpur Wari",               tradition: "Warkari" },
   { id: "maghi-ekadashi-warkari",     label: "Maghi Ekadashi (Jaya)",              subtitle: "Jaya Ekadashi · prelude to Tukaram Beej",                 tradition: "Warkari" },
@@ -278,7 +279,7 @@ const SWAMINARAYAN_DEFAULTS = ["swaminarayan-jayanti", "fuldol-swaminarayan", "e
 const ISKCON_DEFAULTS       = ["iskcon-ekadashi", "janmashtami-iskcon", "gaura-purnima", "radhashtami", "narasimha-chaturdashi", "kartik-damodara", "nityananda-trayodashi", "ramanavami-iskcon", "ratha-yatra-iskcon", "balarama-purnima-iskcon", "vyasa-puja-iskcon", "govardhan-puja-iskcon", "srila-prabhupada-tirobhava-iskcon", "tulasi-vivaha-iskcon"];
 const LINGAYAT_DEFAULTS     = ["maha-shivaratri-lingayat", "somavara-lingayat", "basava-jayanti"];
 const PUSHTI_MARG_DEFAULTS  = ["ekadashi-pushti-marg", "janmashtami-pushti-marg", "annakut-pushti-marg", "phoolon-wali-holi"];
-const WARKARI_DEFAULTS         = ["ashadhi-ekadashi-warkari", "kartiki-ekadashi-warkari", "tukaram-beej", "dnyaneshwar-punyatithi"];
+const WARKARI_DEFAULTS         = ["hari-path-warkari", "ashadhi-ekadashi-warkari", "kartiki-ekadashi-warkari", "tukaram-beej", "dnyaneshwar-punyatithi"];
 const RAMANANDI_DEFAULTS       = [
   // Existing one-off Ramanandi festivals
   "ram-navami-ramanandi", "hanuman-jayanti-ramanandi", "sita-navami", "vivah-panchami", "tulsi-vivah-ramanandi",
