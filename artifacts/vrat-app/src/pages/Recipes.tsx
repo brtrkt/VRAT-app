@@ -1304,12 +1304,28 @@ function getRegionalRecipes(tradition: string): { pool: Recipe[]; title: string 
   }
 }
 
+// Recipes from the universal RECIPES pool that Jains do not eat — they
+// rely on root vegetables (potato, sweet potato), which Jain dietary
+// principles avoid year-round (uprooting harms micro-organisms in the
+// soil). These dishes remain visible to Hindu users (where they are
+// traditional vrat foods like Vrat Wale Aloo and Shakarkand Chaat),
+// but are filtered out for Jain users only.
+const JAIN_EXCLUDED_RECIPE_IDS = new Set<string>([
+  "aloo-jeera",          // Vrat Wale Aloo — potato (root)
+  "sweet-potato-chaat",  // Shakarkand Chaat — sweet potato (root)
+]);
+
 export default function Recipes() {
   const [, setLocation] = useLocation();
   const [filter, setFilter] = useState<"All" | "Light" | "Medium" | "Heavy">("All");
   const tradition = getUserTradition();
   const isSikh = tradition === "Sikh";
-  const recipePool = isSikh ? SIKH_RECIPES : RECIPES;
+  const isJain = tradition === "Jain";
+  // Universal pool, with root-vegetable dishes filtered out for Jain users.
+  const universalPool = isJain
+    ? RECIPES.filter((r) => !JAIN_EXCLUDED_RECIPE_IDS.has(r.id))
+    : RECIPES;
+  const recipePool = isSikh ? SIKH_RECIPES : universalPool;
   const filtered = filter === "All" ? recipePool : recipePool.filter((r) => r.energy === filter);
   // Regional recipe section — gated on the user's selected tradition,
   // shown below the universal RECIPES list. Sikh users get their
