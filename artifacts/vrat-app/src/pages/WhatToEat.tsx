@@ -420,6 +420,15 @@ function MealIdeasSection({ vrat }: { vrat: Vrat }) {
 function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
   const { t } = useLanguage();
   const traditionSpecific = getTraditionSpecificFoods(vrat);
+  // BUG FIX: regional/tradition food sections were previously gated on
+  // `vrat.tradition` (the tag of the specific vrat being shown — often
+  // "Hindu" or "Both" for universal vrats like Ekadashi/Maha Shivaratri).
+  // That meant a Lingayat user viewing a generic Hindu vrat never saw
+  // their Karnataka regional foods. The regional food list belongs to
+  // the user — not to the vrat — so we now gate on the user's selected
+  // tradition. The per-vrat "Special Foods for this Vrat" layer below
+  // remains tied to `vrat` since it is genuinely vrat-specific.
+  const userTradition = getUserTradition();
   const tradLabel =
     vrat.tradition === "Lingayat"        ? "Lingayat Tradition" :
     vrat.tradition === "PushtiMarg"      ? "Pushti Marg Tradition" :
@@ -446,9 +455,9 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
           Sits between the universal list and the per-vrat special foods,
           so each section reads as a regional layer that always applies
           for that tradition — independent of which specific vrat is
-          showing. Each section is gated on a single tradition value, so
-          at most one regional list ever renders for a given user. */}
-      {vrat.tradition === "Lingayat" && (
+          showing. Each section is gated on the user's selected tradition,
+          so at most one regional list ever renders for a given user. */}
+      {userTradition === "Lingayat" && (
         <>
           <div className="h-px bg-border my-4" />
           <FoodList
@@ -458,7 +467,7 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
           />
         </>
       )}
-      {vrat.tradition === "Warkari" && (
+      {userTradition === "Warkari" && (
         <>
           <div className="h-px bg-border my-4" />
           <FoodList
@@ -468,7 +477,7 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
           />
         </>
       )}
-      {vrat.tradition === "SriVaishnava" && (
+      {userTradition === "SriVaishnava" && (
         <>
           <div className="h-px bg-border my-4" />
           <FoodList
@@ -478,7 +487,7 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
           />
         </>
       )}
-      {vrat.tradition === "ShaivaSiddhanta" && (
+      {userTradition === "ShaivaSiddhanta" && (
         <>
           <div className="h-px bg-border my-4" />
           <FoodList
@@ -488,7 +497,7 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
           />
         </>
       )}
-      {vrat.tradition === "Shakta" && (
+      {userTradition === "Shakta" && (
         <>
           <div className="h-px bg-border my-4" />
           <FoodList
@@ -498,7 +507,7 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
           />
         </>
       )}
-      {vrat.tradition === "ISKCON" && (
+      {userTradition === "ISKCON" && (
         <>
           <div className="h-px bg-border my-4" />
           <FoodList
@@ -508,7 +517,7 @@ function NonJainNonSikhFoodSection({ vrat }: { vrat: Vrat }) {
           />
         </>
       )}
-      {vrat.tradition === "PushtiMarg" && (
+      {userTradition === "PushtiMarg" && (
         <>
           <div className="h-px bg-border my-4" />
           <FoodList
