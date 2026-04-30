@@ -1,8 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link } from "wouter";
-import { ChevronLeft, RefreshCw, Search, X } from "lucide-react";
+import { ChevronLeft, RefreshCw, Search, X, Lock } from "lucide-react";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "";
+const ADMIN_TOKEN_KEY = "vrat_admin_token";
 
 const ERROR_TYPE_LABELS: Record<string, string> = {
   "wrong-date": "Wrong date",
@@ -78,7 +79,85 @@ function Badge({ label, color }: { label: string; color: string }) {
   );
 }
 
+function TokenGate({ onUnlock }: { onUnlock: (token: string) => void }) {
+  const [value, setValue] = useState("");
+  const [error, setError] = useState("");
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmed = value.trim();
+    if (!trimmed) {
+      setError("Enter the admin token");
+      return;
+    }
+    setError("");
+    try {
+      const res = await fetch(`${API_BASE}/api/error-reports/stats`, {
+        headers: { "x-admin-token": trimmed },
+      });
+      if (res.status === 401) {
+        setError("Wrong token");
+        return;
+      }
+      if (res.status === 503) {
+        setError("Admin API not configured on the server");
+        return;
+      }
+      if (!res.ok) {
+        setError(`Server returned ${res.status}`);
+        return;
+      }
+      onUnlock(trimmed);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Network error");
+    }
+  }
+
+  return (
+    <div className="min-h-screen cream-gradient flex items-center justify-center px-4">
+      <div className="vrat-card p-6 w-full max-w-sm">
+        <div className="flex items-center gap-2 mb-1">
+          <Lock size={16} style={{ color: "#78350F" }} />
+          <h1 className="font-serif text-xl font-bold text-foreground">Admin access</h1>
+        </div>
+        <p className="text-xs text-muted-foreground mb-4">
+          This page is restricted. Enter the admin token to view error reports.
+        </p>
+        <form onSubmit={submit} className="space-y-3">
+          <input
+            type="password"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder="Admin token"
+            autoFocus
+            className="w-full px-3 py-2 rounded-lg bg-white text-sm text-foreground focus:outline-none focus:ring-2"
+            style={{ border: "1px solid rgba(224,123,42,0.3)" }}
+            data-testid="admin-token-input"
+          />
+          {error && (
+            <p className="text-xs" style={{ color: "#991B1B" }}>{error}</p>
+          )}
+          <button
+            type="submit"
+            className="w-full px-3 py-2 rounded-lg text-sm font-bold tracking-wide text-white"
+            style={{ background: "linear-gradient(135deg, #FF6F00 0%, #E65100 100%)" }}
+            data-testid="admin-token-submit"
+          >
+            Unlock
+          </button>
+        </form>
+        <Link href="/">
+          <button className="w-full mt-3 text-xs text-muted-foreground hover:text-foreground transition-colors">
+            ← Back to app
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 export default function AdminErrorReports() {
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem(ADMIN_TOKEN_KEY));
   const [reports, setReports] = useState<ReportRow[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
   const [total, setTotal] = useState(0);
@@ -90,7 +169,13 @@ export default function AdminErrorReports() {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string>("");
 
+  function clearToken() {
+    localStorage.removeItem(ADMIN_TOKEN_KEY);
+    setToken(null);
+  }
+
   const loadReports = useCallback(async () => {
+    if (!token) return;
     setLoading(true);
     setErrorMsg("");
     try {
@@ -101,7 +186,13 @@ export default function AdminErrorReports() {
       params.set("limit", String(PAGE_SIZE));
       params.set("offset", String(offset));
 
-      const res = await fetch(`${API_BASE}/api/error-reports?${params.toString()}`);
+      const res = await fetch(`${API_BASE}/api/error-reports?${params.toString()}`, {
+        headers: { "x-admin-token": token },
+      });
+      if (res.status === 401) {
+        clearToken();
+        return;
+      }
       if (!res.ok) throw new Error(`Server returned ${res.status}`);
       const data = await res.json();
       setReports(data.reports ?? []);
@@ -113,18 +204,25 @@ export default function AdminErrorReports() {
     } finally {
       setLoading(false);
     }
-  }, [errorType, tradition, q, offset]);
+  }, [errorType, tradition, q, offset, token]);
 
   const loadStats = useCallback(async () => {
+    if (!token) return;
     try {
-      const res = await fetch(`${API_BASE}/api/error-reports/stats`);
+      const res = await fetch(`${API_BASE}/api/error-reports/stats`, {
+        headers: { "x-admin-token": token },
+      });
+      if (res.status === 401) {
+        clearToken();
+        return;
+      }
       if (!res.ok) return;
       const data = await res.json();
       setStats(data);
     } catch {
       // stats are optional decoration; ignore
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     loadReports();
@@ -133,6 +231,17 @@ export default function AdminErrorReports() {
   useEffect(() => {
     loadStats();
   }, [loadStats]);
+
+  if (!token) {
+    return (
+      <TokenGate
+        onUnlock={(t) => {
+          localStorage.setItem(ADMIN_TOKEN_KEY, t);
+          setToken(t);
+        }}
+      />
+    );
+  }
 
   function applyFilter<T>(setter: (v: T) => void, value: T) {
     setter(value);
@@ -168,18 +277,30 @@ export default function AdminErrorReports() {
               Back
             </button>
           </Link>
-          <button
-            onClick={() => {
-              loadReports();
-              loadStats();
-            }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
-            style={{ background: "rgba(120,53,15,0.08)", color: "#78350F" }}
-            data-testid="admin-refresh"
-          >
-            <RefreshCw size={12} className={loading ? "animate-spin" : ""} />
-            Refresh
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                loadReports();
+                loadStats();
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
+              style={{ background: "rgba(120,53,15,0.08)", color: "#78350F" }}
+              data-testid="admin-refresh"
+            >
+              <RefreshCw size={12} className={loading ? "animate-spin" : ""} />
+              Refresh
+            </button>
+            <button
+              onClick={clearToken}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
+              style={{ background: "rgba(120,53,15,0.08)", color: "#78350F" }}
+              data-testid="admin-signout"
+              title="Sign out (clear stored token)"
+            >
+              <Lock size={12} />
+              Sign out
+            </button>
+          </div>
         </div>
 
         <div className="mb-5">

@@ -1,7 +1,24 @@
-import { Router, type IRouter } from "express";
+import { Router, type IRouter, type Request, type Response, type NextFunction } from "express";
 import { storage } from "../storage";
 
 const router: IRouter = Router();
+
+function requireAdmin(req: Request, res: Response, next: NextFunction): void {
+  const expected = process.env.ADMIN_API_TOKEN;
+  if (!expected) {
+    req.log.warn("ADMIN_API_TOKEN not configured; admin endpoints are disabled");
+    res.status(503).json({ error: "Admin API not configured" });
+    return;
+  }
+  const headerToken = req.header("x-admin-token");
+  const queryToken = typeof req.query.token === "string" ? req.query.token : undefined;
+  const provided = headerToken ?? queryToken ?? "";
+  if (provided !== expected) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
+  next();
+}
 
 const ERROR_TYPES = [
   "wrong-date",
@@ -69,7 +86,7 @@ router.post("/error-reports", async (req, res) => {
   }
 });
 
-router.get("/error-reports", async (req, res) => {
+router.get("/error-reports", requireAdmin, async (req, res) => {
   const errorTypeRaw = typeof req.query.errorType === "string" ? req.query.errorType : "";
   const traditionRaw = typeof req.query.tradition === "string" ? req.query.tradition : "";
   const qRaw = typeof req.query.q === "string" ? req.query.q : "";
@@ -105,7 +122,7 @@ router.get("/error-reports", async (req, res) => {
   }
 });
 
-router.get("/error-reports/stats", async (_req, res) => {
+router.get("/error-reports/stats", requireAdmin, async (_req, res) => {
   try {
     const stats = await storage.getErrorReportStats();
     res.json(stats);
