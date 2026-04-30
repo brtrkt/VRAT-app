@@ -68,6 +68,7 @@ router.post('/stripe/checkout', async (req, res) => {
       cancel_url: `${origin}/?checkout_cancel=1`,
       ...(!isLifetime && { customer_update: { address: 'auto' } }),
       automatic_tax: { enabled: false },
+      allow_promotion_codes: true,
     });
 
     res.json({ url: session.url });
