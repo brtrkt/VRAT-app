@@ -3,6 +3,7 @@ import app from "./app";
 import { logger } from "./lib/logger";
 import { storage } from "./storage";
 import { ensurePricesSeeded } from "./seedPrices";
+import { startBackupScheduler } from "./jobs/scheduler";
 
 async function initSchema() {
   try {
@@ -52,5 +53,9 @@ app.listen(port, (err) => {
 
   seedPricesIfNeeded().catch((err) => {
     logger.warn({ err: err?.message }, "Background price seed failed (non-fatal)");
+  });
+
+  startBackupScheduler().catch((err) => {
+    logger.warn({ err: err?.message }, "Backup scheduler failed to start (non-fatal)");
   });
 });
