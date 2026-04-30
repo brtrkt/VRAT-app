@@ -13,6 +13,7 @@ import Paywall from "@/pages/Paywall";
 import VratHistory from "@/pages/VratHistory";
 import Onboarding from "@/components/Onboarding";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import ReportErrorButton from "@/components/ReportErrorButton";
 import HowToInstall from "@/pages/HowToInstall";
 import Recipes from "@/pages/Recipes";
 import LangarRecipes from "@/pages/LangarRecipes";
@@ -231,6 +232,7 @@ function Router() {
       </Switch>
       <BottomNav />
       <PWAInstallPrompt />
+      <ReportErrorButton />
     </div>
   );
 }
