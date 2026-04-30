@@ -265,6 +265,12 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "jambhoji-mukti-diwas",          label: "Jambhoji Mukti Diwas",              subtitle: "Magh Krishna Navami · mahaprayan at Lalasar Sathari",           tradition: "Bishnoi" },
   { id: "mukam-mela-asoj-amavasya",      label: "Mukam Mela (Asoj Amavasya)",        subtitle: "Autumn Bishnoi pilgrimage · Samrathal Dhora · Bikaner",         tradition: "Bishnoi" },
   { id: "mukam-mela-phalgun-amavasya",   label: "Mukam Mela (Phalgun Amavasya)",     subtitle: "Spring Bishnoi pilgrimage · before Holi · Mukam",               tradition: "Bishnoi" },
+  { id: "bishnoi-holi",                  label: "Bishnoi Holi (Phalgun Purnima)",    subtitle: "Phool gulal only · no green wood · niyam #16",                  tradition: "Bishnoi" },
+  { id: "bishnoi-mauni-amavasya",        label: "Mauni Amavasya (Monthly Amavasya)", subtitle: "Magha amavasya · silent fast · niyam #14",                      tradition: "Bishnoi" },
+  { id: "bishnoi-guru-purnima",          label: "Guru Purnima (Bishnoi)",            subtitle: "Ashadh Purnima · Shabadvani recitation · 29 niyams",            tradition: "Bishnoi" },
+  { id: "bishnoi-akshay-tritiya",        label: "Akshay Tritiya (Bishnoi)",          subtitle: "Vraksh-ropan · gau-daan · anna-daan",                           tradition: "Bishnoi" },
+  { id: "bishnoi-devshayani-ekadashi",   label: "Devshayani Ekadashi (Chaturmas)",   subtitle: "Ashadh Shukla Ekadashi · 4-month vrat begins",                  tradition: "Bishnoi" },
+  { id: "bishnoi-govardhan-puja",        label: "Govardhan Puja / Annakut",          subtitle: "Karthika Shukla Pratipada · gau-puja · niyam #19",              tradition: "Bishnoi" },
 ];
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
