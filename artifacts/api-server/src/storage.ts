@@ -1,15 +1,16 @@
 import { Pool } from 'pg';
+import { configurePoolSearchPath } from './lib/dbUrl';
 
 let pool: Pool | null = null;
 
 function getPool(): Pool {
   if (!pool) {
-    pool = new Pool({
+    pool = configurePoolSearchPath(new Pool({
       connectionString: process.env.DATABASE_URL,
       connectionTimeoutMillis: 5000,
       idleTimeoutMillis: 30000,
       max: 10,
-    });
+    }));
   }
   return pool;
 }
@@ -26,8 +27,11 @@ export interface VratUser {
 export class Storage {
   async initSchema(): Promise<void> {
     const db = getPool();
+    // All table refs are fully qualified with the `public.` schema —
+    // Neon's pooled endpoint ships with an empty search_path that breaks
+    // unqualified references.
     await db.query(`
-      CREATE TABLE IF NOT EXISTS vrat_users (
+      CREATE TABLE IF NOT EXISTS public.vrat_users (
         id          TEXT PRIMARY KEY,
         email       TEXT UNIQUE NOT NULL,
         stripe_customer_id TEXT,
@@ -36,20 +40,20 @@ export class Storage {
         created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
 
-      CREATE TABLE IF NOT EXISTS vrat_subscriptions (
+      CREATE TABLE IF NOT EXISTS public.vrat_subscriptions (
         stripe_customer_id    TEXT PRIMARY KEY,
         stripe_subscription_id TEXT NOT NULL,
         status                TEXT NOT NULL,
         updated_at            TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
 
-      ALTER TABLE vrat_subscriptions
+      ALTER TABLE public.vrat_subscriptions
         ADD COLUMN IF NOT EXISTS cancel_at_period_end BOOLEAN NOT NULL DEFAULT FALSE;
 
-      ALTER TABLE vrat_subscriptions
+      ALTER TABLE public.vrat_subscriptions
         ADD COLUMN IF NOT EXISTS current_period_end TIMESTAMPTZ;
 
-      CREATE TABLE IF NOT EXISTS vrat_prices (
+      CREATE TABLE IF NOT EXISTS public.vrat_prices (
         id       TEXT PRIMARY KEY,
         plan     TEXT NOT NULL,
         currency TEXT NOT NULL,
@@ -57,7 +61,7 @@ export class Storage {
         UNIQUE (plan, currency)
       );
 
-      CREATE TABLE IF NOT EXISTS vrat_error_reports (
+      CREATE TABLE IF NOT EXISTS public.vrat_error_reports (
         id          BIGSERIAL PRIMARY KEY,
         error_type  TEXT NOT NULL,
         tradition   TEXT,
@@ -68,11 +72,11 @@ export class Storage {
       );
 
       CREATE INDEX IF NOT EXISTS idx_vrat_error_reports_created_at
-        ON vrat_error_reports (created_at DESC);
+        ON public.vrat_error_reports (created_at DESC);
       CREATE INDEX IF NOT EXISTS idx_vrat_error_reports_error_type
-        ON vrat_error_reports (error_type);
+        ON public.vrat_error_reports (error_type);
       CREATE INDEX IF NOT EXISTS idx_vrat_error_reports_tradition
-        ON vrat_error_reports (tradition);
+        ON public.vrat_error_reports (tradition);
     `);
   }
 
@@ -85,7 +89,7 @@ export class Storage {
   }): Promise<{ id: string; created_at: Date }> {
     const db = getPool();
     const result = await db.query<{ id: string; created_at: Date }>(
-      `INSERT INTO vrat_error_reports (error_type, tradition, page, notes, user_agent)
+      `INSERT INTO public.vrat_error_reports (error_type, tradition, page, notes, user_agent)
        VALUES ($1, $2, $3, $4, $5)
        RETURNING id::text, created_at`,
       [input.errorType, input.tradition, input.page, input.notes, input.userAgent]
@@ -131,7 +135,7 @@ export class Storage {
     const where = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
 
     const countResult = await db.query<{ count: string }>(
-      `SELECT COUNT(*)::text AS count FROM vrat_error_reports ${where}`,
+      `SELECT COUNT(*)::text AS count FROM public.vrat_error_reports ${where}`,
       params
     );
     const total = Number(countResult.rows[0]?.count ?? 0);
@@ -143,7 +147,7 @@ export class Storage {
 
     const result = await db.query(
       `SELECT id::text, error_type, tradition, page, notes, user_agent, created_at
-       FROM vrat_error_reports
+       FROM public.vrat_error_reports
        ${where}
        ORDER BY created_at DESC
        LIMIT $${limitIdx} OFFSET $${offsetIdx}`,
@@ -161,26 +165,26 @@ export class Storage {
   }> {
     const db = getPool();
     const [totalRes, byTypeRes, byTradRes, last7Res, last24Res] = await Promise.all([
-      db.query<{ count: string }>(`SELECT COUNT(*)::text AS count FROM vrat_error_reports`),
+      db.query<{ count: string }>(`SELECT COUNT(*)::text AS count FROM public.vrat_error_reports`),
       db.query<{ error_type: string; count: string }>(
         `SELECT error_type, COUNT(*)::text AS count
-         FROM vrat_error_reports
+         FROM public.vrat_error_reports
          GROUP BY error_type
          ORDER BY count DESC`
       ),
       db.query<{ tradition: string | null; count: string }>(
         `SELECT tradition, COUNT(*)::text AS count
-         FROM vrat_error_reports
+         FROM public.vrat_error_reports
          GROUP BY tradition
          ORDER BY count DESC
          LIMIT 20`
       ),
       db.query<{ count: string }>(
-        `SELECT COUNT(*)::text AS count FROM vrat_error_reports
+        `SELECT COUNT(*)::text AS count FROM public.vrat_error_reports
          WHERE created_at >= NOW() - INTERVAL '7 days'`
       ),
       db.query<{ count: string }>(
-        `SELECT COUNT(*)::text AS count FROM vrat_error_reports
+        `SELECT COUNT(*)::text AS count FROM public.vrat_error_reports
          WHERE created_at >= NOW() - INTERVAL '24 hours'`
       ),
     ]);
@@ -199,7 +203,7 @@ export class Storage {
     const id = `user_${normalized.replace(/[^a-z0-9]/g, '_')}`;
 
     const result = await db.query<VratUser>(
-      `INSERT INTO vrat_users (id, email)
+      `INSERT INTO public.vrat_users (id, email)
        VALUES ($1, $2)
        ON CONFLICT (email) DO UPDATE SET email = EXCLUDED.email
        RETURNING *`,
@@ -211,7 +215,7 @@ export class Storage {
   async getUserByEmail(email: string): Promise<VratUser | null> {
     const db = getPool();
     const result = await db.query<VratUser>(
-      'SELECT * FROM vrat_users WHERE email = $1',
+      'SELECT * FROM public.vrat_users WHERE email = $1',
       [email.trim().toLowerCase()]
     );
     return result.rows[0] || null;
@@ -220,7 +224,7 @@ export class Storage {
   async getUserByStripeCustomerId(customerId: string): Promise<VratUser | null> {
     const db = getPool();
     const result = await db.query<VratUser>(
-      'SELECT * FROM vrat_users WHERE stripe_customer_id = $1',
+      'SELECT * FROM public.vrat_users WHERE stripe_customer_id = $1',
       [customerId]
     );
     return result.rows[0] || null;
@@ -229,7 +233,7 @@ export class Storage {
   async updateStripeCustomerId(email: string, stripeCustomerId: string): Promise<void> {
     const db = getPool();
     await db.query(
-      'UPDATE vrat_users SET stripe_customer_id = $1 WHERE email = $2',
+      'UPDATE public.vrat_users SET stripe_customer_id = $1 WHERE email = $2',
       [stripeCustomerId, email.trim().toLowerCase()]
     );
   }
@@ -247,7 +251,7 @@ export class Storage {
     const cancelAtPeriodEnd = options.cancelAtPeriodEnd ?? false;
     const currentPeriodEnd = options.currentPeriodEnd ?? null;
     await db.query(
-      `INSERT INTO vrat_subscriptions
+      `INSERT INTO public.vrat_subscriptions
          (stripe_customer_id, stripe_subscription_id, status,
           cancel_at_period_end, current_period_end, updated_at)
        VALUES ($1, $2, $3, $4, $5, NOW())
@@ -271,7 +275,7 @@ export class Storage {
   } | null> {
     const db = getPool();
     const result = await db.query(
-      `SELECT * FROM vrat_subscriptions
+      `SELECT * FROM public.vrat_subscriptions
        WHERE stripe_customer_id = $1
          AND status IN ('active', 'trialing', 'lifetime')
        LIMIT 1`,
@@ -283,7 +287,7 @@ export class Storage {
   async getPriceByPlanAndCurrency(plan: 'monthly' | 'annual' | 'lifetime', currency: 'usd' | 'inr'): Promise<string | null> {
     const db = getPool();
     const result = await db.query(
-      `SELECT id FROM vrat_prices WHERE plan = $1 AND currency = $2 LIMIT 1`,
+      `SELECT id FROM public.vrat_prices WHERE plan = $1 AND currency = $2 LIMIT 1`,
       [plan, currency]
     );
     return result.rows[0]?.id || null;
@@ -292,7 +296,7 @@ export class Storage {
   async upsertPrice(id: string, plan: string, currency: string, amount: number): Promise<void> {
     const db = getPool();
     await db.query(
-      `INSERT INTO vrat_prices (id, plan, currency, amount)
+      `INSERT INTO public.vrat_prices (id, plan, currency, amount)
        VALUES ($1, $2, $3, $4)
        ON CONFLICT (plan, currency) DO UPDATE
          SET id = EXCLUDED.id, amount = EXCLUDED.amount`,

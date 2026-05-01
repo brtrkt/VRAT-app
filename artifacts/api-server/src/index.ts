@@ -1,4 +1,4 @@
-import "./lib/dbUrl";
+import { configurePoolSearchPath } from "./lib/dbUrl";
 import { Pool } from "pg";
 import app from "./app";
 import { logger } from "./lib/logger";
@@ -21,7 +21,7 @@ async function seedPricesIfNeeded() {
     logger.warn('DATABASE_URL not set, skipping price seed check');
     return;
   }
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  const pool = configurePoolSearchPath(new Pool({ connectionString: process.env.DATABASE_URL }));
   try {
     await ensurePricesSeeded(pool);
   } catch (err: any) {
