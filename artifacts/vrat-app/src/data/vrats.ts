@@ -11579,17 +11579,39 @@ export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] 
   return list;
 }
 
+export function isPrimaryFast(v: Vrat): boolean {
+  return /\b(Ekadashi|Amavasya|Purnima)\b/i.test(v.name);
+}
+
+export function sortVratsPrimaryFirst(list: Vrat[]): Vrat[] {
+  return [...list].sort((a, b) => {
+    const ap = isPrimaryFast(a) ? 0 : 1;
+    const bp = isPrimaryFast(b) ? 0 : 1;
+    if (ap !== bp) return ap - bp;
+    return a.name.localeCompare(b.name);
+  });
+}
+
 export function getNextVratForTradition(fromDate: Date, tradition: string, bucket?: IskconRegionBucket): { vrat: Vrat; date: string } | null {
+  const next = getNextVratsForTradition(fromDate, tradition, bucket);
+  return next ? { vrat: next.vrats[0], date: next.date } : null;
+}
+
+export function getNextVratsForTradition(fromDate: Date, tradition: string, bucket?: IskconRegionBucket): { vrats: Vrat[]; date: string } | null {
   const today = localDateStr(fromDate);
-  const pairs: { date: string; vrat: Vrat }[] = [];
+  const dateToVrats = new Map<string, Map<string, Vrat>>();
   for (const vrat of vrats) {
     const filtered = filterVratsByTradition([vrat], tradition);
     if (filtered.length === 0) continue;
     for (const date of pickDates(vrat, bucket)) {
-      if (date >= today) pairs.push({ date, vrat });
+      if (date <= today) continue;
+      if (!dateToVrats.has(date)) dateToVrats.set(date, new Map());
+      dateToVrats.get(date)!.set(vrat.id, vrat);
     }
   }
-  pairs.sort((a, b) => a.date.localeCompare(b.date));
-  const next = pairs.find((p) => p.date > today);
-  return next ? { vrat: next.vrat, date: next.date } : null;
+  const sortedDates = Array.from(dateToVrats.keys()).sort();
+  if (sortedDates.length === 0) return null;
+  const nextDate = sortedDates[0];
+  const vratsOnDate = Array.from(dateToVrats.get(nextDate)!.values());
+  return { date: nextDate, vrats: sortVratsPrimaryFirst(vratsOnDate) };
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, type CSSProperties } from "react";
 import { useLocation } from "wouter";
-import { getVratsForDate, getNextVratForTradition, filterVratsByTradition, getDaysUntil, formatDateStr, getAllVrats, getIskconRegionBucket } from "@/data/vrats";
+import { getVratsForDate, getNextVratForTradition, getNextVratsForTradition, sortVratsPrimaryFirst, filterVratsByTradition, getDaysUntil, formatDateStr, getAllVrats, getIskconRegionBucket } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import PageFooter from "@/components/PageFooter";
@@ -516,12 +516,13 @@ function TodayCard({ todayStr, vratsToday }: { todayStr: string; vratsToday: Vra
   );
 }
 
-function NextVratCard({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | null }) {
+function NextVratCard({ nextVrats }: { nextVrats: { vrats: Vrat[]; date: string } | null }) {
   const { t } = useLanguage();
-  if (!nextVrat) return null;
+  if (!nextVrats || nextVrats.vrats.length === 0) return null;
 
-  const daysLeft = getDaysUntil(nextVrat.date, new Date());
-  const dateFormatted = formatDateStr(nextVrat.date);
+  const [primary, ...secondary] = nextVrats.vrats;
+  const daysLeft = getDaysUntil(nextVrats.date, new Date());
+  const dateFormatted = formatDateStr(nextVrats.date);
   const isLingayat = getUserTradition() === "Lingayat";
 
   return (
@@ -532,15 +533,15 @@ function NextVratCard({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | n
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1">
           <h3 className="font-serif text-lg font-semibold text-foreground" data-testid="next-vrat-name">
-            {nextVrat.vrat.name}
+            {primary.name}
           </h3>
-          {nextVrat.vrat.hinduEquivalent && (
+          {primary.hinduEquivalent && (
             <p className="text-xs text-muted-foreground mt-0.5 italic">
-              Also observed as {nextVrat.vrat.hinduEquivalent}
+              Also observed as {primary.hinduEquivalent}
             </p>
           )}
           <p className="text-sm text-muted-foreground mt-0.5">{dateFormatted}</p>
-          <p className="text-sm text-muted-foreground">{nextVrat.vrat.deity}</p>
+          <p className="text-sm text-muted-foreground">{primary.deity}</p>
         </div>
         <div className="text-center flex-shrink-0">
           <div
@@ -553,6 +554,28 @@ function NextVratCard({ nextVrat }: { nextVrat: { vrat: Vrat; date: string } | n
           </div>
         </div>
       </div>
+      {secondary.length > 0 && (
+        <div className="mt-3 pt-3 border-t border-border/50" data-testid="next-vrat-secondary-list">
+          <p className="text-xs font-medium tracking-widest uppercase text-muted-foreground mb-2">
+            {t("home.alsoOnThisDay")}
+          </p>
+          <ul className="space-y-1.5">
+            {secondary.map((v) => (
+              <li
+                key={v.id}
+                className="flex items-baseline gap-2"
+                data-testid={`next-vrat-secondary-${v.id}`}
+              >
+                <span className="text-muted-foreground text-xs leading-none mt-1">•</span>
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-foreground leading-snug">{v.name}</p>
+                  <p className="text-xs text-muted-foreground leading-snug">{v.deity}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
@@ -564,7 +587,7 @@ function MantraCard({ vrats }: { vrats: Vrat[] }) {
   const todayStr = today.toISOString().split("T")[0];
   const tradition = getUserTradition();
   const iskconBucket = getIskconRegionBucket(getUserLocation(), getUserRegion());
-  const currentVrats = filterVratsByTradition(getVratsForDate(todayStr, iskconBucket), tradition);
+  const currentVrats = sortVratsPrimaryFirst(filterVratsByTradition(getVratsForDate(todayStr, iskconBucket), tradition));
   const nextVratData = getNextVratForTradition(today, tradition, iskconBucket);
   const displayVrat = currentVrats[0] || nextVratData?.vrat;
 
@@ -776,8 +799,8 @@ export default function Home() {
   const todayStr = today.toISOString().split("T")[0];
   const userTradition = getUserTradition();
   const iskconBucket = getIskconRegionBucket(getUserLocation(), getUserRegion());
-  const vratsToday = filterVratsByTradition(getVratsForDate(todayStr, iskconBucket), userTradition);
-  const nextVrat = getNextVratForTradition(today, userTradition, iskconBucket);
+  const vratsToday = sortVratsPrimaryFirst(filterVratsByTradition(getVratsForDate(todayStr, iskconBucket), userTradition));
+  const nextVrats = getNextVratsForTradition(today, userTradition, iskconBucket);
 
   const allVrats = vratsToday.length > 0 ? vratsToday : [];
   const nirjalaVrat = vratsToday.find(isNirjalaTimerVrat) ?? null;
@@ -829,7 +852,7 @@ export default function Home() {
         )}
         <HydrationTracker vratsToday={vratsToday} todayStr={todayStr} />
         <MyStreaks />
-        <NextVratCard nextVrat={nextVrat} />
+        <NextVratCard nextVrats={nextVrats} />
         <MantraCard vrats={allVrats} />
         {userTradition === "Sikh" ? <NanakshahiCard /> : <PanchangCard />}
         <BrahmaMuhurta />
