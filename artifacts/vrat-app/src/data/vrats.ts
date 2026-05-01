@@ -11603,21 +11603,29 @@ export function getAllVrats(): Vrat[] {
   return vrats;
 }
 
+// Pan-Hindu monthly lunar fasts (Ekadashi, Amavasya, Purnima) — observed by
+// most Hindu sub-traditions in addition to their tradition-specific entries.
+// Excluded for: Sikh (has its own Pooranmashi), ISKCON (uses iskcon-ekadashi
+// with location-specific dates), and Swaminarayan (uses ekadashi-swaminarayan).
+function isHinduLunarFast(v: Vrat): boolean {
+  return v.tradition === "Hindu" && /\b(Ekadashi|Amavasya|Purnima)\b/i.test(v.name);
+}
+
 export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] {
   if (tradition === "Both") return list.filter((v) => v.tradition === "Hindu" || v.tradition === "Jain" || v.tradition === "Both");
   if (tradition === "Hindu") return list.filter((v) => v.tradition === "Hindu" || v.tradition === "Both");
-  if (tradition === "Jain")  return list.filter((v) => v.tradition === "Jain"  || v.tradition === "Both");
+  if (tradition === "Jain")  return list.filter((v) => v.tradition === "Jain"  || v.tradition === "Both" || isHinduLunarFast(v));
   if (tradition === "Sikh")  return list.filter((v) => v.tradition === "Sikh");
   if (tradition === "Swaminarayan") return list.filter((v) => v.tradition === "Swaminarayan");
   if (tradition === "ISKCON") return list.filter((v) => v.tradition === "ISKCON");
-  if (tradition === "Lingayat")        return list.filter((v) => v.tradition === "Lingayat");
-  if (tradition === "PushtiMarg")      return list.filter((v) => v.tradition === "PushtiMarg");
-  if (tradition === "Warkari")         return list.filter((v) => v.tradition === "Warkari");
-  if (tradition === "Ramanandi")       return list.filter((v) => v.tradition === "Ramanandi");
-  if (tradition === "SriVaishnava")    return list.filter((v) => v.tradition === "SriVaishnava");
-  if (tradition === "Shakta")          return list.filter((v) => v.tradition === "Shakta");
-  if (tradition === "ShaivaSiddhanta") return list.filter((v) => v.tradition === "ShaivaSiddhanta");
-  if (tradition === "Bishnoi")         return list.filter((v) => v.tradition === "Bishnoi");
+  if (tradition === "Lingayat")        return list.filter((v) => v.tradition === "Lingayat"        || isHinduLunarFast(v));
+  if (tradition === "PushtiMarg")      return list.filter((v) => v.tradition === "PushtiMarg"      || isHinduLunarFast(v));
+  if (tradition === "Warkari")         return list.filter((v) => v.tradition === "Warkari"         || isHinduLunarFast(v));
+  if (tradition === "Ramanandi")       return list.filter((v) => v.tradition === "Ramanandi"       || isHinduLunarFast(v));
+  if (tradition === "SriVaishnava")    return list.filter((v) => v.tradition === "SriVaishnava"    || isHinduLunarFast(v));
+  if (tradition === "Shakta")          return list.filter((v) => v.tradition === "Shakta"          || isHinduLunarFast(v));
+  if (tradition === "ShaivaSiddhanta") return list.filter((v) => v.tradition === "ShaivaSiddhanta" || isHinduLunarFast(v));
+  if (tradition === "Bishnoi")         return list.filter((v) => v.tradition === "Bishnoi"         || isHinduLunarFast(v));
   return list;
 }
 
