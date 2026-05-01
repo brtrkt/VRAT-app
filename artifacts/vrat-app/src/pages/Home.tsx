@@ -433,7 +433,9 @@ function TodayCard({ todayStr, vratsToday }: { todayStr: string; vratsToday: Vra
   const weekday = today.toLocaleDateString("en-IN", { weekday: "long" });
   const dateFormatted = today.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
   const isFastDay = vratsToday.length > 0;
-  const isLingayat = getUserTradition() === "Lingayat";
+  const userTrad = getUserTradition();
+  const isLingayat = userTrad === "Lingayat";
+  const isJain = userTrad === "Jain";
 
   return (
     <div
@@ -447,7 +449,9 @@ function TodayCard({ todayStr, vratsToday }: { todayStr: string; vratsToday: Vra
     >
       {isFastDay && (
         <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-          <OmSymbol className="text-8xl text-white" />
+          {isJain
+            ? <JainSymbol className="w-24 h-24 text-white" />
+            : <OmSymbol className="text-8xl text-white" />}
         </div>
       )}
       <div className="relative z-10">
@@ -596,9 +600,9 @@ function MantraCard({ vrats }: { vrats: Vrat[] }) {
   return (
     <div data-testid="mantra-card" className="vrat-card p-5 mb-4">
       <div className="flex items-center gap-2 mb-3">
-        {displayVrat.tradition === "Jain"
+        {tradition === "Jain" || displayVrat.tradition === "Jain"
           ? <JainSymbol className="text-green-600 w-5 h-6 flex-shrink-0" />
-          : displayVrat.tradition === "Sikh"
+          : tradition === "Sikh" || displayVrat.tradition === "Sikh"
           ? <KhandaSvg className="w-5 h-5 flex-shrink-0" style={{ color: "#003DA5" }} />
           : <OmSymbol className="text-primary text-lg" />
         }

@@ -11605,8 +11605,10 @@ export function getAllVrats(): Vrat[] {
 
 // Pan-Hindu monthly lunar fasts (Ekadashi, Amavasya, Purnima) — observed by
 // most Hindu sub-traditions in addition to their tradition-specific entries.
-// Excluded for: Sikh (has its own Pooranmashi), ISKCON (uses iskcon-ekadashi
-// with location-specific dates), and Swaminarayan (uses ekadashi-swaminarayan).
+// Excluded for: Jain (has its own fasting calendar — Paryushana, Navpad Oli,
+// etc. — and does not observe Hindu lunar tithis), Sikh (has its own
+// Pooranmashi), ISKCON (uses location-specific iskcon-ekadashi), and
+// Swaminarayan (uses ekadashi-swaminarayan).
 function isHinduLunarFast(v: Vrat): boolean {
   return v.tradition === "Hindu" && /\b(Ekadashi|Amavasya|Purnima)\b/i.test(v.name);
 }
@@ -11614,7 +11616,7 @@ function isHinduLunarFast(v: Vrat): boolean {
 export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] {
   if (tradition === "Both") return list.filter((v) => v.tradition === "Hindu" || v.tradition === "Jain" || v.tradition === "Both");
   if (tradition === "Hindu") return list.filter((v) => v.tradition === "Hindu" || v.tradition === "Both");
-  if (tradition === "Jain")  return list.filter((v) => v.tradition === "Jain"  || v.tradition === "Both" || isHinduLunarFast(v));
+  if (tradition === "Jain")  return list.filter((v) => v.tradition === "Jain"  || v.tradition === "Both");
   if (tradition === "Sikh")  return list.filter((v) => v.tradition === "Sikh");
   if (tradition === "Swaminarayan") return list.filter((v) => v.tradition === "Swaminarayan");
   if (tradition === "ISKCON") return list.filter((v) => v.tradition === "ISKCON");

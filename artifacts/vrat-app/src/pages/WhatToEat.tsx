@@ -276,6 +276,33 @@ function OmSymbol({ className = "" }: { className?: string }) {
   return <span className={`font-serif ${className}`} aria-hidden="true">ॐ</span>;
 }
 
+function JainSymbol({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 56 72"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      {/* Five fingers: pinky → thumb */}
+      <rect x="1"  y="22" width="9"  height="22" rx="4.5" />
+      <rect x="12" y="14" width="9"  height="28" rx="4.5" />
+      <rect x="23" y="8"  width="10" height="33" rx="5" />
+      <rect x="35" y="13" width="9"  height="28" rx="4.5" />
+      <rect x="46" y="21" width="9"  height="22" rx="4.5" />
+      {/* Palm */}
+      <path d="M1 40 C1 38 3 37 5 37 L51 37 C53 37 55 38 55 40 L55 60 C55 67 48 72 28 72 C8 72 1 67 1 60 Z" />
+      {/* Ahimsa chakra wheel */}
+      <circle cx="28" cy="57" r="11" fill="white" />
+      <line x1="28" y1="46" x2="28" y2="68" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="17" y1="57" x2="39" y2="57" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="20.2" y1="49.2" x2="35.8" y2="64.8" stroke="currentColor" strokeWidth="1.5" />
+      <line x1="35.8" y1="49.2" x2="20.2" y2="64.8" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="28" cy="57" r="2.5" />
+    </svg>
+  );
+}
+
 function FoodList({
   title,
   items,
@@ -731,15 +758,18 @@ function KhandaSvg({ className = "", style = {} }: { className?: string; style?:
 
 function NoFastToday({ nextVrat, tradition }: { nextVrat: { vrat: Vrat; date: string } | null; tradition: string }) {
   const isSikh = tradition === "Sikh";
+  const isJain = tradition === "Jain";
   return (
     <div data-testid="no-fast-message">
       <div className="vrat-card p-6 mb-4 text-center">
         <div
-          className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4${isSikh ? "" : " bg-accent"}`}
-          style={isSikh ? { background: "#EFF6FF" } : undefined}
+          className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4${isSikh || isJain ? "" : " bg-accent"}`}
+          style={isSikh ? { background: "#EFF6FF" } : isJain ? { background: "#ECFDF5" } : undefined}
         >
           {isSikh
             ? <KhandaSvg className="w-8 h-10" style={{ color: "#003DA5" }} />
+            : isJain
+            ? <JainSymbol className="w-8 h-10 text-green-600" />
             : <OmSymbol className="text-primary text-2xl" />
           }
         </div>
