@@ -72,8 +72,8 @@ export async function ensurePricesSeeded(pool: Pool): Promise<void> {
   const stripe = getStripeClient();
 
   const { rows } = await pool.query<{ id: string; count: string }>(
-    `SELECT id, (SELECT COUNT(*)::text FROM vrat_prices) AS count
-     FROM vrat_prices LIMIT 1`,
+    `SELECT id, (SELECT COUNT(*)::text FROM public.vrat_prices) AS count
+     FROM public.vrat_prices LIMIT 1`,
   );
   const existingCount = Number(rows[0]?.count ?? '0');
   const sampleId = rows[0]?.id;
@@ -89,10 +89,10 @@ export async function ensurePricesSeeded(pool: Pool): Promise<void> {
           { sampleId },
           'Cached Stripe price not found — Stripe key likely switched modes (test↔live). Wiping and re-seeding.',
         );
-        await pool.query('DELETE FROM vrat_prices');
+        await pool.query('DELETE FROM public.vrat_prices');
       } else {
         logger.warn({ err: err?.message }, 'Could not validate cached Stripe price; re-seeding anyway');
-        await pool.query('DELETE FROM vrat_prices');
+        await pool.query('DELETE FROM public.vrat_prices');
       }
     }
   }
@@ -111,7 +111,7 @@ export async function ensurePricesSeeded(pool: Pool): Promise<void> {
     const priceId = await findOrCreatePrice(stripe, productId, spec);
 
     await pool.query(
-      `INSERT INTO vrat_prices (id, plan, currency, amount)
+      `INSERT INTO public.vrat_prices (id, plan, currency, amount)
        VALUES ($1, $2, $3, $4)
        ON CONFLICT (plan, currency) DO UPDATE
          SET id = EXCLUDED.id, amount = EXCLUDED.amount`,
