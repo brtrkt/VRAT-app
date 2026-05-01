@@ -5188,6 +5188,48 @@ export const vrats: Vrat[] = [
     specialNote: "Sikhism does not prescribe formal fasting on Sangrand. It is a day of gratitude, prayer, and community — celebrated by attending Gurdwara, listening to kirtan, and sharing in the langar.",
   },
   {
+    id: "pooranmashi",
+    name: "Pooranmashi",
+    punjabiName: "ਪੂਰਨਮਾਸ਼ੀ",
+    nanakshahiDate: "Full moon of each month, NS 558",
+    hinduEquivalent: "Purnima",
+    dates: [
+      "2026-01-03", "2026-02-01", "2026-03-03", "2026-04-02",
+      "2026-05-01", "2026-06-29", "2026-07-29", "2026-08-28",
+      "2026-09-26", "2026-10-26", "2026-11-24", "2026-12-23",
+      "2027-01-03", "2027-02-02", "2027-03-04", "2027-04-03",
+      "2027-05-02", "2027-06-01", "2027-07-18", "2027-08-17",
+      "2027-10-15", "2027-11-13",
+    ],
+    deity: "Waheguru (The Divine)",
+    tradition: "Sikh",
+    foodsAllowed: [
+      "Langar (community vegetarian meal at the Gurdwara)",
+      "Karah Prasad — sacred halwa of whole-wheat flour, ghee, and sugar",
+      "Dal (lentil soup)",
+      "Sabzi (vegetable curry)",
+      "Roti (wheat flatbread) and rice",
+      "Kheer (rice pudding)",
+      "Fresh fruits and dry fruits",
+      "Milk, yoghurt, and dairy",
+    ],
+    foodsAvoided: [
+      "Meat and fish",
+      "Eggs",
+      "Alcohol",
+      "Tobacco and intoxicants",
+    ],
+    mantra: "ਵਾਹਿਗੁਰੂ ਵਾਹਿਗੁਰੂ",
+    mantraTransliteration: "Waheguru Waheguru",
+    mantraTranslation: "Waheguru — Wondrous Enlightener, the Eternal Light pervading all creation",
+    mantraHow: "Begin the day with Nitnem (daily prayers) — Japji Sahib at amrit vela (early morning), Rehras Sahib at sunset. Visit the Gurdwara for kirtan and ardas. Recite Sukhmani Sahib for inner peace. Many Sikhs take Amrit Snan (sacred bath) before sunrise.",
+    mantraBenefits: "Pooranmashi simran of Waheguru on the full moon brings the mind into stillness, deepens devotion, and strengthens the Sikh's connection to the Sangat (holy congregation) and Guru Granth Sahib Ji.",
+    mealIdea: "Karah Prasad and kheer at the Gurdwara langar — sweet and nourishing on the bright full-moon night, shared with the sangat as Guru's blessing",
+    color: "#003DA5",
+    description: "Pooranmashi (Punjabi for Purnima) is the full moon day, observed monthly with special prayers, kirtan, and sangat at the Gurdwara. Many Sikhs take a sacred dip (Amrit Snan), recite the Sukhmani Sahib and Asa Di Vaar, and join in continuous ardas through the night. Historically associated with key Sikh events — Guru Nanak Dev Ji's enlightenment is also commemorated on Kartik Pooranmashi.",
+    specialNote: "Sikhism does not prescribe formal fasting on Pooranmashi. The day is for simran (meditation on Waheguru), seva (selfless service), and joining the sangat in the Gurdwara for kirtan, ardas, and langar. The full-moon light is seen as a reminder of the inner light of the Guru.",
+  },
+  {
     id: "guru-ram-das-jayanti",
     name: "Guru Ram Das Ji Gurpurab",
     punjabiName: "ਗੁਰੂ ਰਾਮ ਦਾਸ ਜੀ ਗੁਰਪੁਰਬ",
@@ -11580,7 +11622,7 @@ export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] 
 }
 
 export function isPrimaryFast(v: Vrat): boolean {
-  return /\b(Ekadashi|Amavasya|Purnima)\b/i.test(v.name);
+  return /\b(Ekadashi|Amavasya|Purnima|Pooranmashi)\b/i.test(v.name);
 }
 
 export function sortVratsPrimaryFirst(list: Vrat[]): Vrat[] {

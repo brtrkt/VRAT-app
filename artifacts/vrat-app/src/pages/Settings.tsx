@@ -80,6 +80,7 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "bandi-chhor-divas",            label: "Bandi Chhor Divas",                  subtitle: "Katik 5 (Oct 20) · Day of Liberation · coincides with Deepawali", tradition: "Sikh" },
   { id: "guru-nanak-gurpurab",          label: "Guru Nanak Dev Ji Gurpurab",          subtitle: "Katik 21 (Nov 5) · Founder of Sikhism's birth anniversary", tradition: "Sikh" },
   { id: "guru-tegh-bahadur-shaheedi",   label: "Guru Tegh Bahadur Ji Shaheedi Divas",subtitle: "Maghar 10 (Nov 24) · 9th Guru's Martyrdom Day",           tradition: "Sikh" },
+  { id: "pooranmashi",                   label: "Pooranmashi",                        subtitle: "Full moon of each month · ~22/yr · gurdwara sangat, kirtan, langar",  tradition: "Sikh" },
   { id: "swaminarayan-jayanti",       label: "Swaminarayan Jayanti",  subtitle: "Chaitra Shukla Navami · Lord Swaminarayan's birth",    tradition: "Swaminarayan" },
   { id: "fuldol-swaminarayan",        label: "Fuldol",                subtitle: "Phalgun Purnima · flower festival before Holi",        tradition: "Swaminarayan" },
   { id: "annakut-swaminarayan",       label: "Annakut",               subtitle: "Day after Deepawali · Swaminarayan New Year offering",    tradition: "Swaminarayan" },
