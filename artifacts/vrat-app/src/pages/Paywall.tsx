@@ -102,6 +102,24 @@ function EmailStep({ onContinue }: { onContinue: () => void }) {
   );
 }
 
+type AppliedPromo = {
+  code: string;
+  currency: Currency;
+  plan: Plan;
+  originalAmount: number;
+  discountedAmount: number;
+  discountLabel: string;
+};
+
+function formatAmount(amount: number, currency: Currency): string {
+  // Stripe amounts are in the smallest currency unit (cents/paise).
+  const major = amount / 100;
+  if (currency === "inr") {
+    return `₹${major.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
+  }
+  return `$${major.toFixed(2)}`;
+}
+
 function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
   const [selected, setSelected] = useState<Plan>("annual");
   const [loading, setLoading] = useState(false);
@@ -109,11 +127,68 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
   const [restoring, setRestoring] = useState(false);
   const [currency, setCurrency] = useState<Currency | null>(null);
 
+  const [promoInput, setPromoInput] = useState("");
+  const [promoLoading, setPromoLoading] = useState(false);
+  const [promoError, setPromoError] = useState("");
+  const [appliedPromo, setAppliedPromo] = useState<AppliedPromo | null>(null);
+
   const email = getUserEmail();
 
   useEffect(() => {
     detectCurrency().then(setCurrency);
   }, []);
+
+  // The discount is computed against a specific plan + currency, so any
+  // change to either invalidates the applied promo and forces a re-apply.
+  useEffect(() => {
+    if (appliedPromo && (appliedPromo.plan !== selected || appliedPromo.currency !== currency)) {
+      setAppliedPromo(null);
+      setPromoError("");
+    }
+  }, [selected, currency, appliedPromo]);
+
+  async function handleApplyPromo() {
+    const code = promoInput.trim();
+    if (!code || !currency) return;
+    setPromoLoading(true);
+    setPromoError("");
+    try {
+      const res = await fetch(`${API_BASE}/api/stripe/validate-promo`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code, plan: selected, currency }),
+      });
+      const contentType = res.headers.get("content-type") ?? "";
+      if (!contentType.includes("application/json")) {
+        setPromoError("Could not check this code right now. Please try again.");
+        return;
+      }
+      const data = await res.json();
+      if (!data.valid) {
+        setPromoError(data.error || "This code is not valid.");
+        setAppliedPromo(null);
+        return;
+      }
+      setAppliedPromo({
+        code: data.code,
+        currency,
+        plan: selected,
+        originalAmount: data.originalAmount,
+        discountedAmount: data.discountedAmount,
+        discountLabel: data.discountLabel,
+      });
+    } catch {
+      setPromoError("Could not check this code. Please check your connection.");
+    } finally {
+      setPromoLoading(false);
+    }
+  }
+
+  function handleRemovePromo() {
+    setAppliedPromo(null);
+    setPromoInput("");
+    setPromoError("");
+  }
 
   async function handleSubscribe() {
     if (!email || !currency) return;
@@ -124,7 +199,12 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
       const res = await fetch(`${API_BASE}/api/stripe/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, plan: selected, currency }),
+        body: JSON.stringify({
+          email,
+          plan: selected,
+          currency,
+          ...(appliedPromo ? { promoCode: appliedPromo.code } : {}),
+        }),
       });
 
       const contentType = res.headers.get("content-type") ?? "";
@@ -288,6 +368,78 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
         </div>
       )}
 
+      {currency !== null && (
+        <div className="mb-5">
+          {!appliedPromo ? (
+            <>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={promoInput}
+                  onChange={(e) => { setPromoInput(e.target.value.toUpperCase()); setPromoError(""); }}
+                  placeholder="Promo / coupon code"
+                  className="flex-1 min-w-0 px-4 py-3 rounded-2xl text-sm outline-none transition-all uppercase tracking-wider"
+                  style={{
+                    background: "rgba(255,255,255,0.18)",
+                    border: promoError ? "1.5px solid #FCA5A5" : "1.5px solid rgba(255,255,255,0.35)",
+                    color: "#FEF9EC",
+                  }}
+                  onKeyDown={(e) => e.key === "Enter" && promoInput.trim() && !promoLoading && handleApplyPromo()}
+                  data-testid="promo-input"
+                  autoComplete="off"
+                  spellCheck={false}
+                />
+                <button
+                  onClick={handleApplyPromo}
+                  disabled={!promoInput.trim() || promoLoading}
+                  className="px-5 rounded-2xl font-semibold text-sm transition-all active:scale-[0.97] disabled:opacity-50"
+                  style={{ background: "rgba(255,255,255,0.22)", color: "#FEF9EC", border: "1.5px solid rgba(255,255,255,0.35)" }}
+                  data-testid="promo-apply-btn"
+                >
+                  {promoLoading ? "…" : "Apply"}
+                </button>
+              </div>
+              {promoError && (
+                <p className="text-xs px-1 mt-2" style={{ color: "#FCA5A5" }} data-testid="promo-error">
+                  {promoError}
+                </p>
+              )}
+            </>
+          ) : (
+            <div
+              className="rounded-2xl px-4 py-3"
+              style={{ background: "rgba(34,197,94,0.18)", border: "1.5px solid rgba(134,239,172,0.5)" }}
+              data-testid="promo-applied"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold" style={{ color: "#FEF9EC" }}>
+                    ✓ {appliedPromo.code} — {appliedPromo.discountLabel}
+                  </p>
+                  <p className="text-xs mt-0.5" style={{ color: "#FEF3E2", opacity: 0.85 }}>
+                    <span style={{ textDecoration: "line-through", opacity: 0.7 }}>
+                      {formatAmount(appliedPromo.originalAmount, appliedPromo.currency)}
+                    </span>
+                    {" → "}
+                    <span className="font-bold">
+                      {formatAmount(appliedPromo.discountedAmount, appliedPromo.currency)}
+                    </span>
+                  </p>
+                </div>
+                <button
+                  onClick={handleRemovePromo}
+                  className="text-xs underline transition-opacity active:opacity-50 flex-shrink-0"
+                  style={{ color: "#FEF3E2", opacity: 0.8 }}
+                  data-testid="promo-remove-btn"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {error && (
         <p className="text-xs text-center mb-3 px-2" style={{ color: "#FCA5A5" }}>
           {error}
@@ -304,7 +456,13 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
         }}
         data-testid="subscribe-btn"
       >
-        {loading ? "Redirecting to payment…" : selected === "lifetime" ? "Get Lifetime Access" : "Subscribe Now"}
+        {loading
+          ? "Redirecting to payment…"
+          : appliedPromo
+          ? `Pay ${formatAmount(appliedPromo.discountedAmount, appliedPromo.currency)}${selected === "lifetime" ? "" : selected === "annual" ? " / year" : " / month"}`
+          : selected === "lifetime"
+          ? "Get Lifetime Access"
+          : "Subscribe Now"}
       </button>
 
       <p className="text-center text-xs mt-4" style={{ color: "#FEF3E2", opacity: 0.6 }}>

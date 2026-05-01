@@ -91,10 +91,10 @@ app.post(
         }
       }
 
-      res.status(200).json({ received: true });
+      return res.status(200).json({ received: true });
     } catch (err: any) {
       logger.error({ err }, 'Webhook error');
-      res.status(400).json({ error: err.message });
+      return res.status(400).json({ error: err.message });
     }
   }
 );
