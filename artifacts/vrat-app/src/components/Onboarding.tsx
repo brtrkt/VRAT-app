@@ -244,6 +244,8 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "aarudra-darshan",            label: "Aarudra Darshan",                    subtitle: "Nataraja's Ananda Tandava · Margazhi Tiruvathirai",       tradition: "ShaivaSiddhanta" },
   { id: "karthigai-deepam-shaiva",    label: "Karthigai Deepam",                   subtitle: "Thiruvannamalai Maha Deepam · Tamil festival of lights",  tradition: "ShaivaSiddhanta" },
   { id: "skanda-shashti-shaiva",      label: "Skanda Shashti (Soorasamharam)",     subtitle: "6-day Murugan vrat · Tiruchendur Soorasamharam",          tradition: "ShaivaSiddhanta" },
+  { id: "thai-poosam-shaiva",         label: "Thai Poosam (Thaipusam)",            subtitle: "Pushya nakshatra in Thai · kavadi-attam at Palani",        tradition: "ShaivaSiddhanta" },
+  { id: "aadi-krittikai-shaiva",      label: "Aadi Krittikai",                     subtitle: "Krittika nakshatra in Aadi · Murugan at Tiruttani",        tradition: "ShaivaSiddhanta" },
 
   { id: "guru-jambheshwar-jayanti",      label: "Guru Jambheshwar Jayanti",          subtitle: "Bhadrapada Krishna Ashtami · Jambhoji's birth · Pipasar",  tradition: "Bishnoi" },
   { id: "khejarli-shaheed-diwas",        label: "Khejarli Shaheed Diwas",            subtitle: "Amrita Devi & 363 martyrs (1730 CE) · Bhadrapada Sud 10",  tradition: "Bishnoi" },
@@ -311,7 +313,7 @@ const SRIVAISHNAVA_DEFAULTS    = [
   "brahmotsavam-srivaishnava",
 ];
 const SHAKTA_DEFAULTS          = ["amavasya-shakta", "sharadiya-navaratri-shakta", "maha-ashtami-shakta", "lakshmi-puja-shakta", "kali-puja-shakta", "chaitra-navaratri-shakta", "phalaharini-kali-puja-shakta", "mahalaya-amavasya-shakta", "shakambhari-purnima-shakta", "magha-gupta-navaratri-shakta", "saraswati-puja-shakta", "lalita-jayanti-shakta", "ashadha-gupta-navaratri-shakta", "jagaddhatri-puja-shakta", "annapurna-jayanti-shakta"];
-const SHAIVA_SIDDHANTA_DEFAULTS = ["maha-shivaratri-shaiva", "aarudra-darshan", "karthigai-deepam-shaiva", "skanda-shashti-shaiva"];
+const SHAIVA_SIDDHANTA_DEFAULTS = ["maha-shivaratri-shaiva", "pradosha-shaiva", "aarudra-darshan", "karthigai-deepam-shaiva", "skanda-shashti-shaiva", "thai-poosam-shaiva", "aadi-krittikai-shaiva"];
 const BISHNOI_DEFAULTS          = ["guru-jambheshwar-jayanti", "khejarli-shaheed-diwas", "jambhoji-mukti-diwas", "mukam-mela-asoj-amavasya", "mukam-mela-phalgun-amavasya", "bishnoi-holi", "bishnoi-mauni-amavasya", "bishnoi-guru-purnima", "bishnoi-akshay-tritiya", "bishnoi-devshayani-ekadashi", "bishnoi-govardhan-puja", "bishnoi-hariyali-amavasya", "bishnoi-hariyali-teej", "bishnoi-vat-savitri-amavasya", "bishnoi-diwali-lakshmi-puja", "bishnoi-devuthani-ekadashi", "bishnoi-tulsi-vivah", "bishnoi-karthika-purnima", "bishnoi-nirjala-ekadashi", "bishnoi-maha-shivaratri", "bishnoi-vasant-panchami", "bishnoi-ram-navami", "bishnoi-hanuman-jayanti", "bishnoi-makar-sankranti", "bishnoi-jajiwal-dham-mela"];
 
 function defaultsForTradition(t: Tradition): string[] {

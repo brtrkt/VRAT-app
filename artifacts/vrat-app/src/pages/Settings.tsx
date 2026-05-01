@@ -261,6 +261,8 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "aarudra-darshan",            label: "Aarudra Darshan",                    subtitle: "Nataraja's Ananda Tandava · Margazhi Tiruvathirai",       tradition: "ShaivaSiddhanta" },
   { id: "karthigai-deepam-shaiva",    label: "Karthigai Deepam",                   subtitle: "Thiruvannamalai Maha Deepam · Tamil festival of lights",  tradition: "ShaivaSiddhanta" },
   { id: "skanda-shashti-shaiva",      label: "Skanda Shashti (Soorasamharam)",     subtitle: "6-day Murugan vrat · Tiruchendur Soorasamharam",          tradition: "ShaivaSiddhanta" },
+  { id: "thai-poosam-shaiva",         label: "Thai Poosam (Thaipusam)",            subtitle: "Pushya nakshatra in Thai · kavadi-attam at Palani",        tradition: "ShaivaSiddhanta" },
+  { id: "aadi-krittikai-shaiva",      label: "Aadi Krittikai",                     subtitle: "Krittika nakshatra in Aadi · Murugan at Tiruttani",        tradition: "ShaivaSiddhanta" },
 
   { id: "guru-jambheshwar-jayanti",      label: "Guru Jambheshwar Jayanti",          subtitle: "Bhadrapada Krishna Ashtami · Jambhoji's birth · Pipasar",       tradition: "Bishnoi" },
   { id: "khejarli-shaheed-diwas",        label: "Khejarli Shaheed Diwas",            subtitle: "Amrita Devi & 363 martyrs (1730 CE) · Bhadrapada Sud 10",       tradition: "Bishnoi" },
