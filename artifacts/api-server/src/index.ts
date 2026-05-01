@@ -1,3 +1,4 @@
+import "./lib/dbUrl";
 import { Pool } from "pg";
 import app from "./app";
 import { logger } from "./lib/logger";
