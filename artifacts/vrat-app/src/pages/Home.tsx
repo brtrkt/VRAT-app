@@ -820,7 +820,7 @@ export default function Home() {
               if (t === "Jain")          return <JainSymbol className="text-green-600 w-7 h-9" />;
               if (t === "Hindu")         return <OmSymbol className="text-primary text-3xl" />;
               if (t === "Swaminarayan") return <LotusSvg className="w-10 h-10" style={{ color: "#C4972A" }} />;
-              if (t === "ISKCON")        return <IskconLogoSvg className="w-8 h-12" />;
+              if (t === "ISKCON")        return <IskconLogoSvg className="w-16 h-16" />;
               if (t === "Lingayat")        return <IshtalingaSvg className="w-11 h-11" style={{ color: "#9B2335" }} />;
               if (t === "PushtiMarg")      return <ShrinathjiSvg className="w-9 h-12" style={{ color: "#0E7490" }} />;
               if (t === "Warkari")         return <VitthalSvg className="w-9 h-12" style={{ color: "#DC6803" }} />;
