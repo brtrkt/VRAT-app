@@ -843,7 +843,7 @@ export default function Home() {
               );
             })()}
           </div>
-          <h1 className="font-serif text-3xl font-bold text-foreground">VRAT</h1>
+          <h1 className="font-serif text-3xl font-bold text-foreground">V<span style={{ color: "#FF9933" }}>RA</span>T</h1>
           <p className="text-muted-foreground text-sm mt-1 tracking-wide">Your Fast, Your Way</p>
           <TraditionSwitcher />
         </div>
