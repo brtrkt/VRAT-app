@@ -447,24 +447,6 @@ function CalendarGrid({
 
 type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan" | "iskcon" | "lingayat" | "pushtimarg" | "warkari" | "ramanandi" | "srivaishnava" | "shakta" | "shaivasiddhanta" | "bishnoi" | "aryasamaj";
 
-const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
-  { value: "all",             label: "All" },
-  { value: "hindu",           label: "Hindu" },
-  { value: "jain",            label: "Jain" },
-  { value: "sikh",            label: "Sikh" },
-  { value: "swaminarayan",    label: "Swaminarayan" },
-  { value: "iskcon",          label: "ISKCON" },
-  { value: "lingayat",        label: "Lingayat" },
-  { value: "pushtimarg",      label: "Pushti Marg" },
-  { value: "warkari",         label: "Warkari" },
-  { value: "ramanandi",       label: "Ramanandi" },
-  { value: "srivaishnava",    label: "Sri Vaishnava" },
-  { value: "shakta",          label: "Shakta" },
-  { value: "shaivasiddhanta", label: "Shaiva Siddhanta" },
-  { value: "aryasamaj",       label: "Arya Samaj" },
-  { value: "bishnoi",         label: "Bishnoi" },
-];
-
 const HINDU_LEGEND = [
   { label: "Ekadashi", color: "#D4A017" },
   { label: "Pradosh", color: "#7C3AED" },
@@ -648,26 +630,6 @@ export default function Calendar() {
           <p className="text-muted-foreground text-sm mt-1">
             2026–2027 — Tap any highlighted date
           </p>
-        </div>
-
-        <div className="flex gap-2 justify-center mb-4" role="group" aria-label="Filter by tradition">
-          {FILTER_LABELS.map(({ value, label }) => (
-            <button
-              key={value}
-              onClick={() => { setFilter(value); setSelected(null); }}
-              className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
-                filter === value
-                  ? value === "jain"
-                    ? "bg-green-500 text-white shadow-sm"
-                    : "saffron-gradient text-white shadow-sm"
-                  : "bg-card border border-card-border text-muted-foreground hover:text-foreground"
-              }`}
-              data-testid={`filter-${value}`}
-              aria-pressed={filter === value}
-            >
-              {label}
-            </button>
-          ))}
         </div>
 
         <div className="vrat-card p-4 mb-4">
