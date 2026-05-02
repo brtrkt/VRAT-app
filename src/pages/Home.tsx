@@ -370,6 +370,19 @@ function IshtalingaSvg({ className = "", style }: { className?: string; style?: 
   );
 }
 
+function AumVedicSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none" style={style} aria-hidden="true">
+      <path d="M10 40 L24 32 L38 40 Z" fill="currentColor" opacity="0.18" />
+      <path d="M10 40 L38 40" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M24 8 C20 14, 18 18, 22 22 C20 24, 19 27, 22 30 C24 27, 26 25, 24 22 C28 18, 28 13, 24 8 Z" fill="currentColor" opacity="0.9" />
+      <circle cx="24" cy="6" r="1.2" fill="currentColor" />
+      <circle cx="20" cy="10" r="0.8" fill="currentColor" opacity="0.7" />
+      <circle cx="28" cy="10" r="0.8" fill="currentColor" opacity="0.7" />
+    </svg>
+  );
+}
+
 function KhejriTreeSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
     <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
@@ -833,6 +846,7 @@ export default function Home() {
               if (t === "SriVaishnava")    return <NaamamSvg className="w-9 h-12" style={{ color: "#B45309" }} />;
               if (t === "Shakta")          return <SriYantraSvg className="w-11 h-11" style={{ color: "#BE185D" }} />;
               if (t === "ShaivaSiddhanta") return <TripundraSvg className="w-11 h-11" style={{ color: "#475569" }} />;
+              if (t === "AryaSamaj")       return <AumVedicSvg className="w-11 h-11" style={{ color: "#9A3412" }} />;
               if (t === "Bishnoi")         return <KhejriTreeSvg className="w-11 h-11" style={{ color: "#16A34A" }} />;
               return (
                 <>
