@@ -263,6 +263,12 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "skanda-shashti-shaiva",      label: "Skanda Shashti (Soorasamharam)",     subtitle: "6-day Murugan vrat · Tiruchendur Soorasamharam",          tradition: "ShaivaSiddhanta" },
   { id: "thai-poosam-shaiva",         label: "Thai Poosam (Thaipusam)",            subtitle: "Pushya nakshatra in Thai · kavadi-attam at Palani",        tradition: "ShaivaSiddhanta" },
   { id: "aadi-krittikai-shaiva",      label: "Aadi Krittikai",                     subtitle: "Krittika nakshatra in Aadi · Murugan at Tiruttani",        tradition: "ShaivaSiddhanta" },
+  { id: "ugadi-telugu",               label: "Ugadi (Telugu New Year)",            subtitle: "Chaitra Shukla Pratipada · 6-taste Pachadi · Andhra/Telangana", tradition: "ShaivaSiddhanta" },
+  { id: "vara-lakshmi-vratam",        label: "Varalakshmi Vratam",                 subtitle: "Friday before Shravana Purnima · 9-knot toram · married women", tradition: "ShaivaSiddhanta" },
+  { id: "dasara-vijayadashami-telugu",label: "Dasara (Vijayadashami)",             subtitle: "Bommala koluvu · Ayudha Pooja · jammi-leaf exchange",      tradition: "ShaivaSiddhanta" },
+  { id: "sankranti-telugu",           label: "Sankranti (Pedda Panduga)",          subtitle: "Jan 14 · 4-day harvest · Bhogi/Sankranti/Kanuma/Mukkanuma", tradition: "ShaivaSiddhanta" },
+  { id: "kartika-masam-telugu",       label: "Kartika Masam (Karthika Pournami)",  subtitle: "Month-long akasa-deepam · 365 deepams on Kartika Pournami", tradition: "ShaivaSiddhanta" },
+  { id: "satyanarayan-pooja-telugu",  label: "Satyanarayana Vratam",               subtitle: "Pournami days · 5-katha paath · sapadi rava-kesari prasadam", tradition: "ShaivaSiddhanta" },
 
   { id: "guru-jambheshwar-jayanti",      label: "Guru Jambheshwar Jayanti",          subtitle: "Bhadrapada Krishna Ashtami · Jambhoji's birth · Pipasar",       tradition: "Bishnoi" },
   { id: "khejarli-shaheed-diwas",        label: "Khejarli Shaheed Diwas",            subtitle: "Amrita Devi & 363 martyrs (1730 CE) · Bhadrapada Sud 10",       tradition: "Bishnoi" },
