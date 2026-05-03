@@ -459,7 +459,7 @@ export default function Onboarding({ onComplete }: Props) {
   const regionOptions = getRegionOptionsForLocation(location);
   const regionCopy = getRegionScreenCopy(location);
 
-  const TOTAL_STEPS = 7;
+  const TOTAL_STEPS = 6;
 
   function chooseTradition(t: Tradition) {
     setTradition(t);
@@ -587,45 +587,13 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
         </div>
 
-        {/* ── Screen 3: Vrat toggles ───────────────────────────── */}
-        <div
-          className="flex-shrink-0 h-full flex flex-col"
-          style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
-        >
-          <div className="px-6 pb-3 safe-top">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 2 of 5</p>
-            <h2 className="font-serif text-3xl font-bold text-foreground mb-1">Which vrats do you observe?</h2>
-            <p className="text-sm text-muted-foreground">
-              Toggle on the ones you keep. Your personal vrats will be starred in the calendar.
-            </p>
-          </div>
-
-          <div className="flex-1 overflow-y-auto px-6 py-2">
-            {visibleVrats.map((opt) => (
-              <VratRow key={opt.id} opt={opt} on={observed.includes(opt.id)} onToggle={() => toggleVrat(opt.id)} />
-            ))}
-            <div className="h-4" />
-          </div>
-
-          <div className="px-6 pb-10">
-            <StepDots total={TOTAL_STEPS} current={2} />
-            <button
-              onClick={() => setStep(3)}
-              className="mt-4 w-full py-4 rounded-2xl font-semibold text-base text-white tracking-wide transition-opacity active:opacity-80"
-              style={{ background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }}
-            >
-              Next
-            </button>
-          </div>
-        </div>
-
-        {/* ── Screen 4: Location ───────────────────────────────── */}
+        {/* ── Screen 3: Location ───────────────────────────────── */}
         <div
           className="flex-shrink-0 h-full flex flex-col px-6 pb-12 safe-top overflow-y-auto"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 3 of 5</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 2 of 4</p>
             <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Where are you based?</h2>
             <p className="text-sm text-muted-foreground mb-8">
               Panchang dates are rooted in IST. We'll show you a regional note so you can confirm with your local pandit.
@@ -667,9 +635,9 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
 
           <div className="max-w-sm mx-auto w-full">
-            <StepDots total={TOTAL_STEPS} current={3} />
+            <StepDots total={TOTAL_STEPS} current={2} />
             <button
-              onClick={() => setStep(4)}
+              onClick={() => setStep(3)}
               className="mt-4 w-full py-4 rounded-2xl font-semibold text-base text-white tracking-wide transition-opacity active:opacity-80"
               style={{ background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }}
             >
@@ -678,13 +646,13 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
         </div>
 
-        {/* ── Screen 5: Region ─────────────────────────────────── */}
+        {/* ── Screen 4: Region ─────────────────────────────────── */}
         <div
           className="flex-shrink-0 h-full flex flex-col px-6 pb-12 safe-top overflow-y-auto"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 4 of 5</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 3 of 4</p>
             <h2 className="font-serif text-3xl font-bold text-foreground mb-2">{regionCopy.title}</h2>
             <p className="text-sm text-muted-foreground mb-6">
               {regionCopy.body}
@@ -723,9 +691,9 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
 
           <div className="max-w-sm mx-auto w-full">
-            <StepDots total={TOTAL_STEPS} current={4} />
+            <StepDots total={TOTAL_STEPS} current={3} />
             <button
-              onClick={() => setStep(5)}
+              onClick={() => setStep(4)}
               className="mt-4 w-full py-4 rounded-2xl font-semibold text-base text-white tracking-wide transition-opacity active:opacity-80"
               style={{ background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }}
             >
@@ -734,13 +702,13 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
         </div>
 
-        {/* ── Screen 6: City ───────────────────────────────────── */}
+        {/* ── Screen 5: City ───────────────────────────────────── */}
         <div
           className="flex-shrink-0 h-full flex flex-col px-6 pb-12 safe-top overflow-y-auto"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}
         >
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 5 of 5</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-2">Step 4 of 4</p>
             <h2 className="font-serif text-3xl font-bold text-foreground mb-2">What is your city?</h2>
             <p className="text-sm text-muted-foreground mb-8">
               We use this to calculate Brahma Muhurta and moonrise times accurately for your location.
@@ -772,9 +740,9 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
 
           <div className="max-w-sm mx-auto w-full">
-            <StepDots total={TOTAL_STEPS} current={5} />
+            <StepDots total={TOTAL_STEPS} current={4} />
             <button
-              onClick={() => setStep(6)}
+              onClick={() => setStep(5)}
               className="mt-4 w-full py-4 rounded-2xl font-semibold text-base text-white tracking-wide transition-opacity active:opacity-80"
               style={{ background: "linear-gradient(135deg, #E07B2A 0%, #C86B1A 100%)" }}
             >
@@ -783,7 +751,9 @@ export default function Onboarding({ onComplete }: Props) {
           </div>
         </div>
 
-        {/* ── Screen 6: All set ────────────────────────────────── */}
+        {/* ── Screen 6: All set ─────────────────────────────────
+            Index in slider is now 5 since the Vrat-toggles screen has
+            been removed and steps were renumbered to 4 total. ── */}
         <div
           className="flex-shrink-0 h-full flex flex-col items-center justify-between px-6 pb-14 safe-top"
           style={{ width: `${100 / TOTAL_STEPS}%`, background: "linear-gradient(160deg, #C86B1A 0%, #E07B2A 50%, #D97706 100%)" }}
