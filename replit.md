@@ -19,8 +19,15 @@ The VRAT app is a React + Vite web application built with TypeScript, Tailwind C
 
 **Technical Implementations & Features:**
 - **Onboarding Flow:** A 7-screen process for initial user setup covering tradition, vrat toggles, location, region, and city.
-- **Personalization:** Users can select their tradition (Hindu/Jain/Both), location (India/UK/USA-Canada/Australia), region (e.g., North India, Maharashtra), and observed vrats.
-- **Vrat Data:** Over 140 vrat entries for 2026–2027, hardcoded in `src/data/vrats.ts`, including Hindu, Jain, and regional vrats.
+- **Personalization:** Users can select their tradition, location (India/UK/USA-Canada/Australia), region (e.g., North India, Maharashtra), and observed vrats.
+- **Supported Traditions (15 total, ~377 vrat entries):**
+    - **Pan-Hindu:** Hindu (119), Both (Hindu+Jain shared, 2)
+    - **Vaishnava sampradayas:** ISKCON / Gaudiya (38), PushtiMarg / Vallabh (17), Ramanandi (21), SriVaishnava (16), Swaminarayan / BAPS (20), Warkari / Varkari (17)
+    - **Shaiva / Shakta sampradayas:** Lingayat / Veerashaiva (24), ShaivaSiddhanta (13, incl. 6 Telugu festivals + 20 Pournami dates under Shaiva-aligned Telugu calendar), Shakta (15)
+    - **Reform / regional sampradayas:** AryaSamaj (13), Bishnoi (25)
+    - **Jain:** Jain (21, both Shvetambara & Digambara)
+    - **Sikh:** Sikh (16, Nanakshahi calendar)
+- **Vrat Data:** All entries hardcoded in `src/data/vrats.ts` for 2026–2027, with regional + sampradaya filtering via `filterVratsByTradition()`.
 - **Location-Awareness:** Vrat timings (sunrise/sunset) are based on the user's device location or manually set city. Timezone adjustments are critical for diaspora users.
 - **Calendar View:** A 2026–2027 year view with color-coded vrat days and gold dots for personal vrats, supporting location and regional filtering.
 - **Health Warnings:** Nirjala (no-water fast) warnings and a general health disclaimer.
@@ -33,7 +40,42 @@ The VRAT app is a React + Vite web application built with TypeScript, Tailwind C
     - Vrat journal for personal notes on past fasts.
 - **Offline Support:** Service worker (`public/sw.js`) for stale-while-revalidate offline caching.
 - **PWA Installation Guide:** `src/pages/HowToInstall.tsx` and `src/components/PWAInstallPrompt.tsx`.
-- **LocalStorage:** User preferences and state are stored locally using keys like `vrat_onboarding_done`, `vrat_tradition`, `vrat_location`, `vrat_region`, `vrat_observed`, `vrat_city`, `vrat_disclaimer_accepted`, `vrat_trial_start`, `vrat_user_email_v1`, `vrat_subscribed_v1`, `vrat_language_v1`, and `vrat_journal_v1`.
+- **LocalStorage:** User preferences and state are stored locally using keys like `vrat_onboarding_done`, `vrat_has_seen_onboarding_v1`, `vrat_tradition`, `vrat_location`, `vrat_region`, `vrat_observed`, `vrat_city`, `vrat_disclaimer_accepted`, `vrat_trial_start`, `vrat_user_email_v1`, `vrat_subscribed_v1`, `vrat_language_v1`, `vrat_device_id_v1`, and `vrat_journal_v1`.
+- **Backend Settings Persistence:** A Postgres table `public.vrat_user_settings` (user_id PK, tradition, observed JSONB, city, location, region, updated_at) backed by `GET`/`PUT /api/settings` lets users restore their full setup on a new device. The user_id is the verified email if signed in, otherwise a stable `device:<uuid>` value stored in `vrat_device_id_v1`. The frontend pulls on app mount and pushes on Settings save, tradition change, and Onboarding finish.
+
+## Master Tradition Log
+
+This section is updated whenever a new tradition (or significant set of vrats for an existing tradition) is added. Each entry records: tradition key, display label, sampradaya family, entry count, and notable additions.
+
+| Key | Label | Family | Entries | Notes |
+|---|---|---|---|---|
+| `Hindu` | Hindu (Pan-Hindu) | Pan-Hindu | 119 | Ekadashi, Amavasya, Purnima, Navratri, festivals |
+| `Both` | Hindu + Jain shared | Pan-Hindu | 2 | Days observed by both communities |
+| `Jain` | Jain | Jain | 21 | Shvetambara + Digambara, Paryushan, Kshamavani |
+| `Sikh` | Sikh | Sikh | 16 | Nanakshahi calendar, Gurpurabs |
+| `ISKCON` | ISKCON / Gaudiya Vaishnava | Vaishnava | 38 | Vaishnava Calendar — Ekadashi tithi, Janmashtami |
+| `PushtiMarg` | PushtiMarg (Vallabh Sampradaya) | Vaishnava | 17 | Pushtimarg Tippni — Krishna utsavs |
+| `Swaminarayan` | Swaminarayan / BAPS | Vaishnava | 20 | BAPS official calendar |
+| `SriVaishnava` | Sri Vaishnava | Vaishnava | 16 | Srirangam, Ahobila Mutt, Andavan, Parakala panchangams |
+| `Ramanandi` | Ramanandi Sampradaya | Vaishnava | 21 | Ram Navami, Hanuman Jayanti emphasis |
+| `Warkari` | Warkari / Varkari | Vaishnava (Marathi) | 17 | Pandharpur Wari, Ekadashi-centric |
+| `Lingayat` | Lingayat / Veerashaiva | Shaiva | 24 | Basava Jayanti, Lingayat festivals + Hindu lunar fasts |
+| `ShaivaSiddhanta` | Shaiva Siddhanta | Shaiva | 13 | Tamil Shaiva (Thirukanthika) + Telugu Shaiva (6 festivals + 20 Pournami) |
+| `Shakta` | Shakta | Shakta | 15 | Devi-centric — Navratri, Durga Puja, Lalita Panchami |
+| `AryaSamaj` | Arya Samaj | Reform | 13 | Maharishi Dayanand related observances; orange `#9A3412` legend |
+| `Bishnoi` | Bishnoi | Reform / regional | 25 | Guru Jambheshwar tradition, 29 principles |
+
+**Total: 15 traditions, 377 vrat entries.**
+
+When adding a new tradition, update:
+1. Tradition union in `artifacts/vrat-app/src/data/vrats.ts` (and `useUserPrefs.ts`)
+2. `VRAT_OPTIONS` in `Onboarding.tsx` and `Settings.tsx`
+3. Branch in `filterVratsByTradition()`
+4. Calendar legend ternary + LEGEND constant in `Calendar.tsx`
+5. Home.tsx tradition card branding (if a unique theme is desired)
+6. WhatToEat label mapping
+7. Translations in `data/translations.ts`
+8. **This master log table.**
 
 **Monetization:**
 - **Subscription Model:** 30-day free trial followed by a paid subscription (monthly/annual plans).
