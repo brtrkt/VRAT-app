@@ -6,6 +6,7 @@ import {
   CITY_KEY,
   LOCATION_KEY,
   REGION_KEY,
+  pushSettingsToServer,
   LOCATION_OPTIONS,
   getRegionOptionsForLocation,
   getRegionScreenCopy,
@@ -487,6 +488,7 @@ export default function Onboarding({ onComplete }: Props) {
     localStorage.setItem(ONBOARDING_KEY, "1");
     localStorage.setItem("hasSeenOnboarding", "true");
     localStorage.setItem(DISCLAIMER_KEY, "1");
+    void pushSettingsToServer();
     onComplete();
   }
 

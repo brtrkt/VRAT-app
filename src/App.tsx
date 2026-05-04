@@ -18,7 +18,7 @@ import HowToInstall from "@/pages/HowToInstall";
 import Recipes from "@/pages/Recipes";
 import LangarRecipes from "@/pages/LangarRecipes";
 import AdminErrorReports from "@/pages/AdminErrorReports";
-import { ONBOARDING_KEY, TRADITION_KEY, initTrial, isTrialExpired, isSubscribed, setSubscribed, hasSeenOnboarding } from "@/hooks/useUserPrefs";
+import { ONBOARDING_KEY, TRADITION_KEY, initTrial, isTrialExpired, isSubscribed, setSubscribed, hasSeenOnboarding, pullSettingsFromServer } from "@/hooks/useUserPrefs";
 import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
 
 const queryClient = new QueryClient();
@@ -246,6 +246,15 @@ function App() {
   const [verifying, setVerifying] = useState(false);
 
   useEffect(() => {
+    // Pull persisted settings from the backend so Safari/iOS clearing
+    // localStorage doesn't lose tradition/observed/region across sessions.
+    // Best-effort; failures are silent and we fall back to local state.
+    pullSettingsFromServer().then((restored) => {
+      if (restored) {
+        setOnboardingDone(hasSeenOnboarding());
+      }
+    });
+
     if (!hasSeenOnboarding()) {
       localStorage.removeItem(TRADITION_KEY);
     }

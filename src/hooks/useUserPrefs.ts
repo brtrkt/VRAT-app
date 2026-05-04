@@ -1,5 +1,95 @@
 export const ONBOARDING_KEY = "vrat_onboarding_done";
 export const HAS_SEEN_ONBOARDING_KEY = "hasSeenOnboarding";
+export const DEVICE_ID_KEY = "vrat_device_id_v1";
+
+const SETTINGS_API_BASE: string =
+  (import.meta as any).env?.VITE_API_BASE_URL ?? "";
+
+function generateDeviceId(): string {
+  try {
+    if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+      return `dev_${crypto.randomUUID()}`;
+    }
+  } catch {}
+  return `dev_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+}
+
+export function getUserId(): string {
+  try {
+    const email = localStorage.getItem("vrat_user_email_v1");
+    if (email && email.trim()) return `email:${email.trim().toLowerCase()}`;
+    let id = localStorage.getItem(DEVICE_ID_KEY);
+    if (!id) {
+      id = generateDeviceId();
+      localStorage.setItem(DEVICE_ID_KEY, id);
+    }
+    return `device:${id}`;
+  } catch {
+    return `device:${generateDeviceId()}`;
+  }
+}
+
+export async function pushSettingsToServer(): Promise<void> {
+  try {
+    const userId = getUserId();
+    const body = {
+      user_id: userId,
+      tradition: localStorage.getItem("vrat_tradition"),
+      observed: JSON.parse(localStorage.getItem("vrat_observed") || "[]"),
+      city: localStorage.getItem("vrat_city"),
+      location: localStorage.getItem("vrat_location"),
+      region: localStorage.getItem("vrat_region"),
+    };
+    await fetch(`${SETTINGS_API_BASE}/api/settings`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      keepalive: true,
+    });
+  } catch {
+    // best-effort; localStorage write already succeeded
+  }
+}
+
+export async function pullSettingsFromServer(): Promise<boolean> {
+  try {
+    const userId = getUserId();
+    const res = await fetch(
+      `${SETTINGS_API_BASE}/api/settings?user_id=${encodeURIComponent(userId)}`,
+      { method: "GET" }
+    );
+    if (!res.ok) return false;
+    const data = await res.json();
+    if (!data || data.found !== true) return false;
+    if (typeof data.tradition === "string" && data.tradition) {
+      localStorage.setItem("vrat_tradition", data.tradition);
+    }
+    if (Array.isArray(data.observed)) {
+      localStorage.setItem("vrat_observed", JSON.stringify(data.observed));
+    }
+    if (typeof data.city === "string") {
+      localStorage.setItem("vrat_city", data.city);
+    }
+    if (typeof data.location === "string" && data.location) {
+      localStorage.setItem("vrat_location", data.location);
+    }
+    if (typeof data.region === "string" && data.region) {
+      localStorage.setItem("vrat_region", data.region);
+    }
+    // If server has settings, treat onboarding as completed too — the user
+    // configured the app on a previous device/session and we just rehydrated.
+    if (
+      (typeof data.tradition === "string" && data.tradition) ||
+      (Array.isArray(data.observed) && data.observed.length > 0)
+    ) {
+      localStorage.setItem(HAS_SEEN_ONBOARDING_KEY, "true");
+      localStorage.setItem(ONBOARDING_KEY, "1");
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
 export function hasSeenOnboarding(): boolean {
   try {
     return (

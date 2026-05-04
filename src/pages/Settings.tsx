@@ -27,6 +27,7 @@ import {
   getUserEmail,
   setUserEmail,
   setSubscribed,
+  pushSettingsToServer,
 } from "@/hooks/useUserPrefs";
 import { detectCurrency, type Currency } from "@/utils/currencyDetect";
 import PageFooter from "@/components/PageFooter";
@@ -424,6 +425,7 @@ export default function Settings() {
     localStorage.setItem(CITY_KEY, city.trim());
     localStorage.setItem(LOCATION_KEY, location);
     localStorage.setItem(REGION_KEY, region);
+    void pushSettingsToServer();
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
     if (section !== "main") setSection("main");
@@ -664,6 +666,7 @@ export default function Settings() {
                   onClick={() => {
                     setTradition(opt.value);
                     localStorage.setItem(TRADITION_KEY, opt.value);
+                    void pushSettingsToServer();
                     setSection("main");
                   }}
                   className="w-full flex items-center gap-4 p-4 rounded-2xl text-left transition-all"
