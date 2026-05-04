@@ -1,4 +1,21 @@
 export const ONBOARDING_KEY = "vrat_onboarding_done";
+export const HAS_SEEN_ONBOARDING_KEY = "hasSeenOnboarding";
+export function hasSeenOnboarding(): boolean {
+  try {
+    return (
+      localStorage.getItem(HAS_SEEN_ONBOARDING_KEY) === "true" ||
+      !!localStorage.getItem(ONBOARDING_KEY)
+    );
+  } catch {
+    return false;
+  }
+}
+export function markOnboardingSeen(): void {
+  try {
+    localStorage.setItem(HAS_SEEN_ONBOARDING_KEY, "true");
+    localStorage.setItem(ONBOARDING_KEY, "1");
+  } catch {}
+}
 export const TRIAL_START_KEY = "vrat_trial_start";
 export const TRIAL_DAYS = 30;
 export const TRADITION_KEY = "vrat_tradition";

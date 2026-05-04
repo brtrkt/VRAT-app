@@ -18,7 +18,7 @@ import HowToInstall from "@/pages/HowToInstall";
 import Recipes from "@/pages/Recipes";
 import LangarRecipes from "@/pages/LangarRecipes";
 import AdminErrorReports from "@/pages/AdminErrorReports";
-import { ONBOARDING_KEY, TRADITION_KEY, initTrial, isTrialExpired, isSubscribed, setSubscribed } from "@/hooks/useUserPrefs";
+import { ONBOARDING_KEY, TRADITION_KEY, initTrial, isTrialExpired, isSubscribed, setSubscribed, hasSeenOnboarding } from "@/hooks/useUserPrefs";
 import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
 
 const queryClient = new QueryClient();
@@ -240,15 +240,13 @@ function Router() {
 }
 
 function App() {
-  const [onboardingDone, setOnboardingDone] = useState(
-    () => !!localStorage.getItem(ONBOARDING_KEY)
-  );
+  const [onboardingDone, setOnboardingDone] = useState(() => hasSeenOnboarding());
   const [showPaywall, setShowPaywall] = useState(false);
   const [checkoutCancelled, setCheckoutCancelled] = useState(false);
   const [verifying, setVerifying] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem(ONBOARDING_KEY)) {
+    if (!hasSeenOnboarding()) {
       localStorage.removeItem(TRADITION_KEY);
     }
 

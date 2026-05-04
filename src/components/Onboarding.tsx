@@ -485,6 +485,7 @@ export default function Onboarding({ onComplete }: Props) {
     localStorage.setItem(LOCATION_KEY, location);
     localStorage.setItem(REGION_KEY, region);
     localStorage.setItem(ONBOARDING_KEY, "1");
+    localStorage.setItem("hasSeenOnboarding", "true");
     localStorage.setItem(DISCLAIMER_KEY, "1");
     onComplete();
   }
