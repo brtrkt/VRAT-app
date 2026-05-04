@@ -387,6 +387,8 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
                   onKeyDown={(e) => e.key === "Enter" && promoInput.trim() && !promoLoading && handleApplyPromo()}
                   data-testid="promo-input"
                   autoComplete="off"
+                  autoCapitalize="none"
+                  autoCorrect="off"
                   spellCheck={false}
                 />
                 <button
