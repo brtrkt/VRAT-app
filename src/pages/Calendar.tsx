@@ -530,6 +530,12 @@ const BISHNOI_LEGEND = [
   { label: "Jambhoji Mukti Diwas · Lalasar Sathari", color: "#16A34A" },
   { label: "Mukam Mela · Asoj & Phalgun Amavasya", color: "#16A34A" },
 ];
+const ARYA_SAMAJ_LEGEND = [
+  { label: "Arya Samaj Sthapana Diwas · Apr 10, 1875", color: "#9A3412" },
+  { label: "Dayananda Saraswati Jayanti · birth at Tankara", color: "#9A3412" },
+  { label: "Veda Prakatya Diwas · Ashadh Shukla Purnima", color: "#9A3412" },
+  { label: "Vasanta Navsamvatsar · Vedic New Year", color: "#9A3412" },
+];
 
 export default function Calendar() {
   const { t } = useLanguage();
@@ -686,7 +692,7 @@ export default function Calendar() {
               />
               <span className="text-xs font-medium text-foreground">Your observed vrats (gold)</span>
             </div>
-            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "lingayat" ? LINGAYAT_LEGEND : filter === "pushtimarg" ? PUSHTI_MARG_LEGEND : filter === "warkari" ? WARKARI_LEGEND : filter === "ramanandi" ? RAMANANDI_LEGEND : filter === "srivaishnava" ? SRIVAISHNAVA_LEGEND : filter === "shakta" ? SHAKTA_LEGEND : filter === "shaivasiddhanta" ? SHAIVA_SIDDHANTA_LEGEND : filter === "bishnoi" ? BISHNOI_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
+            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "lingayat" ? LINGAYAT_LEGEND : filter === "pushtimarg" ? PUSHTI_MARG_LEGEND : filter === "warkari" ? WARKARI_LEGEND : filter === "ramanandi" ? RAMANANDI_LEGEND : filter === "srivaishnava" ? SRIVAISHNAVA_LEGEND : filter === "shakta" ? SHAKTA_LEGEND : filter === "shaivasiddhanta" ? SHAIVA_SIDDHANTA_LEGEND : filter === "bishnoi" ? BISHNOI_LEGEND : filter === "aryasamaj" ? ARYA_SAMAJ_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
               <div key={item.label} className="flex items-center gap-2" data-testid={`legend-${item.label}`}>
                 <span
                   className="w-3 h-3 rounded-full flex-shrink-0"

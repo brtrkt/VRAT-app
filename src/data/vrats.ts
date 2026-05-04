@@ -12241,6 +12241,7 @@ export function filterVratsByTradition(list: Vrat[], tradition: string): Vrat[] 
   if (tradition === "Shakta")          return list.filter((v) => v.tradition === "Shakta"          || isHinduLunarFast(v));
   if (tradition === "ShaivaSiddhanta") return list.filter((v) => v.tradition === "ShaivaSiddhanta" || isHinduLunarFast(v));
   if (tradition === "Bishnoi")         return list.filter((v) => v.tradition === "Bishnoi"         || isHinduLunarFast(v));
+  if (tradition === "AryaSamaj")       return list.filter((v) => v.tradition === "AryaSamaj"       || isHinduLunarFast(v));
   return list;
 }
 
