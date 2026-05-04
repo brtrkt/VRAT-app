@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type MouseEvent as ReactMouseEvent } from "react";
 import { useLocation } from "wouter";
 import { getVratsForDate, getNextVratForTradition, getNextVratsForTradition, sortVratsPrimaryFirst, filterVratsByTradition, getDaysUntil, formatDateStr, getAllVrats, getIskconRegionBucket } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
@@ -80,13 +80,86 @@ function BrahmaMuhurta() {
   const alarmHour = 3;
   const alarmMin = 30;
 
-  const isAndroid = /android/i.test(navigator.userAgent);
-  const alarmUrl =
-    `intent:#Intent;action=android.intent.action.SET_ALARM;` +
-    `S.android.intent.extra.alarm.MESSAGE=Brahma%20Muhurta;` +
-    `i.android.intent.extra.alarm.HOUR=${alarmHour};` +
-    `i.android.intent.extra.alarm.MINUTES=${alarmMin};` +
-    `Z.android.intent.extra.alarm.SKIP_UI=false;end`;
+  const isAndroid =
+    typeof navigator !== "undefined" && /android/i.test(navigator.userAgent);
+
+  // Build a universal .ics calendar event: a daily 3:30 AM event with a
+  // VALARM that triggers at the start of the event. Works on iOS Calendar,
+  // Google Calendar (Android & desktop), Outlook, and Apple Calendar — no
+  // browser-specific intent: scheme required.
+  function buildIcs(): string {
+    const today = new Date();
+    const y = today.getFullYear();
+    const m = String(today.getMonth() + 1).padStart(2, "0");
+    const d = String(today.getDate()).padStart(2, "0");
+    const hh = String(alarmHour).padStart(2, "0");
+    const mm = String(alarmMin).padStart(2, "0");
+    const dtStart = `${y}${m}${d}T${hh}${mm}00`;
+    const dtEnd = `${y}${m}${d}T0500${"00"}`.replace("050000", "050000");
+    const dtStamp =
+      `${y}${m}${d}T${String(today.getUTCHours()).padStart(2, "0")}${String(
+        today.getUTCMinutes()
+      ).padStart(2, "0")}00Z`;
+    const uid = `brahma-muhurta-${y}${m}${d}-${Math.random().toString(36).slice(2, 8)}@vrat-app.com`;
+    return [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//VRAT App//Brahma Muhurta//EN",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      "BEGIN:VEVENT",
+      `UID:${uid}`,
+      `DTSTAMP:${dtStamp}`,
+      `DTSTART:${dtStart}`,
+      `DTEND:${dtEnd}`,
+      "RRULE:FREQ=DAILY",
+      "SUMMARY:Brahma Muhurta — prayer & meditation",
+      "DESCRIPTION:The most auspicious time for prayer and meditation.\\nApprox. 96 minutes before sunrise.",
+      "BEGIN:VALARM",
+      "ACTION:DISPLAY",
+      "DESCRIPTION:Brahma Muhurta",
+      "TRIGGER:PT0M",
+      "END:VALARM",
+      "END:VEVENT",
+      "END:VCALENDAR",
+    ].join("\r\n");
+  }
+
+  function handleSetAlarm(e: ReactMouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    try {
+      const ics = buildIcs();
+      const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "brahma-muhurta.ics";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    } catch {
+      // ignore — user can still set the alarm manually
+    }
+  }
+
+  function handleAndroidClock(e: ReactMouseEvent<HTMLAnchorElement>) {
+    // Android Chrome supports the SET_ALARM intent. Other Android browsers
+    // (Firefox, Brave, Samsung Internet) may strip it — they fall back to
+    // the .ics calendar event link above.
+    const intentUrl =
+      `intent:#Intent;action=android.intent.action.SET_ALARM;` +
+      `S.android.intent.extra.alarm.MESSAGE=Brahma%20Muhurta;` +
+      `i.android.intent.extra.alarm.HOUR=${alarmHour};` +
+      `i.android.intent.extra.alarm.MINUTES=${alarmMin};` +
+      `B.android.intent.extra.alarm.SKIP_UI=false;` +
+      `S.browser_fallback_url=${encodeURIComponent("https://vrat-app.com")};end`;
+    try {
+      window.location.href = intentUrl;
+    } catch {
+      e.preventDefault();
+    }
+  }
 
   return (
     <div
@@ -104,23 +177,31 @@ function BrahmaMuhurta() {
         <span className="font-serif font-semibold text-base text-amber-900">
           3:30 AM – 5:00 AM
         </span>
-        {" "}{t("home.brahmaDesc")}{" "}
-        {isAndroid ? (
-          <a
-            href={alarmUrl}
-            className="text-amber-700 underline underline-offset-2 font-semibold hover:text-amber-900 transition-colors"
-            data-testid="alarm-link"
-            aria-label="Open Clock app to set alarm for Brahma Muhurta at 3:30 AM"
-          >
-            {t("home.brahmaAlarm")}
-          </a>
-        ) : (
-          <span className="text-amber-700 font-semibold">
-            {t("home.brahmaAlarmIos")}
-          </span>
-        )}
+        {" "}{t("home.brahmaDesc")}
       </p>
-      <p className="text-xs text-amber-600/60 mt-1">
+      <div className="flex flex-wrap gap-2 mt-3">
+        <a
+          href="#"
+          onClick={handleSetAlarm}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-300 bg-white text-amber-800 hover:bg-amber-50 transition-colors"
+          data-testid="alarm-link"
+          aria-label="Add daily Brahma Muhurta reminder at 3:30 AM to your calendar"
+        >
+          📅 {t("home.brahmaAlarm")}
+        </a>
+        {isAndroid && (
+          <a
+            href="#"
+            onClick={handleAndroidClock}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-300 bg-white text-amber-800 hover:bg-amber-50 transition-colors"
+            data-testid="alarm-link-android"
+            aria-label="Open the Android Clock app to set a 3:30 AM alarm"
+          >
+            ⏰ Set Android alarm
+          </a>
+        )}
+      </div>
+      <p className="text-xs text-amber-600/60 mt-2">
         {t("home.brahmaNote")}
       </p>
     </div>
