@@ -141,9 +141,13 @@ export function ShrinathjiSvg({ className = "", style }: { className?: string; s
 export function IshtalingaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
     <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <circle cx="30" cy="28" r="14"/>
-      <ellipse cx="25" cy="22" rx="3.5" ry="2.5" fill="white" opacity="0.4"/>
-      <path d="M6 38 C6 50 16 56 30 56 C44 56 54 50 54 38 L50 38 C50 47 41 52 30 52 C19 52 10 47 10 38 Z"/>
+      <ellipse cx="30" cy="48" rx="22" ry="6" opacity="0.18"/>
+      <path d="M8 46 Q8 40 14 38 L46 38 Q52 40 52 46 Q52 52 46 53 L14 53 Q8 52 8 46 Z"/>
+      <path d="M52 44 Q58 44 58 47 Q58 50 52 50 Z"/>
+      <path d="M30 8 C22 8 18 18 18 26 C18 34 22 38 30 38 C38 38 42 34 42 26 C42 18 38 8 30 8 Z"/>
+      <ellipse cx="25" cy="20" rx="3" ry="4" fill="white" opacity="0.22"/>
+      <path d="M22 32 L38 32" stroke="white" strokeWidth="1" opacity="0.35" strokeLinecap="round"/>
+      <path d="M21 34.5 L39 34.5" stroke="white" strokeWidth="1" opacity="0.35" strokeLinecap="round"/>
     </svg>
   );
 }
