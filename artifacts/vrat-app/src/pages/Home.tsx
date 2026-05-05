@@ -1,4 +1,4 @@
-import { useState, useEffect, type MouseEvent as ReactMouseEvent } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { getVratsForDate, getNextVratForTradition, getNextVratsForTradition, sortVratsPrimaryFirst, filterVratsByTradition, getDaysUntil, formatDateStr, getAllVrats, getIskconRegionBucket } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
@@ -7,8 +7,7 @@ import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import NavratriCard from "@/components/NavratriCard";
 import HydrationTracker from "@/components/HydrationTracker";
-import { getDaysRemaining, getUserTradition, getUserLocation, getUserRegion, getUserCity, TRADITION_KEY, type Tradition } from "@/hooks/useUserPrefs";
-import { getBrahmaMuhurta, formatLocalTime, type BrahmaWindow } from "@/utils/sunrise";
+import { getDaysRemaining, getUserTradition, getUserLocation, getUserRegion, TRADITION_KEY, type Tradition } from "@/hooks/useUserPrefs";
 import {
   getTopStreaks,
   checkBadges,
@@ -76,50 +75,29 @@ function useCountdown(targetTime: Date | null) {
   return { hours, mins, done: remaining === 0 };
 }
 
+const BRAHMA_ALARM_KEY = "vrat_brahma_alarm_v1";
+const BRAHMA_HOUR = 3;
+const BRAHMA_MIN = 30;
+
 function BrahmaMuhurta() {
   const { t } = useLanguage();
-
-  // Compute the actual Brahma Muhurta window for the user's location and
-  // today's date. Re-compute when the city/location/day changes so the
-  // displayed times stay accurate.
-  const [bm, setBm] = useState<BrahmaWindow>(() =>
-    getBrahmaMuhurta(new Date(), getUserCity(), getUserLocation())
-  );
-
-  useEffect(() => {
-    function refresh() {
-      setBm(getBrahmaMuhurta(new Date(), getUserCity(), getUserLocation()));
+  const [enabled, setEnabled] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem(BRAHMA_ALARM_KEY) === "1";
+    } catch {
+      return false;
     }
-    const onStorage = (e: StorageEvent) => {
-      if (!e.key || e.key === "vrat_city" || e.key === "vrat_location") refresh();
-    };
-    window.addEventListener("storage", onStorage);
-    // Refresh at next local midnight so tomorrow's sunrise is shown.
-    const now = new Date();
-    const nextMidnight = new Date(now);
-    nextMidnight.setHours(24, 0, 30, 0);
-    const ms = Math.max(60_000, nextMidnight.getTime() - now.getTime());
-    const timer = setTimeout(refresh, ms);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("storage", onStorage);
-    };
-  }, []);
+  });
 
   const isAndroid =
     typeof navigator !== "undefined" && /android/i.test(navigator.userAgent);
 
-  const startStr = formatLocalTime(bm.start);
-  const endStr = formatLocalTime(bm.end);
-  const sunriseStr = formatLocalTime(bm.sunrise);
-  const alarmHour = bm.start.getHours();
-  const alarmMin = bm.start.getMinutes();
-
-  // Build a universal .ics calendar event: a daily event at the computed
-  // Brahma Muhurta start with a VALARM that triggers at the start of the
-  // event. Works on iOS Calendar, Google Calendar (Android & desktop),
-  // Outlook, and Apple Calendar.
   function buildIcs(): string {
+    const today = new Date();
+    const start = new Date(today);
+    start.setHours(BRAHMA_HOUR, BRAHMA_MIN, 0, 0);
+    const end = new Date(start);
+    end.setMinutes(end.getMinutes() + 48);
     const fmt = (d: Date) =>
       `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(
         d.getDate()
@@ -132,10 +110,7 @@ function BrahmaMuhurta() {
       ).padStart(2, "0")}T${String(d.getUTCHours()).padStart(2, "0")}${String(
         d.getUTCMinutes()
       ).padStart(2, "0")}00Z`;
-    const dtStart = fmt(bm.start);
-    const dtEnd = fmt(bm.end);
-    const dtStamp = fmtUtc(new Date());
-    const uid = `brahma-muhurta-${dtStart}-${Math.random()
+    const uid = `brahma-muhurta-${fmt(start)}-${Math.random()
       .toString(36)
       .slice(2, 8)}@vrat-app.com`;
     return [
@@ -146,12 +121,12 @@ function BrahmaMuhurta() {
       "METHOD:PUBLISH",
       "BEGIN:VEVENT",
       `UID:${uid}`,
-      `DTSTAMP:${dtStamp}`,
-      `DTSTART:${dtStart}`,
-      `DTEND:${dtEnd}`,
+      `DTSTAMP:${fmtUtc(new Date())}`,
+      `DTSTART:${fmt(start)}`,
+      `DTEND:${fmt(end)}`,
       "RRULE:FREQ=DAILY",
-      `SUMMARY:Brahma Muhurta (${bm.coords.label})`,
-      `DESCRIPTION:The most auspicious time for prayer and meditation.\\n96–48 minutes before local sunrise (${sunriseStr}).`,
+      "SUMMARY:Brahma Muhurta",
+      "DESCRIPTION:The most auspicious time for prayer and meditation.",
       "BEGIN:VALARM",
       "ACTION:DISPLAY",
       "DESCRIPTION:Brahma Muhurta",
@@ -162,8 +137,7 @@ function BrahmaMuhurta() {
     ].join("\r\n");
   }
 
-  function handleSetAlarm(e: ReactMouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
+  function downloadIcs() {
     try {
       const ics = buildIcs();
       const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
@@ -176,22 +150,36 @@ function BrahmaMuhurta() {
       document.body.removeChild(link);
       setTimeout(() => URL.revokeObjectURL(url), 1500);
     } catch {
-      // ignore — user can still set the alarm manually
+      // ignore
     }
   }
 
-  function handleAndroidClock(e: ReactMouseEvent<HTMLAnchorElement>) {
+  function openAndroidAlarm() {
     const intentUrl =
       `intent:#Intent;action=android.intent.action.SET_ALARM;` +
       `S.android.intent.extra.alarm.MESSAGE=Brahma%20Muhurta;` +
-      `i.android.intent.extra.alarm.HOUR=${alarmHour};` +
-      `i.android.intent.extra.alarm.MINUTES=${alarmMin};` +
+      `i.android.intent.extra.alarm.HOUR=${BRAHMA_HOUR};` +
+      `i.android.intent.extra.alarm.MINUTES=${BRAHMA_MIN};` +
       `B.android.intent.extra.alarm.SKIP_UI=false;` +
       `S.browser_fallback_url=${encodeURIComponent("https://vrat-app.com")};end`;
     try {
       window.location.href = intentUrl;
     } catch {
-      e.preventDefault();
+      // ignore
+    }
+  }
+
+  function handleToggle() {
+    const next = !enabled;
+    setEnabled(next);
+    try {
+      localStorage.setItem(BRAHMA_ALARM_KEY, next ? "1" : "0");
+    } catch {
+      // ignore
+    }
+    if (next) {
+      if (isAndroid) openAndroidAlarm();
+      else downloadIcs();
     }
   }
 
@@ -201,50 +189,37 @@ function BrahmaMuhurta() {
       style={{ background: "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)" }}
       data-testid="brahma-muhurta-card"
     >
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-lg" aria-hidden="true">🌅</span>
-        <p className="text-xs font-medium tracking-widest uppercase text-amber-700">
-          {t("home.brahmaTitle")}
-        </p>
-      </div>
-      <p className="text-foreground text-sm leading-relaxed mb-2">
-        <span
-          className="font-serif font-semibold text-base text-amber-900"
-          data-testid="brahma-window"
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-lg" aria-hidden="true">🌅</span>
+          <div className="min-w-0">
+            <p className="text-xs font-medium tracking-widest uppercase text-amber-700">
+              {t("home.brahmaTitle")}
+            </p>
+            <p
+              className="font-serif font-semibold text-base text-amber-900"
+              data-testid="brahma-window"
+            >
+              3:30 AM daily
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={enabled}
+          aria-label="Brahma Muhurta daily reminder"
+          onClick={handleToggle}
+          data-testid="brahma-toggle"
+          className="relative inline-flex h-7 w-12 flex-shrink-0 items-center rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+          style={{ backgroundColor: enabled ? "#B45309" : "#D6D3D1" }}
         >
-          {startStr} – {endStr}
-        </span>
-        {" "}{t("home.brahmaDesc")}
-      </p>
-      <p className="text-xs text-amber-700/80 mb-1">
-        Sunrise in {bm.coords.label}: <span className="font-semibold">{sunriseStr}</span>
-        {bm.approximate ? " (approx.)" : ""}
-      </p>
-      <div className="flex flex-wrap gap-2 mt-3">
-        <a
-          href="#"
-          onClick={handleSetAlarm}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-300 bg-white text-amber-800 hover:bg-amber-50 transition-colors"
-          data-testid="alarm-link"
-          aria-label={`Add daily Brahma Muhurta reminder at ${startStr} to your calendar`}
-        >
-          📅 {t("home.brahmaAlarm")}
-        </a>
-        {isAndroid && (
-          <a
-            href="#"
-            onClick={handleAndroidClock}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-300 bg-white text-amber-800 hover:bg-amber-50 transition-colors"
-            data-testid="alarm-link-android"
-            aria-label={`Open the Android Clock app to set a ${startStr} alarm`}
-          >
-            ⏰ Set Android alarm
-          </a>
-        )}
+          <span
+            className="inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform"
+            style={{ transform: enabled ? "translateX(24px)" : "translateX(4px)" }}
+          />
+        </button>
       </div>
-      <p className="text-xs text-amber-600/60 mt-2">
-        {t("home.brahmaNote")}
-      </p>
     </div>
   );
 }
