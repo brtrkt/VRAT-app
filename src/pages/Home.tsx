@@ -7,7 +7,8 @@ import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import NavratriCard from "@/components/NavratriCard";
 import HydrationTracker from "@/components/HydrationTracker";
-import { getDaysRemaining, getUserTradition, getUserLocation, getUserRegion, TRADITION_KEY, type Tradition } from "@/hooks/useUserPrefs";
+import { getDaysRemaining, getUserTradition, getUserLocation, getUserRegion, getUserCity, TRADITION_KEY, type Tradition } from "@/hooks/useUserPrefs";
+import { getBrahmaMuhurta, formatLocalTime, type BrahmaWindow } from "@/utils/sunrise";
 import {
   getTopStreaks,
   checkBadges,
@@ -77,30 +78,66 @@ function useCountdown(targetTime: Date | null) {
 
 function BrahmaMuhurta() {
   const { t } = useLanguage();
-  const alarmHour = 3;
-  const alarmMin = 30;
+
+  // Compute the actual Brahma Muhurta window for the user's location and
+  // today's date. Re-compute when the city/location/day changes so the
+  // displayed times stay accurate.
+  const [bm, setBm] = useState<BrahmaWindow>(() =>
+    getBrahmaMuhurta(new Date(), getUserCity(), getUserLocation())
+  );
+
+  useEffect(() => {
+    function refresh() {
+      setBm(getBrahmaMuhurta(new Date(), getUserCity(), getUserLocation()));
+    }
+    const onStorage = (e: StorageEvent) => {
+      if (!e.key || e.key === "vrat_city" || e.key === "vrat_location") refresh();
+    };
+    window.addEventListener("storage", onStorage);
+    // Refresh at next local midnight so tomorrow's sunrise is shown.
+    const now = new Date();
+    const nextMidnight = new Date(now);
+    nextMidnight.setHours(24, 0, 30, 0);
+    const ms = Math.max(60_000, nextMidnight.getTime() - now.getTime());
+    const timer = setTimeout(refresh, ms);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("storage", onStorage);
+    };
+  }, []);
 
   const isAndroid =
     typeof navigator !== "undefined" && /android/i.test(navigator.userAgent);
 
-  // Build a universal .ics calendar event: a daily 3:30 AM event with a
-  // VALARM that triggers at the start of the event. Works on iOS Calendar,
-  // Google Calendar (Android & desktop), Outlook, and Apple Calendar — no
-  // browser-specific intent: scheme required.
+  const startStr = formatLocalTime(bm.start);
+  const endStr = formatLocalTime(bm.end);
+  const sunriseStr = formatLocalTime(bm.sunrise);
+  const alarmHour = bm.start.getHours();
+  const alarmMin = bm.start.getMinutes();
+
+  // Build a universal .ics calendar event: a daily event at the computed
+  // Brahma Muhurta start with a VALARM that triggers at the start of the
+  // event. Works on iOS Calendar, Google Calendar (Android & desktop),
+  // Outlook, and Apple Calendar.
   function buildIcs(): string {
-    const today = new Date();
-    const y = today.getFullYear();
-    const m = String(today.getMonth() + 1).padStart(2, "0");
-    const d = String(today.getDate()).padStart(2, "0");
-    const hh = String(alarmHour).padStart(2, "0");
-    const mm = String(alarmMin).padStart(2, "0");
-    const dtStart = `${y}${m}${d}T${hh}${mm}00`;
-    const dtEnd = `${y}${m}${d}T0500${"00"}`.replace("050000", "050000");
-    const dtStamp =
-      `${y}${m}${d}T${String(today.getUTCHours()).padStart(2, "0")}${String(
-        today.getUTCMinutes()
+    const fmt = (d: Date) =>
+      `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(
+        d.getDate()
+      ).padStart(2, "0")}T${String(d.getHours()).padStart(2, "0")}${String(
+        d.getMinutes()
+      ).padStart(2, "0")}00`;
+    const fmtUtc = (d: Date) =>
+      `${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, "0")}${String(
+        d.getUTCDate()
+      ).padStart(2, "0")}T${String(d.getUTCHours()).padStart(2, "0")}${String(
+        d.getUTCMinutes()
       ).padStart(2, "0")}00Z`;
-    const uid = `brahma-muhurta-${y}${m}${d}-${Math.random().toString(36).slice(2, 8)}@vrat-app.com`;
+    const dtStart = fmt(bm.start);
+    const dtEnd = fmt(bm.end);
+    const dtStamp = fmtUtc(new Date());
+    const uid = `brahma-muhurta-${dtStart}-${Math.random()
+      .toString(36)
+      .slice(2, 8)}@vrat-app.com`;
     return [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
@@ -113,8 +150,8 @@ function BrahmaMuhurta() {
       `DTSTART:${dtStart}`,
       `DTEND:${dtEnd}`,
       "RRULE:FREQ=DAILY",
-      "SUMMARY:Brahma Muhurta — prayer & meditation",
-      "DESCRIPTION:The most auspicious time for prayer and meditation.\\nApprox. 96 minutes before sunrise.",
+      `SUMMARY:Brahma Muhurta (${bm.coords.label})`,
+      `DESCRIPTION:The most auspicious time for prayer and meditation.\\n96–48 minutes before local sunrise (${sunriseStr}).`,
       "BEGIN:VALARM",
       "ACTION:DISPLAY",
       "DESCRIPTION:Brahma Muhurta",
@@ -144,9 +181,6 @@ function BrahmaMuhurta() {
   }
 
   function handleAndroidClock(e: ReactMouseEvent<HTMLAnchorElement>) {
-    // Android Chrome supports the SET_ALARM intent. Other Android browsers
-    // (Firefox, Brave, Samsung Internet) may strip it — they fall back to
-    // the .ics calendar event link above.
     const intentUrl =
       `intent:#Intent;action=android.intent.action.SET_ALARM;` +
       `S.android.intent.extra.alarm.MESSAGE=Brahma%20Muhurta;` +
@@ -174,10 +208,17 @@ function BrahmaMuhurta() {
         </p>
       </div>
       <p className="text-foreground text-sm leading-relaxed mb-2">
-        <span className="font-serif font-semibold text-base text-amber-900">
-          3:30 AM – 5:00 AM
+        <span
+          className="font-serif font-semibold text-base text-amber-900"
+          data-testid="brahma-window"
+        >
+          {startStr} – {endStr}
         </span>
         {" "}{t("home.brahmaDesc")}
+      </p>
+      <p className="text-xs text-amber-700/80 mb-1">
+        Sunrise in {bm.coords.label}: <span className="font-semibold">{sunriseStr}</span>
+        {bm.approximate ? " (approx.)" : ""}
       </p>
       <div className="flex flex-wrap gap-2 mt-3">
         <a
@@ -185,7 +226,7 @@ function BrahmaMuhurta() {
           onClick={handleSetAlarm}
           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-300 bg-white text-amber-800 hover:bg-amber-50 transition-colors"
           data-testid="alarm-link"
-          aria-label="Add daily Brahma Muhurta reminder at 3:30 AM to your calendar"
+          aria-label={`Add daily Brahma Muhurta reminder at ${startStr} to your calendar`}
         >
           📅 {t("home.brahmaAlarm")}
         </a>
@@ -195,7 +236,7 @@ function BrahmaMuhurta() {
             onClick={handleAndroidClock}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-300 bg-white text-amber-800 hover:bg-amber-50 transition-colors"
             data-testid="alarm-link-android"
-            aria-label="Open the Android Clock app to set a 3:30 AM alarm"
+            aria-label={`Open the Android Clock app to set a ${startStr} alarm`}
           >
             ⏰ Set Android alarm
           </a>
