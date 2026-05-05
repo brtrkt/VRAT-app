@@ -202,6 +202,9 @@ function BrahmaMuhurta() {
             >
               3:30 AM daily
             </p>
+            <p className="text-xs text-amber-800/80 mt-0.5 leading-snug">
+              The most auspicious time for prayer and meditation
+            </p>
           </div>
         </div>
         <button
