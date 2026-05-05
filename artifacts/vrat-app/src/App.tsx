@@ -18,7 +18,7 @@ import HowToInstall from "@/pages/HowToInstall";
 import Recipes from "@/pages/Recipes";
 import LangarRecipes from "@/pages/LangarRecipes";
 import AdminErrorReports from "@/pages/AdminErrorReports";
-import { ONBOARDING_KEY, TRADITION_KEY, initTrial, isTrialExpired, isSubscribed, setSubscribed } from "@/hooks/useUserPrefs";
+import { ONBOARDING_KEY, TRADITION_KEY, initTrial, isTrialExpired, isSubscribed, setSubscribed, hasSeenOnboarding, pullSettingsFromServer } from "@/hooks/useUserPrefs";
 import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
 
 const queryClient = new QueryClient();
@@ -54,7 +54,7 @@ function DisclaimerPopup() {
         >
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="text-2xl" aria-hidden="true">🪔</span>
-            <span className="font-serif text-xl font-bold text-foreground">Welcome to VRAT</span>
+            <span className="font-serif text-xl font-bold text-foreground">Welcome to V<span style={{ color: "#FF9933" }}>RA</span>T</span>
           </div>
           <p className="text-sm text-foreground/80 leading-relaxed mb-4">
             This app shares traditional Hindu and Jain fasting knowledge passed down through
@@ -240,15 +240,22 @@ function Router() {
 }
 
 function App() {
-  const [onboardingDone, setOnboardingDone] = useState(
-    () => !!localStorage.getItem(ONBOARDING_KEY)
-  );
+  const [onboardingDone, setOnboardingDone] = useState(() => hasSeenOnboarding());
   const [showPaywall, setShowPaywall] = useState(false);
   const [checkoutCancelled, setCheckoutCancelled] = useState(false);
   const [verifying, setVerifying] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem(ONBOARDING_KEY)) {
+    // Pull persisted settings from the backend so Safari/iOS clearing
+    // localStorage doesn't lose tradition/observed/region across sessions.
+    // Best-effort; failures are silent and we fall back to local state.
+    pullSettingsFromServer().then((restored) => {
+      if (restored) {
+        setOnboardingDone(hasSeenOnboarding());
+      }
+    });
+
+    if (!hasSeenOnboarding()) {
       localStorage.removeItem(TRADITION_KEY);
     }
 

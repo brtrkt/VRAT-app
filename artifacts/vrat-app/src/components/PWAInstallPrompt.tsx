@@ -76,7 +76,7 @@ export default function PWAInstallPrompt() {
       >
         <span className="text-2xl flex-shrink-0" aria-hidden="true">🪔</span>
         <p className="flex-1 text-sm leading-snug" style={{ color: "#78350F" }}>
-          <span className="font-semibold">Add VRAT to your home screen</span>
+          <span className="font-semibold">Add V<span style={{ color: "#FF9933" }}>RA</span>T to your home screen</span>
           {" "}for the best experience
         </p>
         <div className="flex items-center gap-2 flex-shrink-0">

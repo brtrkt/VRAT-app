@@ -445,24 +445,7 @@ function CalendarGrid({
   );
 }
 
-type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan" | "iskcon" | "lingayat" | "pushtimarg" | "warkari" | "ramanandi" | "srivaishnava" | "shakta" | "shaivasiddhanta" | "bishnoi";
-
-const FILTER_LABELS: { value: TraditionFilter; label: string }[] = [
-  { value: "all",             label: "All" },
-  { value: "hindu",           label: "Hindu" },
-  { value: "jain",            label: "Jain" },
-  { value: "sikh",            label: "Sikh" },
-  { value: "swaminarayan",    label: "Swaminarayan" },
-  { value: "iskcon",          label: "ISKCON" },
-  { value: "lingayat",        label: "Lingayat" },
-  { value: "pushtimarg",      label: "Pushti Marg" },
-  { value: "warkari",         label: "Warkari" },
-  { value: "ramanandi",       label: "Ramanandi" },
-  { value: "srivaishnava",    label: "Sri Vaishnava" },
-  { value: "shakta",          label: "Shakta" },
-  { value: "shaivasiddhanta", label: "Shaiva Siddhanta" },
-  { value: "bishnoi",         label: "Bishnoi" },
-];
+type TraditionFilter = "all" | "hindu" | "jain" | "sikh" | "swaminarayan" | "iskcon" | "lingayat" | "pushtimarg" | "warkari" | "ramanandi" | "srivaishnava" | "shakta" | "shaivasiddhanta" | "bishnoi" | "aryasamaj";
 
 const HINDU_LEGEND = [
   { label: "Ekadashi", color: "#D4A017" },
@@ -547,6 +530,12 @@ const BISHNOI_LEGEND = [
   { label: "Jambhoji Mukti Diwas · Lalasar Sathari", color: "#16A34A" },
   { label: "Mukam Mela · Asoj & Phalgun Amavasya", color: "#16A34A" },
 ];
+const ARYA_SAMAJ_LEGEND = [
+  { label: "Arya Samaj Sthapana Diwas · Apr 10, 1875", color: "#9A3412" },
+  { label: "Dayananda Saraswati Jayanti · birth at Tankara", color: "#9A3412" },
+  { label: "Veda Prakatya Diwas · Ashadh Shukla Purnima", color: "#9A3412" },
+  { label: "Vasanta Navsamvatsar · Vedic New Year", color: "#9A3412" },
+];
 
 export default function Calendar() {
   const { t } = useLanguage();
@@ -571,6 +560,7 @@ export default function Calendar() {
     if (trad === "Shakta")           return "shakta";
     if (trad === "ShaivaSiddhanta")  return "shaivasiddhanta";
     if (trad === "Bishnoi")          return "bishnoi";
+    if (trad === "AryaSamaj")        return "aryasamaj";
     return "all";
   });
   const [observedVrats] = useState<string[]>(() => getObservedVrats());
@@ -602,7 +592,8 @@ export default function Calendar() {
           (filter === "srivaishnava"    && v.tradition === "SriVaishnava") ||
           (filter === "shakta"          && v.tradition === "Shakta") ||
           (filter === "shaivasiddhanta" && v.tradition === "ShaivaSiddhanta") ||
-          (filter === "bishnoi"         && v.tradition === "Bishnoi");
+          (filter === "bishnoi"         && v.tradition === "Bishnoi") ||
+          (filter === "aryasamaj"       && v.tradition === "AryaSamaj");
         const regionOk = !v.region || !regionFilterActive || v.region === userRegion;
         return traditionOk && regionOk;
       }),
@@ -645,26 +636,6 @@ export default function Calendar() {
           <p className="text-muted-foreground text-sm mt-1">
             2026–2027 — Tap any highlighted date
           </p>
-        </div>
-
-        <div className="flex gap-2 justify-center mb-4" role="group" aria-label="Filter by tradition">
-          {FILTER_LABELS.map(({ value, label }) => (
-            <button
-              key={value}
-              onClick={() => { setFilter(value); setSelected(null); }}
-              className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
-                filter === value
-                  ? value === "jain"
-                    ? "bg-green-500 text-white shadow-sm"
-                    : "saffron-gradient text-white shadow-sm"
-                  : "bg-card border border-card-border text-muted-foreground hover:text-foreground"
-              }`}
-              data-testid={`filter-${value}`}
-              aria-pressed={filter === value}
-            >
-              {label}
-            </button>
-          ))}
         </div>
 
         <div className="vrat-card p-4 mb-4">
@@ -721,7 +692,7 @@ export default function Calendar() {
               />
               <span className="text-xs font-medium text-foreground">Your observed vrats (gold)</span>
             </div>
-            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "lingayat" ? LINGAYAT_LEGEND : filter === "pushtimarg" ? PUSHTI_MARG_LEGEND : filter === "warkari" ? WARKARI_LEGEND : filter === "ramanandi" ? RAMANANDI_LEGEND : filter === "srivaishnava" ? SRIVAISHNAVA_LEGEND : filter === "shakta" ? SHAKTA_LEGEND : filter === "shaivasiddhanta" ? SHAIVA_SIDDHANTA_LEGEND : filter === "bishnoi" ? BISHNOI_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
+            {(filter === "jain" ? JAIN_LEGEND : filter === "sikh" ? SIKH_LEGEND : filter === "swaminarayan" ? SWAMINARAYAN_LEGEND : filter === "iskcon" ? ISKCON_LEGEND : filter === "lingayat" ? LINGAYAT_LEGEND : filter === "pushtimarg" ? PUSHTI_MARG_LEGEND : filter === "warkari" ? WARKARI_LEGEND : filter === "ramanandi" ? RAMANANDI_LEGEND : filter === "srivaishnava" ? SRIVAISHNAVA_LEGEND : filter === "shakta" ? SHAKTA_LEGEND : filter === "shaivasiddhanta" ? SHAIVA_SIDDHANTA_LEGEND : filter === "bishnoi" ? BISHNOI_LEGEND : filter === "aryasamaj" ? ARYA_SAMAJ_LEGEND : filter === "hindu" ? HINDU_LEGEND : [...HINDU_LEGEND, ...JAIN_LEGEND]).map((item) => (
               <div key={item.label} className="flex items-center gap-2" data-testid={`legend-${item.label}`}>
                 <span
                   className="w-3 h-3 rounded-full flex-shrink-0"

@@ -226,10 +226,24 @@ async function generateShareImage(d: DayInfo, dayNum: number): Promise<Blob> {
   ctx.lineTo(cx + 200, 840);
   ctx.stroke();
 
-  // VRAT branding
+  // VRAT branding — V and T in tradition saffron-brown, RA highlighted in saffron #FF9933
   ctx.font = `bold 48px Georgia, 'Times New Roman', serif`;
+  const wV  = ctx.measureText("V").width;
+  const wRA = ctx.measureText("RA").width;
+  const wT  = ctx.measureText("T").width;
+  const totalW = wV + wRA + wT;
+  const prevAlign = ctx.textAlign;
+  ctx.textAlign = "left";
+  let bx = cx - totalW / 2;
   ctx.fillStyle = "#E07B2A";
-  ctx.fillText("VRAT", cx, 920);
+  ctx.fillText("V", bx, 920);
+  bx += wV;
+  ctx.fillStyle = "#FF9933";
+  ctx.fillText("RA", bx, 920);
+  bx += wRA;
+  ctx.fillStyle = "#E07B2A";
+  ctx.fillText("T", bx, 920);
+  ctx.textAlign = prevAlign;
 
   ctx.font = `26px Arial, sans-serif`;
   ctx.fillStyle = "#B45309";

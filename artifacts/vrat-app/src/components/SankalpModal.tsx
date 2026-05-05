@@ -187,7 +187,7 @@ export default function SankalpModal({ vrat, onClose }: Props) {
             className="text-xs font-medium tracking-[0.2em] uppercase mt-3 mb-1"
             style={{ color: goldText, opacity: 0.7 }}
           >
-            {isJain ? "Jain Sankalp" : "Sankalp"}
+            {isSikh ? "Ardas" : isJain ? "Jain Sankalp" : "Sankalp"}
           </p>
           <h2
             className="font-serif text-2xl font-bold"
@@ -241,7 +241,11 @@ export default function SankalpModal({ vrat, onClose }: Props) {
                 className="text-xs leading-relaxed"
                 style={{ color: creamText, opacity: 0.65 }}
               >
-                After your morning bath, face east. Light a diya. Hold raw rice and Gangajal (or clean water) cupped in your right palm. Say your name, your city, your country, and your gotra — if your gotra is unknown, say Kashyap gotra. Recite the sankalp mantra above. Then gently pour the rice and water next to the diya — your vow is sealed. 🙏
+                {isSikh
+                  ? "After your morning ishnan (bath), face the Guru Granth Sahib (or your Nitnem gutka). Stand with folded hands and quietly recite the Ardas. Begin with 'Pritham Bhagauti simar kai…' and conclude by humbly placing your day's seva, simran, and intention before Waheguru. Bow with 'Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh.' 🙏"
+                  : isJain
+                  ? "Stand or sit before the Tirthankara murti (or facing east). Fold your hands and recite the Namokar Mantra three times. Then take the formal vow before the Panch Parmeshti — name your fast, the duration, and the food restrictions you accept. Conclude with 'Michhami Dukkadam' if any vow has been broken before. 🙏"
+                  : "After your morning bath, face east. Light a diya. Hold raw rice and Gangajal (or clean water) cupped in your right palm. Say your name, your city, your country, and your gotra — if your gotra is unknown, say Kashyap gotra. Recite the sankalp mantra above. Then gently pour the rice and water next to the diya — your vow is sealed. 🙏"}
               </p>
             </div>
 
@@ -257,7 +261,7 @@ export default function SankalpModal({ vrat, onClose }: Props) {
               }}
               data-testid="confirm-sankalp-btn"
             >
-              {t("sankalp.confirm")}
+              {isSikh ? "I have offered my Ardas 🙏" : t("sankalp.confirm")}
             </button>
           </>
         ) : (
@@ -268,7 +272,7 @@ export default function SankalpModal({ vrat, onClose }: Props) {
               className="font-serif text-xl font-bold mb-3 leading-snug"
               style={{ color: goldText }}
             >
-              Your sankalp has been taken
+              {isSikh ? "Your Ardas has been offered" : "Your sankalp has been taken"}
             </p>
             <p
               className="text-sm leading-relaxed"
@@ -313,7 +317,7 @@ export function SankalpButton({
             className="text-xs font-semibold"
             style={{ color: isSikh ? "#003DA5" : isJain ? "#15803D" : "#92400E" }}
           >
-            {t("sankalp.taken")}
+            {isSikh ? "Ardas offered today" : t("sankalp.taken")}
           </p>
           <p className="text-xs text-muted-foreground">
             May {vrat.deity} bless your fast
@@ -340,7 +344,7 @@ export function SankalpButton({
           : "1px solid rgba(245,158,11,0.35)",
       }}
       data-testid="take-sankalp-btn"
-      aria-label="Take sankalp"
+      aria-label={isSikh ? "Offer Ardas" : "Take sankalp"}
     >
       <span className="text-2xl flex-shrink-0" aria-hidden="true">
         {isSikh ? <KhandaSvg className="w-6 h-6 inline-block" style={{ color: "#003DA5" }} /> : isJain ? "🤚" : "🪔"}
@@ -350,10 +354,10 @@ export function SankalpButton({
           className="text-sm font-semibold"
           style={{ color: isSikh ? "#003DA5" : isJain ? "#15803D" : "#92400E" }}
         >
-          {t("sankalp.take")}
+          {isSikh ? "🙏 Offer Ardas" : t("sankalp.take")}
         </p>
         <p className="text-xs text-muted-foreground">
-          Begin your fast with intention and devotion
+          {isSikh ? "Begin your day with simran, seva, and gratitude" : "Begin your fast with intention and devotion"}
         </p>
       </div>
       <svg

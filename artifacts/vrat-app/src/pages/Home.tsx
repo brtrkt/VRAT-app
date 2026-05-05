@@ -1,4 +1,4 @@
-import { useState, useEffect, type CSSProperties } from "react";
+import { useState, useEffect, type MouseEvent as ReactMouseEvent } from "react";
 import { useLocation } from "wouter";
 import { getVratsForDate, getNextVratForTradition, getNextVratsForTradition, sortVratsPrimaryFirst, filterVratsByTradition, getDaysUntil, formatDateStr, getAllVrats, getIskconRegionBucket } from "@/data/vrats";
 import type { Vrat } from "@/data/vrats";
@@ -7,7 +7,8 @@ import PageFooter from "@/components/PageFooter";
 import NirjalaWarning from "@/components/NirjalaWarning";
 import NavratriCard from "@/components/NavratriCard";
 import HydrationTracker from "@/components/HydrationTracker";
-import { getDaysRemaining, getUserTradition, getUserLocation, getUserRegion, TRADITION_KEY, type Tradition } from "@/hooks/useUserPrefs";
+import { getDaysRemaining, getUserTradition, getUserLocation, getUserRegion, getUserCity, TRADITION_KEY, type Tradition } from "@/hooks/useUserPrefs";
+import { getBrahmaMuhurta, formatLocalTime, type BrahmaWindow } from "@/utils/sunrise";
 import {
   getTopStreaks,
   checkBadges,
@@ -20,6 +21,7 @@ import LanguageSelector from "@/components/LanguageSelector";
 import PanchangCard from "@/components/PanchangCard";
 import NanakshahiCard from "@/components/NanakshahiCard";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { TraditionIcon, TraditionSwitcher as SharedTraditionSwitcher, KhandaSvg, JainSymbol, OmSymbol } from "@/components/TraditionSelector";
 
 const NIRJALA_TIMER_IDS = new Set([
   "karva-chauth", "hartalika-teej", "maha-shivratri", "ekadashi-jun-1",
@@ -76,16 +78,122 @@ function useCountdown(targetTime: Date | null) {
 
 function BrahmaMuhurta() {
   const { t } = useLanguage();
-  const alarmHour = 3;
-  const alarmMin = 30;
 
-  const isAndroid = /android/i.test(navigator.userAgent);
-  const alarmUrl =
-    `intent:#Intent;action=android.intent.action.SET_ALARM;` +
-    `S.android.intent.extra.alarm.MESSAGE=Brahma%20Muhurta;` +
-    `i.android.intent.extra.alarm.HOUR=${alarmHour};` +
-    `i.android.intent.extra.alarm.MINUTES=${alarmMin};` +
-    `Z.android.intent.extra.alarm.SKIP_UI=false;end`;
+  // Compute the actual Brahma Muhurta window for the user's location and
+  // today's date. Re-compute when the city/location/day changes so the
+  // displayed times stay accurate.
+  const [bm, setBm] = useState<BrahmaWindow>(() =>
+    getBrahmaMuhurta(new Date(), getUserCity(), getUserLocation())
+  );
+
+  useEffect(() => {
+    function refresh() {
+      setBm(getBrahmaMuhurta(new Date(), getUserCity(), getUserLocation()));
+    }
+    const onStorage = (e: StorageEvent) => {
+      if (!e.key || e.key === "vrat_city" || e.key === "vrat_location") refresh();
+    };
+    window.addEventListener("storage", onStorage);
+    // Refresh at next local midnight so tomorrow's sunrise is shown.
+    const now = new Date();
+    const nextMidnight = new Date(now);
+    nextMidnight.setHours(24, 0, 30, 0);
+    const ms = Math.max(60_000, nextMidnight.getTime() - now.getTime());
+    const timer = setTimeout(refresh, ms);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("storage", onStorage);
+    };
+  }, []);
+
+  const isAndroid =
+    typeof navigator !== "undefined" && /android/i.test(navigator.userAgent);
+
+  const startStr = formatLocalTime(bm.start);
+  const endStr = formatLocalTime(bm.end);
+  const sunriseStr = formatLocalTime(bm.sunrise);
+  const alarmHour = bm.start.getHours();
+  const alarmMin = bm.start.getMinutes();
+
+  // Build a universal .ics calendar event: a daily event at the computed
+  // Brahma Muhurta start with a VALARM that triggers at the start of the
+  // event. Works on iOS Calendar, Google Calendar (Android & desktop),
+  // Outlook, and Apple Calendar.
+  function buildIcs(): string {
+    const fmt = (d: Date) =>
+      `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(
+        d.getDate()
+      ).padStart(2, "0")}T${String(d.getHours()).padStart(2, "0")}${String(
+        d.getMinutes()
+      ).padStart(2, "0")}00`;
+    const fmtUtc = (d: Date) =>
+      `${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, "0")}${String(
+        d.getUTCDate()
+      ).padStart(2, "0")}T${String(d.getUTCHours()).padStart(2, "0")}${String(
+        d.getUTCMinutes()
+      ).padStart(2, "0")}00Z`;
+    const dtStart = fmt(bm.start);
+    const dtEnd = fmt(bm.end);
+    const dtStamp = fmtUtc(new Date());
+    const uid = `brahma-muhurta-${dtStart}-${Math.random()
+      .toString(36)
+      .slice(2, 8)}@vrat-app.com`;
+    return [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//VRAT App//Brahma Muhurta//EN",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      "BEGIN:VEVENT",
+      `UID:${uid}`,
+      `DTSTAMP:${dtStamp}`,
+      `DTSTART:${dtStart}`,
+      `DTEND:${dtEnd}`,
+      "RRULE:FREQ=DAILY",
+      `SUMMARY:Brahma Muhurta (${bm.coords.label})`,
+      `DESCRIPTION:The most auspicious time for prayer and meditation.\\n96–48 minutes before local sunrise (${sunriseStr}).`,
+      "BEGIN:VALARM",
+      "ACTION:DISPLAY",
+      "DESCRIPTION:Brahma Muhurta",
+      "TRIGGER:PT0M",
+      "END:VALARM",
+      "END:VEVENT",
+      "END:VCALENDAR",
+    ].join("\r\n");
+  }
+
+  function handleSetAlarm(e: ReactMouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    try {
+      const ics = buildIcs();
+      const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "brahma-muhurta.ics";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    } catch {
+      // ignore — user can still set the alarm manually
+    }
+  }
+
+  function handleAndroidClock(e: ReactMouseEvent<HTMLAnchorElement>) {
+    const intentUrl =
+      `intent:#Intent;action=android.intent.action.SET_ALARM;` +
+      `S.android.intent.extra.alarm.MESSAGE=Brahma%20Muhurta;` +
+      `i.android.intent.extra.alarm.HOUR=${alarmHour};` +
+      `i.android.intent.extra.alarm.MINUTES=${alarmMin};` +
+      `B.android.intent.extra.alarm.SKIP_UI=false;` +
+      `S.browser_fallback_url=${encodeURIComponent("https://vrat-app.com")};end`;
+    try {
+      window.location.href = intentUrl;
+    } catch {
+      e.preventDefault();
+    }
+  }
 
   return (
     <div
@@ -100,26 +208,41 @@ function BrahmaMuhurta() {
         </p>
       </div>
       <p className="text-foreground text-sm leading-relaxed mb-2">
-        <span className="font-serif font-semibold text-base text-amber-900">
-          3:30 AM – 5:00 AM
+        <span
+          className="font-serif font-semibold text-base text-amber-900"
+          data-testid="brahma-window"
+        >
+          {startStr} – {endStr}
         </span>
-        {" "}{t("home.brahmaDesc")}{" "}
-        {isAndroid ? (
-          <a
-            href={alarmUrl}
-            className="text-amber-700 underline underline-offset-2 font-semibold hover:text-amber-900 transition-colors"
-            data-testid="alarm-link"
-            aria-label="Open Clock app to set alarm for Brahma Muhurta at 3:30 AM"
-          >
-            {t("home.brahmaAlarm")}
-          </a>
-        ) : (
-          <span className="text-amber-700 font-semibold">
-            {t("home.brahmaAlarmIos")}
-          </span>
-        )}
+        {" "}{t("home.brahmaDesc")}
       </p>
-      <p className="text-xs text-amber-600/60 mt-1">
+      <p className="text-xs text-amber-700/80 mb-1">
+        Sunrise in {bm.coords.label}: <span className="font-semibold">{sunriseStr}</span>
+        {bm.approximate ? " (approx.)" : ""}
+      </p>
+      <div className="flex flex-wrap gap-2 mt-3">
+        <a
+          href="#"
+          onClick={handleSetAlarm}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-300 bg-white text-amber-800 hover:bg-amber-50 transition-colors"
+          data-testid="alarm-link"
+          aria-label={`Add daily Brahma Muhurta reminder at ${startStr} to your calendar`}
+        >
+          📅 {t("home.brahmaAlarm")}
+        </a>
+        {isAndroid && (
+          <a
+            href="#"
+            onClick={handleAndroidClock}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-300 bg-white text-amber-800 hover:bg-amber-50 transition-colors"
+            data-testid="alarm-link-android"
+            aria-label={`Open the Android Clock app to set a ${startStr} alarm`}
+          >
+            ⏰ Set Android alarm
+          </a>
+        )}
+      </div>
+      <p className="text-xs text-amber-600/60 mt-2">
         {t("home.brahmaNote")}
       </p>
     </div>
@@ -185,202 +308,6 @@ function FastingTimer({ vratsToday }: { vratsToday: Vrat[] }) {
         </>
       )}
     </div>
-  );
-}
-
-function KhandaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 838" className={className} style={style} aria-hidden="true">
-      <path d="M 382.877 20.123 C 369.559 30.822, 345.376 45.962, 330.750 52.758 L 324 55.895 324 60.716 C 324 63.367, 325.121 70.478, 326.491 76.518 C 330.918 96.036, 331.246 95.385, 314.461 100.337 C 256.870 117.327, 191.500 172.746, 164.465 227.500 C 128.787 299.759, 133.953 392.025, 177.399 458.500 C 205.721 501.836, 258.627 543.384, 305.275 558.925 C 319.415 563.636, 319.789 564.487, 315.501 582.186 C 311.341 599.359, 309.421 597.713, 335.145 599.034 C 362.888 600.459, 359.904 596.918, 363.140 632.263 C 364.614 648.366, 366.925 648.221, 339.819 633.723 C 252.035 586.770, 204.974 549.771, 163.695 495.259 C 67.338 368.009, 85.097 234.198, 213 123.764 C 234.742 104.992, 234.667 103.873, 212.041 109.559 C 110.139 135.170, 38.463 217.919, 19.001 332.424 C -3.183 462.948, 77.786 612.592, 213.874 692.578 C 223.306 698.122, 229.221 704.156, 231.270 710.324 C 233.906 718.262, 236.150 716.989, 261 693.454 C 278.715 676.677, 287.385 669.523, 297.935 662.980 L 306.023 657.964 315.262 664.154 C 330.925 674.649, 347.391 686.178, 349.711 688.277 C 352.765 691.038, 351.984 692.143, 339.263 703.039 C 313.054 725.490, 308.858 729.378, 303.067 736.577 C 282.832 761.731, 290.623 784.971, 319.300 784.994 C 330.385 785.004, 333.416 782.872, 342.754 768.500 C 346.597 762.584, 352.819 754.927, 357.990 749.750 C 373.817 733.904, 377.458 740.437, 362.850 758.470 C 333.229 795.033, 383.820 841.515, 416.786 808.026 C 431.330 793.250, 431.601 775.970, 417.578 757.500 C 411.168 749.057, 410 746.910, 410 743.566 C 410 734.605, 425.868 749.290, 441.223 772.463 C 451.449 787.894, 469.510 790.098, 482.357 777.483 C 498.744 761.393, 491.697 745.849, 452.882 712.466 C 432.026 694.528, 428.655 691.121, 430.072 689.413 C 430.659 688.706, 441.041 681.316, 453.142 672.992 L 475.144 657.858 482.035 661.952 C 491.830 667.771, 501.058 675.358, 520.523 693.600 C 544.940 716.481, 546.929 717.777, 549.146 712.250 C 553.075 702.455, 555.873 699.765, 573.512 688.823 C 660.606 634.799, 723.719 555.962, 752.815 464.849 C 802.830 308.231, 705.681 131.137, 556.250 106.524 C 547.729 105.121, 550.304 108.484, 571.500 126.448 C 654.376 196.686, 688.599 278.271, 674.504 372 C 661.836 456.236, 588.780 548.821, 488.500 607.724 C 467.194 620.239, 420.825 645, 418.695 645 C 417.216 645, 419.673 608.756, 421.553 602.832 C 422.335 600.370, 423.498 600.193, 446.302 599.048 C 471.150 597.801, 470.002 598.724, 466.055 583.167 C 461.173 563.920, 460.979 564.315, 478.486 557.960 C 610.741 509.951, 674.863 366.463, 621.629 237.646 C 598.393 181.420, 529.902 119.704, 470.500 101.468 C 453.923 96.379, 453.151 96.050, 452.427 93.771 C 452.076 92.664, 453.259 84.451, 455.056 75.521 C 458.967 56.086, 459.278 57.164, 448.152 51.576 C 432.526 43.728, 411.049 30.140, 398.803 20.352 C 390.615 13.808, 390.737 13.809, 382.877 20.123 M 329.723 164.487 C 173.505 220.082, 164.045 413.813, 313.840 489.732 C 335.376 500.647, 334.660 501.050, 339.953 475 C 353.029 410.637, 357.976 316.778, 352.180 243 C 345.822 162.064, 344.963 159.063, 329.723 164.487 M 438.720 164.138 C 433.355 172.743, 426.995 257.397, 427.010 320 C 427.027 389.999, 430.285 424.681, 441.616 475.500 C 447.333 501.142, 445.886 499.900, 461.500 492.567 C 615.210 420.383, 612.274 229.328, 456.490 166.524 C 444.255 161.592, 440.613 161.102, 438.720 164.138" fill="currentColor" fillRule="evenodd" stroke="none" />
-    </svg>
-  );
-}
-
-function OmSymbol({ className = "" }: { className?: string }) {
-  return (
-    <span className={`font-serif ${className}`} aria-hidden="true">ॐ</span>
-  );
-}
-
-function JainSymbol({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 56 72"
-      fill="currentColor"
-      aria-hidden="true"
-      className={className}
-    >
-      {/* Five fingers: pinky → thumb */}
-      <rect x="1"  y="22" width="9"  height="22" rx="4.5" />
-      <rect x="12" y="14" width="9"  height="28" rx="4.5" />
-      <rect x="23" y="8"  width="10" height="33" rx="5" />
-      <rect x="35" y="13" width="9"  height="28" rx="4.5" />
-      <rect x="46" y="21" width="9"  height="22" rx="4.5" />
-      {/* Palm */}
-      <path d="M1 40 C1 38 3 37 5 37 L51 37 C53 37 55 38 55 40 L55 60 C55 67 48 72 28 72 C8 72 1 67 1 60 Z" />
-      {/* Ahimsa chakra wheel */}
-      <circle cx="28" cy="57" r="11" fill="white" />
-      <line x1="28" y1="46" x2="28" y2="68" stroke="currentColor" strokeWidth="1.5" />
-      <line x1="17" y1="57" x2="39" y2="57" stroke="currentColor" strokeWidth="1.5" />
-      <line x1="20.2" y1="49.2" x2="35.8" y2="64.8" stroke="currentColor" strokeWidth="1.5" />
-      <line x1="35.8" y1="49.2" x2="20.2" y2="64.8" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="28" cy="57" r="2.5" />
-    </svg>
-  );
-}
-
-function LotusSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <ellipse cx="30" cy="24" rx="5" ry="14" opacity="0.9" />
-      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(-28 30 42)" opacity="0.85" />
-      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(28 30 42)" opacity="0.85" />
-      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(-58 30 42)" opacity="0.75" />
-      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(58 30 42)" opacity="0.75" />
-      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(-85 30 42)" opacity="0.6" />
-      <ellipse cx="30" cy="24" rx="5" ry="14" transform="rotate(85 30 42)" opacity="0.6" />
-      <circle cx="30" cy="42" r="7" />
-    </svg>
-  );
-}
-
-function IskconLogoSvg({ className = "" }: { className?: string; style?: CSSProperties }) {
-  return (
-    <img src="/iskcon_logo.svg" className={className} alt="ISKCON" style={{ objectFit: "contain" }} />
-  );
-}
-
-function TrisulaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 48 68" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <rect x="21" y="26" width="6" height="38" rx="3"/>
-      <path d="M24 2 C24 2 20 10 20 18 L28 18 C28 10 24 2 24 2Z"/>
-      <path d="M11 8 C9 13 9 20 13 23 L18 23 L18 18 C14 18 12 14 13 10Z"/>
-      <path d="M37 8 C39 13 39 20 35 23 L30 23 L30 18 C34 18 36 14 35 10Z"/>
-      <rect x="11" y="20" width="26" height="4" rx="2"/>
-    </svg>
-  );
-}
-
-function PeacockFeatherSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 48 72" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <rect x="22" y="34" width="4" height="36" rx="2"/>
-      <ellipse cx="24" cy="18" rx="14" ry="20" opacity="0.2"/>
-      <ellipse cx="24" cy="18" rx="10" ry="14"/>
-      <ellipse cx="24" cy="18" rx="5" ry="7" fill="white" opacity="0.85"/>
-      <ellipse cx="24" cy="18" rx="2.5" ry="3.5"/>
-    </svg>
-  );
-}
-
-// ─── Tradition-specific silhouette icons (Warkari, Ramanandi, SriVaishnava,
-//     Shakta, ShaivaSiddhanta, PushtiMarg, Lingayat) ───────────────────────────
-function VitthalSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 60 80" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <path d="M22 4 L26 1 L30 4 L34 1 L38 4 L37 10 L23 10 Z"/>
-      <circle cx="30" cy="15" r="5"/>
-      <path d="M27 19 L33 19 L37 22 L44 26 L44 30 L40 31 L36 28 L36 40 L24 40 L24 28 L20 31 L16 30 L16 26 L23 22 Z"/>
-      <path d="M24 40 L36 40 L38 58 L22 58 Z"/>
-      <rect x="25" y="58" width="4" height="14"/>
-      <rect x="31" y="58" width="4" height="14"/>
-      <rect x="14" y="72" width="32" height="6" rx="1"/>
-    </svg>
-  );
-}
-
-// Urdhva Pundra — the canonical Vaishnav tilak worn by Ramanandi sadhus
-// across Ayodhya, Chitrakoot, and Janakpur. The white "U" represents the
-// lotus feet of Vishnu / Sri Ram; the central red vertical line (shrivatsa
-// flame) represents Devi Sita / Lakshmi; the red bindu at the base
-// represents the devotee's surrendered head at the Lord's feet.
-function UrdhvaPundraSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 48 64" className={className} style={style} aria-hidden="true">
-      <path
-        d="M5 4 H17 V40 Q17 44 21 44 H27 Q31 44 31 40 V4 H43 V42 Q43 56 31 56 H17 Q5 56 5 42 Z"
-        fill="white"
-      />
-      <path
-        d="M24 3 Q19 18 21 32 Q22 40 24 46 Q26 40 27 32 Q29 18 24 3 Z"
-        fill="#DC2626"
-      />
-      <circle cx="24" cy="60" r="3.4" fill="#DC2626" />
-    </svg>
-  );
-}
-
-function NaamamSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 60 80" className={className} style={style} fill="none" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <line x1="17" y1="6" x2="17" y2="55" stroke="currentColor" strokeWidth="6.5"/>
-      <line x1="43" y1="6" x2="43" y2="55" stroke="currentColor" strokeWidth="6.5"/>
-      <path d="M14 55 C14 74 46 74 46 55" stroke="currentColor" strokeWidth="6.5"/>
-      <line x1="30" y1="10" x2="30" y2="62" stroke="#DC2626" strokeWidth="6.5"/>
-    </svg>
-  );
-}
-
-function SriYantraSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 60 60" className={className} style={style} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-      <circle cx="30" cy="30" r="27" strokeWidth="1.5"/>
-      <polygon points="30,8 8,46 52,46"/>
-      <polygon points="30,52 8,14 52,14"/>
-      <polygon points="30,15 14,40 46,40"/>
-      <polygon points="30,45 14,20 46,20"/>
-      <circle cx="30" cy="30" r="2.5" fill="currentColor"/>
-    </svg>
-  );
-}
-
-function TripundraSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <rect x="6" y="18" width="48" height="4" rx="2"/>
-      <rect x="6" y="28" width="48" height="4" rx="2"/>
-      <rect x="6" y="38" width="48" height="4" rx="2"/>
-      <circle cx="30" cy="30" r="3"/>
-    </svg>
-  );
-}
-
-function ShrinathjiSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 60 80" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <path d="M14 8 Q22 2 28 5 Q34 1 40 5 Q48 2 50 9 Q49 13 44 13 L18 13 Q12 13 14 8 Z"/>
-      <rect x="22" y="12" width="4" height="22" rx="2"/>
-      <path d="M28 26 L30 22 L32 25 L34 21 L36 25 L38 22 L40 26 Z"/>
-      <ellipse cx="34" cy="32" rx="5" ry="6"/>
-      <path d="M27 38 L41 38 L41 60 L27 60 Z"/>
-      <rect x="41" y="38" width="3.5" height="20" rx="1.5"/>
-      <path d="M25 60 L43 60 L46 76 L22 76 Z"/>
-    </svg>
-  );
-}
-
-function IshtalingaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <circle cx="30" cy="28" r="14"/>
-      <ellipse cx="25" cy="22" rx="3.5" ry="2.5" fill="white" opacity="0.4"/>
-      <path d="M6 38 C6 50 16 56 30 56 C44 56 54 50 54 38 L50 38 C50 47 41 52 30 52 C19 52 10 47 10 38 Z"/>
-    </svg>
-  );
-}
-
-function KhejriTreeSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <path d="M0 50 Q15 44 30 48 Q45 52 60 46 L60 60 L0 60 Z" opacity="0.45"/>
-      <path d="M28 50 L28 28 Q27 22 30 20 Q33 22 32 28 L32 50 Z"/>
-      <circle cx="30" cy="16" r="9"/>
-      <circle cx="20" cy="20" r="7"/>
-      <circle cx="40" cy="20" r="7"/>
-      <circle cx="24" cy="12" r="5"/>
-      <circle cx="36" cy="12" r="5"/>
-    </svg>
   );
 }
 
@@ -734,67 +661,18 @@ function MyStreaks() {
   );
 }
 
-// Order: Hindu / Jain / Sikh first (umbrella categories),
-// then the remaining 9 sub-traditions alphabetically.
-const TRADITION_OPTIONS: { value: Tradition; label: string }[] = [
-  { value: "Hindu",            label: "Hindu" },
-  { value: "Jain",             label: "Jain" },
-  { value: "Sikh",             label: "Sikh" },
-  { value: "Bishnoi",          label: "Bishnoi" },
-  { value: "ISKCON",           label: "ISKCON" },
-  { value: "Lingayat",         label: "Lingayat" },
-  { value: "PushtiMarg",       label: "Pushti Marg" },
-  { value: "Ramanandi",        label: "Ramanandi" },
-  { value: "ShaivaSiddhanta",  label: "Shaiva Siddhanta" },
-  { value: "Shakta",           label: "Shakta" },
-  { value: "SriVaishnava",     label: "Sri Vaishnava" },
-  { value: "Swaminarayan",     label: "Swaminarayan" },
-  { value: "Warkari",          label: "Warkari" },
-];
-
+// TRADITION_OPTIONS, TraditionIcon, and TraditionSwitcher all live in
+// `@/components/TraditionSelector` so Home and Onboarding share the same
+// data source, icons, labels, ordering, and dropdown UI.
 function TraditionSwitcher() {
-  const [open, setOpen] = useState(false);
-  const current = getUserTradition();
-  const currentLabel = TRADITION_OPTIONS.find((o) => o.value === current)?.label ?? current;
-
-  function select(t: Tradition) {
-    localStorage.setItem(TRADITION_KEY, t);
-    setOpen(false);
-    window.location.reload();
-  }
-
   return (
-    <div className="relative flex justify-center mt-1 mb-3">
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-full font-medium border transition-all active:opacity-70"
-        style={{ background: "rgba(255,255,255,0.65)", borderColor: "#E5E7EB", color: "#78716C", fontSize: "17px" }}
-        aria-label="Switch tradition"
-      >
-        {currentLabel}
-        <svg viewBox="0 0 10 10" className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d={open ? "M1 7l4-4 4 4" : "M1 3l4 4 4-4"} />
-        </svg>
-      </button>
-
-      {open && (
-        <>
-          <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
-          <div className="absolute top-[52px] left-1/2 -translate-x-1/2 z-20 bg-white rounded-2xl shadow-xl border border-stone-100 overflow-hidden" style={{ minWidth: 220 }}>
-            {TRADITION_OPTIONS.map((opt) => (
-              <button
-                key={opt.value}
-                onClick={() => select(opt.value)}
-                className="w-full text-left px-4 py-3 min-h-[44px] font-medium transition-colors active:bg-amber-50"
-                style={{ color: opt.value === current ? "#E07B2A" : "#374151", background: opt.value === current ? "#FFF7ED" : "transparent", fontSize: "17px" }}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
+    <SharedTraditionSwitcher
+      current={getUserTradition()}
+      onSelect={(t) => {
+        localStorage.setItem(TRADITION_KEY, t);
+        window.location.reload();
+      }}
+    />
   );
 }
 
@@ -818,31 +696,9 @@ export default function Home() {
 
         <div className="text-center mb-4">
           <div className="flex items-end justify-center gap-4 mb-2">
-            {(() => {
-              const t = getUserTradition();
-              if (t === "Sikh")          return <KhandaSvg className="w-10 h-12" style={{ color: "#003DA5" }} />;
-              if (t === "Jain")          return <JainSymbol className="text-green-600 w-7 h-9" />;
-              if (t === "Hindu")         return <OmSymbol className="text-primary text-3xl" />;
-              if (t === "Swaminarayan") return <LotusSvg className="w-10 h-10" style={{ color: "#C4972A" }} />;
-              if (t === "ISKCON")        return <IskconLogoSvg className="w-16 h-16" />;
-              if (t === "Lingayat")        return <IshtalingaSvg className="w-11 h-11" style={{ color: "#9B2335" }} />;
-              if (t === "PushtiMarg")      return <ShrinathjiSvg className="w-9 h-12" style={{ color: "#0E7490" }} />;
-              if (t === "Warkari")         return <VitthalSvg className="w-9 h-12" style={{ color: "#DC6803" }} />;
-              if (t === "Ramanandi")       return <UrdhvaPundraSvg className="w-11 h-11" />;
-              if (t === "SriVaishnava")    return <NaamamSvg className="w-9 h-12" style={{ color: "#B45309" }} />;
-              if (t === "Shakta")          return <SriYantraSvg className="w-11 h-11" style={{ color: "#BE185D" }} />;
-              if (t === "ShaivaSiddhanta") return <TripundraSvg className="w-11 h-11" style={{ color: "#475569" }} />;
-              if (t === "Bishnoi")         return <KhejriTreeSvg className="w-11 h-11" style={{ color: "#16A34A" }} />;
-              return (
-                <>
-                  <OmSymbol className="text-primary text-3xl" />
-                  <JainSymbol className="text-green-600 w-7 h-9" />
-                  <KhandaSvg className="w-10 h-12" style={{ color: "#003DA5" }} />
-                </>
-              );
-            })()}
+            <TraditionIcon tradition={getUserTradition()} />
           </div>
-          <h1 className="font-serif text-3xl font-bold text-foreground">VRAT</h1>
+          <h1 className="font-serif text-3xl font-bold text-foreground">V<span style={{ color: "#FF9933" }}>RA</span>T</h1>
           <p className="text-muted-foreground text-sm mt-1 tracking-wide">Your Fast, Your Way</p>
           <TraditionSwitcher />
         </div>

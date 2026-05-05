@@ -27,6 +27,7 @@ import {
   getUserEmail,
   setUserEmail,
   setSubscribed,
+  pushSettingsToServer,
 } from "@/hooks/useUserPrefs";
 import { detectCurrency, type Currency } from "@/utils/currencyDetect";
 import PageFooter from "@/components/PageFooter";
@@ -39,7 +40,7 @@ const PRICES = {
   lifetime: { usd: "$49.99",       inr: "₹3,999"      },
 } as const;
 
-const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Warkari" | "Ramanandi" | "SriVaishnava" | "Shakta" | "ShaivaSiddhanta" | "Bishnoi" }[] = [
+const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "Hindu" | "Jain" | "Sikh" | "Swaminarayan" | "ISKCON" | "Lingayat" | "PushtiMarg" | "Warkari" | "Ramanandi" | "SriVaishnava" | "Shakta" | "ShaivaSiddhanta" | "Bishnoi" | "AryaSamaj" }[] = [
   { id: "ekadashi",                   label: "Ekadashi",                       subtitle: "24 days a year",                           tradition: "Hindu" },
   { id: "purnima",                    label: "Purnima",                        subtitle: "Full moon · 12 days a year",               tradition: "Hindu" },
   { id: "pradosh",                    label: "Pradosh / Pradosham",            subtitle: "For Lord Shiva · 24 days a year",          tradition: "Hindu" },
@@ -263,6 +264,12 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "skanda-shashti-shaiva",      label: "Skanda Shashti (Soorasamharam)",     subtitle: "6-day Murugan vrat · Tiruchendur Soorasamharam",          tradition: "ShaivaSiddhanta" },
   { id: "thai-poosam-shaiva",         label: "Thai Poosam (Thaipusam)",            subtitle: "Pushya nakshatra in Thai · kavadi-attam at Palani",        tradition: "ShaivaSiddhanta" },
   { id: "aadi-krittikai-shaiva",      label: "Aadi Krittikai",                     subtitle: "Krittika nakshatra in Aadi · Murugan at Tiruttani",        tradition: "ShaivaSiddhanta" },
+  { id: "ugadi-telugu",               label: "Ugadi (Telugu New Year)",            subtitle: "Chaitra Shukla Pratipada · 6-taste Pachadi · Andhra/Telangana", tradition: "ShaivaSiddhanta" },
+  { id: "vara-lakshmi-vratam",        label: "Varalakshmi Vratam",                 subtitle: "Friday before Shravana Purnima · 9-knot toram · married women", tradition: "ShaivaSiddhanta" },
+  { id: "dasara-vijayadashami-telugu",label: "Dasara (Vijayadashami)",             subtitle: "Bommala koluvu · Ayudha Pooja · jammi-leaf exchange",      tradition: "ShaivaSiddhanta" },
+  { id: "sankranti-telugu",           label: "Sankranti (Pedda Panduga)",          subtitle: "Jan 14 · 4-day harvest · Bhogi/Sankranti/Kanuma/Mukkanuma", tradition: "ShaivaSiddhanta" },
+  { id: "kartika-masam-telugu",       label: "Kartika Masam (Karthika Pournami)",  subtitle: "Month-long akasa-deepam · 365 deepams on Kartika Pournami", tradition: "ShaivaSiddhanta" },
+  { id: "pournami-telugu",            label: "Pournami (Full Moon Vratam)",        subtitle: "Every full-moon · ekabhuktam fast · arghya to Chandra · family-deity puja", tradition: "ShaivaSiddhanta" },
 
   { id: "guru-jambheshwar-jayanti",      label: "Guru Jambheshwar Jayanti",          subtitle: "Bhadrapada Krishna Ashtami · Jambhoji's birth · Pipasar",       tradition: "Bishnoi" },
   { id: "khejarli-shaheed-diwas",        label: "Khejarli Shaheed Diwas",            subtitle: "Amrita Devi & 363 martyrs (1730 CE) · Bhadrapada Sud 10",       tradition: "Bishnoi" },
@@ -289,6 +296,20 @@ const VRAT_OPTIONS: { id: string; label: string; subtitle: string; tradition: "H
   { id: "bishnoi-hanuman-jayanti"             , label: "Hanuman Jayanti"                            , subtitle: "Chaitra Purnima · Hanuman Chalisa · Sundara Kand"                      , tradition: "Bishnoi" },
   { id: "bishnoi-makar-sankranti"             , label: "Makar Sankranti / Uttarayan"                , subtitle: "Jan 14 · Surya arghya · til-laddu · no manjha"                         , tradition: "Bishnoi" },
   { id: "bishnoi-jajiwal-dham-mela"           , label: "Jajiwal Dham Mela"                          , subtitle: "Karthik Shukla Ashtami · Jodhpur · 14-mandir lineage"                  , tradition: "Bishnoi" },
+
+  { id: "arya-samaj-sthapana-diwas",       label: "Arya Samaj Sthapana Diwas",              subtitle: "Apr 10 · founding day · Mumbai 1875 · Dayananda Saraswati",           tradition: "AryaSamaj" },
+  { id: "dayananda-saraswati-jayanti",     label: "Dayananda Saraswati Jayanti",            subtitle: "Phalguna Krishna Dashami · birth at Tankara, Gujarat (1824)",          tradition: "AryaSamaj" },
+  { id: "dayananda-nirvana-diwas",         label: "Dayananda Nirvana Diwas",                subtitle: "Karthika Krishna Amavasya (Diwali) · mahaprayan Ajmer 1883",           tradition: "AryaSamaj" },
+  { id: "vasanta-navsamvatsar-arya",       label: "Vasanta Navsamvatsar (Vedic New Year)",  subtitle: "Chaitra Shukla Pratipada · Sristi Diwas · Vikram Samvat",              tradition: "AryaSamaj" },
+  { id: "veda-prakatya-diwas",             label: "Veda Prakatya Diwas",                    subtitle: "Ashadh Shukla Purnima · revelation of the four Vedas",                 tradition: "AryaSamaj" },
+  { id: "gayatri-jayanti-arya",            label: "Gayatri Jayanti",                        subtitle: "Jyeshtha Shukla Ekadashi · manifestation of Gayatri mantra",           tradition: "AryaSamaj" },
+  { id: "virjananda-jayanti-arya",         label: "Swami Virjananda Jayanti",               subtitle: "Phalguna Krishna Tritiya · Dayananda's guru (Mathura)",                tradition: "AryaSamaj" },
+  { id: "maharshi-bodh-diwas",             label: "Maharshi Bodh Diwas (Shivratri Bodh)",   subtitle: "Maha Shivaratri · 14yo Mool Shankar's awakening (1839)",               tradition: "AryaSamaj" },
+  { id: "holika-dahan-yajna-arya",         label: "Holika Dahan Yajna",                     subtitle: "Phalguna Purnima eve · cleansing yajna (no waste burning)",            tradition: "AryaSamaj" },
+  { id: "vasant-panchami-arya",            label: "Vasant Panchami (Vedic Saraswati)",      subtitle: "Magha Shukla Panchami · Veda-vani · vidyarambha",                      tradition: "AryaSamaj" },
+  { id: "shravani-upakarma-arya",          label: "Shravani Upakarma",                      subtitle: "Shravana Purnima · yagnopavit dharan · Veda-paath upakarma",           tradition: "AryaSamaj" },
+  { id: "ram-navami-arya",                 label: "Ram Navami (Vedic Maryada)",             subtitle: "Chaitra Shukla Navami · Sri Ram as Vedic Maryada Purushottam",          tradition: "AryaSamaj" },
+  { id: "krishna-janmashtami-arya",        label: "Krishna Janmashtami (Vedic Yogi)",       subtitle: "Bhadrapada Krishna Ashtami · Sri Krishna as Vedic Yogeshwara",         tradition: "AryaSamaj" },
 ];
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
@@ -404,6 +425,7 @@ export default function Settings() {
     localStorage.setItem(CITY_KEY, city.trim());
     localStorage.setItem(LOCATION_KEY, location);
     localStorage.setItem(REGION_KEY, region);
+    void pushSettingsToServer();
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
     if (section !== "main") setSection("main");
@@ -614,6 +636,7 @@ export default function Settings() {
       { value: "Hindu",            label: "Hindu",                              subtitle: "Ekadashi, Navratri, Karva Chauth and more" },
       { value: "Jain",             label: "Jain",                               subtitle: "Paryushana, Navpad Oli, Samvatsari and more" },
       { value: "Sikh",             label: "Sikh",                               subtitle: "Gurpurabs, Baisakhi, Sangrand and more" },
+      { value: "AryaSamaj",        label: "Arya Samaj (Vedic Dharma)",          subtitle: "Daily Sandhya & Havan, Sthapana Diwas, Dayananda Jayanti, Veda Prakatya" },
       { value: "Bishnoi",          label: "Bishnoi (Jambhoji panth)",           subtitle: "Guru Jambheshwar Jayanti, Khejarli Shaheed Diwas, Mukam Mela" },
       { value: "ISKCON",           label: "ISKCON / Vaishnava",                 subtitle: "Ekadashi (no grains), Gaura Purnima, Janmashtami, Kartik" },
       { value: "Lingayat",         label: "Lingayat / Veerashaiva",             subtitle: "Maha Shivaratri, Shravana Somavara, Basava Jayanti" },
@@ -643,6 +666,7 @@ export default function Settings() {
                   onClick={() => {
                     setTradition(opt.value);
                     localStorage.setItem(TRADITION_KEY, opt.value);
+                    void pushSettingsToServer();
                     setSection("main");
                   }}
                   className="w-full flex items-center gap-4 p-4 rounded-2xl text-left transition-all"
@@ -680,6 +704,7 @@ export default function Settings() {
     const shaktaVrats          = VRAT_OPTIONS.filter((v) => v.tradition === "Shakta");
     const shaivaSiddhantaVrats = VRAT_OPTIONS.filter((v) => v.tradition === "ShaivaSiddhanta");
     const bishnoiVrats         = VRAT_OPTIONS.filter((v) => v.tradition === "Bishnoi");
+    const aryaSamajVrats       = VRAT_OPTIONS.filter((v) => v.tradition === "AryaSamaj");
     const showHindu            = tradition === "Hindu";
     const showJain             = tradition === "Jain";
     const showSikh             = tradition === "Sikh";
@@ -693,6 +718,7 @@ export default function Settings() {
     const showShakta           = tradition === "Shakta";
     const showShaivaSiddhanta  = tradition === "ShaivaSiddhanta";
     const showBishnoi          = tradition === "Bishnoi";
+    const showAryaSamaj        = tradition === "AryaSamaj";
     return (
       <div className="min-h-screen pb-24" style={{ background: "linear-gradient(160deg, #FEF3E2 0%, #FFFBF5 100%)" }}>
         <div className="max-w-md mx-auto px-5 pt-6 pb-8">
@@ -862,6 +888,19 @@ export default function Settings() {
           {showBishnoi && (
             <>
               {bishnoiVrats.map((opt) => (
+                <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
+                  <div className="flex-1 mr-4">
+                    <p className="text-sm font-medium text-foreground">{opt.label}</p>
+                    <p className="text-xs text-muted-foreground">{opt.subtitle}</p>
+                  </div>
+                  <Toggle on={isVratObserved(opt.id, observed)} onToggle={() => toggleVrat(opt.id)} />
+                </div>
+              ))}
+            </>
+          )}
+          {showAryaSamaj && (
+            <>
+              {aryaSamajVrats.map((opt) => (
                 <div key={opt.id} className="flex items-center justify-between py-3 border-b border-stone-100">
                   <div className="flex-1 mr-4">
                     <p className="text-sm font-medium text-foreground">{opt.label}</p>

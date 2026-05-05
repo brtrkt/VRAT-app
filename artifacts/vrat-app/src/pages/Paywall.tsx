@@ -299,7 +299,7 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
         </h1>
         <p className="text-sm leading-relaxed" style={{ color: "#FDE68A" }}>
           Continue your vrat journey with{" "}
-          <span className="font-semibold">VRAT Premium</span>
+          <span className="font-semibold">V<span style={{ color: "#FF9933" }}>RA</span>T Premium</span>
         </p>
         {showCancelled && (
           <p className="text-xs mt-2 px-2" style={{ color: "#FCA5A5" }}>
@@ -387,6 +387,8 @@ function SubscriptionStep({ showCancelled }: { showCancelled?: boolean }) {
                   onKeyDown={(e) => e.key === "Enter" && promoInput.trim() && !promoLoading && handleApplyPromo()}
                   data-testid="promo-input"
                   autoComplete="off"
+                  autoCapitalize="none"
+                  autoCorrect="off"
                   spellCheck={false}
                 />
                 <button
