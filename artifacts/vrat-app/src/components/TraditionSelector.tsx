@@ -141,13 +141,14 @@ export function ShrinathjiSvg({ className = "", style }: { className?: string; s
 export function IshtalingaSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
     <svg viewBox="0 0 60 60" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <ellipse cx="30" cy="48" rx="22" ry="6" opacity="0.18"/>
-      <path d="M8 46 Q8 40 14 38 L46 38 Q52 40 52 46 Q52 52 46 53 L14 53 Q8 52 8 46 Z"/>
-      <path d="M52 44 Q58 44 58 47 Q58 50 52 50 Z"/>
-      <path d="M30 8 C22 8 18 18 18 26 C18 34 22 38 30 38 C38 38 42 34 42 26 C42 18 38 8 30 8 Z"/>
-      <ellipse cx="25" cy="20" rx="3" ry="4" fill="white" opacity="0.22"/>
-      <path d="M22 32 L38 32" stroke="white" strokeWidth="1" opacity="0.35" strokeLinecap="round"/>
-      <path d="M21 34.5 L39 34.5" stroke="white" strokeWidth="1" opacity="0.35" strokeLinecap="round"/>
+      <ellipse cx="30" cy="56" rx="20" ry="2.5" opacity="0.2"/>
+      <path d="M14 52 L46 52 L44 56 L16 56 Z" opacity="0.85"/>
+      <path d="M10 42 Q10 36 16 35 L44 35 Q50 36 50 42 Q50 48 44 49 L16 49 Q10 48 10 42 Z"/>
+      <path d="M50 40 Q56 40 56 43 Q56 46 50 46 Z"/>
+      <path d="M30 6 C22 6 18 16 18 24 C18 32 22 35 30 35 C38 35 42 32 42 24 C42 16 38 6 30 6 Z"/>
+      <ellipse cx="25" cy="18" rx="3" ry="4" fill="white" opacity="0.25"/>
+      <path d="M22 29 L38 29" stroke="white" strokeWidth="1" opacity="0.4" strokeLinecap="round"/>
+      <path d="M21 31.5 L39 31.5" stroke="white" strokeWidth="1" opacity="0.4" strokeLinecap="round"/>
     </svg>
   );
 }
@@ -189,7 +190,7 @@ export const TRADITION_OPTIONS: { value: Tradition; label: string; accent: strin
   { value: "AryaSamaj",        label: "Arya Samaj",        accent: "#9A3412" },
   { value: "Bishnoi",          label: "Bishnoi",           accent: "#16A34A" },
   { value: "ISKCON",           label: "ISKCON",            accent: "#0284C7" },
-  { value: "Lingayat",         label: "Lingayat",          accent: "#9B2335" },
+  { value: "Lingayat",         label: "Lingayat",          accent: "#1D4ED8" },
   { value: "PushtiMarg",       label: "Pushti Marg",       accent: "#0E7490" },
   { value: "Ramanandi",        label: "Ramanandi",         accent: "#B91C1C" },
   { value: "ShaivaSiddhanta",  label: "Shaiva Siddhanta",  accent: "#475569" },
@@ -207,7 +208,7 @@ export function TraditionIcon({ tradition }: { tradition: Tradition }) {
   if (tradition === "Hindu")           return <OmSymbol className="text-primary text-3xl" />;
   if (tradition === "Swaminarayan")    return <LotusSvg className="w-10 h-10" style={{ color: "#C4972A" }} />;
   if (tradition === "ISKCON")          return <IskconLogoSvg className="w-16 h-16" />;
-  if (tradition === "Lingayat")        return <IshtalingaSvg className="w-11 h-11" style={{ color: "#9B2335" }} />;
+  if (tradition === "Lingayat")        return <IshtalingaSvg className="w-11 h-11" style={{ color: "#1D4ED8" }} />;
   if (tradition === "PushtiMarg")      return <ShrinathjiSvg className="w-9 h-12" style={{ color: "#0E7490" }} />;
   if (tradition === "Warkari")         return <VitthalSvg className="w-9 h-12" style={{ color: "#DC6803" }} />;
   if (tradition === "Ramanandi")       return <UrdhvaPundraSvg className="w-11 h-11" />;
