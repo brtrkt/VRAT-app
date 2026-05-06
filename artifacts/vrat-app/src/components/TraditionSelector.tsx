@@ -214,7 +214,7 @@ export const TRADITION_OPTIONS: { value: Tradition; label: string; accent: strin
 // Used for the icon badge above the dropdown on Home and Onboarding alike.
 export function TraditionIcon({ tradition }: { tradition: Tradition }) {
   if (tradition === "Sikh")            return <KhandaSvg className="w-10 h-12" style={{ color: "#003DA5" }} />;
-  if (tradition === "Jain")            return <JainSymbol className="w-10 h-12" style={{ color: "#15803D" }} />;
+  if (tradition === "Jain")            return <JainSymbol className="w-10 h-12" style={{ color: "#D97706" }} />;
   if (tradition === "Hindu")           return <OmSymbol className="text-primary text-3xl" />;
   if (tradition === "Swaminarayan")    return <LotusSvg className="w-10 h-10" style={{ color: "#C4972A" }} />;
   if (tradition === "ISKCON")          return <IskconLogoSvg className="w-16 h-16" />;
