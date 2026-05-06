@@ -20,20 +20,19 @@ export function OmSymbol({ className = "" }: { className?: string }) {
 export function JainSymbol({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
     <svg viewBox="0 0 60 80" fill="currentColor" aria-hidden="true" className={className} style={style}>
-      {/* Palm + wrist */}
-      <path d="M14 78 L14 44 Q14 36 22 35 L40 35 Q48 36 50 44 L50 60 Q50 78 38 78 Z" />
-      {/* Four fingers */}
-      <rect x="18" y="10" width="6" height="30" rx="3" />
-      <rect x="26" y="6"  width="6" height="34" rx="3" />
-      <rect x="34" y="8"  width="6" height="32" rx="3" />
-      <rect x="42" y="14" width="6" height="26" rx="3" />
-      {/* Thumb — angled out from the side of the palm */}
-      <path d="M14 46 Q6 38 3 30 Q1 24 5 22 Q9 20 12 26 Q15 32 18 40 Z" />
+      {/* Open-palm Ahimsa hand silhouette — traced around the outside */}
+      <path d="M8 78
+               L8 38
+               L8 20 Q8 14 13 14 Q18 14 18 20 L18 32
+               Q19 30 20 30 Q21 30 22 32 L22 12 Q22 6 27 6 Q32 6 32 12 L32 32
+               Q33 30 34 30 Q35 30 36 32 L36 8 Q36 2 41 2 Q46 2 46 8 L46 32
+               Q47 30 48 30 Q49 30 50 32 L50 16 Q50 10 55 10 Q60 10 60 16 L60 36
+               Q62 38 62 42 Q62 50 58 56 L52 64 L52 78 Z" />
       {/* Wheel of Ahimsa on the palm */}
-      <circle cx="32" cy="58" r="11" fill="white" />
-      <circle cx="32" cy="58" r="11" fill="none" stroke="currentColor" strokeWidth="2" />
-      <circle cx="32" cy="58" r="2.2" />
-      <path d="M32 49 L32 67 M23 58 L41 58 M25.5 51.5 L38.5 64.5 M38.5 51.5 L25.5 64.5"
+      <circle cx="34" cy="56" r="11" fill="white" />
+      <circle cx="34" cy="56" r="11" fill="none" stroke="currentColor" strokeWidth="2" />
+      <circle cx="34" cy="56" r="2.2" />
+      <path d="M34 47 L34 65 M25 56 L43 56 M27.5 49.5 L40.5 62.5 M40.5 49.5 L27.5 62.5"
             stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
     </svg>
   );
