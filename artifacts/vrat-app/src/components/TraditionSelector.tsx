@@ -164,15 +164,16 @@ export function IshtalingaSvg({ className = "", style }: { className?: string; s
 }
 
 export function AumVedicSvg({ className = "", style }: { className?: string; style?: CSSProperties }) {
+  // The Arya Samaj symbol is the Vedic Aum — "ओ३म्" — written with the
+  // Devanagari digit 3, as prescribed by Swami Dayananda Saraswati.
   return (
-    <svg viewBox="0 0 48 48" className={className} fill="none" style={style} aria-hidden="true">
-      <path d="M10 40 L24 32 L38 40 Z" fill="currentColor" opacity="0.18" />
-      <path d="M10 40 L38 40" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <path d="M24 8 C20 14, 18 18, 22 22 C20 24, 19 27, 22 30 C24 27, 26 25, 24 22 C28 18, 28 13, 24 8 Z" fill="currentColor" opacity="0.9" />
-      <circle cx="24" cy="6" r="1.2" fill="currentColor" />
-      <circle cx="20" cy="10" r="0.8" fill="currentColor" opacity="0.7" />
-      <circle cx="28" cy="10" r="0.8" fill="currentColor" opacity="0.7" />
-    </svg>
+    <span
+      className={`inline-flex items-center justify-center font-serif leading-none ${className}`}
+      style={{ ...style, fontSize: "1.9em" }}
+      aria-label="Arya Samaj Aum"
+    >
+      ओ३म्
+    </span>
   );
 }
 
