@@ -190,7 +190,7 @@ export const TRADITION_OPTIONS: { value: Tradition; label: string; accent: strin
   { value: "AryaSamaj",        label: "Arya Samaj",        accent: "#9A3412" },
   { value: "Bishnoi",          label: "Bishnoi",           accent: "#16A34A" },
   { value: "ISKCON",           label: "ISKCON",            accent: "#0284C7" },
-  { value: "Lingayat",         label: "Lingayat",          accent: "#1D4ED8" },
+  { value: "Lingayat",         label: "Lingayat",          accent: "#111111" },
   { value: "PushtiMarg",       label: "Pushti Marg",       accent: "#0E7490" },
   { value: "Ramanandi",        label: "Ramanandi",         accent: "#B91C1C" },
   { value: "ShaivaSiddhanta",  label: "Shaiva Siddhanta",  accent: "#475569" },
@@ -208,7 +208,7 @@ export function TraditionIcon({ tradition }: { tradition: Tradition }) {
   if (tradition === "Hindu")           return <OmSymbol className="text-primary text-3xl" />;
   if (tradition === "Swaminarayan")    return <LotusSvg className="w-10 h-10" style={{ color: "#C4972A" }} />;
   if (tradition === "ISKCON")          return <IskconLogoSvg className="w-16 h-16" />;
-  if (tradition === "Lingayat")        return <IshtalingaSvg className="w-11 h-11" style={{ color: "#1D4ED8" }} />;
+  if (tradition === "Lingayat")        return <IshtalingaSvg className="w-11 h-11" style={{ color: "#111111" }} />;
   if (tradition === "PushtiMarg")      return <ShrinathjiSvg className="w-9 h-12" style={{ color: "#0E7490" }} />;
   if (tradition === "Warkari")         return <VitthalSvg className="w-9 h-12" style={{ color: "#DC6803" }} />;
   if (tradition === "Ramanandi")       return <UrdhvaPundraSvg className="w-11 h-11" />;
