@@ -17,13 +17,24 @@ export function OmSymbol({ className = "" }: { className?: string }) {
   return <span className={`font-serif ${className}`} aria-hidden="true">ॐ</span>;
 }
 
-export function JainSymbol({ className = "" }: { className?: string }) {
+export function JainSymbol({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
-    <svg viewBox="0 0 56 72" fill="currentColor" aria-hidden="true" className={className}>
-      <path d="M28 4 L52 18 L52 50 C52 60 40 70 28 70 C16 70 4 60 4 50 L4 18 Z" opacity="0.18"/>
-      <path d="M28 8 L48 20 L48 48 C48 56 38 64 28 64 C18 64 8 56 8 48 L8 20 Z" opacity="0.22"/>
-      <circle cx="28" cy="36" r="10" />
-      <path d="M28 32 L28 40 M24 36 L32 36" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+    <svg viewBox="0 0 60 80" fill="currentColor" aria-hidden="true" className={className} style={style}>
+      {/* Palm + wrist */}
+      <path d="M14 78 L14 44 Q14 36 22 35 L40 35 Q48 36 50 44 L50 60 Q50 78 38 78 Z" />
+      {/* Four fingers */}
+      <rect x="18" y="10" width="6" height="30" rx="3" />
+      <rect x="26" y="6"  width="6" height="34" rx="3" />
+      <rect x="34" y="8"  width="6" height="32" rx="3" />
+      <rect x="42" y="14" width="6" height="26" rx="3" />
+      {/* Thumb */}
+      <path d="M14 50 Q4 48 4 56 Q4 64 14 64 Z" />
+      {/* Wheel of Ahimsa on the palm */}
+      <circle cx="32" cy="58" r="11" fill="white" />
+      <circle cx="32" cy="58" r="11" fill="none" stroke="currentColor" strokeWidth="2" />
+      <circle cx="32" cy="58" r="2.2" />
+      <path d="M32 49 L32 67 M23 58 L41 58 M25.5 51.5 L38.5 64.5 M38.5 51.5 L25.5 64.5"
+            stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
     </svg>
   );
 }
@@ -204,7 +215,7 @@ export const TRADITION_OPTIONS: { value: Tradition; label: string; accent: strin
 // Used for the icon badge above the dropdown on Home and Onboarding alike.
 export function TraditionIcon({ tradition }: { tradition: Tradition }) {
   if (tradition === "Sikh")            return <KhandaSvg className="w-10 h-12" style={{ color: "#003DA5" }} />;
-  if (tradition === "Jain")            return <JainSymbol className="text-green-600 w-9 h-11" />;
+  if (tradition === "Jain")            return <JainSymbol className="w-10 h-12" style={{ color: "#15803D" }} />;
   if (tradition === "Hindu")           return <OmSymbol className="text-primary text-3xl" />;
   if (tradition === "Swaminarayan")    return <LotusSvg className="w-10 h-10" style={{ color: "#C4972A" }} />;
   if (tradition === "ISKCON")          return <IskconLogoSvg className="w-16 h-16" />;
