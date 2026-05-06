@@ -27,8 +27,8 @@ export function JainSymbol({ className = "", style }: { className?: string; styl
       <rect x="26" y="6"  width="6" height="34" rx="3" />
       <rect x="34" y="8"  width="6" height="32" rx="3" />
       <rect x="42" y="14" width="6" height="26" rx="3" />
-      {/* Thumb */}
-      <path d="M14 50 Q4 48 4 56 Q4 64 14 64 Z" />
+      {/* Thumb — angled out from the side of the palm */}
+      <path d="M14 46 Q6 38 3 30 Q1 24 5 22 Q9 20 12 26 Q15 32 18 40 Z" />
       {/* Wheel of Ahimsa on the palm */}
       <circle cx="32" cy="58" r="11" fill="white" />
       <circle cx="32" cy="58" r="11" fill="none" stroke="currentColor" strokeWidth="2" />
