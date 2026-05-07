@@ -24,9 +24,9 @@ export default function PWAInstallPrompt() {
     const count = getVisitCount() + 1;
     localStorage.setItem(VISIT_KEY, String(count));
 
-    if (count >= 2) {
-      setTimeout(() => setShow(true), 3000);
-    }
+    // Show prompt 30 seconds after the page loads, on every visit until
+    // the user installs or dismisses.
+    const showTimer = setTimeout(() => setShow(true), 30000);
 
     function onBeforeInstall(e: Event) {
       e.preventDefault();
@@ -41,6 +41,7 @@ export default function PWAInstallPrompt() {
     window.addEventListener("beforeinstallprompt", onBeforeInstall);
     window.addEventListener("appinstalled", onAppInstalled);
     return () => {
+      clearTimeout(showTimer);
       window.removeEventListener("beforeinstallprompt", onBeforeInstall);
       window.removeEventListener("appinstalled", onAppInstalled);
     };
