@@ -13,6 +13,7 @@ import Paywall from "@/pages/Paywall";
 import VratHistory from "@/pages/VratHistory";
 import Onboarding from "@/components/Onboarding";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import IosInstallBanner from "@/components/IosInstallBanner";
 import ReportErrorButton from "@/components/ReportErrorButton";
 import HowToInstall from "@/pages/HowToInstall";
 import Recipes from "@/pages/Recipes";
@@ -234,6 +235,7 @@ function Router() {
       </Switch>
       <BottomNav />
       <PWAInstallPrompt />
+      <IosInstallBanner />
       <ReportErrorButton />
     </div>
   );
