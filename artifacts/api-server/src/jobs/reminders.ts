@@ -1,13 +1,13 @@
 import { Pool } from "pg";
 import { configurePoolSearchPath } from "../lib/dbUrl";
 import { logger } from "../lib/logger";
+import { sendResendEmail } from "../lib/email";
 import {
   getVratsForDate,
   filterVratsByTradition,
   type Vrat,
 } from "../../../vrat-app/src/data/vrats";
 
-const REMINDER_FROM = "VRAT Reminders <reminders@vrat-app.com>";
 const DISCLAIMER_TRADITIONS = new Set(["ISKCON", "Swaminarayan"]);
 
 interface ReminderUserRow {
@@ -74,38 +74,6 @@ function buildEmail(vrat: Vrat, tradition: string): { subject: string; text: str
   return { subject, text: lines.join("\n\n") };
 }
 
-async function sendEmail(to: string, subject: string, text: string): Promise<boolean> {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    logger.warn("RESEND_API_KEY not set; skipping email send");
-    return false;
-  }
-  try {
-    const resp = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: REMINDER_FROM,
-        to: [to],
-        subject,
-        text,
-      }),
-    });
-    if (!resp.ok) {
-      const body = await resp.text();
-      logger.warn({ status: resp.status, body, to }, "Resend send failed");
-      return false;
-    }
-    return true;
-  } catch (err) {
-    logger.warn({ err: (err as Error).message, to }, "Resend send threw");
-    return false;
-  }
-}
-
 export interface ReminderRunResult {
   targetDate: string;
   usersConsidered: number;
@@ -138,7 +106,7 @@ export async function runDailyReminders(): Promise<ReminderRunResult> {
     if (matches.length === 0) continue;
     const primary = matches[0];
     const { subject, text } = buildEmail(primary, tradition);
-    const ok = await sendEmail(user.email, subject, text);
+    const ok = await sendResendEmail({ to: user.email, subject, text });
     if (ok) {
       result.emailsSent += 1;
       result.perTradition[tradition] = (result.perTradition[tradition] ?? 0) + 1;

@@ -77,7 +77,75 @@ export class Storage {
         ON public.vrat_error_reports (error_type);
       CREATE INDEX IF NOT EXISTS idx_vrat_error_reports_tradition
         ON public.vrat_error_reports (tradition);
+
+      CREATE TABLE IF NOT EXISTS public.vrat_user_settings (
+        user_id    TEXT PRIMARY KEY,
+        tradition  TEXT,
+        observed   JSONB,
+        city       TEXT,
+        location   TEXT,
+        region     TEXT,
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
     `);
+  }
+
+  async getUserSettings(userId: string): Promise<{
+    tradition: string | null;
+    observed: string[] | null;
+    city: string | null;
+    location: string | null;
+    region: string | null;
+    updated_at: Date;
+  } | null> {
+    const db = getPool();
+    const result = await db.query(
+      `SELECT tradition, observed, city, location, region, updated_at
+       FROM public.vrat_user_settings
+       WHERE user_id = $1`,
+      [userId]
+    );
+    const row = result.rows[0];
+    if (!row) return null;
+    return {
+      tradition: row.tradition ?? null,
+      observed: Array.isArray(row.observed) ? row.observed : null,
+      city: row.city ?? null,
+      location: row.location ?? null,
+      region: row.region ?? null,
+      updated_at: row.updated_at,
+    };
+  }
+
+  async upsertUserSettings(input: {
+    userId: string;
+    tradition: string | null;
+    observed: string[] | null;
+    city: string | null;
+    location: string | null;
+    region: string | null;
+  }): Promise<void> {
+    const db = getPool();
+    await db.query(
+      `INSERT INTO public.vrat_user_settings
+         (user_id, tradition, observed, city, location, region, updated_at)
+       VALUES ($1, $2, $3::jsonb, $4, $5, $6, NOW())
+       ON CONFLICT (user_id) DO UPDATE SET
+         tradition  = COALESCE(EXCLUDED.tradition,  public.vrat_user_settings.tradition),
+         observed   = COALESCE(EXCLUDED.observed,   public.vrat_user_settings.observed),
+         city       = COALESCE(EXCLUDED.city,       public.vrat_user_settings.city),
+         location   = COALESCE(EXCLUDED.location,   public.vrat_user_settings.location),
+         region     = COALESCE(EXCLUDED.region,     public.vrat_user_settings.region),
+         updated_at = NOW()`,
+      [
+        input.userId,
+        input.tradition,
+        input.observed === null ? null : JSON.stringify(input.observed),
+        input.city,
+        input.location,
+        input.region,
+      ]
+    );
   }
 
   async insertErrorReport(input: {
@@ -197,19 +265,23 @@ export class Storage {
     };
   }
 
-  async getOrCreateUser(email: string): Promise<VratUser> {
+  async getOrCreateUser(email: string): Promise<VratUser & { wasInserted: boolean }> {
     const db = getPool();
     const normalized = email.trim().toLowerCase();
     const id = `user_${normalized.replace(/[^a-z0-9]/g, '_')}`;
 
-    const result = await db.query<VratUser>(
+    // `xmax = 0` is true only for the row produced by the INSERT branch of an
+    // upsert; on an UPDATE conflict path xmax is set to the previous tx id.
+    const result = await db.query<VratUser & { was_inserted: boolean }>(
       `INSERT INTO public.vrat_users (id, email)
        VALUES ($1, $2)
        ON CONFLICT (email) DO UPDATE SET email = EXCLUDED.email
-       RETURNING *`,
+       RETURNING *, (xmax = 0) AS was_inserted`,
       [id, normalized]
     );
-    return result.rows[0];
+    const row = result.rows[0];
+    const { was_inserted, ...rest } = row;
+    return { ...(rest as VratUser), wasInserted: Boolean(was_inserted) };
   }
 
   async getUserByEmail(email: string): Promise<VratUser | null> {

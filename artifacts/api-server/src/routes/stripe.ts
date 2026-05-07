@@ -36,12 +36,35 @@ router.post('/stripe/validate-promo', async (req, res) => {
     const price = await stripe.prices.retrieve(priceId);
     const unitAmount = price.unit_amount ?? 0;
 
-    const promoList = await stripe.promotionCodes.list({
-      code: trimmed,
-      active: true,
-      limit: 1,
-    });
-    const promo = promoList.data[0];
+    // Stripe's promotionCodes.list({ code }) lookup is case-sensitive,
+    // so to accept "VRAT_FAMILY", "vrat-family", "Vrat-Family", etc.
+    // we try a few common case variants, then fall back to a paginated
+    // case-insensitive scan of active promotion codes.
+    const candidates = Array.from(
+      new Set([trimmed, trimmed.toUpperCase(), trimmed.toLowerCase()])
+    );
+    let promo: Stripe.PromotionCode | undefined;
+    for (const candidate of candidates) {
+      const list = await stripe.promotionCodes.list({
+        code: candidate,
+        active: true,
+        limit: 1,
+      });
+      if (list.data[0]) {
+        promo = list.data[0];
+        break;
+      }
+    }
+    if (!promo) {
+      const target = trimmed.toLowerCase();
+      const scan = stripe.promotionCodes.list({ active: true, limit: 100 });
+      for await (const p of scan) {
+        if (typeof p.code === 'string' && p.code.toLowerCase() === target) {
+          promo = p;
+          break;
+        }
+      }
+    }
 
     if (!promo) {
       return res.json({ valid: false, error: 'This code is not valid.' });
@@ -120,6 +143,11 @@ router.post('/stripe/checkout', async (req, res) => {
     }
 
     const user = await storage.getOrCreateUser(email);
+    if (user.wasInserted) {
+      void import("../lib/email").then(({ sendWelcomeEmail }) =>
+        sendWelcomeEmail(user.email)
+      );
+    }
     const stripe = getStripeClient();
 
     // If the caller pre-applied a promo code on the paywall, resolve it
@@ -208,7 +236,12 @@ router.get('/stripe/verify', async (req, res) => {
       if (session.payment_status === 'paid' && session.status === 'complete') {
         const customerEmail = session.customer_email || (session.customer_details?.email ?? '');
         if (customerEmail) {
-          await storage.getOrCreateUser(customerEmail);
+          const created = await storage.getOrCreateUser(customerEmail);
+          if (created.wasInserted) {
+            void import("../lib/email").then(({ sendWelcomeEmail }) =>
+              sendWelcomeEmail(created.email)
+            );
+          }
           if (session.customer && typeof session.customer === 'string') {
             await storage.updateStripeCustomerId(customerEmail, session.customer);
             if (session.mode === 'payment') {
