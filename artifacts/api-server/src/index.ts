@@ -5,6 +5,7 @@ import { logger } from "./lib/logger";
 import { storage } from "./storage";
 import { ensurePricesSeeded } from "./seedPrices";
 import { startBackupScheduler } from "./jobs/scheduler";
+import { startReminderScheduler } from "./jobs/reminderScheduler";
 
 async function initSchema() {
   try {
@@ -59,4 +60,10 @@ app.listen(port, (err) => {
   startBackupScheduler().catch((err) => {
     logger.warn({ err: err?.message }, "Backup scheduler failed to start (non-fatal)");
   });
+
+  try {
+    startReminderScheduler();
+  } catch (err: any) {
+    logger.warn({ err: err?.message }, "Reminder scheduler failed to start (non-fatal)");
+  }
 });
